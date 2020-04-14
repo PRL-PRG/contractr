@@ -34,7 +34,7 @@ SEXP check_type(SEXP x, SEXP pkg_name, SEXP fun_name,
   return x;
 }
 
-SEXP inject_type_checks(SEXP pkg_name, SEXP fun_name, SEXP fun, SEXP rho) {
+SEXP inject_type_check(SEXP pkg_name, SEXP fun_name, SEXP fun, SEXP rho) {
   if (TYPEOF(pkg_name) != STRSXP || Rf_length(pkg_name) != 1) {
     Rf_error("pkg_name must be scalar character");
   }
@@ -56,19 +56,33 @@ SEXP inject_type_checks(SEXP pkg_name, SEXP fun_name, SEXP fun, SEXP rho) {
     SEXP param_sym = TAG(params);
     SEXP val = Rf_findVarInFrame(rho, param_sym);
 
-    if (val != R_UnboundValue && TYPEOF(val) == PROMSXP) {
-      SEXP param_int = PROTECT(Rf_ScalarInteger(idx));
-      SEXP param_name = PROTECT(Rf_mkString(R_CHAR(PRINTNAME(param_sym))));
+    // in other words - param_sym not found in rho
+    if (val == R_UnboundValue) continue;
+
+    SEXP param_idx = PROTECT(Rf_ScalarInteger(idx));
+    SEXP param_name = PROTECT(Rf_mkString(R_CHAR(PRINTNAME(param_sym))));
+    SEXP val_to_check = NULL;
+
+    if (TYPEOF(val) == PROMSXP) {
+      val_to_check = PREXPR(val);
+    } else if (param_sym == R_DotsSymbol) {
+      val_to_check = R_NilValue;
+    }
+
+    if (val != NULL) {
       SEXP check_type_call = PROTECT(
         Rf_lang6(
           CheckTypeFun,
-          PREXPR(val), pkg_name, fun_name, param_name, param_int
+          val_to_check, pkg_name, fun_name, param_name, param_idx
         )
       );
 
       if (CheckTypeFunWrapper != R_NilValue) {
         check_type_call = PROTECT(Rf_lcons(CheckTypeFunWrapper, check_type_call));
       }
+
+      if (TYPEOF(val) == PROMSXP) {
+        SET_PRCODE(val, check_type_call);
 
 #ifdef DEBUG
       Rprintf(
@@ -80,13 +94,22 @@ SEXP inject_type_checks(SEXP pkg_name, SEXP fun_name, SEXP fun, SEXP rho) {
         idx
       );
 #endif
+      } else if (param_sym == R_DotsSymbol) {
+#ifdef DEBUG
+      Rprintf(
+        "contractR/src/inject.c: calling '%s' for '%s:::%s' in '%s' [%d]\n",
+        R_CHAR(Rf_asChar(Rf_deparse1(check_type_call, FALSE, 0))),
+        R_CHAR(Rf_asChar(pkg_name)),
+        R_CHAR(Rf_asChar(fun_name)),
+        R_CHAR(Rf_asChar(param_name)),
+        idx
+      );
+#endif
 
-      SET_PRCODE(val, check_type_call);
-
-      UNPROTECT(3);
-      if (CheckTypeFunWrapper != R_NilValue) {
-        UNPROTECT(1);
+        Rf_eval(check_type_call, rho);
       }
+
+      UNPROTECT(3 + (CheckTypeFunWrapper != R_NilValue ? 1 : 0));
     }
   }
 
@@ -143,21 +166,35 @@ SEXP reset_type_check_function() {
   return R_NilValue;
 }
 
+SEXP environment_name(SEXP env) {
+  if (R_IsPackageEnv(env) == TRUE) {
+    // cf. builtin.c:432 do_envirName
+    return Rf_asChar(R_PackageEnvName(env));
+  } else if (R_IsNamespaceEnv(env) == TRUE) {
+    // cf. builtin.c:434 do_envirName
+    return Rf_asChar(R_NamespaceEnvSpec(env));
+  } else {
+    return R_NilValue;
+  }
+}
+
 /* .check_call calls */
 extern SEXP get_type_check_function();
 extern SEXP get_type_check_function_wrapper();
 extern SEXP set_type_check_function(SEXP, SEXP);
 extern SEXP reset_type_check_function();
-extern SEXP inject_type_checks(SEXP, SEXP, SEXP, SEXP);
+extern SEXP inject_type_check(SEXP, SEXP, SEXP, SEXP);
 extern SEXP check_type(SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP environment_name(SEXP);
 
 static const R_CallMethodDef callMethods[] = {
     {"get_type_check_function", (DL_FUNC)&get_type_check_function, 0},
     {"get_type_check_function_wrapper", (DL_FUNC)&get_type_check_function_wrapper, 0},
     {"set_type_check_function", (DL_FUNC)&set_type_check_function, 2},
     {"reset_type_check_function", (DL_FUNC)&reset_type_check_function, 0},
-    {"inject_type_checks", (DL_FUNC)&inject_type_checks, 4},
+    {"inject_type_check", (DL_FUNC)&inject_type_check, 4},
     {"check_type", (DL_FUNC)&check_type, 5},
+    {"environment_name", (DL_FUNC)&environment_name, 1},
     {NULL, NULL, 0}
 };
 
