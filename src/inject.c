@@ -18,6 +18,7 @@ static SEXP R_DotCallSym = NULL;
 // - the function name (STRSXP),
 // - the parameter name (STRSXP) and
 // - the parameter index (INTSXP)
+// and it has to return the value!
 static SEXP CheckTypeFun = NULL;
 // A function that the CheckTypeFun will be wrapped into or NULL.
 // If not-null the final call will be CheckTypeFunWrapper(CheckTypeFun, ...)
