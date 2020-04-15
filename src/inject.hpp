@@ -1,3 +1,6 @@
+#ifndef CONTRACTR_INJECT_HPP
+#define CONTRACTR_INJECT_HPP
+
 #include <R.h>
 #include <Rinternals.h>
 
@@ -14,5 +17,6 @@ SEXP reset_type_check_function();
 SEXP inject_type_check(SEXP, SEXP, SEXP, SEXP);
 SEXP check_type(SEXP, SEXP, SEXP, SEXP, SEXP);
 SEXP environment_name(SEXP);
-
 }
+
+#endif /* CONTRACTR_INJECT_HPP */
