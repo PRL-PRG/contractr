@@ -15,8 +15,11 @@ SEXP get_type_check_function_wrapper();
 SEXP set_type_check_function(SEXP, SEXP);
 SEXP reset_type_check_function();
 SEXP inject_type_check(SEXP, SEXP, SEXP, SEXP);
+SEXP log_insertion(SEXP, SEXP, SEXP, SEXP, SEXP);
 SEXP check_type(SEXP, SEXP, SEXP, SEXP, SEXP);
 SEXP environment_name(SEXP);
+
+SEXP Rf_deparse1(SEXP, Rboolean, int);
 }
 
 #endif /* CONTRACTR_INJECT_HPP */

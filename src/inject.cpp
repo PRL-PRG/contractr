@@ -1,12 +1,12 @@
 #include "inject.hpp"
 
+#include "TypeDeclarationCache.hpp"
+#include "Typechecker.hpp"
+#include "logger.hpp"
+
 #include <R_ext/Rdynload.h>
 #include <Rinternals.h>
 #include <stdlib.h> // for NULL
-
-#ifdef DEBUG
-SEXP Rf_deparse1(SEXP, Rboolean, int);
-#endif
 
 SEXP R_DotCallSym = NULL;
 
@@ -25,18 +25,46 @@ static SEXP CheckTypeFun = NULL;
 // If not-null the final call will be CheckTypeFunWrapper(CheckTypeFun, ...)
 static SEXP CheckTypeFunWrapper = NULL;
 
-SEXP check_type(SEXP x,
-                SEXP pkg_name,
-                SEXP fun_name,
-                SEXP param_name,
-                SEXP param_idx) {
+SEXP log_insertion(SEXP value,
+                   SEXP pkg_name,
+                   SEXP fun_name,
+                   SEXP param_name,
+                   SEXP param_idx) {
     Rprintf("Checking parameter: %s (%d) in %s::%s -- %d\n",
             R_CHAR(Rf_asChar(param_name)),
             Rf_asInteger(param_idx),
             R_CHAR(Rf_asChar(pkg_name)),
             R_CHAR(Rf_asChar(fun_name)),
-            TYPEOF(x));
-    return x;
+            TYPEOF(value));
+    return value;
+}
+
+SEXP check_type(SEXP value,
+                SEXP pkg_name,
+                SEXP fun_name,
+                SEXP param_name,
+                SEXP param_idx) {
+    std::string parameter_name(R_CHAR(Rf_asChar(param_name)));
+    int formal_parameter_position = Rf_asInteger(param_idx);
+    std::string package_name(R_CHAR(Rf_asChar(pkg_name)));
+    std::string function_name(R_CHAR(Rf_asChar(fun_name)));
+    const tastr::ast::Node& node(
+        *TypeDeclarationCache::get_function_parameter_type(
+            package_name, function_name, formal_parameter_position));
+    TypeChecker type_checker(
+        package_name, function_name, parameter_name, formal_parameter_position);
+    bool result = type_checker.typecheck(value, node);
+    if (!result) {
+        log_error(
+            "type checking failed for parameter '%s' (position %d) of %s::%s\n",
+            R_CHAR(Rf_asChar(param_name)),
+            Rf_asInteger(param_idx),
+            R_CHAR(Rf_asChar(pkg_name)),
+            R_CHAR(Rf_asChar(fun_name)));
+        log_raw("\tExpected: %s\n", tastr::parser::to_string(node).c_str());
+        //log_raw("\tActual: %s\n", infer_type(value));
+    }
+    return value;
 }
 
 SEXP inject_type_check(SEXP pkg_name, SEXP fun_name, SEXP fun, SEXP rho) {
@@ -62,8 +90,9 @@ SEXP inject_type_check(SEXP pkg_name, SEXP fun_name, SEXP fun, SEXP rho) {
         SEXP val = Rf_findVarInFrame(rho, param_sym);
 
         // in other words - param_sym not found in rho
-        if (val == R_UnboundValue)
-            continue;
+        if (val == R_UnboundValue) {
+            val == R_MissingArg;
+        }
 
         SEXP param_idx = PROTECT(Rf_ScalarInteger(idx));
         SEXP param_name = PROTECT(Rf_mkString(R_CHAR(PRINTNAME(param_sym))));
