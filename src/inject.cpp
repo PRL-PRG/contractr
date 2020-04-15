@@ -2,6 +2,7 @@
 
 #include "TypeDeclarationCache.hpp"
 #include "Typechecker.hpp"
+#include "infer_type.hpp"
 #include "logger.hpp"
 
 #include <R_ext/Rdynload.h>
@@ -62,7 +63,7 @@ SEXP check_type(SEXP value,
             R_CHAR(Rf_asChar(pkg_name)),
             R_CHAR(Rf_asChar(fun_name)));
         log_raw("\tExpected: %s\n", tastr::parser::to_string(node).c_str());
-        //log_raw("\tActual: %s\n", infer_type(value));
+        log_raw("\tActual: %s\n", infer_type(value, parameter_name).c_str());
     }
     return value;
 }
