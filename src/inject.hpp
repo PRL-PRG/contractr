@@ -4,11 +4,6 @@
 #include <R.h>
 #include <Rinternals.h>
 
-extern SEXP R_DotCallSym;
-extern SEXP R_TrueValue;
-extern SEXP R_FalseValue;
-extern SEXP R_DelayedAssign;
-
 extern "C" {
 
 /* .check_call calls */

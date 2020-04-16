@@ -4,13 +4,11 @@
 #include "Typechecker.hpp"
 #include "infer_type.hpp"
 #include "logger.hpp"
+#include "utilities.hpp"
 
 #include <R_ext/Rdynload.h>
 #include <Rinternals.h>
 #include <stdlib.h> // for NULL
-
-SEXP R_DotCallSym = NULL;
-SEXP R_DelayedAssign = NULL;
 
 // A symbol (SYMSXP) or a call LANSXP to get the function
 // to be called to do the actual type checking. The function
@@ -26,31 +24,6 @@ static SEXP CheckTypeFun = NULL;
 // A function that the CheckTypeFun will be wrapped into or NULL.
 // If not-null the final call will be CheckTypeFunWrapper(CheckTypeFun, ...)
 static SEXP CheckTypeFunWrapper = NULL;
-
-SEXP list7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y) {
-    PROTECT(s);
-    s = CONS(s, Rf_list6(t, u, v, w, x, y));
-    UNPROTECT(1);
-    return s;
-}
-
-SEXP lang8(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y, SEXP z) {
-    PROTECT(s);
-    s = LCONS(s, list7(t, u, v, w, x, y, z));
-    UNPROTECT(1);
-    return s;
-}
-
-SEXP delayed_assign(SEXP variable,
-                    SEXP value,
-                    SEXP eval_env,
-                    SEXP assign_env,
-                    SEXP rho) {
-    SEXP call =
-        Rf_lang5(R_DelayedAssign, variable, value, eval_env, assign_env);
-    Rf_eval(call, rho);
-    return Rf_findVarInFrame(rho, variable);
-}
 
 SEXP log_insertion(SEXP value,
                    SEXP argument_is_missing,
@@ -348,14 +321,3 @@ SEXP reset_type_check_function() {
     return R_NilValue;
 }
 
-SEXP environment_name(SEXP env) {
-    if (R_IsPackageEnv(env) == TRUE) {
-        // cf. builtin.c:432 do_envirName
-        return Rf_asChar(R_PackageEnvName(env));
-    } else if (R_IsNamespaceEnv(env) == TRUE) {
-        // cf. builtin.c:434 do_envirName
-        return Rf_asChar(R_NamespaceEnvSpec(env));
-    } else {
-        return R_NilValue;
-    }
-}

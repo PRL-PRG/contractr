@@ -1,5 +1,6 @@
 #define R_NO_REMAP
 #include "inject.hpp"
+#include "utilities.hpp"
 
 #include <R.h>
 #include <R_ext/Rdynload.h>
@@ -26,8 +27,7 @@ void R_init_contractR(DllInfo* dll) {
     R_registerRoutines(dll, NULL, callMethods, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 
-    R_DotCallSym = Rf_install(".Call");
-    R_DelayedAssign = Rf_install("delayedAssign");
+    initialize_globals();
 
     reset_type_check_function();
 }
