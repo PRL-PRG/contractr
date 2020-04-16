@@ -21,7 +21,11 @@ class TypeDeclarationCache {
     ~TypeDeclarationCache() = default;
 
     static fs::path get_type_declaration_dirpath() {
-        return fs::canonical(type_declaration_dirpath_);
+        if (fs::is_directory(type_declaration_dirpath_)) {
+            return fs::canonical(type_declaration_dirpath_);
+        } else {
+            return fs::canonical(type_declaration_dirpath_);
+        }
     }
 
     static fs::path
