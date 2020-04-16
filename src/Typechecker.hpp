@@ -323,6 +323,11 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
 
     /* TODO */
     void visit(const tastr::ast::FunctionTypeNode& node) override final {
+        SEXP value = pop_value_();
+        SEXPTYPE valtype = TYPEOF(value);
+        bool result =
+            valtype == CLOSXP || valtype == BUILTINSXP || valtype == SPECIALSXP;
+        push_result_(result);
     }
 
     void visit(const tastr::ast::CommaSeparatorNode& node) override final {
