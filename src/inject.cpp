@@ -10,6 +10,7 @@
 #include <stdlib.h> // for NULL
 
 SEXP R_DotCallSym = NULL;
+SEXP R_DelayedAssign = NULL;
 
 // A symbol (SYMSXP) or a call LANSXP to get the function
 // to be called to do the actual type checking. The function
@@ -26,7 +27,34 @@ static SEXP CheckTypeFun = NULL;
 // If not-null the final call will be CheckTypeFunWrapper(CheckTypeFun, ...)
 static SEXP CheckTypeFunWrapper = NULL;
 
+SEXP list7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y) {
+    PROTECT(s);
+    s = CONS(s, Rf_list6(t, u, v, w, x, y));
+    UNPROTECT(1);
+    return s;
+}
+
+SEXP lang8(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y, SEXP z) {
+    PROTECT(s);
+    s = LCONS(s, list7(t, u, v, w, x, y, z));
+    UNPROTECT(1);
+    return s;
+}
+
+SEXP delayed_assign(SEXP variable,
+                    SEXP value,
+                    SEXP eval_env,
+                    SEXP assign_env,
+                    SEXP rho) {
+    SEXP call =
+        Rf_lang5(R_DelayedAssign, variable, value, eval_env, assign_env);
+    Rf_eval(call, rho);
+    return Rf_findVarInFrame(rho, variable);
+}
+
 SEXP log_insertion(SEXP value,
+                   SEXP argument_is_missing,
+                   SEXP parameter_is_vararg,
                    SEXP pkg_name,
                    SEXP fun_name,
                    SEXP param_name,
@@ -89,6 +117,8 @@ void check_return_type(SEXP value,
 }
 
 SEXP check_type(SEXP value,
+                SEXP argument_is_missing,
+                SEXP parameter_is_vararg,
                 SEXP pkg_name,
                 SEXP fun_name,
                 SEXP param_name,
@@ -98,13 +128,16 @@ SEXP check_type(SEXP value,
     std::string package_name(R_CHAR(Rf_asChar(pkg_name)));
     std::string function_name(R_CHAR(Rf_asChar(fun_name)));
 
+    SEXP value_to_check =
+        (argument_is_missing == R_TrueValue) ? R_MissingArg : value;
+
     const tastr::ast::Node* node = nullptr;
 
     if (formal_parameter_position == -1) {
-        check_return_type(value, package_name, function_name);
+        check_return_type(value_to_check, package_name, function_name);
 
     } else {
-        check_parameter_type(value,
+        check_parameter_type(value_to_check,
                              package_name,
                              function_name,
                              parameter_name,
@@ -114,27 +147,123 @@ SEXP check_type(SEXP value,
     return value;
 }
 
-SEXP create_check_type_call(SEXP val, SEXP pkg_name, SEXP fun_name,
-                            SEXP param_name, SEXP param_idx) {
-    SEXP call = PROTECT(
-        Rf_lang6(
-            CheckTypeFun,
-            val,
-            pkg_name,
-            fun_name,
-            param_name,
-            param_idx
-        )
-    );
+SEXP create_check_type_call(SEXP value,
+                            SEXP argument_is_missing,
+                            SEXP parameter_is_vararg,
+                            SEXP pkg_name,
+                            SEXP fun_name,
+                            SEXP param_name,
+                            SEXP param_index) {
+    int protect_counter = 0;
+
+    SEXP call = PROTECT(lang8(CheckTypeFun,
+                              value,
+                              argument_is_missing,
+                              parameter_is_vararg,
+                              pkg_name,
+                              fun_name,
+                              param_name,
+                              param_index));
+    ++protect_counter;
 
     if (CheckTypeFunWrapper != R_NilValue) {
-        call =
-            PROTECT(Rf_lcons(CheckTypeFunWrapper, call));
+        call = PROTECT(Rf_lcons(CheckTypeFunWrapper, call));
+        ++protect_counter;
     }
 
-    UNPROTECT(CheckTypeFunWrapper != R_NilValue ? 2 : 1);
+    UNPROTECT(protect_counter);
 
     return call;
+}
+
+/* NOTE: if DEBUG is undefined, this function will be empty and should be
+ * eliminated by the compiler  */
+void show_insertion_message(SEXP check_type_call,
+                            bool evaluate_call,
+                            SEXP pkg_name,
+                            SEXP fun_name,
+                            SEXP param_name,
+                            SEXP param_index) {
+#ifdef DEBUG
+    const char* action = "injecting";
+    if (evaluate_call) {
+        action = "calling";
+    }
+
+    Rprintf("\ncontractR/src/inject.c: %s '%s' for '%s:::%s' in "
+            "'%s' [%d]\n",
+            action,
+            R_CHAR(Rf_asChar(Rf_deparse1(check_type_call, FALSE, 0))),
+            R_CHAR(Rf_asChar(pkg_name)),
+            R_CHAR(Rf_asChar(fun_name)),
+            R_CHAR(Rf_asChar(param_name)),
+            asInteger(param_index));
+#endif
+}
+
+void inject_argument_type_check(SEXP pkg_name,
+                                SEXP fun_name,
+                                SEXP param_sym,
+                                SEXP param_name,
+                                SEXP param_index,
+                                SEXP value,
+                                SEXP rho) {
+    SEXP call_value = NULL;
+    SEXP argument_is_missing = R_FalseValue;
+    SEXP parameter_is_vararg = R_FalseValue;
+    bool evaluate_call = false;
+
+    /* missing argument */
+    if (value == R_UnboundValue || value == R_MissingArg) {
+        call_value = R_NilValue;
+        argument_is_missing = R_TrueValue;
+        parameter_is_vararg = R_FalseValue;
+        evaluate_call = true;
+    }
+
+    /* ... parameter */
+    else if (param_sym == R_DotsSymbol) {
+        call_value = R_NilValue;
+        argument_is_missing = R_FalseValue;
+        parameter_is_vararg = R_TrueValue;
+        evaluate_call = true;
+    }
+
+    /* value (promise optimized away by compiler)  */
+    else if (TYPEOF(value) != PROMSXP) {
+        value = delayed_assign(param_sym, value, rho, rho, rho);
+        call_value = PREXPR(value);
+        argument_is_missing = R_FalseValue;
+        parameter_is_vararg = R_FalseValue;
+        evaluate_call = false;
+    }
+
+    /* promise */
+    else if (TYPEOF(value) == PROMSXP) {
+        call_value = PREXPR(value);
+        argument_is_missing = R_FalseValue;
+        parameter_is_vararg = R_FalseValue;
+        evaluate_call = false;
+    }
+
+    SEXP call = PROTECT(create_check_type_call(call_value,
+                                               argument_is_missing,
+                                               parameter_is_vararg,
+                                               pkg_name,
+                                               fun_name,
+                                               param_name,
+                                               param_index));
+
+    show_insertion_message(
+        call, evaluate_call, pkg_name, fun_name, param_name, param_index);
+
+    if (evaluate_call) {
+        Rf_eval(call, rho);
+    } else {
+        SET_PRCODE(value, call);
+    }
+
+    UNPROTECT(3);
 }
 
 SEXP inject_type_check(SEXP pkg_name, SEXP fun_name, SEXP fun, SEXP rho) {
@@ -160,66 +289,14 @@ SEXP inject_type_check(SEXP pkg_name, SEXP fun_name, SEXP fun, SEXP rho) {
     }
 
     SEXP params = FORMALS(fun);
-    for (int idx = 0; params != R_NilValue; idx++, params = CDR(params)) {
+    for (int index = 0; params != R_NilValue; index++, params = CDR(params)) {
         SEXP param_sym = TAG(params);
-        SEXP val = Rf_findVarInFrame(rho, param_sym);
-
-        SEXP param_idx = PROTECT(Rf_ScalarInteger(idx));
+        SEXP value = Rf_findVarInFrame(rho, param_sym);
         SEXP param_name = PROTECT(Rf_mkString(R_CHAR(PRINTNAME(param_sym))));
-        SEXP val_to_check = NULL;
+        SEXP param_index = PROTECT(Rf_ScalarInteger(index));
 
-        if (val == R_UnboundValue || val == R_MissingArg) {
-            // FIXME: hardcoded - not possible to test
-            check_type(R_MissingArg, pkg_name, fun_name, param_name, param_idx);
-        } else if (TYPEOF(val) == PROMSXP) {
-            val_to_check = PREXPR(val);
-        } else if (param_sym == R_DotsSymbol) {
-            val_to_check = R_NilValue;
-        } else {
-            // TODO: construct a promise to handle optimizations
-        }
-
-        if (val_to_check != NULL) {
-            SEXP check_type_call = PROTECT(
-                create_check_type_call(
-                    val_to_check,
-                    pkg_name,
-                    fun_name,
-                    param_name,
-                    param_idx
-                )
-            );
-
-            if (TYPEOF(val) == PROMSXP) {
-                SET_PRCODE(val, check_type_call);
-
-#ifdef DEBUG
-                Rprintf(
-                    "\ncontractR/src/inject.c: injecting '%s' for '%s:::%s' in "
-                    "'%s' [%d]\n",
-                    R_CHAR(Rf_asChar(Rf_deparse1(check_type_call, FALSE, 0))),
-                    R_CHAR(Rf_asChar(pkg_name)),
-                    R_CHAR(Rf_asChar(fun_name)),
-                    R_CHAR(Rf_asChar(param_name)),
-                    idx);
-#endif
-            } else {
-#ifdef DEBUG
-                Rprintf(
-                    "\ncontractR/src/inject.c: calling '%s' for '%s:::%s' in "
-                    "'%s' [%d]\n",
-                    R_CHAR(Rf_asChar(Rf_deparse1(check_type_call, FALSE, 0))),
-                    R_CHAR(Rf_asChar(pkg_name)),
-                    R_CHAR(Rf_asChar(fun_name)),
-                    R_CHAR(Rf_asChar(param_name)),
-                    idx);
-#endif
-
-                Rf_eval(check_type_call, rho);
-            }
-
-            UNPROTECT(3);
-        }
+        inject_argument_type_check(
+            pkg_name, fun_name, param_sym, param_name, param_index, value, rho);
     }
 
     return R_NilValue;

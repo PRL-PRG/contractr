@@ -27,6 +27,8 @@ inject_type_check_call <- function(fun, fun_name, pkg_name) {
       CHECK=.Call(
         create_check_type_call,
         quote(`__retval`),
+        FALSE,
+        FALSE,
         pkg_name,
         fun_name,
         "__retval",
