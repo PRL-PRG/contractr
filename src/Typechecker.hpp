@@ -255,9 +255,10 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
     void visit(const tastr::ast::UnionTypeNode& node) override final {
         SEXP value = peek_value_();
         node.get_first_type().accept(*this);
-        if (pop_result_()) {
+        if (peek_result_()) {
             return;
         }
+        pop_result_();
         push_value_(value);
         node.get_second_type().accept(*this);
     }
