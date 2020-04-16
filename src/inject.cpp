@@ -193,7 +193,6 @@ SEXP inject_type_check(SEXP pkg_name, SEXP fun_name, SEXP fun, SEXP rho) {
             if (TYPEOF(val) == PROMSXP) {
                 SET_PRCODE(val, check_type_call);
 
-                #define DEBUG
 #ifdef DEBUG
                 Rprintf(
                     "\ncontractR/src/inject.c: injecting '%s' for '%s:::%s' in "
