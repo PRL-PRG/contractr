@@ -14,6 +14,7 @@ SEXP get_type_check_function();
 SEXP get_type_check_function_wrapper();
 SEXP set_type_check_function(SEXP, SEXP);
 SEXP reset_type_check_function();
+SEXP create_check_type_call(SEXP, SEXP, SEXP, SEXP, SEXP);
 SEXP inject_type_check(SEXP, SEXP, SEXP, SEXP);
 SEXP log_insertion(SEXP, SEXP, SEXP, SEXP, SEXP);
 SEXP check_type(SEXP, SEXP, SEXP, SEXP, SEXP);

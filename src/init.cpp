@@ -15,6 +15,7 @@ static const R_CallMethodDef callMethods[] = {
      0},
     {"set_type_check_function", (DL_FUNC) &set_type_check_function, 2},
     {"reset_type_check_function", (DL_FUNC) &reset_type_check_function, 0},
+    {"create_check_type_call", (DL_FUNC) &create_check_type_call, 5},
     {"inject_type_check", (DL_FUNC) &inject_type_check, 4},
     {"log_insertion", (DL_FUNC) &log_insertion, 5},
     {"check_type", (DL_FUNC) &check_type, 5},

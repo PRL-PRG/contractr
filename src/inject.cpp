@@ -114,6 +114,29 @@ SEXP check_type(SEXP value,
     return value;
 }
 
+SEXP create_check_type_call(SEXP val, SEXP pkg_name, SEXP fun_name,
+                            SEXP param_name, SEXP param_idx) {
+    SEXP call = PROTECT(
+        Rf_lang6(
+            CheckTypeFun,
+            val,
+            pkg_name,
+            fun_name,
+            param_name,
+            param_idx
+        )
+    );
+
+    if (CheckTypeFunWrapper != R_NilValue) {
+        call =
+            PROTECT(Rf_lcons(CheckTypeFunWrapper, call));
+    }
+
+    UNPROTECT(CheckTypeFunWrapper != R_NilValue ? 2 : 1);
+
+    return call;
+}
+
 SEXP inject_type_check(SEXP pkg_name, SEXP fun_name, SEXP fun, SEXP rho) {
     if (TYPEOF(pkg_name) != STRSXP || Rf_length(pkg_name) != 1) {
         Rf_error("pkg_name must be scalar character");
@@ -141,40 +164,39 @@ SEXP inject_type_check(SEXP pkg_name, SEXP fun_name, SEXP fun, SEXP rho) {
         SEXP param_sym = TAG(params);
         SEXP val = Rf_findVarInFrame(rho, param_sym);
 
-        // in other words - param_sym not found in rho
-        if (val == R_UnboundValue) {
-            val == R_MissingArg;
-        }
-
         SEXP param_idx = PROTECT(Rf_ScalarInteger(idx));
         SEXP param_name = PROTECT(Rf_mkString(R_CHAR(PRINTNAME(param_sym))));
         SEXP val_to_check = NULL;
 
-        if (TYPEOF(val) == PROMSXP) {
+        if (val == R_UnboundValue || val == R_MissingArg) {
+            // FIXME: hardcoded - not possible to test
+            check_type(R_MissingArg, pkg_name, fun_name, param_name, param_idx);
+        } else if (TYPEOF(val) == PROMSXP) {
             val_to_check = PREXPR(val);
         } else if (param_sym == R_DotsSymbol) {
             val_to_check = R_NilValue;
+        } else {
+            // TODO: construct a promise to handle optimizations
         }
 
-        if (val != NULL) {
-            SEXP check_type_call = PROTECT(Rf_lang6(CheckTypeFun,
-                                                    val_to_check,
-                                                    pkg_name,
-                                                    fun_name,
-                                                    param_name,
-                                                    param_idx));
-
-            if (CheckTypeFunWrapper != R_NilValue) {
-                check_type_call =
-                    PROTECT(Rf_lcons(CheckTypeFunWrapper, check_type_call));
-            }
+        if (val_to_check != NULL) {
+            SEXP check_type_call = PROTECT(
+                create_check_type_call(
+                    val_to_check,
+                    pkg_name,
+                    fun_name,
+                    param_name,
+                    param_idx
+                )
+            );
 
             if (TYPEOF(val) == PROMSXP) {
                 SET_PRCODE(val, check_type_call);
 
+                #define DEBUG
 #ifdef DEBUG
                 Rprintf(
-                    "contractR/src/inject.c: injecting '%s' for '%s:::%s' in "
+                    "\ncontractR/src/inject.c: injecting '%s' for '%s:::%s' in "
                     "'%s' [%d]\n",
                     R_CHAR(Rf_asChar(Rf_deparse1(check_type_call, FALSE, 0))),
                     R_CHAR(Rf_asChar(pkg_name)),
@@ -182,10 +204,10 @@ SEXP inject_type_check(SEXP pkg_name, SEXP fun_name, SEXP fun, SEXP rho) {
                     R_CHAR(Rf_asChar(param_name)),
                     idx);
 #endif
-            } else if (param_sym == R_DotsSymbol) {
+            } else {
 #ifdef DEBUG
                 Rprintf(
-                    "contractR/src/inject.c: calling '%s' for '%s:::%s' in "
+                    "\ncontractR/src/inject.c: calling '%s' for '%s:::%s' in "
                     "'%s' [%d]\n",
                     R_CHAR(Rf_asChar(Rf_deparse1(check_type_call, FALSE, 0))),
                     R_CHAR(Rf_asChar(pkg_name)),
@@ -197,7 +219,7 @@ SEXP inject_type_check(SEXP pkg_name, SEXP fun_name, SEXP fun, SEXP rho) {
                 Rf_eval(check_type_call, rho);
             }
 
-            UNPROTECT(3 + (CheckTypeFunWrapper != R_NilValue ? 1 : 0));
+            UNPROTECT(3);
         }
     }
 

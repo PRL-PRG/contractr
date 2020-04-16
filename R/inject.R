@@ -7,7 +7,7 @@ inject_type_check_call <- function(fun, fun_name, pkg_name) {
   id <- injectr:::sexp_address(fun)
 
   if (!exists(id, envir=.injected_functions)) {
-    code <- substitute(
+    check_params <- substitute(
       .Call(
         contractR:::inject_type_check,
         PKG_NAME,
@@ -18,9 +18,26 @@ inject_type_check_call <- function(fun, fun_name, pkg_name) {
       list(PKG_NAME=pkg_name, FUN_NAME=fun_name)
     )
 
+    check_retval <- substitute({
+      `__retval` <- returnValue(contactR:::.no_retval_marker)
+      if (!identical(`__retval`, contactR:::.no_retval_marker)) {
+        CHECK
+      }
+    }, list(
+      CHECK=.Call(
+        create_check_type_call,
+        quote(`__retval`),
+        pkg_name,
+        fun_name,
+        "__retval",
+        -1
+      )
+    ))
+
     old <- injectr:::create_duplicate(fun)
 
-    injectr::inject_code(code, fun)
+    injectr::inject_code(check_params, fun)
+    injectr::inject_code(check_retval, fun, where="onexit")
 
     assign(
       id,
@@ -57,3 +74,4 @@ is_type_check_injected <- function(f) {
 }
 
 .injected_functions <- new.env(parent=emptyenv())
+.no_retval_marker <- new.env(parent=emptyenv())
