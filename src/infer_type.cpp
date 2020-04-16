@@ -114,6 +114,18 @@ std::string infer_type(SEXP value, const std::string& parameter_name) {
         return infer_list_type(value);
     }
 
+    else if (TYPEOF(value) == CLOSXP) {
+        return "??? => ???";
+    }
+
+    else if (TYPEOF(value) == BUILTINSXP) {
+        return "??? => ???";
+    }
+
+    else if (TYPEOF(value) == SPECIALSXP) {
+        return "??? => ???";
+    }
+
     else if (TYPEOF(value) == INTSXP) {
         return infer_vector_type(
             value, "integer", [](SEXP vector, int index) -> bool {
