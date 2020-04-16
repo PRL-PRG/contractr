@@ -47,14 +47,12 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
         return pop_result_();
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::IdentifierNode& node) override final {
         SEXP value = pop_value_();
         std::string name = node.get_name();
         push_result_(CHAR(value) == name);
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::VectorTypeNode& node) override final {
         SEXP value = pop_value_();
         bool result = is_vector_type_(value);
@@ -68,7 +66,6 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
         }
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::NAScalarTypeNode& node) override final {
         /* setting this is important because we want to make sure that there
          * is no na value if na annotation is not present */
@@ -77,7 +74,6 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
         unset_na_();
     }
 
-    /* DONE DONE */
     void
     visit(const tastr::ast::CharacterAScalarTypeNode& node) override final {
         SEXP value = pop_value_();
@@ -87,7 +83,6 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
             });
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::ComplexAScalarTypeNode& node) override final {
         SEXP value = pop_value_();
         satisfies_vector_or_scalar_(
@@ -97,7 +92,6 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
             });
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::DoubleAScalarTypeNode& node) override final {
         SEXP value = pop_value_();
         satisfies_vector_or_scalar_(
@@ -106,7 +100,6 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
             });
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::IntegerAScalarTypeNode& node) override final {
         SEXP value = pop_value_();
         satisfies_vector_or_scalar_(
@@ -115,7 +108,6 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
             });
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::LogicalAScalarTypeNode& node) override final {
         SEXP value = pop_value_();
         satisfies_vector_or_scalar_(
@@ -124,7 +116,6 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
             });
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::RawAScalarTypeNode& node) override final {
         SEXP value = pop_value_();
         satisfies_vector_or_scalar_(
@@ -135,82 +126,70 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
             });
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::EnvironmentTypeNode& node) override final {
         SEXP value = pop_value_();
         SEXPTYPE rtype = TYPEOF(value);
         push_result_(rtype == ENVSXP);
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::ExpressionTypeNode& node) override final {
         SEXP value = pop_value_();
         SEXPTYPE rtype = TYPEOF(value);
         push_result_(rtype == EXPRSXP);
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::LanguageTypeNode& node) override final {
         SEXP value = pop_value_();
         SEXPTYPE rtype = TYPEOF(value);
         push_result_(rtype == LANGSXP);
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::SymbolTypeNode& node) override final {
         SEXP value = pop_value_();
         SEXPTYPE rtype = TYPEOF(value);
         push_result_(rtype == SYMSXP);
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::ExternalPointerTypeNode& node) override final {
         SEXP value = pop_value_();
         SEXPTYPE rtype = TYPEOF(value);
         push_result_(rtype == EXTPTRSXP);
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::BytecodeTypeNode& node) override final {
         SEXP value = pop_value_();
         SEXPTYPE rtype = TYPEOF(value);
         push_result_(rtype == BCODESXP);
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::PairlistTypeNode& node) override final {
         SEXP value = pop_value_();
         SEXPTYPE rtype = TYPEOF(value);
         push_result_(rtype == LISTSXP);
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::S4TypeNode& node) override final {
         SEXP value = pop_value_();
         SEXPTYPE rtype = TYPEOF(value);
         push_result_(rtype == S4SXP);
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::WeakReferenceTypeNode& node) override final {
         SEXP value = pop_value_();
         SEXPTYPE rtype = TYPEOF(value);
         push_result_(rtype == WEAKREFSXP);
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::AnyTypeNode& node) override final {
         SEXP value = pop_value_();
         push_result_(true);
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::UnknownTypeNode& node) override final {
         SEXP value = pop_value_();
         push_result_(value == R_MissingArg);
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::ParameterNode& node) override final {
         SEXP value = pop_value_();
         tastr::ast::Node::count_t size = node.get_parameter_count();
@@ -223,7 +202,6 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
         and_result_(size);
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::ListTypeNode& node) override final {
         SEXP value = pop_value_();
 
@@ -245,7 +223,6 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
         }
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::StructTypeNode& node) override final {
         SEXP value = pop_value_();
 
@@ -259,7 +236,6 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
         }
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::TupleTypeNode& node) override final {
         SEXP value = pop_value_();
         bool result = TYPEOF(value) == VECSXP;
@@ -272,12 +248,10 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
         }
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::GroupTypeNode& node) override final {
         node.get_inner_type().accept(*this);
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::UnionTypeNode& node) override final {
         SEXP value = peek_value_();
         node.get_first_type().accept(*this);
@@ -288,13 +262,11 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
         node.get_second_type().accept(*this);
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::NullTypeNode& node) override final {
         SEXP value = pop_value_();
         push_result_(value == R_NilValue);
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::NullableTypeNode& node) override final {
         SEXP value = pop_value_();
 
@@ -307,7 +279,6 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
         }
     }
 
-    /* DONE DONE */
     void visit(const tastr::ast::TagTypePairNode& node) override final {
         SEXP list = pop_value_();
         seq_index_t seq_index = pop_seq_index_();
@@ -321,7 +292,6 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
         and_result_();
     }
 
-    /* TODO */
     void visit(const tastr::ast::FunctionTypeNode& node) override final {
         SEXP value = pop_value_();
         SEXPTYPE valtype = TYPEOF(value);
