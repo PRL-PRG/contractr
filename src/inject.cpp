@@ -40,6 +40,54 @@ SEXP log_insertion(SEXP value,
     return value;
 }
 
+void check_parameter_type(SEXP value,
+                          const std::string& package_name,
+                          const std::string& function_name,
+                          const std::string& parameter_name,
+                          int formal_parameter_position) {
+    const tastr::ast::Node* node =
+        TypeDeclarationCache::get_function_parameter_type(
+            package_name, function_name, formal_parameter_position);
+
+    TypeChecker type_checker(
+        package_name, function_name, parameter_name, formal_parameter_position);
+
+    bool result = type_checker.typecheck(value, *node);
+
+    if (!result) {
+        log_error(
+            "type checking failed for parameter '%s' (position %d) of %s::%s\n",
+            parameter_name.c_str(),
+            formal_parameter_position,
+            package_name.c_str(),
+            function_name.c_str());
+
+        log_raw("\tExpected: %s\n", tastr::parser::to_string(*node).c_str());
+        log_raw("\tActual: %s\n", infer_type(value, parameter_name).c_str());
+    }
+}
+
+void check_return_type(SEXP value,
+                       const std::string& package_name,
+                       const std::string& function_name) {
+    const tastr::ast::Node* node =
+        TypeDeclarationCache::get_function_return_type(package_name,
+                                                       function_name);
+
+    std::string parameter_name = "return";
+
+    TypeChecker type_checker(package_name, function_name, parameter_name, -1);
+    bool result = type_checker.typecheck(value, *node);
+
+    if (!result) {
+        log_error("type checking failed for return value of %s::%s\n",
+                  package_name.c_str(),
+                  function_name.c_str());
+        log_raw("\tExpected: %s\n", tastr::parser::to_string(*node).c_str());
+        log_raw("\tActual: %s\n", infer_type(value, parameter_name).c_str());
+    }
+}
+
 SEXP check_type(SEXP value,
                 SEXP pkg_name,
                 SEXP fun_name,
@@ -49,22 +97,20 @@ SEXP check_type(SEXP value,
     int formal_parameter_position = Rf_asInteger(param_idx);
     std::string package_name(R_CHAR(Rf_asChar(pkg_name)));
     std::string function_name(R_CHAR(Rf_asChar(fun_name)));
-    const tastr::ast::Node& node(
-        *TypeDeclarationCache::get_function_parameter_type(
-            package_name, function_name, formal_parameter_position));
-    TypeChecker type_checker(
-        package_name, function_name, parameter_name, formal_parameter_position);
-    bool result = type_checker.typecheck(value, node);
-    if (!result) {
-        log_error(
-            "type checking failed for parameter '%s' (position %d) of %s::%s\n",
-            R_CHAR(Rf_asChar(param_name)),
-            Rf_asInteger(param_idx),
-            R_CHAR(Rf_asChar(pkg_name)),
-            R_CHAR(Rf_asChar(fun_name)));
-        log_raw("\tExpected: %s\n", tastr::parser::to_string(node).c_str());
-        log_raw("\tActual: %s\n", infer_type(value, parameter_name).c_str());
+
+    const tastr::ast::Node* node = nullptr;
+
+    if (formal_parameter_position == -1) {
+        check_return_type(value, package_name, function_name);
+
+    } else {
+        check_parameter_type(value,
+                             package_name,
+                             function_name,
+                             parameter_name,
+                             formal_parameter_position);
     }
+
     return value;
 }
 
@@ -83,6 +129,11 @@ SEXP inject_type_check(SEXP pkg_name, SEXP fun_name, SEXP fun, SEXP rho) {
 
     if (TYPEOF(rho) != ENVSXP) {
         Rf_error("argument rho must be an environment");
+    }
+
+    if (!TypeDeclarationCache::function_is_typed(R_CHAR(Rf_asChar(pkg_name)),
+                                                 R_CHAR(Rf_asChar(fun_name)))) {
+        return R_NilValue;
     }
 
     SEXP params = FORMALS(fun);
