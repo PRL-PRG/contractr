@@ -19,8 +19,8 @@ inject_type_check_call <- function(fun, fun_name, pkg_name) {
     )
 
     check_retval <- substitute({
-      `__retval` <- returnValue(contactR:::.no_retval_marker)
-      if (!identical(`__retval`, contactR:::.no_retval_marker)) {
+      `__retval` <- returnValue(contractR:::.no_retval_marker)
+      if (!identical(`__retval`, contractR:::.no_retval_marker)) {
         CHECK
       }
     }, list(
