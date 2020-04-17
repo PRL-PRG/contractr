@@ -2,11 +2,15 @@
 #define CONTRACTR_UTILITIES_HPP
 
 #include <Rinternals.h>
+#include <string>
 
-extern SEXP R_DotCallSym;
 extern SEXP R_TrueValue;
 extern SEXP R_FalseValue;
-extern SEXP R_DelayedAssign;
+
+extern SEXP DotCallSym;
+extern SEXP DelayedAssign;
+extern SEXP SystemDotFile;
+extern SEXP PackageSymbol;
 
 extern "C" {
 
@@ -23,6 +27,8 @@ SEXP delayed_assign(SEXP variable,
                     SEXP eval_env,
                     SEXP assign_env,
                     SEXP rho);
+
+SEXP system_file(SEXP path);
 }
 
 #endif /* CONTRACTR_UTILITIES_HPP */

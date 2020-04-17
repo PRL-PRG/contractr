@@ -5,7 +5,6 @@
 
 #include <cassert>
 #include <functional>
-#include <tastr/parser/parser.hpp>
 #include <tastr/visitor/visitor.hpp>
 
 class TypeChecker final: public tastr::visitor::ConstNodeVisitor {

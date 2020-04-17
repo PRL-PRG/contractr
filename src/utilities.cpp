@@ -1,11 +1,15 @@
 #include "utilities.hpp"
 
-SEXP R_DotCallSym = NULL;
-SEXP R_DelayedAssign = NULL;
+SEXP DotCallSym = NULL;
+SEXP DelayedAssign = NULL;
+SEXP SystemDotFile = NULL;
+SEXP PackageSymbol = NULL;
 
 void initialize_globals() {
-    R_DotCallSym = Rf_install(".Call");
-    R_DelayedAssign = Rf_install("delayedAssign");
+    DotCallSym = Rf_install(".Call");
+    DelayedAssign = Rf_install("delayedAssign");
+    SystemDotFile = Rf_install("system.file");
+    PackageSymbol = Rf_install("package");
 }
 
 SEXP environment_name(SEXP env) {
@@ -40,7 +44,16 @@ SEXP delayed_assign(SEXP variable,
                     SEXP assign_env,
                     SEXP rho) {
     SEXP call =
-        Rf_lang5(R_DelayedAssign, variable, value, eval_env, assign_env);
+        Rf_lang5(DelayedAssign, variable, value, eval_env, assign_env);
     Rf_eval(call, rho);
     return Rf_findVarInFrame(rho, variable);
+}
+
+SEXP system_file(SEXP path) {
+    SEXP package_name = PROTECT(mkString("contractR"));
+    SEXP call = PROTECT(Rf_lang3(SystemDotFile, path, package_name));
+    SET_TAG(CDDR(call), PackageSymbol);
+    SEXP result = Rf_eval(call, R_GlobalEnv);
+    UNPROTECT(2);
+    return result;
 }

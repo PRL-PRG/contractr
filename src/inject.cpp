@@ -1,9 +1,9 @@
 #include "inject.hpp"
 
-#include "TypeDeclarationCache.hpp"
 #include "Typechecker.hpp"
 #include "infer_type.hpp"
 #include "logger.hpp"
+#include "type_declaration_cache.hpp"
 #include "utilities.hpp"
 
 #include <R_ext/Rdynload.h>
@@ -46,9 +46,8 @@ void check_parameter_type(SEXP value,
                           const std::string& function_name,
                           const std::string& parameter_name,
                           int formal_parameter_position) {
-    const tastr::ast::Node* node =
-        TypeDeclarationCache::get_function_parameter_type(
-            package_name, function_name, formal_parameter_position);
+    const tastr::ast::Node* node = get_function_parameter_type(
+        package_name, function_name, formal_parameter_position);
 
     TypeChecker type_checker(
         package_name, function_name, parameter_name, formal_parameter_position);
@@ -63,7 +62,7 @@ void check_parameter_type(SEXP value,
             package_name.c_str(),
             function_name.c_str());
 
-        log_raw("\tExpected: %s\n", tastr::parser::to_string(*node).c_str());
+        log_raw("\tExpected: %s\n", type_to_string(*node).c_str());
         log_raw("\tActual: %s\n", infer_type(value, parameter_name).c_str());
     }
 }
@@ -72,8 +71,7 @@ void check_return_type(SEXP value,
                        const std::string& package_name,
                        const std::string& function_name) {
     const tastr::ast::Node* node =
-        TypeDeclarationCache::get_function_return_type(package_name,
-                                                       function_name);
+        get_function_return_type(package_name, function_name);
 
     std::string parameter_name = "return";
 
@@ -84,7 +82,7 @@ void check_return_type(SEXP value,
         log_error("type checking failed for return value of %s::%s\n",
                   package_name.c_str(),
                   function_name.c_str());
-        log_raw("\tExpected: %s\n", tastr::parser::to_string(*node).c_str());
+        log_raw("\tExpected: %s\n", type_to_string(*node).c_str());
         log_raw("\tActual: %s\n", infer_type(value, parameter_name).c_str());
     }
 }
@@ -256,11 +254,6 @@ SEXP inject_type_check(SEXP pkg_name, SEXP fun_name, SEXP fun, SEXP rho) {
         Rf_error("argument rho must be an environment");
     }
 
-    if (!TypeDeclarationCache::function_is_typed(R_CHAR(Rf_asChar(pkg_name)),
-                                                 R_CHAR(Rf_asChar(fun_name)))) {
-        return R_NilValue;
-    }
-
     SEXP params = FORMALS(fun);
     for (int index = 0; params != R_NilValue; index++, params = CDR(params)) {
         SEXP param_sym = TAG(params);
@@ -314,10 +307,9 @@ SEXP reset_type_check_function() {
                                             Rf_install("contractR"),
                                             Rf_install("check_type")));
 
-    set_type_check_function(check_type_call, R_DotCallSym);
+    set_type_check_function(check_type_call, DotCallSym);
 
     UNPROTECT(1);
 
     return R_NilValue;
 }
-
