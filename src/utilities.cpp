@@ -4,12 +4,20 @@ SEXP DotCallSym = NULL;
 SEXP DelayedAssign = NULL;
 SEXP SystemDotFile = NULL;
 SEXP PackageSymbol = NULL;
+SEXPTYPE MISSINGSXP = 19883;
 
 void initialize_globals() {
     DotCallSym = Rf_install(".Call");
     DelayedAssign = Rf_install("delayedAssign");
     SystemDotFile = Rf_install("system.file");
     PackageSymbol = Rf_install("package");
+}
+
+SEXPTYPE type_of_sexp(SEXP value) {
+    if (value == R_MissingArg) {
+        return MISSINGSXP;
+    }
+    return TYPEOF(value);
 }
 
 SEXP environment_name(SEXP env) {
@@ -43,8 +51,7 @@ SEXP delayed_assign(SEXP variable,
                     SEXP eval_env,
                     SEXP assign_env,
                     SEXP rho) {
-    SEXP call =
-        Rf_lang5(DelayedAssign, variable, value, eval_env, assign_env);
+    SEXP call = Rf_lang5(DelayedAssign, variable, value, eval_env, assign_env);
     Rf_eval(call, rho);
     return Rf_findVarInFrame(rho, variable);
 }

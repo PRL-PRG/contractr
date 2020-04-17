@@ -1,5 +1,7 @@
 #include "infer_type.hpp"
 
+#include "utilities.hpp"
+
 #include <set>
 #include <vector>
 
@@ -102,45 +104,45 @@ std::string infer_type(SEXP value, const std::string& parameter_name) {
         return "...";
     }
 
-    else if (value == R_MissingArg) {
+    else if (type_of_sexp(value) == MISSINGSXP) {
         return "???";
     }
 
-    else if (value == R_NilValue) {
+    else if (type_of_sexp(value) == NILSXP) {
         return "null";
     }
 
-    else if (TYPEOF(value) == VECSXP) {
+    else if (type_of_sexp(value) == VECSXP) {
         return infer_list_type(value);
     }
 
-    else if (TYPEOF(value) == CLOSXP) {
+    else if (type_of_sexp(value) == CLOSXP) {
         return "??? => ???";
     }
 
-    else if (TYPEOF(value) == BUILTINSXP) {
+    else if (type_of_sexp(value) == BUILTINSXP) {
         return "??? => ???";
     }
 
-    else if (TYPEOF(value) == SPECIALSXP) {
+    else if (type_of_sexp(value) == SPECIALSXP) {
         return "??? => ???";
     }
 
-    else if (TYPEOF(value) == INTSXP) {
+    else if (type_of_sexp(value) == INTSXP) {
         return infer_vector_type(
             value, "integer", [](SEXP vector, int index) -> bool {
                 return INTEGER_ELT(vector, index) == NA_INTEGER;
             });
     }
 
-    else if (TYPEOF(value) == CHARSXP) {
+    else if (type_of_sexp(value) == CHARSXP) {
         return infer_vector_type(
             value, "character", [](SEXP vector, int index) -> bool {
                 return STRING_ELT(vector, index) == NA_STRING;
             });
     }
 
-    else if (TYPEOF(value) == CPLXSXP) {
+    else if (type_of_sexp(value) == CPLXSXP) {
         return infer_vector_type(
             value, "complex", [](SEXP vector, int index) -> bool {
                 Rcomplex v = COMPLEX_ELT(vector, index);
@@ -148,21 +150,21 @@ std::string infer_type(SEXP value, const std::string& parameter_name) {
             });
     }
 
-    else if (TYPEOF(value) == REALSXP) {
+    else if (type_of_sexp(value) == REALSXP) {
         return infer_vector_type(
             value, "double", [](SEXP vector, int index) -> bool {
                 return ISNAN(REAL_ELT(vector, index));
             });
     }
 
-    else if (TYPEOF(value) == LGLSXP) {
+    else if (type_of_sexp(value) == LGLSXP) {
         return infer_vector_type(
             value, "logical", [](SEXP vector, int index) -> bool {
                 return LOGICAL_ELT(vector, index) == NA_LOGICAL;
             });
     }
 
-    else if (TYPEOF(value) == RAWSXP) {
+    else if (type_of_sexp(value) == RAWSXP) {
         return infer_vector_type(
             value, "raw", [](SEXP vector, int index) -> bool {
                 // NOTE no such thing as a raw NA
@@ -170,39 +172,39 @@ std::string infer_type(SEXP value, const std::string& parameter_name) {
             });
     }
 
-    else if (TYPEOF(value) == ENVSXP) {
+    else if (type_of_sexp(value) == ENVSXP) {
         return "environment";
     }
 
-    else if (TYPEOF(value) == EXPRSXP) {
+    else if (type_of_sexp(value) == EXPRSXP) {
         return "expression";
     }
 
-    else if (TYPEOF(value) == LANGSXP) {
+    else if (type_of_sexp(value) == LANGSXP) {
         return "language";
     }
 
-    else if (TYPEOF(value) == SYMSXP) {
+    else if (type_of_sexp(value) == SYMSXP) {
         return "symbol";
     }
 
-    else if (TYPEOF(value) == EXTPTRSXP) {
+    else if (type_of_sexp(value) == EXTPTRSXP) {
         return "externalptr";
     }
 
-    else if (TYPEOF(value) == BCODESXP) {
+    else if (type_of_sexp(value) == BCODESXP) {
         return "bytecode";
     }
 
-    else if (TYPEOF(value) == LISTSXP) {
+    else if (type_of_sexp(value) == LISTSXP) {
         return "pairlist";
     }
 
-    else if (TYPEOF(value) == S4SXP) {
+    else if (type_of_sexp(value) == S4SXP) {
         return "s4";
     }
 
-    else if (TYPEOF(value) == WEAKREFSXP) {
+    else if (type_of_sexp(value) == WEAKREFSXP) {
         return "weakref";
     }
 

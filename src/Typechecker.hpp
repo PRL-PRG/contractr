@@ -2,6 +2,7 @@
 #define CONTRACTR_TYPECHECKER_HPP
 
 #include "logger.hpp"
+#include "utilities.hpp"
 
 #include <cassert>
 #include <functional>
@@ -127,55 +128,55 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
 
     void visit(const tastr::ast::EnvironmentTypeNode& node) override final {
         SEXP value = pop_value_();
-        SEXPTYPE rtype = TYPEOF(value);
+        SEXPTYPE rtype = type_of_sexp(value);
         push_result_(rtype == ENVSXP);
     }
 
     void visit(const tastr::ast::ExpressionTypeNode& node) override final {
         SEXP value = pop_value_();
-        SEXPTYPE rtype = TYPEOF(value);
+        SEXPTYPE rtype = type_of_sexp(value);
         push_result_(rtype == EXPRSXP);
     }
 
     void visit(const tastr::ast::LanguageTypeNode& node) override final {
         SEXP value = pop_value_();
-        SEXPTYPE rtype = TYPEOF(value);
+        SEXPTYPE rtype = type_of_sexp(value);
         push_result_(rtype == LANGSXP);
     }
 
     void visit(const tastr::ast::SymbolTypeNode& node) override final {
         SEXP value = pop_value_();
-        SEXPTYPE rtype = TYPEOF(value);
+        SEXPTYPE rtype = type_of_sexp(value);
         push_result_(rtype == SYMSXP);
     }
 
     void visit(const tastr::ast::ExternalPointerTypeNode& node) override final {
         SEXP value = pop_value_();
-        SEXPTYPE rtype = TYPEOF(value);
+        SEXPTYPE rtype = type_of_sexp(value);
         push_result_(rtype == EXTPTRSXP);
     }
 
     void visit(const tastr::ast::BytecodeTypeNode& node) override final {
         SEXP value = pop_value_();
-        SEXPTYPE rtype = TYPEOF(value);
+        SEXPTYPE rtype = type_of_sexp(value);
         push_result_(rtype == BCODESXP);
     }
 
     void visit(const tastr::ast::PairlistTypeNode& node) override final {
         SEXP value = pop_value_();
-        SEXPTYPE rtype = TYPEOF(value);
+        SEXPTYPE rtype = type_of_sexp(value);
         push_result_(rtype == LISTSXP);
     }
 
     void visit(const tastr::ast::S4TypeNode& node) override final {
         SEXP value = pop_value_();
-        SEXPTYPE rtype = TYPEOF(value);
+        SEXPTYPE rtype = type_of_sexp(value);
         push_result_(rtype == S4SXP);
     }
 
     void visit(const tastr::ast::WeakReferenceTypeNode& node) override final {
         SEXP value = pop_value_();
-        SEXPTYPE rtype = TYPEOF(value);
+        SEXPTYPE rtype = type_of_sexp(value);
         push_result_(rtype == WEAKREFSXP);
     }
 
@@ -186,7 +187,8 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
 
     void visit(const tastr::ast::UnknownTypeNode& node) override final {
         SEXP value = pop_value_();
-        push_result_(value == R_MissingArg);
+        SEXPTYPE rtype = type_of_sexp(value);
+        push_result_(rtype == MISSINGSXP);
     }
 
     void visit(const tastr::ast::ParameterNode& node) override final {
@@ -204,7 +206,7 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
     void visit(const tastr::ast::ListTypeNode& node) override final {
         SEXP value = pop_value_();
 
-        bool result = TYPEOF(value) == VECSXP;
+        bool result = type_of_sexp(value) == VECSXP;
 
         if (!result) {
             push_result_(result);
@@ -225,7 +227,7 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
     void visit(const tastr::ast::StructTypeNode& node) override final {
         SEXP value = pop_value_();
 
-        bool result = TYPEOF(value) == VECSXP;
+        bool result = type_of_sexp(value) == VECSXP;
 
         if (!result) {
             push_result_(result);
@@ -237,7 +239,7 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
 
     void visit(const tastr::ast::TupleTypeNode& node) override final {
         SEXP value = pop_value_();
-        bool result = TYPEOF(value) == VECSXP;
+        bool result = type_of_sexp(value) == VECSXP;
 
         if (!result) {
             push_result_(result);
@@ -294,7 +296,7 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
 
     void visit(const tastr::ast::FunctionTypeNode& node) override final {
         SEXP value = pop_value_();
-        SEXPTYPE valtype = TYPEOF(value);
+        SEXPTYPE valtype = type_of_sexp(value);
         bool result =
             valtype == CLOSXP || valtype == BUILTINSXP || valtype == SPECIALSXP;
         push_result_(result);
@@ -342,14 +344,14 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
 
   private:
     bool is_vector_type_(SEXP value) {
-        SEXPTYPE sexptype = TYPEOF(value);
+        SEXPTYPE sexptype = type_of_sexp(value);
         return (sexptype == INTSXP || sexptype == REALSXP ||
                 sexptype == RAWSXP || sexptype == LGLSXP || sexptype == STRSXP);
     };
 
     template <typename T>
     void satisfies_vector_or_scalar_(SEXP value, SEXPTYPE type, T check_na) {
-        if (TYPEOF(value) != type) {
+        if (type_of_sexp(value) != type) {
             push_result_(false);
             return;
         }

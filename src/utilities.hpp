@@ -12,9 +12,13 @@ extern SEXP DelayedAssign;
 extern SEXP SystemDotFile;
 extern SEXP PackageSymbol;
 
+extern SEXPTYPE MISSINGSXP;
+
 extern "C" {
 
 void initialize_globals();
+
+SEXPTYPE type_of_sexp(SEXP value);
 
 SEXP environment_name(SEXP env);
 
