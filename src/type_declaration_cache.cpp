@@ -275,43 +275,66 @@ SEXP show_type_declarations() {
     return R_NilValue;
 }
 
-const tastr::ast::Node*
+int get_function_parameter_count(const std::string& package_name,
+                                 const std::string& function_name) {
+    const tastr::ast::FunctionTypeNode& function_type =
+        get_function_type(package_name, function_name);
+
+    const tastr::ast::ParameterNode& parameter_node =
+        function_type.get_parameter();
+
+    return parameter_node.get_parameter_count();
+}
+
+const tastr::ast::Node&
 get_function_parameter_type(const std::string& package_name,
                             const std::string& function_name,
                             int formal_parameter_position) {
-    const tastr::ast::FunctionTypeNode* function_type =
+    /* NOTE: this cannot be null as get_function_type never returns null */
+    const tastr::ast::FunctionTypeNode& function_type =
         get_function_type(package_name, function_name);
-
-    if (function_type == nullptr) {
-        return nullptr;
-    }
 
     const tastr::ast::ParameterNode& parameter_node =
-        function_type->get_parameter();
+        function_type.get_parameter();
 
-    return &parameter_node.at(formal_parameter_position);
-}
+    int parameter_count = parameter_node.get_parameter_count();
 
-const tastr::ast::Node*
-get_function_return_type(const std::string& package_name,
-                         const std::string& function_name) {
-    const tastr::ast::FunctionTypeNode* function_type =
-        get_function_type(package_name, function_name);
-
-    if (function_type == nullptr) {
-        return nullptr;
+    if (formal_parameter_position >= parameter_count) {
+        errorcall(R_NilValue,
+                  "type for parameter %d requested for '%s::%s' which has type "
+                  "%s with %d parameters",
+                  /* NOTE: indexing starts from 1 in R */
+                  formal_parameter_position + 1,
+                  package_name.c_str(),
+                  function_name.c_str(),
+                  type_to_string(function_type).c_str(),
+                  parameter_count);
     }
 
-    return &function_type->get_return_type();
+    return parameter_node.at(formal_parameter_position);
 }
 
-const tastr::ast::FunctionTypeNode*
+const tastr::ast::Node&
+get_function_return_type(const std::string& package_name,
+                         const std::string& function_name) {
+    /* NOTE: this cannot be null as get_function_type never returns null */
+    const tastr::ast::FunctionTypeNode& function_type =
+        get_function_type(package_name, function_name);
+
+    return function_type.get_return_type();
+}
+
+const tastr::ast::FunctionTypeNode&
 get_function_type(const std::string& package_name,
                   const std::string& function_name) {
     auto package_iter = type_declaration_cache.find(package_name);
 
     if (package_iter == type_declaration_cache.end()) {
-        return nullptr;
+        errorcall(R_NilValue,
+                  "type declaration not available for '%s::%s'",
+                  package_name.c_str(),
+                  function_name.c_str());
+        exit(1);
     }
 
     const package_type_declaration_t& package_map = package_iter->second;
@@ -319,15 +342,24 @@ get_function_type(const std::string& package_name,
     auto function_iter = package_map.find(function_name);
 
     if (function_iter == package_map.end()) {
-        return nullptr;
+        errorcall(R_NilValue,
+                  "type declaration not available for '%s::%s'",
+                  package_name.c_str(),
+                  function_name.c_str());
+        exit(1);
     }
 
     tastr::ast::TypeNode* node = function_iter->second.get();
 
     if (node->is_function_type_node()) {
-        return tastr::ast::as<tastr::ast::FunctionTypeNode>(node);
+        return *tastr::ast::as<tastr::ast::FunctionTypeNode>(node);
     } else {
-        return nullptr;
+        errorcall(R_NilValue,
+                  "'%s::%s' has type %s which is not a function type",
+                  package_name.c_str(),
+                  function_name.c_str(),
+                  type_to_string(*node).c_str());
+        exit(1);
     }
 }
 

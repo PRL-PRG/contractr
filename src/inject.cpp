@@ -32,7 +32,7 @@ SEXP log_insertion(SEXP value,
                    SEXP fun_name,
                    SEXP param_name,
                    SEXP param_idx) {
-    Rprintf("Checking parameter: %s (%d) in %s::%s -- %d\n",
+    Rprintf("Checking parameter: %s (%d) in '%s::%s' -- %d\n",
             R_CHAR(Rf_asChar(param_name)),
             Rf_asInteger(param_idx),
             R_CHAR(Rf_asChar(pkg_name)),
@@ -46,46 +46,69 @@ void check_parameter_type(SEXP value,
                           const std::string& function_name,
                           const std::string& parameter_name,
                           int formal_parameter_position) {
-    const tastr::ast::Node* node = get_function_parameter_type(
-        package_name, function_name, formal_parameter_position);
+    int parameter_count =
+        get_function_parameter_count(package_name, function_name);
 
-    TypeChecker type_checker(
-        package_name, function_name, parameter_name, formal_parameter_position);
+    if (parameter_count <= formal_parameter_position) {
+        warningcall(
+            R_NilValue,
+            "contract violation for '%s::%s'\n   ├── declared types for "
+            "%d parameters\n   └── received argument for untyped "
+            "parameter '%s' at position %d of type %s",
+            package_name.c_str(),
+            function_name.c_str(),
+            parameter_count,
+            parameter_name.c_str(),
+            /* NOTE: indexing starts from 1 in R */
+            formal_parameter_position + 1,
+            infer_type(value, parameter_name).c_str());
+    }
 
-    bool result = type_checker.typecheck(value, *node);
+    else {
+        const tastr::ast::Node& node = get_function_parameter_type(
+            package_name, function_name, formal_parameter_position);
 
-    if (!result) {
-        warningcall(R_NilValue,
-                    "contract violation for parameter '%s' (position %d) of "
-                    "%s::%s\n   ├── expected: %s\n   └── actual: %s",
-                    parameter_name.c_str(),
-                    /* NOTE: indexing starts from 1 in R */
-                    formal_parameter_position + 1,
-                    package_name.c_str(),
-                    function_name.c_str(),
-                    type_to_string(*node).c_str(),
-                    infer_type(value, parameter_name).c_str());
+        TypeChecker type_checker(package_name,
+                                 function_name,
+                                 parameter_name,
+                                 formal_parameter_position);
+
+        bool result = type_checker.typecheck(value, node);
+
+        if (!result) {
+            warningcall(
+                R_NilValue,
+                "contract violation for parameter '%s' (position %d) of "
+                "'%s::%s'\n   ├── expected: %s\n   └── actual: %s",
+                parameter_name.c_str(),
+                /* NOTE: indexing starts from 1 in R */
+                formal_parameter_position + 1,
+                package_name.c_str(),
+                function_name.c_str(),
+                type_to_string(node).c_str(),
+                infer_type(value, parameter_name).c_str());
+        }
     }
 }
 
 void check_return_type(SEXP value,
                        const std::string& package_name,
                        const std::string& function_name) {
-    const tastr::ast::Node* node =
+    const tastr::ast::Node& node =
         get_function_return_type(package_name, function_name);
 
     std::string parameter_name = "return";
 
     TypeChecker type_checker(package_name, function_name, parameter_name, -1);
-    bool result = type_checker.typecheck(value, *node);
+    bool result = type_checker.typecheck(value, node);
 
     if (!result) {
         warningcall(R_NilValue,
                     "contract violation for return value of "
-                    "%s::%s\n   ├── expected: %s\n   └── actual: %s",
+                    "'%s::%s'\n   ├── expected: %s\n   └── actual: %s",
                     package_name.c_str(),
                     function_name.c_str(),
-                    type_to_string(*node).c_str(),
+                    type_to_string(node).c_str(),
                     infer_type(value, parameter_name).c_str());
     }
 }
