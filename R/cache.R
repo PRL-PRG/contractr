@@ -45,7 +45,7 @@ set_type_declaration <- function(fun,
     stopifnot(is_scalar_character(function_name))
     stopifnot(is_scalar_character(type_declaration))
     type_declaration <- paste0("type ", function_name, " ", type_declaration, ";")
-    .Call(C_set_type_declaration, package_name, function_name, type_declaration)
+    invisible(.Call(C_set_type_declaration, package_name, function_name, type_declaration))
 }
 
 #' @export

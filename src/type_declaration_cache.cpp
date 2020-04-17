@@ -26,8 +26,9 @@ void initialize_type_declaration_cache() {
     UNPROTECT(1);
 
     if (!fs::is_directory(type_declaration_directory)) {
-        log_warn("type declaration directory '%s' does not exist",
-                 type_declaration_directory.c_str());
+        errorcall(R_NilValue,
+                  "type declaration directory '%s' does not exist",
+                  type_declaration_directory.c_str());
     }
 }
 
@@ -42,34 +43,42 @@ SEXP import_type_declarations(SEXP pkg_name) {
     fs::path package_typedecl_filepath =
         type_declaration_directory / fs::path(package_name);
 
+    /* return empty vector if types are not present  */
     if (!fs::is_regular_file(package_typedecl_filepath)) {
-        log_warn("'%s' is not a file or does not exist",
-                 package_typedecl_filepath.c_str());
-        return R_FalseValue;
+        return allocVector(STRSXP, 0);
     }
 
     tastr::parser::ParseResult result(
         tastr::parser::parse_file(package_typedecl_filepath));
 
+    /* return empty vector if type declaration file is not well formed  */
     if (!result) {
-        log_warn("%s:%s :: %s\n",
-                 package_typedecl_filepath.c_str(),
-                 to_string(result.get_error_location()).c_str(),
-                 result.get_error_message().c_str());
-        return R_FalseValue;
+        errorcall(R_NilValue,
+                  "%s in '%s' at %s",
+                  result.get_error_message().c_str(),
+                  package_typedecl_filepath.c_str(),
+                  to_string(result.get_error_location()).c_str());
+        return allocVector(STRSXP, 0);
     }
 
     package_type_declaration_t package_map;
 
+    SEXP function_names =
+        PROTECT(allocVector(STRSXP, result.get_top_level_node()->size()));
+
+    int index = 0;
     for (const std::unique_ptr<tastr::ast::TypeDeclarationNode>& decl:
          result.get_top_level_node()->get_type_declarations()) {
         std::string name(decl->get_identifier().get_name());
         package_map.insert(std::make_pair(name, decl->get_type().clone()));
+        SET_STRING_ELT(function_names, index, mkChar(name.c_str()));
     }
 
     type_declaration_cache.insert({package_name, std::move(package_map)});
 
-    return R_TrueValue;
+    UNPROTECT(1);
+
+    return function_names;
 }
 
 SEXP get_typed_package_names() {
@@ -148,31 +157,33 @@ SEXP set_type_declaration(SEXP pkg_name, SEXP fun_name, SEXP type_decl) {
         tastr::parser::parse_string(type_declaration));
 
     if (!result) {
-        log_warn("'%s' : %s :: %s\n",
-                 type_declaration.c_str(),
-                 to_string(result.get_error_location()).c_str(),
-                 result.get_error_message().c_str());
-        return R_FalseValue;
+        errorcall(R_NilValue,
+                  "%s in '%s' at %s",
+                  result.get_error_message().c_str(),
+                  type_declaration.c_str(),
+                  to_string(result.get_error_location()).c_str());
+        return R_NilValue;
     }
 
     const tastr::ast::TypeDeclarationNode& decl =
         result.get_top_level_node()->at(0);
 
     auto package_iter = type_declaration_cache.find(package_name);
+
     if (package_iter == type_declaration_cache.end()) {
         package_type_declaration_t package_map;
         package_map.insert(
             std::make_pair(function_name, decl.get_type().clone()));
         type_declaration_cache.insert({package_name, std::move(package_map)});
-        return R_TrueValue;
     }
 
     else {
         package_type_declaration_t& package_map = package_iter->second;
         package_map.insert(
             std::make_pair(function_name, decl.get_type().clone()));
-        return R_TrueValue;
     }
+
+    return R_NilValue;
 }
 
 SEXP remove_type_declaration(SEXP pkg_name, SEXP fun_name) {

@@ -303,43 +303,61 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::CommaSeparatorNode& node) override final {
-        log_error("%s: this case should not occur", "CommaSeparatorNode");
+        errorcall(R_NilValue,
+                  "typechecker encountered unexpected '%s'",
+                  "CommaSeparatorNode");
     }
 
     void visit(const tastr::ast::VarargTypeNode& node) override final {
-        log_error("%s: this case should not occur", "VarargTypeNode");
+        errorcall(R_NilValue,
+                  "typechecker encountered unexpected '%s'",
+                  "VarargTypeNode");
     }
 
     void visit(const tastr::ast::TypeDeclarationNode& node) override final {
-        log_error("%s: this case should not occur", "TypeDeclarationNode");
+        errorcall(R_NilValue,
+                  "typechecker encountered unexpected '%s'",
+                  "TypeDeclarationNode");
     }
 
     void visit(const tastr::ast::TopLevelNode& node) override final {
-        log_error("%s: this case should not occur", "TopLevelNode");
+        errorcall(R_NilValue,
+                  "typechecker encountered unexpected '%s'",
+                  "TopLevelNode");
     }
 
     void visit(const tastr::ast::KeywordNode& node) override final {
-        log_error("%s: this case should not occur", "KeywordNode");
+        errorcall(R_NilValue,
+                  "typechecker encountered unexpected '%s'",
+                  "KeywordNode");
     }
 
     void visit(const tastr::ast::OperatorNode& node) override final {
-        log_error("%s: this case should not occur", "OperatorNode");
+        errorcall(R_NilValue,
+                  "typechecker encountered unexpected '%s'",
+                  "OperatorNode");
     }
 
     void visit(const tastr::ast::TerminatorNode& node) override final {
-        log_error("%s: this case should not occur", "TerminatorNode");
+        errorcall(R_NilValue,
+                  "typechecker encountered unexpected '%s'",
+                  "TerminatorNode");
     }
 
     void visit(const tastr::ast::SeparatorNode& node) override final {
-        log_error("%s: this case should not occur", "SeparatorNode");
+        errorcall(R_NilValue,
+                  "typechecker encountered unexpected '%s'",
+                  "SeparatorNode");
     }
 
     void visit(const tastr::ast::EmptyNode& node) override final {
-        log_error("%s: this case should not occur", "EmptyNode");
+        errorcall(
+            R_NilValue, "typechecker encountered unexpected '%s'", "EmptyNode");
     }
 
     void visit(const tastr::ast::EofNode& node) override final {
-        log_error("%s: this case should not occur", "EofNode");
+        errorcall(
+            R_NilValue, "typechecker encountered unexpected '%s'", "EofNode");
     }
 
   private:
