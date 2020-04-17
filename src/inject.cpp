@@ -55,15 +55,16 @@ void check_parameter_type(SEXP value,
     bool result = type_checker.typecheck(value, *node);
 
     if (!result) {
-        log_error(
-            "type checking failed for parameter '%s' (position %d) of %s::%s\n",
-            parameter_name.c_str(),
-            formal_parameter_position,
-            package_name.c_str(),
-            function_name.c_str());
-
-        log_raw("\tExpected: %s\n", type_to_string(*node).c_str());
-        log_raw("\tActual: %s\n", infer_type(value, parameter_name).c_str());
+        warningcall(R_NilValue,
+                    "contract violation for parameter '%s' (position %d) of "
+                    "%s::%s\n   ├── expected: %s\n   └── actual: %s",
+                    parameter_name.c_str(),
+                    /* NOTE: indexing starts from 1 in R */
+                    formal_parameter_position + 1,
+                    package_name.c_str(),
+                    function_name.c_str(),
+                    type_to_string(*node).c_str(),
+                    infer_type(value, parameter_name).c_str());
     }
 }
 
@@ -79,11 +80,13 @@ void check_return_type(SEXP value,
     bool result = type_checker.typecheck(value, *node);
 
     if (!result) {
-        log_error("type checking failed for return value of %s::%s\n",
-                  package_name.c_str(),
-                  function_name.c_str());
-        log_raw("\tExpected: %s\n", type_to_string(*node).c_str());
-        log_raw("\tActual: %s\n", infer_type(value, parameter_name).c_str());
+        warningcall(R_NilValue,
+                    "contract violation for return value of "
+                    "%s::%s\n   ├── expected: %s\n   └── actual: %s",
+                    package_name.c_str(),
+                    function_name.c_str(),
+                    type_to_string(*node).c_str(),
+                    infer_type(value, parameter_name).c_str());
     }
 }
 
