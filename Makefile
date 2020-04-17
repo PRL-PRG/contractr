@@ -16,18 +16,19 @@ clean:
 	rm -rf src/*.o
 
 document:
-	$(R_EXECUTABLE) -e "devtools::document()"
+	$(R_EXECUTABLE) --slave -e "devtools::document()"
+	$(R_EXECUTABLE) --slave -e "pkgdown::build_site()"
 
 check: build
-	$(R_EXECUTABLE) CMD check --output=$(R_CMD_CHECK_OUTPUT_DIRPATH) typetesterdyntracer_*.tar.gz
+	$(R_EXECUTABLE) CMD check --output=$(R_CMD_CHECK_OUTPUT_DIRPATH) contractR_*.tar.gz
 
 test:
-	$(R_EXECUTABLE) -e "devtools::test()"
+	$(R_EXECUTABLE) --slave -e "devtools::test()"
 
 install-dependencies:
-	$(R_EXECUTABLE) -e "install.packages(c('withr', 'testthat', 'devtools', 'roxygen2', 'lintr'), repos='http://cran.us.r-project.org')"
+	$(R_EXECUTABLE) --slave -e "install.packages(c('withr', 'testthat', 'devtools', 'roxygen2', 'lintr', 'pkgdown'), repos='http://cran.us.r-project.org')"
 
 lint:
-	@$(R_EXECUTABLE) --slave -e "lintr::lint_package()"
+	$(R_EXECUTABLE) --slave -e "lintr::lint_package()"
 
 .PHONY: all build install clean document check test install-dependencies lint
