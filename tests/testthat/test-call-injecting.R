@@ -1,7 +1,7 @@
 test_inject_call("injection into a function", {
   f <- function(a, b) a + b
 
-  inject_type_check_call(f, "f", "mypkg")
+  inject_type_check_call(f, fun_name = "f", pkg_name = "mypkg")
 
   expect_length(.injected_functions, 1)
   expect_type_checks_injected(f)

@@ -200,6 +200,70 @@ SEXP remove_type_declaration(SEXP pkg_name, SEXP fun_name) {
     }
 }
 
+void show_function_type_declaration_(const std::string& package_name,
+                                     const std::string& function_name,
+                                     const tastr::ast::TypeNodeUPtr& type) {
+    tastr::ast::TypeDeclarationNode node(
+        /* FIXME: hacky space */
+        std::move(wrap(new tastr::ast::KeywordNode("type "))),
+        std::move(wrap(new tastr::ast::IdentifierNode(function_name))),
+        type->clone(),
+        std::move(wrap(new tastr::ast::TerminatorNode(";"))));
+
+    bool style = true;
+    tastr::parser::unparse_stdout(node, false, style);
+    std::cout << std::endl;
+}
+
+void show_package_type_declarations_(
+    const std::string& package_name,
+    const package_type_declaration_t& package) {
+    std::cout << std::string(80, '#') << std::endl;
+    std::cout << "## " << package_name << std::endl;
+    std::cout << std::string(80, '#') << std::endl;
+    for (auto function_iter = package.cbegin(); function_iter != package.cend();
+         ++function_iter) {
+        show_function_type_declaration_(
+            package_name, function_iter->first, function_iter->second);
+    }
+    std::cout << std::endl;
+}
+
+SEXP show_function_type_declaration(SEXP pkg_name, SEXP fun_name) {
+    const std::string package_name = CHAR(asChar(pkg_name));
+    const std::string function_name = CHAR(asChar(fun_name));
+
+    auto package_iter = type_declaration_cache.find(package_name);
+    if (package_iter != type_declaration_cache.end()) {
+        const package_type_declaration_t& package = package_iter->second;
+        auto function_iter = package.find(function_name);
+        if (function_iter != package.end()) {
+            show_function_type_declaration_(
+                package_name, function_iter->first, function_iter->second);
+        }
+    }
+    return R_NilValue;
+}
+
+SEXP show_package_type_declarations(SEXP pkg_name) {
+    const std::string package_name = CHAR(asChar(pkg_name));
+    auto iter = type_declaration_cache.find(package_name);
+    if (iter != type_declaration_cache.end()) {
+        show_package_type_declarations_(package_name, iter->second);
+    }
+    return R_NilValue;
+}
+
+SEXP show_type_declarations() {
+    for (auto package_iter = type_declaration_cache.cbegin();
+         package_iter != type_declaration_cache.cend();
+         ++package_iter) {
+        show_package_type_declarations_(package_iter->first,
+                                        package_iter->second);
+    }
+    return R_NilValue;
+}
+
 const tastr::ast::Node*
 get_function_parameter_type(const std::string& package_name,
                             const std::string& function_name,

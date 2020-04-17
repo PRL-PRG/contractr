@@ -1,13 +1,3 @@
-is_scalar_character <- function(package_name) {
-    is.character(package_name) && (length(package_name) == 1) && (nchar(package_name) != 0)
-}
-
-get_package_name <- function(fun) {
-    name <- environmentName(environment(fun))
-    if(name == "R_GlobalEnv") ".GlobalEnv"
-    else name
-}
-
 #' @export
 clear_type_declaration_cache <- function() {
     ## TODO: get typed packages and functions and revert them to uninjected state
@@ -38,15 +28,19 @@ is_package_typed <- function(package_name) {
 }
 
 #' @export
-is_function_typed <- function(package_name, function_name) {
+is_function_typed <- function(fun,
+                              package_name = get_package_name(fun),
+                              function_name = as.character(substitute(fun))) {
     stopifnot(is_scalar_character(package_name))
     stopifnot(is_scalar_character(function_name))
     .Call(C_is_function_typed, package_name, function_name)
 }
 
 #' @export
-set_type_declaration <- function(fun, type_declaration, package_name = get_package_name(fun)) {
-    function_name <- as.character(substitute(fun))
+set_type_declaration <- function(fun,
+                                 type_declaration,
+                                 package_name = get_package_name(fun),
+                                 function_name = as.character(substitute(fun))) {
     stopifnot(is_scalar_character(package_name))
     stopifnot(is_scalar_character(function_name))
     stopifnot(is_scalar_character(type_declaration))
@@ -55,9 +49,31 @@ set_type_declaration <- function(fun, type_declaration, package_name = get_packa
 }
 
 #' @export
-remove_type_declaration <- function(fun, package_name = get_package_name(fun)) {
-    function_name <- as.character(substitute(fun))
+remove_type_declaration <- function(fun,
+                                    package_name = get_package_name(fun),
+                                    function_name = as.character(substitute(fun))) {
     stopifnot(is_scalar_character(package_name))
     stopifnot(is_scalar_character(function_name))
     .Call(C_remove_type_declaration, package_name, function_name)
 }
+
+#' @export
+show_function_type_declaration <- function(fun,
+                                           package_name = get_package_name(fun),
+                                           function_name = as.character(substitute(fun))) {
+    stopifnot(is_scalar_character(package_name))
+    stopifnot(is_scalar_character(function_name))
+    invisible(.Call(C_show_function_type_declaration, package_name, function_name))
+}
+
+#' @export
+show_package_type_declarations <- function(package_name) {
+    stopifnot(is_scalar_character(package_name))
+    invisible(.Call(C_show_package_type_declarations, package_name))
+}
+
+#' @export
+show_type_declarations <- function() {
+    invisible(.Call(C_show_type_declarations))
+}
+

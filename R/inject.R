@@ -1,8 +1,20 @@
 #' @export
-inject_type_check_call <- function(fun, fun_name, pkg_name) {
+inject_type_check_call <- function(fun,
+                                   type_declaration = character(0),
+                                   fun_name = as.character(substitute(fun)),
+                                   pkg_name = get_package_name(fun)) {
+  if(is_scalar_character(type_declaration)) {
+      if(set_type_declaration(fun, type_declaration, pkg_name, fun_name)) {
+          inject_type_check_call_(fun, fun_name, pkg_name)
+      }
+  }
+  invisible(NULL)
+}
+
+inject_type_check_call_ <- function(fun, fun_name, pkg_name) {
   stopifnot(is.function(fun))
-  stopifnot(is.character(fun_name) && length(fun_name) == 1)
-  stopifnot(is.character(pkg_name) && length(pkg_name) == 1)
+  stopifnot(is_scalar_character(fun_name))
+  stopifnot(is_scalar_character(pkg_name))
 
   id <- injectr:::sexp_address(fun)
 
@@ -53,7 +65,7 @@ inject_type_check_call <- function(fun, fun_name, pkg_name) {
 
 #' @export
 inject_type_check_calls <- function(pkg_name, env=getNamespace(pkg_name)) {
-  stopifnot(is.character(pkg_name) && length(pkg_name) == 1)
+  stopifnot(is_scalar_character(pkg_name))
 
   if (is.null(env)) return(NULL)
 
@@ -61,7 +73,7 @@ inject_type_check_calls <- function(pkg_name, env=getNamespace(pkg_name)) {
     fun <- get(name, envir=env)
     if (is.function(fun)) {
       tryCatch({
-        inject_type_check_call(fun, name, pkg_name)
+        inject_type_check_call(fun, fun_name = name, pkg_name = pkg_name)
       }, error=function(e) {
         warning("Unable to inject type checks into `",
                 pkg_name, ":::", name, "`: ", e$message)

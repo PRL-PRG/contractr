@@ -26,6 +26,12 @@ SEXP set_type_declaration(SEXP pkg_name, SEXP fun_name, SEXP type_decl);
 
 SEXP remove_type_declaration(SEXP pkg_name, SEXP fun_name);
 
+SEXP show_function_type_declaration(SEXP pkg_name, SEXP fun_name);
+
+SEXP show_package_type_declarations(SEXP pkg_name);
+
+SEXP show_type_declarations();
+
 const tastr::ast::Node*
 get_function_parameter_type(const std::string& package_name,
                             const std::string& function_name,

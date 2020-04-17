@@ -34,7 +34,13 @@ static const R_CallMethodDef callMethods[] = {
     {"C_is_function_typed", (DL_FUNC) &is_function_typed, 2},
     {"C_set_type_declaration", (DL_FUNC) &set_type_declaration, 3},
     {"C_remove_type_declaration", (DL_FUNC) &remove_type_declaration, 2},
-
+    {"C_show_function_type_declaration",
+     (DL_FUNC) &show_function_type_declaration,
+     2},
+    {"C_show_package_type_declarations",
+     (DL_FUNC) &show_package_type_declarations,
+     1},
+    {"C_show_type_declarations", (DL_FUNC) &show_type_declarations, 0},
     {NULL, NULL, 0}};
 
 void R_init_contractR(DllInfo* dll) {
