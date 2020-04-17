@@ -26,9 +26,9 @@ void initialize_type_declaration_cache() {
     UNPROTECT(1);
 
     if (!fs::is_directory(type_declaration_directory)) {
-        errorcall(R_NilValue,
-                  "type declaration directory '%s' does not exist",
-                  type_declaration_directory.c_str());
+        warningcall(R_NilValue,
+                    "type declaration directory '%s' does not exist",
+                    type_declaration_directory.c_str());
     }
 }
 
