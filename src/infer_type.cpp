@@ -117,15 +117,15 @@ std::string infer_type(SEXP value, const std::string& parameter_name) {
     }
 
     else if (type_of_sexp(value) == CLOSXP) {
-        return "??? => ???";
+        return "any => any";
     }
 
     else if (type_of_sexp(value) == BUILTINSXP) {
-        return "??? => ???";
+        return "any => any";
     }
 
     else if (type_of_sexp(value) == SPECIALSXP) {
-        return "??? => ???";
+        return "any => any";
     }
 
     else if (type_of_sexp(value) == INTSXP) {
