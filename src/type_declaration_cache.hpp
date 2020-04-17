@@ -10,6 +10,8 @@ extern "C" {
 
 void initialize_type_declaration_cache();
 
+SEXP clear_type_declaration_cache();
+
 SEXP import_type_declarations(SEXP pkg_name);
 
 SEXP get_typed_package_names();
@@ -19,6 +21,10 @@ SEXP get_typed_function_names(SEXP pkg_name);
 SEXP is_package_typed(SEXP pkg_name);
 
 SEXP is_function_typed(SEXP pkg_name, SEXP fun_name);
+
+SEXP set_type_declaration(SEXP pkg_name, SEXP fun_name, SEXP type_decl);
+
+SEXP remove_type_declaration(SEXP pkg_name, SEXP fun_name);
 
 const tastr::ast::Node*
 get_function_parameter_type(const std::string& package_name,

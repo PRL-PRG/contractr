@@ -31,8 +31,13 @@ void initialize_type_declaration_cache() {
     }
 }
 
+SEXP clear_type_declaration_cache() {
+    type_declaration_cache.clear();
+    return R_NilValue;
+}
+
 SEXP import_type_declarations(SEXP pkg_name) {
-    const std::string& package_name = CHAR(asChar(pkg_name));
+    const std::string package_name = CHAR(asChar(pkg_name));
 
     fs::path package_typedecl_filepath =
         type_declaration_directory / fs::path(package_name);
@@ -87,7 +92,7 @@ SEXP get_typed_function_names(SEXP pkg_name) {
         return allocVector(STRSXP, 0);
     }
 
-    const std::string& package_name = CHAR(asChar(pkg_name));
+    const std::string package_name = CHAR(asChar(pkg_name));
     auto package_iter = type_declaration_cache.find(package_name);
 
     const package_type_declaration_t& package_map = package_iter->second;
@@ -107,7 +112,7 @@ SEXP get_typed_function_names(SEXP pkg_name) {
 }
 
 SEXP is_package_typed(SEXP pkg_name) {
-    const std::string& package_name = CHAR(asChar(pkg_name));
+    const std::string package_name = CHAR(asChar(pkg_name));
     auto package_iter = type_declaration_cache.find(package_name);
     if (package_iter == type_declaration_cache.end()) {
         return R_FalseValue;
@@ -117,8 +122,8 @@ SEXP is_package_typed(SEXP pkg_name) {
 }
 
 SEXP is_function_typed(SEXP pkg_name, SEXP fun_name) {
-    const std::string& package_name = CHAR(asChar(pkg_name));
-    const std::string& function_name = CHAR(asChar(pkg_name));
+    const std::string package_name = CHAR(asChar(pkg_name));
+    const std::string function_name = CHAR(asChar(fun_name));
 
     auto package_iter = type_declaration_cache.find(package_name);
     if (package_iter == type_declaration_cache.end()) {
@@ -129,6 +134,67 @@ SEXP is_function_typed(SEXP pkg_name, SEXP fun_name) {
         if (iter == package_map.end()) {
             return R_FalseValue;
         } else {
+            return R_TrueValue;
+        }
+    }
+}
+
+SEXP set_type_declaration(SEXP pkg_name, SEXP fun_name, SEXP type_decl) {
+    const std::string package_name = CHAR(asChar(pkg_name));
+    const std::string function_name = CHAR(asChar(fun_name));
+    const std::string type_declaration = CHAR(asChar(type_decl));
+
+    tastr::parser::ParseResult result(
+        tastr::parser::parse_string(type_declaration));
+
+    if (!result) {
+        log_warn("'%s' : %s :: %s\n",
+                 type_declaration.c_str(),
+                 to_string(result.get_error_location()).c_str(),
+                 result.get_error_message().c_str());
+        return R_FalseValue;
+    }
+
+    const tastr::ast::TypeDeclarationNode& decl =
+        result.get_top_level_node()->at(0);
+
+    auto package_iter = type_declaration_cache.find(package_name);
+    if (package_iter == type_declaration_cache.end()) {
+        package_type_declaration_t package_map;
+        package_map.insert(
+            std::make_pair(function_name, decl.get_type().clone()));
+        type_declaration_cache.insert({package_name, std::move(package_map)});
+        return R_TrueValue;
+    }
+
+    else {
+        package_type_declaration_t& package_map = package_iter->second;
+        package_map.insert(
+            std::make_pair(function_name, decl.get_type().clone()));
+        return R_TrueValue;
+    }
+}
+
+SEXP remove_type_declaration(SEXP pkg_name, SEXP fun_name) {
+    const std::string package_name = CHAR(asChar(pkg_name));
+    const std::string function_name = CHAR(asChar(fun_name));
+
+    auto package_iter = type_declaration_cache.find(package_name);
+
+    if (package_iter == type_declaration_cache.end()) {
+        return R_FalseValue;
+    }
+
+    else {
+        package_type_declaration_t& package_map = package_iter->second;
+        auto iter = package_map.find(function_name);
+
+        if (iter == package_map.end()) {
+            return R_FalseValue;
+        }
+
+        else {
+            package_map.erase(iter);
             return R_TrueValue;
         }
     }
