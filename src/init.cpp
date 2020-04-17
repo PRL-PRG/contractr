@@ -24,11 +24,11 @@ static const R_CallMethodDef callMethods[] = {
     {"environment_name", (DL_FUNC) &environment_name, 1},
 
     /*  type declaration cache */
-    {"import_type_declarations", (DL_FUNC) &import_type_declarations, 1},
-    {"get_typed_package_names", (DL_FUNC) &get_typed_package_names, 0},
-    {"get_typed_function_names", (DL_FUNC) &get_typed_function_names, 1},
-    {"is_package_typed", (DL_FUNC) &is_package_typed, 1},
-    {"is_function_typed", (DL_FUNC) &is_function_typed, 2},
+    {"C_import_type_declarations", (DL_FUNC) &import_type_declarations, 1},
+    {"C_get_typed_package_names", (DL_FUNC) &get_typed_package_names, 0},
+    {"C_get_typed_function_names", (DL_FUNC) &get_typed_function_names, 1},
+    {"C_is_package_typed", (DL_FUNC) &is_package_typed, 1},
+    {"C_is_function_typed", (DL_FUNC) &is_function_typed, 2},
 
     {NULL, NULL, 0}};
 
