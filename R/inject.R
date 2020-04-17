@@ -7,7 +7,7 @@ inject_type_check_call <- function(fun,
   stopifnot(is_scalar_character(fun_name))
   stopifnot(is_scalar_character(pkg_name))
 
-  if(is_scalar_character(type_declaration)) {
+  if (is_scalar_character(type_declaration)) {
       set_type_declaration(fun, type_declaration, pkg_name, fun_name)
   }
 
@@ -26,19 +26,19 @@ inject_type_check_call <- function(fun,
     )
 
     check_retval <- substitute({
-      `__retval` <- returnValue(contractR:::.no_retval_marker)
-      if (!identical(`__retval`, contractR:::.no_retval_marker)) {
+        `contractr_retval__` <- returnValue(contractR:::.no_retval_marker)
+      if (!identical(`contractr_retval__`, contractR:::.no_retval_marker)) {
         CHECK
       }
     }, list(
       CHECK=.Call(
         create_check_type_call,
-        quote(`__retval`),
+        quote(`contractr_retval__`),
         FALSE,
         FALSE,
         pkg_name,
         fun_name,
-        "__retval",
+        "contractr_retval__",
         -1
       )
     ))

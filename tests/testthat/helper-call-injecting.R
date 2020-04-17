@@ -1,5 +1,7 @@
 test_inject_call <- function(desc, code) {
-  on.exit({.injected_functions <<- new.env(parent=emptyenv())})
+  on.exit({
+    .injected_functions <<- new.env(parent=emptyenv())
+  })
   test_that(desc, code)
 }
 

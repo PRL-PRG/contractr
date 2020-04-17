@@ -76,4 +76,3 @@ show_package_type_declarations <- function(package_name) {
 show_type_declarations <- function() {
     invisible(.Call(C_show_type_declarations))
 }
-

@@ -25,6 +25,9 @@ test:
 	$(R_EXECUTABLE) -e "devtools::test()"
 
 install-dependencies:
-	$(R_EXECUTABLE) -e "install.packages(c('withr', 'testthat', 'devtools', 'roxygen2'), repos='http://cran.us.r-project.org')"
+	$(R_EXECUTABLE) -e "install.packages(c('withr', 'testthat', 'devtools', 'roxygen2', 'lintr'), repos='http://cran.us.r-project.org')"
 
-.PHONY: all build install clean document check test install-dependencies
+lint:
+	@$(R_EXECUTABLE) --slave -e "lintr::lint_package()"
+
+.PHONY: all build install clean document check test install-dependencies lint

@@ -4,6 +4,6 @@ is_scalar_character <- function(package_name) {
 
 get_package_name <- function(fun) {
     name <- environmentName(environment(fun))
-    if(name == "R_GlobalEnv") ".GlobalEnv"
+    if (name == "R_GlobalEnv") ".GlobalEnv"
     else name
 }

@@ -4,7 +4,8 @@ test_inject("default type checking functions are set", {
 })
 
 test_inject("it is possible to set custom functions", {
-  f <- function(...) {}
+  f <- function(...) {
+  }
   .Call(set_type_check_function, quote(f), NULL);
   expect_identical(.Call(get_type_check_function), quote(f))
   expect_null(.Call(get_type_check_function_wrapper))
