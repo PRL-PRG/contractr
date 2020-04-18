@@ -79,7 +79,7 @@ inject_type_check_calls <- function(pkg_name, env=getNamespace(pkg_name)) {
 
 #' @export
 is_type_check_injected <- function(f) {
-  identical(body(f)[[2]][[2]], quote(contractR:::inject_type_check))
+  identical(body(f)[[3]][[2]], quote(contractR:::inject_type_check))
 }
 
 .injected_functions <- new.env(parent=emptyenv())
