@@ -54,7 +54,7 @@ void check_parameter_type(SEXP value,
             R_NilValue,
             "contract violation for '%s::%s'\n   ├── declared types for "
             "%d parameters\n   └── received argument for untyped "
-            "parameter '%s' at position %d of type %s",
+            "parameter '%s' (position %d) of type %s",
             package_name.c_str(),
             function_name.c_str(),
             parameter_count,
