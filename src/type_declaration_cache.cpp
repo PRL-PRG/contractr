@@ -4,6 +4,7 @@
 
 #undef length
 #include <filesystem>
+#include <limits>
 #include <tastr/parser/parser.hpp>
 #include <unordered_map>
 
@@ -279,10 +280,14 @@ int get_function_parameter_count(const std::string& package_name,
     const tastr::ast::FunctionTypeNode& function_type =
         get_function_type(package_name, function_name);
 
-    const tastr::ast::ParameterNode& parameter_node =
-        function_type.get_parameter();
+    const tastr::ast::Node& node = function_type.get_parameter();
 
-    return parameter_node.get_parameter_count();
+    if (node.is_parameter_node()) {
+        return tastr::ast::as<tastr::ast::ParameterNode>(node)
+            .get_parameter_count();
+    } else {
+        return std::numeric_limits<int>::max();
+    }
 }
 
 const tastr::ast::Node&
@@ -293,24 +298,33 @@ get_function_parameter_type(const std::string& package_name,
     const tastr::ast::FunctionTypeNode& function_type =
         get_function_type(package_name, function_name);
 
-    const tastr::ast::ParameterNode& parameter_node =
-        function_type.get_parameter();
+    const tastr::ast::Node& node = function_type.get_parameter();
 
-    int parameter_count = parameter_node.get_parameter_count();
-
-    if (formal_parameter_position >= parameter_count) {
-        errorcall(R_NilValue,
-                  "type for parameter %d requested for '%s::%s' which has type "
-                  "%s with %d parameters",
-                  /* NOTE: indexing starts from 1 in R */
-                  formal_parameter_position + 1,
-                  package_name.c_str(),
-                  function_name.c_str(),
-                  type_to_string(function_type).c_str(),
-                  parameter_count);
+    if (node.is_any_type_node()) {
+        return node;
     }
 
-    return parameter_node.at(formal_parameter_position);
+    else {
+        const tastr::ast::ParameterNode& parameter_node =
+            tastr::ast::as<tastr::ast::ParameterNode>(node);
+
+        int parameter_count = parameter_node.get_parameter_count();
+
+        if (formal_parameter_position >= parameter_count) {
+            errorcall(
+                R_NilValue,
+                "type for parameter %d requested for '%s::%s' which has type "
+                "%s with %d parameters",
+                /* NOTE: indexing starts from 1 in R */
+                formal_parameter_position + 1,
+                package_name.c_str(),
+                function_name.c_str(),
+                type_to_string(function_type).c_str(),
+                parameter_count);
+        }
+
+        return parameter_node.at(formal_parameter_position);
+    }
 }
 
 const tastr::ast::Node&
