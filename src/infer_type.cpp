@@ -71,7 +71,7 @@ std::string infer_list_type(SEXP value) {
             element_types.push_back(name + " : " + type);
         }
 
-        return "list<" + join(element_types, ", ") + ">";
+        return "struct<" + join(element_types, ", ") + ">";
     }
 
     else if (LENGTH(value) <= 5) {
