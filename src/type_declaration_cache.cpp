@@ -179,8 +179,7 @@ SEXP set_type_declaration(SEXP pkg_name, SEXP fun_name, SEXP type_decl) {
 
     else {
         package_type_declaration_t& package_map = package_iter->second;
-        package_map.insert(
-            std::make_pair(function_name, decl.get_type().clone()));
+        package_map.insert_or_assign(function_name, decl.get_type().clone());
     }
 
     return R_NilValue;
