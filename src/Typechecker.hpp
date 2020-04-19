@@ -284,7 +284,7 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
     void visit(const tastr::ast::TagTypePairNode& node) override final {
         SEXP list = pop_value_();
         seq_index_t seq_index = pop_seq_index_();
-        SEXP names = getAttrib(list, R_NamesSymbol);
+        SEXP names = Rf_getAttrib(list, R_NamesSymbol);
         SEXP name = STRING_ELT(names, seq_index);
         SEXP element = VECTOR_ELT(list, seq_index);
         push_value_(name);
@@ -303,60 +303,60 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::CommaSeparatorNode& node) override final {
-        errorcall(R_NilValue,
-                  "typechecker encountered unexpected '%s'",
-                  "CommaSeparatorNode");
+        Rf_errorcall(R_NilValue,
+                     "typechecker encountered unexpected '%s'",
+                     "CommaSeparatorNode");
     }
 
     void visit(const tastr::ast::VarargTypeNode& node) override final {
-        errorcall(R_NilValue,
-                  "typechecker encountered unexpected '%s'",
-                  "VarargTypeNode");
+        Rf_errorcall(R_NilValue,
+                     "typechecker encountered unexpected '%s'",
+                     "VarargTypeNode");
     }
 
     void visit(const tastr::ast::TypeDeclarationNode& node) override final {
-        errorcall(R_NilValue,
-                  "typechecker encountered unexpected '%s'",
-                  "TypeDeclarationNode");
+        Rf_errorcall(R_NilValue,
+                     "typechecker encountered unexpected '%s'",
+                     "TypeDeclarationNode");
     }
 
     void visit(const tastr::ast::TopLevelNode& node) override final {
-        errorcall(R_NilValue,
-                  "typechecker encountered unexpected '%s'",
-                  "TopLevelNode");
+        Rf_errorcall(R_NilValue,
+                     "typechecker encountered unexpected '%s'",
+                     "TopLevelNode");
     }
 
     void visit(const tastr::ast::KeywordNode& node) override final {
-        errorcall(R_NilValue,
-                  "typechecker encountered unexpected '%s'",
-                  "KeywordNode");
+        Rf_errorcall(R_NilValue,
+                     "typechecker encountered unexpected '%s'",
+                     "KeywordNode");
     }
 
     void visit(const tastr::ast::OperatorNode& node) override final {
-        errorcall(R_NilValue,
-                  "typechecker encountered unexpected '%s'",
-                  "OperatorNode");
+        Rf_errorcall(R_NilValue,
+                     "typechecker encountered unexpected '%s'",
+                     "OperatorNode");
     }
 
     void visit(const tastr::ast::TerminatorNode& node) override final {
-        errorcall(R_NilValue,
-                  "typechecker encountered unexpected '%s'",
-                  "TerminatorNode");
+        Rf_errorcall(R_NilValue,
+                     "typechecker encountered unexpected '%s'",
+                     "TerminatorNode");
     }
 
     void visit(const tastr::ast::SeparatorNode& node) override final {
-        errorcall(R_NilValue,
-                  "typechecker encountered unexpected '%s'",
-                  "SeparatorNode");
+        Rf_errorcall(R_NilValue,
+                     "typechecker encountered unexpected '%s'",
+                     "SeparatorNode");
     }
 
     void visit(const tastr::ast::EmptyNode& node) override final {
-        errorcall(
+        Rf_errorcall(
             R_NilValue, "typechecker encountered unexpected '%s'", "EmptyNode");
     }
 
     void visit(const tastr::ast::EofNode& node) override final {
-        errorcall(
+        Rf_errorcall(
             R_NilValue, "typechecker encountered unexpected '%s'", "EofNode");
     }
 
