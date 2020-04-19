@@ -50,6 +50,33 @@ std::string join(const std::vector<std::string>& strings,
     return result;
 }
 
+const std::string union_types(const std::vector<std::string>& types) {
+    std::vector<std::string> strings(types);
+
+    int null_index = -1;
+
+    for(int i = 0; i < strings.size(); ++i) {
+        if(strings[i] == "null") {
+            null_index = i;
+            break;
+        }
+    }
+
+    std::string prefix = "";
+
+    if(null_index != -1) {
+        if(strings.size() == 1) {
+            prefix = "null";
+        }
+        else {
+            prefix = "? ";
+        }
+        strings.erase(strings.begin() + null_index);
+    }
+
+    return prefix + join(strings, " | ");
+}
+
 std::string infer_list_type(SEXP value) {
     SEXP names = getAttrib(value, R_NamesSymbol);
 
@@ -93,9 +120,8 @@ std::string infer_list_type(SEXP value) {
         }
 
         return "list<" +
-               join(std::vector<std::string>(element_types.begin(),
-                                             element_types.end()),
-                    "|") +
+               union_types(std::vector<std::string>(element_types.begin(),
+                                                    element_types.end())) +
                ">";
     }
 }
