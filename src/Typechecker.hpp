@@ -88,7 +88,7 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
         satisfies_vector_or_scalar_(
             value, CPLXSXP, [](SEXP vector, int index) -> bool {
                 Rcomplex v = COMPLEX_ELT(vector, index);
-                return (ISNAN(v.r) || ISNAN(v.i));
+                return (v.r == NA_REAL) || (v.i == NA_REAL);
             });
     }
 
@@ -364,7 +364,8 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
     bool is_vector_type_(SEXP value) {
         SEXPTYPE sexptype = type_of_sexp(value);
         return (sexptype == INTSXP || sexptype == REALSXP ||
-                sexptype == RAWSXP || sexptype == LGLSXP || sexptype == STRSXP);
+                sexptype == CPLXSXP || sexptype == RAWSXP ||
+                sexptype == LGLSXP || sexptype == STRSXP);
     };
 
     template <typename T>
