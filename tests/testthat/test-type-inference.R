@@ -25,8 +25,10 @@ test_that("type inference for null values works", {
 
 test_that("type inference for list values works", {
 
+    expect_identical(infer_type(list(NULL, NULL, NULL, NULL, NULL, NULL)), "list<null>")
+
     expect_identical(infer_type(list(1, 2, "3", NULL, list(1, 2), list(TRUE, FALSE))),
-                 "list<character|double|null|tuple<double, double>|tuple<logical, logical>>")
+                 "list<? character | double | tuple<double, double> | tuple<logical, logical>>")
 
 
     expect_identical(infer_type(create_tuple(0)), "tuple<>")
