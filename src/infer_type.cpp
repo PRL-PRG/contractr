@@ -55,11 +55,12 @@ std::string infer_list_type(SEXP value) {
 
     if (names != R_NilValue) {
         auto get_name = [names](int index) -> std::string {
-            if (index > LENGTH(names)) {
-                return std::string("^");
+            const std::string na_name("^");
+            SEXP name = STRING_ELT(names, index);
+            if (name == NA_STRING) {
+                return na_name;
             } else {
-                return std::string("`") + CHAR(STRING_ELT(names, index)) +
-                       std::string("`");
+                return std::string("`") + CHAR(name) + "`";
             }
         };
 
