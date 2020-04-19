@@ -2,6 +2,7 @@
 #include "inject.hpp"
 #include "type_declaration_cache.hpp"
 #include "utilities.hpp"
+#include "Typechecker.hpp"
 #include "infer_type.hpp"
 
 #include <R.h>
@@ -26,6 +27,8 @@ static const R_CallMethodDef callMethods[] = {
 
     /* type checking utilities */
     {"C_infer_type", (DL_FUNC) &r_infer_type, 3},
+    {"C_check_type", (DL_FUNC) &r_check_type, 4},
+
     /*  type declaration cache */
     {"C_clear_type_declaration_cache",
      (DL_FUNC) &clear_type_declaration_cache,

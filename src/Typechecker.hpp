@@ -8,6 +8,8 @@
 #include <functional>
 #include <tastr/visitor/visitor.hpp>
 
+SEXP r_check_type(SEXP value_sym, SEXP parameter_name, SEXP type, SEXP rho);
+
 class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
   private:
     using seq_index_t = int;
