@@ -1,0 +1,17 @@
+url: https://prl-prg.github.io/contractR/
+
+template:
+  params:
+    bootswatch: cosmo
+
+navbar:
+  title: "contractR"
+  left:
+    - text: "Articles"
+      href: articles/index.html
+    - text: "Reference"
+      href: reference/index.html
+  right:
+   - icon: fa-github
+     href: https://github.com/PRL-PRG/contractR
+

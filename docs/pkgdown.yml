@@ -2,5 +2,8 @@ pandoc: 2.9.2.1
 pkgdown: 1.5.1.9000
 pkgdown_sha: fcc120d996055519db89f37f0097af7ce25d6641
 articles: []
-last_built: 2020-04-17T19:01Z
+last_built: 2020-04-19T19:55Z
+urls:
+  reference: https://prl-prg.github.io/contractR//reference
+  article: https://prl-prg.github.io/contractR//articles
 
