@@ -27,7 +27,7 @@ infer_vector_type(SEXP value, const std::string& infix, T check_na) {
         na_prefix = "^";
     }
 
-    if (LENGTH(value) > 1) {
+    if (LENGTH(value) != 1) {
         vector_suffix = "[]";
     }
 
@@ -68,7 +68,7 @@ std::string infer_list_type(SEXP value) {
         for (int index = 0; index < LENGTH(value); ++index) {
             std::string name = get_name(index);
             std::string type = infer_type(VECTOR_ELT(value, index));
-            element_types.push_back(name + " : " + type);
+            element_types.push_back(name + ": " + type);
         }
 
         return "struct<" + join(element_types, ", ") + ">";
@@ -135,7 +135,7 @@ std::string infer_type(SEXP value, const std::string& parameter_name) {
             });
     }
 
-    else if (type_of_sexp(value) == CHARSXP) {
+    else if (type_of_sexp(value) == STRSXP) {
         return infer_vector_type(
             value, "character", [](SEXP vector, int index) -> bool {
                 return STRING_ELT(vector, index) == NA_STRING;

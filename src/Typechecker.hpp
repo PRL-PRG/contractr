@@ -385,7 +385,7 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
             }
         }
 
-        if (length > 1 && expected_scalar_()) {
+        if (length != 1 && expected_scalar_()) {
             push_result_(false);
             return;
         }
