@@ -2,6 +2,7 @@
 #include "inject.hpp"
 #include "type_declaration_cache.hpp"
 #include "utilities.hpp"
+#include "infer_type.hpp"
 
 #include <R.h>
 #include <R_ext/Rdynload.h>
@@ -23,6 +24,8 @@ static const R_CallMethodDef callMethods[] = {
     {"check_type", (DL_FUNC) &check_type, 7},
     {"environment_name", (DL_FUNC) &environment_name, 1},
 
+    /* type checking utilities */
+    {"C_infer_type", (DL_FUNC) &r_infer_type, 3},
     /*  type declaration cache */
     {"C_clear_type_declaration_cache",
      (DL_FUNC) &clear_type_declaration_cache,

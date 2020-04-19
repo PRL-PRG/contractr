@@ -33,6 +33,8 @@ SEXP delayed_assign(SEXP variable,
                     SEXP rho);
 
 SEXP system_file(SEXP path);
+
+SEXP lookup_value(SEXP rho, SEXP value_sym, bool evaluate = false);
 }
 
 #endif /* CONTRACTR_UTILITIES_HPP */

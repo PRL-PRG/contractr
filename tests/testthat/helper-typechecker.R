@@ -122,8 +122,7 @@ create_tuple <- function(n) {
     as.list(character(n))
 }
 
-create_struct <- function(n) {
-    element_names <- replicate(n, "name")
+create_struct <- function(n, element_names = replicate(n, "name")) {
     struct <- as.list(replicate(n, 3))
     names(struct) <- element_names
     struct

@@ -211,3 +211,10 @@ std::string infer_type(SEXP value, const std::string& parameter_name) {
 
     return "<unhandled case>";
 }
+
+SEXP r_infer_type(SEXP value_sym, SEXP parameter_name, SEXP rho) {
+    SEXP value = PROTECT(lookup_value(rho, value_sym, true));
+    std::string type = infer_type(value, CHAR(asChar(parameter_name)));
+    UNPROTECT(1);
+    return mkString(type.c_str());
+}

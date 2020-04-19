@@ -64,3 +64,13 @@ SEXP system_file(SEXP path) {
     UNPROTECT(2);
     return result;
 }
+
+SEXP lookup_value(SEXP rho, SEXP value_sym, bool evaluate) {
+    SEXP value = Rf_findVarInFrame(rho, value_sym);
+    if (value == R_UnboundValue || value == R_MissingArg) {
+        value = R_MissingArg;
+    } else if (evaluate) {
+        value = Rf_eval(value, rho);
+    }
+    return value;
+}
