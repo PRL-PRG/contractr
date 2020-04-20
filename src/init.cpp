@@ -13,17 +13,9 @@
 extern "C" {
 
 static const R_CallMethodDef callMethods[] = {
-    {"get_type_check_function", (DL_FUNC) &get_type_check_function, 0},
-    {"get_type_check_function_wrapper",
-     (DL_FUNC) &get_type_check_function_wrapper,
-     0},
-    {"set_type_check_function", (DL_FUNC) &set_type_check_function, 2},
-    {"reset_type_check_function", (DL_FUNC) &reset_type_check_function, 0},
-    {"create_check_type_call", (DL_FUNC) &create_check_type_call, 7},
-    {"inject_type_check", (DL_FUNC) &inject_type_check, 4},
-    {"log_insertion", (DL_FUNC) &log_insertion, 7},
-    {"check_type", (DL_FUNC) &check_type, 7},
-    {"environment_name", (DL_FUNC) &environment_name, 1},
+    {"C_inject_type_assertion", (DL_FUNC) &inject_type_assertion, 4},
+    {"C_assert_type", (DL_FUNC) &assert_type, 6},
+    {"C_environment_name", (DL_FUNC) &environment_name, 1},
 
     /* type checking utilities */
     {"C_infer_type", (DL_FUNC) &r_infer_type, 3},
@@ -56,7 +48,5 @@ void R_init_contractR(DllInfo* dll) {
     initialize_globals();
 
     initialize_type_declaration_cache();
-
-    reset_type_check_function();
 }
 }

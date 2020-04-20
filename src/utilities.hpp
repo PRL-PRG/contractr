@@ -22,9 +22,7 @@ SEXPTYPE type_of_sexp(SEXP value);
 
 SEXP environment_name(SEXP env);
 
-SEXP list7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y);
-
-SEXP lang8(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y, SEXP z);
+SEXP lang7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y);
 
 SEXP delayed_assign(SEXP variable,
                     SEXP value,
