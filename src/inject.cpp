@@ -228,7 +228,7 @@ void inject_argument_type_check(SEXP pkg_name,
 
     /* value (promise optimized away by compiler)  */
     else if (TYPEOF(value) != PROMSXP) {
-        value = delayed_assign(param_sym, value, rho, rho, rho);
+        value = delayed_assign(param_name, value, rho, rho, rho);
         call_value = PREXPR(value);
         argument_is_missing = R_FalseValue;
         parameter_is_vararg = R_FalseValue;
