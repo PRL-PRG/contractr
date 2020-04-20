@@ -16,9 +16,9 @@ insert_contract <- function(pkgname) {
 
         is_locked <- bindingIsLocked(binding, pkgenv)
         if (is_locked) unlockBinding(binding, pkgenv)
-        inject_type_check_call(closure,
-                               fun_name = binding,
-                               pkg_name = pkgname)
+        inject_type_assertion(closure,
+                              fun_name = binding,
+                              pkg_name = pkgname)
         if (is_locked) lockBinding(binding, pkgenv)
     }
 }
