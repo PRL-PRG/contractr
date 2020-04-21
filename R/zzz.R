@@ -1,3 +1,7 @@
+
+.injected_functions <- new.env(parent=emptyenv())
+.no_retval_marker <- new.env(parent=emptyenv())
+
 insert_contract <- function(pkgname) {
     pkgenv <- as.environment(pkgname)
 

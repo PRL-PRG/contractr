@@ -80,6 +80,3 @@ is_type_assertion_injected <- function(f) {
   identical(body(f)[[3]][[2]], quote(contractR:::C_inject_type_assertion))
 }
 
-# TODO: move to zzz.R
-.injected_functions <- new.env(parent=emptyenv())
-.no_retval_marker <- new.env(parent=emptyenv())
