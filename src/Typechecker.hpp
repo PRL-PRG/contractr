@@ -51,8 +51,13 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
 
     void visit(const tastr::ast::IdentifierNode& node) override final {
         SEXP value = pop_value_();
-        std::string name = node.get_name();
-        push_result_(CHAR(value) == name);
+
+        if (value == NA_STRING) {
+            push_result_(node.is_missing());
+        } else {
+            std::string name = node.get_name();
+            push_result_(CHAR(value) == name);
+        }
     }
 
     void visit(const tastr::ast::VectorTypeNode& node) override final {
@@ -196,13 +201,20 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
     void visit(const tastr::ast::ParameterNode& node) override final {
         SEXP value = pop_value_();
         tastr::ast::Node::count_t size = node.get_parameter_count();
-        for (int i = 0; i < size; ++i) {
-            push_value_(value);
-            push_seq_index_(i);
-            const tastr::ast::Node& child_node = node.at(i);
-            child_node.accept(*this);
+
+        if (size != LENGTH(value)) {
+            push_result_(false);
         }
-        and_result_(size);
+
+        else {
+            for (int i = 0; i < size; ++i) {
+                push_value_(value);
+                push_seq_index_(i);
+                const tastr::ast::Node& child_node = node.at(i);
+                child_node.accept(*this);
+            }
+            and_result_(size);
+        }
     }
 
     void visit(const tastr::ast::ListTypeNode& node) override final {
@@ -212,17 +224,25 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
 
         if (!result) {
             push_result_(result);
-        } else {
-            const tastr::ast::ParameterNode& params = node.get_parameters();
-            assert(params.size() == 1);
-            const tastr::ast::Node& param_node = params.at(0);
+        }
+
+        else {
             int list_size = LENGTH(value);
-            for (int i = 0; i < list_size; ++i) {
-                SEXP element = VECTOR_ELT(value, i);
-                push_value_(element);
-                param_node.accept(*this);
+            const tastr::ast::ParameterNode& params = node.get_parameters();
+
+            if (params.get_parameter_count() == list_size == 0) {
+                push_result_(true);
             }
-            and_result_(list_size);
+
+            else {
+                const tastr::ast::Node& param_node = params.at(0);
+                for (int i = 0; i < list_size; ++i) {
+                    SEXP element = VECTOR_ELT(value, i);
+                    push_value_(element);
+                    param_node.accept(*this);
+                }
+                and_result_(list_size);
+            }
         }
     }
 
@@ -245,9 +265,27 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
 
         if (!result) {
             push_result_(result);
-        } else {
-            push_value_(value);
-            node.get_parameters().accept(*this);
+        }
+
+        else {
+            const tastr::ast::ParameterNode& param_node(node.get_parameters());
+            tastr::ast::Node::count_t size = param_node.get_parameter_count();
+
+            int list_size = LENGTH(value);
+
+            if (list_size != size) {
+                push_result_(false);
+            }
+
+            else {
+                for (int i = 0; i < size; ++i) {
+                    SEXP element = VECTOR_ELT(value, i);
+                    push_value_(element);
+                    const tastr::ast::Node& child_node = param_node.at(i);
+                    child_node.accept(*this);
+                }
+                and_result_(size);
+            }
         }
     }
 
@@ -287,13 +325,19 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
         SEXP list = pop_value_();
         seq_index_t seq_index = pop_seq_index_();
         SEXP names = Rf_getAttrib(list, R_NamesSymbol);
-        SEXP name = STRING_ELT(names, seq_index);
-        SEXP element = VECTOR_ELT(list, seq_index);
-        push_value_(name);
-        node.get_identifier().accept(*this);
-        push_value_(element);
-        node.get_type().accept(*this);
-        and_result_();
+
+        /* list names can be non-string values */
+        if (TYPEOF(names) != STRSXP) {
+            push_result_(false);
+        } else {
+            SEXP name = STRING_ELT(names, seq_index);
+            SEXP element = VECTOR_ELT(list, seq_index);
+            push_value_(name);
+            node.get_identifier().accept(*this);
+            push_value_(element);
+            node.get_type().accept(*this);
+            and_result_();
+        }
     }
 
     void visit(const tastr::ast::FunctionTypeNode& node) override final {
