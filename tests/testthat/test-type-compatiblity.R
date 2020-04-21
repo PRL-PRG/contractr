@@ -27,28 +27,23 @@ test_that("type inference for list values works", {
 
     expect_type_compatibility(list(NULL, NULL, NULL, NULL, NULL, NULL))
 
-    ## FIXME
-    ## expect_type_compatibility(list(1, 2, "3", NULL, list(1, 2), list(TRUE, FALSE)))
+    expect_type_compatibility(list(1, 2, "3", NULL, list(1, 2), list(TRUE, FALSE)))
 
     expect_type_compatibility(create_tuple(0))
 
-    ## FIXME
-    ## expect_type_compatibility(list(1, "3", NULL, list(1, 2), list(1, "2", TRUE, list(1, 2), max)))
+    expect_type_compatibility(list(1, "3", NULL, list(1, 2), list(1, "2", TRUE, list(1, 2), max)))
 
     expect_type_compatibility(create_struct(0))
 
     expect_type_compatibility(create_struct(1))
 
-    ## FIXME
-    ## expect_type_compatibility(create_struct(1, NA))
+    expect_type_compatibility(create_struct(1, NA))
 
-    ## FIXME
-    ## object <- list(name1 = 1, "3", name3 = NULL, list(1, 2), `another name` = list(1, "2", TRUE, list(1, 2), max))
-    ## expect_type_compatibility(object)
+    object <- list(name1 = 1, "3", name3 = NULL, list(1, 2), `another name` = list(1, "2", TRUE, list(1, 2), max))
+    expect_type_compatibility(object)
 
-    ## FIXME
-    ## names(object) <- NA
-    ## expect_type_compatibility(object)
+    names(object) <- NA
+    expect_type_compatibility(object)
 
 })
 

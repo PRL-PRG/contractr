@@ -27,50 +27,42 @@ test_that("type checking for list values works", {
 
     expect_true(check_type(list(NULL, NULL, NULL, NULL, NULL, NULL), "list<null>"))
 
-    ## FIXME
-    ## expect_true(check_type(list(1, 2, "3", NULL, list(1, 2), list(TRUE, FALSE)),
-    ##              "list<? character | double | tuple<double, double> | tuple<logical, logical>>"))
+    expect_true(check_type(list(1, 2, "3", NULL, list(1, 2), list(TRUE, FALSE)),
+                           "list<? character | double | tuple<double, double> | tuple<logical, logical>>"))
 
+    expect_true(check_type(create_tuple(0), "tuple<>"))
 
-    ## FIXME
-    ## expect_true(check_type(create_tuple(0), "tuple<>"))
+    expect_true(check_type(list(1, "3", NULL, list(1, 2), list(1, "2", TRUE, list(1, 2), max)),
+                     str_c("tuple<",
+                           "double, ",
+                           "character, ",
+                           "null, ",
+                           "tuple<double, double>, ",
+                           "tuple<double, character, logical, tuple<double, double>, any => any>>")))
 
-    ## FIXME
-    ## expect_true(check_type(list(1, "3", NULL, list(1, 2), list(1, "2", TRUE, list(1, 2), max)),
-    ##                  str_c("tuple<",
-    ##                        "double, ",
-    ##                        "character, ",
-    ##                        "null, ",
-    ##                        "tuple<double, double>, ",
-    ##                        "tuple<double, character, logical, tuple<double, double>, any => any>>")))
-
-    ## FIXME
-    ## expect_true(check_type(create_struct(0), "struct<>"))
+    expect_true(check_type(create_struct(0), "struct<>"))
 
     expect_true(check_type(create_struct(1), "struct<`name`: double>"))
 
-    ## FIXME
-    ## expect_true(check_type(create_struct(1, NA), "struct<^: double>"))
+    expect_true(check_type(create_struct(1, NA), "struct<^: double>"))
 
-    ## FIXME
-    ## object <- list(name1 = 1, "3", name3 = NULL, list(1, 2), `another name` = list(1, "2", TRUE, list(1, 2), max))
-    ## expect_true(check_type(object,
-    ##                          str_c("struct<",
-    ##                                "`name1`: double, ",
-    ##                                "``: character, ",
-    ##                                "`name3`: null, ",
-    ##                                "``: tuple<double, double>, ",
-    ##                                "`another name`: tuple<double, character, logical, tuple<double, double>, any => any>>")))
+    object <- list(name1 = 1, "3", name3 = NULL, list(1, 2), `another name` = list(1, "2", TRUE, list(1, 2), max))
+    expect_true(check_type(object,
+                             str_c("struct<",
+                                   "`name1`: double, ",
+                                   "``: character, ",
+                                   "`name3`: null, ",
+                                   "``: tuple<double, double>, ",
+                                   "`another name`: tuple<double, character, logical, tuple<double, double>, any => any>>")))
 
-    ## FIXME
-    ## names(object) <- NA
-    ## expect_true(check_type(object,
-    ##                          str_c("struct<",
-    ##                                "^: double, ",
-    ##                                "^: character, ",
-    ##                                "^: null, ",
-    ##                                "^: tuple<double, double>, ",
-    ##                                "^: tuple<double, character, logical, tuple<double, double>, any => any>>")))
+    names(object) <- NA
+    expect_true(check_type(object,
+                             str_c("struct<",
+                                   "^: double, ",
+                                   "^: character, ",
+                                   "^: null, ",
+                                   "^: tuple<double, double>, ",
+                                   "^: tuple<double, character, logical, tuple<double, double>, any => any>>")))
 
 })
 
