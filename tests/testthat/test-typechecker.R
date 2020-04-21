@@ -1,6 +1,6 @@
 test_that("contract for `double` is enforced correctly", {
 
-    fun <- function(x) if (is_missing(x)) 3L else x
+    fun <- function(x) if (missing(x)) 3L else x
 
     inject_type_assertion(fun, "<double> => double", pkg_name = ".GlobalEnv")
 

@@ -3,7 +3,7 @@ assert_type <- function(value, missing_value, pkg_name, fun_name,
   .Call(
     C_assert_type,
     value,
-    missing(value),
+    missing_value,
     pkg_name,
     fun_name,
     param_name,
