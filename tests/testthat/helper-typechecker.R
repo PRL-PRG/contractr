@@ -132,7 +132,7 @@ na_logical_ <- as.logical(NA_integer_)
 
 expect_type_compatibility <- function(object, parameter_name = "parameter_name") {
     if (missing(object)) {
-        expect_true(check_type_2(, infer_type(, parameter_name), parameter_name))
+        expect_true(check_type(, infer_type(, parameter_name), parameter_name))
     }
     else {
         ## 1. Capture object and label
@@ -140,7 +140,7 @@ expect_type_compatibility <- function(object, parameter_name = "parameter_name")
 
         ## 2. Call expect()
         inferred_type <- infer_type(act$val, parameter_name)
-        checked_result <- check_type_2(act$val, inferred_type, parameter_name)
+        checked_result <- check_type(act$val, inferred_type, parameter_name)
 
         ## TODO: show meaningful error message if expectation fails
         if (!checked_result) {
