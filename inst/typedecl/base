@@ -1,1 +1,1 @@
-type ls <??? | chr | env, int, env, ??? | lgl, ? chr, lgl> => ^chr[];
+type ls <??? | chr | env, int, env, ??? | lgl, ??? | chr, lgl> => ^chr[];
