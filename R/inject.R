@@ -31,6 +31,7 @@ inject_type_assertion <- function(fun,
         if (!identical(.__retval__, contractR:::.no_retval_marker)) {
           contractR:::assert_type(
             .__retval__,
+            FALSE,
             PKG_NAME,
             FUN_NAME,
             ".__retval__",
