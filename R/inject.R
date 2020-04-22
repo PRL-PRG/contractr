@@ -1,3 +1,13 @@
+
+state <- new.env()
+state$current_call_id <- -1L
+
+get_next_call_id <- function() {
+    state$current_call_id <- state$current_call_id + 1
+    state$current_call_id
+}
+
+
 #' @export
 inject_type_assertion <- function(fun,
                                   type_declaration = NULL,
@@ -15,14 +25,16 @@ inject_type_assertion <- function(fun,
   id <- injectr:::sexp_address(fun)
 
   if (!exists(id, envir=.injected_functions)) {
-    check_params <- substitute(
+      check_params <- substitute({
+      .contractr__call_id__ <- contractR:::get_next_call_id();
       .Call(
         contractR:::C_inject_type_assertion,
         PKG_NAME,
         FUN_NAME,
+        .contractr__call_id__,
         sys.function(),
         sys.frame(sys.nframe())
-      ),
+      )},
       list(PKG_NAME=pkg_name, FUN_NAME=fun_name)
     )
 
@@ -34,6 +46,7 @@ inject_type_assertion <- function(fun,
             FALSE,
             PKG_NAME,
             FUN_NAME,
+            .contractr__call_id__,
             ".__retval__",
             -1
           )

@@ -39,6 +39,20 @@ SEXP lang7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y) {
     return s;
 }
 
+SEXP lang8(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y, SEXP z) {
+    PROTECT(s);
+    s = LCONS(s, list7(t, u, v, w, x, y, z));
+    UNPROTECT(1);
+    return s;
+}
+
+SEXP list7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y) {
+    PROTECT(s);
+    s = CONS(s, Rf_list6(t, u, v, w, x, y));
+    UNPROTECT(1);
+    return s;
+}
+
 SEXP delayed_assign(SEXP variable,
                     SEXP value,
                     SEXP eval_env,

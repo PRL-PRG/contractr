@@ -7,6 +7,7 @@ class ContractAssertion {
   public:
     ContractAssertion(const std::string& package_name,
                       const std::string& function_name,
+                      int call_id,
                       const std::string& parameter_name,
                       const int parameter_count,
                       const int parameter_position,
@@ -15,6 +16,7 @@ class ContractAssertion {
                       const bool contract_status)
         : package_name_(package_name)
         , function_name_(function_name)
+        , call_id_(call_id)
         , parameter_name_(parameter_name)
         , parameter_count_(parameter_count)
         , parameter_position_(parameter_position)
@@ -29,6 +31,10 @@ class ContractAssertion {
 
     const std::string& get_function_name() const {
         return function_name_;
+    }
+
+    int get_call_id() const {
+        return call_id_;
     }
 
     const std::string& get_parameter_name() const {
@@ -58,6 +64,7 @@ class ContractAssertion {
   private:
     const std::string package_name_;
     const std::string function_name_;
+    int call_id_;
     const std::string parameter_name_;
     const int parameter_count_;
     const int parameter_position_;
@@ -74,6 +81,7 @@ void add_contract_assertion(const ContractAssertion& assertion);
 
 void add_contract_assertion(const std::string& package_name,
                             const std::string& function_name,
+                            int call_id,
                             const std::string& parameter_name,
                             const int parameter_count,
                             const int formal_parameter_position,

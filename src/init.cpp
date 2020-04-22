@@ -13,8 +13,8 @@
 extern "C" {
 
 static const R_CallMethodDef callMethods[] = {
-    {"inject_type_assertion", (DL_FUNC) &inject_type_assertion, 4},
-    {"assert_type", (DL_FUNC) &assert_type, 6},
+    {"inject_type_assertion", (DL_FUNC) &inject_type_assertion, 5},
+    {"assert_type", (DL_FUNC) &assert_type, 7},
     {"environment_name", (DL_FUNC) &environment_name, 1},
     {"get_contract_assertions", (DL_FUNC) &r_get_contract_assertions, 0},
 

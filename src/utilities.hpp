@@ -25,6 +25,10 @@ SEXP environment_name(SEXP env);
 
 SEXP lang7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y);
 
+SEXP lang8(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y, SEXP z);
+
+SEXP list7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y);
+
 SEXP delayed_assign(SEXP variable,
                     SEXP value,
                     SEXP eval_env,

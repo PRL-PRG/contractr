@@ -5,8 +5,8 @@
 #include <Rinternals.h>
 
 extern "C" {
-SEXP inject_type_assertion(SEXP, SEXP, SEXP, SEXP);
-SEXP assert_type(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+SEXP inject_type_assertion(SEXP, SEXP, SEXP, SEXP, SEXP);
+SEXP assert_type(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 SEXP r_get_contract_assertions();
 
 #ifdef DEBUG

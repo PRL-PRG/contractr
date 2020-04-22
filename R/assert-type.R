@@ -1,11 +1,12 @@
 assert_type <- function(value, missing_value, pkg_name, fun_name,
-                        param_name, param_idx) {
+                        call_id, param_name, param_idx) {
   .Call(
     C_assert_type,
     value,
     missing_value,
     pkg_name,
     fun_name,
+    call_id,
     param_name,
     param_idx
   )
