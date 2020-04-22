@@ -27,7 +27,19 @@ SEXP lang7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y);
 
 SEXP lang8(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y, SEXP z);
 
+SEXP lang9(SEXP r,
+           SEXP s,
+           SEXP t,
+           SEXP u,
+           SEXP v,
+           SEXP w,
+           SEXP x,
+           SEXP y,
+           SEXP z);
+
 SEXP list7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y);
+
+SEXP list8(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y, SEXP z);
 
 SEXP delayed_assign(SEXP variable,
                     SEXP value,

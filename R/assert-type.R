@@ -1,5 +1,5 @@
 assert_type <- function(value, missing_value, pkg_name, fun_name,
-                        call_id, param_name, param_idx) {
+                        call_id, param_name, param_count, param_idx) {
   .Call(
     C_assert_type,
     value,
@@ -8,6 +8,7 @@ assert_type <- function(value, missing_value, pkg_name, fun_name,
     fun_name,
     call_id,
     param_name,
+    param_count,
     param_idx
   )
 

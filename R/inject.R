@@ -27,11 +27,13 @@ inject_type_assertion <- function(fun,
   if (!exists(id, envir=.injected_functions)) {
       check_params <- substitute({
       .contractr__call_id__ <- contractR:::get_next_call_id();
+      .contractr__parameter_count__ <- length(formals(sys.function()))
       .Call(
         contractR:::C_inject_type_assertion,
         PKG_NAME,
         FUN_NAME,
         .contractr__call_id__,
+        .contractr__parameter_count__,
         sys.function(),
         sys.frame(sys.nframe())
       )},
@@ -39,15 +41,16 @@ inject_type_assertion <- function(fun,
     )
 
     check_retval <- substitute({
-        .__retval__ <- returnValue(contractR:::.no_retval_marker)     # nolint
-        if (!identical(.__retval__, contractR:::.no_retval_marker)) {
+        .contractr__retval__ <- returnValue(contractR:::.no_retval_marker)     # nolint
+        if (!identical(.contractr__retval__, contractR:::.no_retval_marker)) {
           contractR:::assert_type(
-            .__retval__,
+            .contractr__retval__,
             FALSE,
             PKG_NAME,
             FUN_NAME,
             .contractr__call_id__,
-            ".__retval__",
+            ".contractr__retval__",
+            .contractr__parameter_count__,
             -1
           )
         }

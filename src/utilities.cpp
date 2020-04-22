@@ -46,9 +46,23 @@ SEXP lang8(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y, SEXP z) {
     return s;
 }
 
+SEXP lang9(SEXP r, SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y, SEXP z) {
+    PROTECT(r);
+    r = LCONS(r, list8(s, t, u, v, w, x, y, z));
+    UNPROTECT(1);
+    return r;
+}
+
 SEXP list7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y) {
     PROTECT(s);
     s = CONS(s, Rf_list6(t, u, v, w, x, y));
+    UNPROTECT(1);
+    return s;
+}
+
+SEXP list8(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y, SEXP z) {
+    PROTECT(s);
+    s = CONS(s, list7(t, u, v, w, x, y, z));
     UNPROTECT(1);
     return s;
 }

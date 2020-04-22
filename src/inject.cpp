@@ -16,9 +16,8 @@ void assert_parameter_type(SEXP value,
                            const std::string& function_name,
                            int call_id,
                            const std::string& parameter_name,
+                           int parameter_count,
                            int formal_parameter_position) {
-    int parameter_count =
-        get_function_parameter_count(package_name, function_name);
     bool contract_status = true;
     std::string actual_type = infer_type(value, parameter_name);
     std::string expected_type;
@@ -81,16 +80,13 @@ void assert_parameter_type(SEXP value,
 void assert_return_type(SEXP value,
                         const std::string& package_name,
                         const std::string& function_name,
-                        int call_id) {
+                        int call_id,
+                        const std::string& parameter_name,
+                        int parameter_count) {
     const tastr::ast::Node& node =
         get_function_return_type(package_name, function_name);
 
     int formal_parameter_position = -1;
-
-    int parameter_count =
-        get_function_parameter_count(package_name, function_name);
-
-    std::string parameter_name = "return";
 
     TypeChecker type_checker(
         package_name, function_name, parameter_name, formal_parameter_position);
@@ -128,12 +124,14 @@ SEXP assert_type(SEXP value,
                  SEXP fun_name,
                  SEXP call_id,
                  SEXP param_name,
+                 SEXP param_count,
                  SEXP param_idx) {
-    std::string parameter_name(R_CHAR(Rf_asChar(param_name)));
-    int formal_parameter_position = Rf_asInteger(param_idx);
     std::string package_name(R_CHAR(Rf_asChar(pkg_name)));
     std::string function_name(R_CHAR(Rf_asChar(fun_name)));
     int int_call_id = Rf_asInteger(call_id);
+    std::string parameter_name(R_CHAR(Rf_asChar(param_name)));
+    int parameter_count = Rf_asInteger(param_count);
+    int formal_parameter_position = Rf_asInteger(param_idx);
 
     SEXP value_to_check =
         (is_value_missing == R_TrueValue) ? R_MissingArg : value;
@@ -141,14 +139,19 @@ SEXP assert_type(SEXP value,
     const tastr::ast::Node* node = nullptr;
 
     if (formal_parameter_position == -1) {
-        assert_return_type(
-            value_to_check, package_name, function_name, int_call_id);
+        assert_return_type(value_to_check,
+                           package_name,
+                           function_name,
+                           int_call_id,
+                           parameter_name,
+                           parameter_count);
     } else {
         assert_parameter_type(value_to_check,
                               package_name,
                               function_name,
                               int_call_id,
                               parameter_name,
+                              parameter_count,
                               formal_parameter_position);
     }
 
@@ -160,6 +163,7 @@ void inject_argument_type_assertion(SEXP pkg_name,
                                     SEXP call_id,
                                     SEXP param_sym,
                                     SEXP param_name,
+                                    SEXP param_count,
                                     SEXP param_index,
                                     SEXP value,
                                     SEXP rho) {
@@ -191,16 +195,17 @@ void inject_argument_type_assertion(SEXP pkg_name,
     }
 
     // TODO: make a constant
-    SEXP check_type_fun = PROTECT(Rf_lang3(R_TripleColonSymbol,
-                                           Rf_install("contractR"),
-                                           Rf_install("assert_type")));
-    SEXP call = PROTECT(lang8(check_type_fun,
+    SEXP assert_type_fun = PROTECT(Rf_lang3(R_TripleColonSymbol,
+                                            Rf_install("contractR"),
+                                            Rf_install("assert_type")));
+    SEXP call = PROTECT(lang9(assert_type_fun,
                               call_value,
                               value_missing,
                               pkg_name,
                               fun_name,
                               call_id,
                               param_name,
+                              param_count,
                               param_index));
 
 #ifdef DEBUG
@@ -226,6 +231,7 @@ void inject_argument_type_assertion(SEXP pkg_name,
 SEXP inject_type_assertion(SEXP pkg_name,
                            SEXP fun_name,
                            SEXP call_id,
+                           SEXP param_count,
                            SEXP fun,
                            SEXP rho) {
     if (TYPEOF(pkg_name) != STRSXP || Rf_length(pkg_name) != 1) {
@@ -256,6 +262,7 @@ SEXP inject_type_assertion(SEXP pkg_name,
                                        call_id,
                                        param_sym,
                                        param_name,
+                                       param_count,
                                        param_index,
                                        value,
                                        rho);
