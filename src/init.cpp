@@ -16,6 +16,7 @@ static const R_CallMethodDef callMethods[] = {
     {"inject_type_assertion", (DL_FUNC) &inject_type_assertion, 4},
     {"assert_type", (DL_FUNC) &assert_type, 6},
     {"environment_name", (DL_FUNC) &environment_name, 1},
+    {"get_contract_assertions", (DL_FUNC) &r_get_contract_assertions, 0},
 
     /* type checking utilities */
     {"infer_type", (DL_FUNC) &r_infer_type, 3},

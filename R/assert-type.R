@@ -16,3 +16,8 @@ assert_type <- function(value, missing_value, pkg_name, fun_name,
 set_assert_type_fun <- function(fun) {
   assign("assert_type", fun, envir=getNamespace("contractR"))
 }
+
+#' @export
+get_contract_assertions <- function() {
+    .Call(C_get_contract_assertions)
+}

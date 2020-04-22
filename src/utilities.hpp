@@ -3,6 +3,7 @@
 
 #include <Rinternals.h>
 #include <string>
+#include <functional>
 
 extern SEXP R_TrueValue;
 extern SEXP R_FalseValue;
@@ -33,6 +34,29 @@ SEXP delayed_assign(SEXP variable,
 SEXP system_file(SEXP path);
 
 SEXP lookup_value(SEXP rho, SEXP value_sym, bool evaluate = false);
+
+void set_class(SEXP object, const std::string& class_name);
+
+void set_names(SEXP object,
+               int size,
+               const std::function<std::string(int index)>& get_element);
+
+void set_row_names(SEXP object,
+                   int size,
+                   const std::function<std::string(int index)>& get_element);
+
+SEXP create_character_vector(
+    int size,
+    const std::function<std::string(int index)>& get_element);
+
+SEXP create_logical_vector(int size,
+                           const std::function<bool(int index)>& get_element);
+
+SEXP create_integer_vector(int size,
+                           const std::function<int(int index)>& get_element);
+
+SEXP create_data_frame(const std::vector<SEXP> columns,
+                       const std::vector<std::string>& names);
 }
 
 #endif /* CONTRACTR_UTILITIES_HPP */

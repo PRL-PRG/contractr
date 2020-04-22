@@ -2,6 +2,7 @@
 
 export(check_type)
 export(clear_type_declaration_cache)
+export(get_contract_assertions)
 export(get_typed_function_names)
 export(get_typed_package_names)
 export(import_type_declarations)

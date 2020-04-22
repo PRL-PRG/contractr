@@ -5,20 +5,26 @@
 #include "logger.hpp"
 #include "type_declaration_cache.hpp"
 #include "utilities.hpp"
+#include "ContractAssertion.hpp"
 
 #include <R_ext/Rdynload.h>
 #include <Rinternals.h>
 #include <stdlib.h> // for NULL
 
 void assert_parameter_type(SEXP value,
-                          const std::string& package_name,
-                          const std::string& function_name,
-                          const std::string& parameter_name,
-                          int formal_parameter_position) {
+                           const std::string& package_name,
+                           const std::string& function_name,
+                           const std::string& parameter_name,
+                           int formal_parameter_position) {
     int parameter_count =
         get_function_parameter_count(package_name, function_name);
+    bool contract_status = true;
+    std::string actual_type = infer_type(value, parameter_name);
+    std::string expected_type;
 
     if (parameter_count <= formal_parameter_position) {
+        contract_status = false;
+
         warningcall(
             R_NilValue,
             "contract violation for '%s::%s'\n   ├── declared types for "
@@ -30,7 +36,8 @@ void assert_parameter_type(SEXP value,
             parameter_name.c_str(),
             /* NOTE: indexing starts from 1 in R */
             formal_parameter_position + 1,
-            infer_type(value, parameter_name).c_str());
+            actual_type);
+
     } else {
         const tastr::ast::Node& node = get_function_parameter_type(
             package_name, function_name, formal_parameter_position);
@@ -40,9 +47,11 @@ void assert_parameter_type(SEXP value,
                                  parameter_name,
                                  formal_parameter_position);
 
-        bool result = type_checker.typecheck(value, node);
+        contract_status = type_checker.typecheck(value, node);
 
-        if (!result) {
+        expected_type = type_to_string(node);
+
+        if (!contract_status) {
             warningcall(
                 R_NilValue,
                 "contract violation for parameter '%s' (position %d) of "
@@ -52,37 +61,69 @@ void assert_parameter_type(SEXP value,
                 formal_parameter_position + 1,
                 package_name.c_str(),
                 function_name.c_str(),
-                type_to_string(node).c_str(),
-                infer_type(value, parameter_name).c_str());
+                expected_type,
+                actual_type);
         }
     }
+
+    add_contract_assertion(package_name,
+                           function_name,
+                           parameter_name,
+                           parameter_count,
+                           formal_parameter_position,
+                           actual_type,
+                           expected_type,
+                           contract_status);
 }
 
 void assert_return_type(SEXP value,
-                       const std::string& package_name,
-                       const std::string& function_name) {
+                        const std::string& package_name,
+                        const std::string& function_name) {
     const tastr::ast::Node& node =
         get_function_return_type(package_name, function_name);
 
+    int formal_parameter_position = -1;
+
+    int parameter_count =
+        get_function_parameter_count(package_name, function_name);
+
     std::string parameter_name = "return";
 
-    TypeChecker type_checker(package_name, function_name, parameter_name, -1);
-    bool result = type_checker.typecheck(value, node);
+    TypeChecker type_checker(
+        package_name, function_name, parameter_name, formal_parameter_position);
 
-    if (!result) {
+    bool contract_status = type_checker.typecheck(value, node);
+
+    std::string expected_type = type_to_string(node);
+
+    std::string actual_type = infer_type(value, parameter_name);
+
+    if (!contract_status) {
         warningcall(R_NilValue,
                     "contract violation for return value of "
                     "'%s::%s'\n   ├── expected: %s\n   └── actual: %s",
                     package_name.c_str(),
                     function_name.c_str(),
-                    type_to_string(node).c_str(),
-                    infer_type(value, parameter_name).c_str());
+                    expected_type,
+                    actual_type);
     }
+
+    add_contract_assertion(package_name,
+                           function_name,
+                           parameter_name,
+                           parameter_count,
+                           formal_parameter_position,
+                           actual_type,
+                           expected_type,
+                           contract_status);
 }
 
-SEXP assert_type(SEXP value, SEXP is_value_missing, SEXP pkg_name,
-                 SEXP fun_name, SEXP param_name, SEXP param_idx) {
-
+SEXP assert_type(SEXP value,
+                 SEXP is_value_missing,
+                 SEXP pkg_name,
+                 SEXP fun_name,
+                 SEXP param_name,
+                 SEXP param_idx) {
     std::string parameter_name(R_CHAR(Rf_asChar(param_name)));
     int formal_parameter_position = Rf_asInteger(param_idx);
     std::string package_name(R_CHAR(Rf_asChar(pkg_name)));
@@ -97,10 +138,10 @@ SEXP assert_type(SEXP value, SEXP is_value_missing, SEXP pkg_name,
         assert_return_type(value_to_check, package_name, function_name);
     } else {
         assert_parameter_type(value_to_check,
-                             package_name,
-                             function_name,
-                             parameter_name,
-                             formal_parameter_position);
+                              package_name,
+                              function_name,
+                              parameter_name,
+                              formal_parameter_position);
     }
 
     return value;
@@ -205,4 +246,65 @@ SEXP inject_type_assertion(SEXP pkg_name, SEXP fun_name, SEXP fun, SEXP rho) {
     }
 
     return R_NilValue;
+}
+
+SEXP r_get_contract_assertions() {
+    int size = get_contract_assertion_count();
+
+    auto get_package_name = [](int index) -> std::string {
+        return get_contract_assertion(index).get_package_name();
+    };
+
+    auto get_function_name = [](int index) -> std::string {
+        return get_contract_assertion(index).get_function_name();
+    };
+
+    auto get_parameter_name = [](int index) -> std::string {
+        return get_contract_assertion(index).get_parameter_name();
+    };
+
+    auto get_parameter_count = [](int index) -> int {
+        return get_contract_assertion(index).get_parameter_count();
+    };
+
+    auto get_parameter_position = [](int index) -> int {
+        return get_contract_assertion(index).get_parameter_position();
+    };
+
+    auto get_actual_type = [](int index) -> std::string {
+        return get_contract_assertion(index).get_actual_type();
+    };
+
+    auto get_expected_type = [](int index) -> std::string {
+        return get_contract_assertion(index).get_expected_type();
+    };
+
+    auto get_contract_status = [](int index) -> bool {
+        return get_contract_assertion(index).get_contract_status();
+    };
+
+    std::vector<SEXP> columns = {
+        PROTECT(create_character_vector(size, get_package_name)),
+        PROTECT(create_character_vector(size, get_function_name)),
+        PROTECT(create_character_vector(size, get_parameter_name)),
+        PROTECT(create_integer_vector(size, get_parameter_count)),
+        PROTECT(create_integer_vector(size, get_parameter_position)),
+        PROTECT(create_character_vector(size, get_actual_type)),
+        PROTECT(create_character_vector(size, get_expected_type)),
+        PROTECT(create_logical_vector(size, get_contract_status))};
+
+    std::vector<std::string> names = {"package_name",
+                                      "function_name",
+                                      "parameter_name",
+                                      "parameter_count",
+                                      "parameter_position",
+                                      "actual_type",
+                                      "expected_type",
+                                      "contract_status"};
+
+    SEXP df = PROTECT(create_data_frame(columns, names));
+
+    UNPROTECT(columns.size() + 1);
+
+    return df;
 }
