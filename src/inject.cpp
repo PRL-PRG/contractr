@@ -36,7 +36,7 @@ void assert_parameter_type(SEXP value,
             parameter_name.c_str(),
             /* NOTE: indexing starts from 1 in R */
             formal_parameter_position + 1,
-            actual_type);
+            actual_type.c_str());
 
     } else {
         const tastr::ast::Node& node = get_function_parameter_type(
@@ -61,8 +61,8 @@ void assert_parameter_type(SEXP value,
                 formal_parameter_position + 1,
                 package_name.c_str(),
                 function_name.c_str(),
-                expected_type,
-                actual_type);
+                expected_type.c_str(),
+                actual_type.c_str());
         }
     }
 
@@ -104,8 +104,8 @@ void assert_return_type(SEXP value,
                     "'%s::%s'\n   ├── expected: %s\n   └── actual: %s",
                     package_name.c_str(),
                     function_name.c_str(),
-                    expected_type,
-                    actual_type);
+                    expected_type.c_str(),
+                    actual_type.c_str());
     }
 
     add_contract_assertion(package_name,
