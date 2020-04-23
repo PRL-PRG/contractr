@@ -12,7 +12,8 @@ get_next_call_id <- function() {
 inject_type_assertion <- function(fun,
                                   type_declaration = NULL,
                                   fun_name = as.character(substitute(fun)),
-                                  pkg_name = get_package_name(fun)) {
+                                  pkg_name = get_package_name(fun),
+                                  env = environment(fun)) {
   stopifnot(is.function(fun))
   stopifnot(is_scalar_character(fun_name))
   stopifnot(is_scalar_character(pkg_name))
@@ -68,7 +69,7 @@ inject_type_assertion <- function(fun,
 
     assign(
       id,
-      list(pkg_name=pkg_name, fun_name=fun_name, new=fun, old=old),
+      list(env = env, pkg_name=pkg_name, fun_name=fun_name, new=fun, old=old),
       envir=.injected_functions
     )
   }
@@ -90,6 +91,8 @@ inject_environment_type_assertions <- function(env,
 
     required_var_names <- intersect(var_names, typed_var_names)
 
+    modified_var_names <- c()
+
     for (var_name in required_var_names) {
 
         fun <- get(var_name, envir=env)
@@ -99,20 +102,29 @@ inject_environment_type_assertions <- function(env,
         if (is_locked && !unlock) next
 
         tryCatch({
+
             if (is_locked) unlockBinding(var_name, env)
-            inject_type_assertion(fun, fun_name = var_name, pkg_name = env_name)
+            inject_type_assertion(fun, fun_name = var_name, pkg_name = env_name, env = env)
             if (is_locked) lockBinding(var_name, env)
+
+            modified_var_names <- c(modified_var_names, var_name)
+
         }, error=function(e) {
             warning("Unable to insert contracts into `",
                     env_name, ":::", var_name, "`: ", e$message)
         })
     }
+
+    modified_var_names
 }
 
 #' @export
 insert_package_contract <- function(package_name) {
+    needs_prefix <- !(package_name %in% c(".GlobalEnv", "Autoloads"))
+    if (needs_prefix) {
+        package_name <- paste0("package:", package_name)
+    }
     package_env <- as.environment(package_name)
-
     inject_environment_type_assertions(package_env,
                                        strip_package_prefix(package_name),
                                        unlock = TRUE)
@@ -124,4 +136,3 @@ insert_package_contract <- function(package_name) {
 is_type_assertion_injected <- function(f) {
   identical(body(f)[[3]][[2]], quote(contractR:::C_inject_type_assertion))
 }
-
