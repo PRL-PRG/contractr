@@ -2,43 +2,26 @@
 .injected_functions <- new.env(parent=emptyenv())
 .no_retval_marker <- new.env(parent=emptyenv())
 
-insert_contract <- function(pkgname) {
-    pkgenv <- as.environment(pkgname)
 
-    package_prefix <- "package:"
-
-    if (startsWith(pkgname, package_prefix)) {
-        pkgname <- substring(pkgname, nchar(package_prefix) + 1)
-    }
-
-    bindings <- ls(pkgenv)
-    typed_bindings <- import_type_declarations(pkgname)
-    required_bindings <- intersect(bindings, typed_bindings)
-
-    for (binding in required_bindings) {
-        closure <- get(binding, pkgenv)
-
-        is_locked <- bindingIsLocked(binding, pkgenv)
-        if (is_locked) unlockBinding(binding, pkgenv)
-        inject_type_assertion(closure,
-                              fun_name = binding,
-                              pkg_name = pkgname)
-        if (is_locked) lockBinding(binding, pkgenv)
-    }
+strip_package_prefix <- function(package_names, prefix = "package:") {
+    ifelse(startsWith(package_names, prefix),
+           substring(package_names, nchar(prefix) + 1),
+           package_names)
 }
 
 .onLoad <- function(libname, pkgname) {
     loaded_packages <- search()
     installed_packages <- installed.packages()[, 1]
+    remaining_packages <- setdiff(installed_packages, strip_package_prefix(loaded_packages))
 
     for (package in loaded_packages) {
-        insert_contract(package)
+        insert_package_contract(package)
     }
 
-    for (package in setdiff(installed_packages, loaded_packages)) {
+    for (package in remaining_packages) {
         setHook(packageEvent(package, "attach"),
                 function(pkgname, libname) {
-                    insert_contract(paste0("package:", pkgname))
+                    insert_package_contract(paste0("package:", pkgname))
                 })
     }
 }

@@ -77,23 +77,48 @@ inject_type_assertion <- function(fun,
 }
 
 #' @export
-inject_environment_type_assertions <- function(pkg_name, env=getNamespace(pkg_name)) {
-  stopifnot(is_scalar_character(pkg_name))
+inject_environment_type_assertions <- function(env,
+                                               env_name = "<unnamed environment>",
+                                               unlock = FALSE) {
+    stopifnot(is_environment(env))
+    stopifnot(is_scalar_character(env_name))
+    stopifnot(is_scalar_logical(unlock))
 
-  if (is.null(env)) return(NULL)
+    var_names <- ls(envir=env, all.names=TRUE, sorted=FALSE)
 
-  for (name in ls(envir=env, all.names=TRUE, sorted=FALSE)) {
-    fun <- get(name, envir=env)
-    if (is.function(fun)) {
-      tryCatch({
-        inject_type_assertion(fun, fun_name = name, pkg_name = pkg_name)
-      }, error=function(e) {
-        warning("Unable to inject type checks into `",
-                pkg_name, ":::", name, "`: ", e$message)
-      })
+    typed_var_names <- import_type_declarations(env_name)
+
+    required_var_names <- intersect(var_names, typed_var_names)
+
+    for (var_name in required_var_names) {
+
+        fun <- get(var_name, envir=env)
+        if (!is.function(fun)) next
+
+        is_locked <- bindingIsLocked(var_name, env)
+        if (is_locked && !unlock) next
+
+        tryCatch({
+            if (is_locked) unlockBinding(var_name, env)
+            inject_type_assertion(fun, fun_name = var_name, pkg_name = env_name)
+            if (is_locked) lockBinding(var_name, env)
+        }, error=function(e) {
+            warning("Unable to insert contracts into `",
+                    env_name, ":::", var_name, "`: ", e$message)
+        })
     }
-  }
 }
+
+#' @export
+insert_package_contract <- function(package_name) {
+    package_env <- as.environment(package_name)
+
+    inject_environment_type_assertions(package_env,
+                                       strip_package_prefix(package_name),
+                                       unlock = TRUE)
+
+}
+
 
 #' @export
 is_type_assertion_injected <- function(f) {

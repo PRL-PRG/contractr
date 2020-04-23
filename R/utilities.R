@@ -1,5 +1,13 @@
-is_scalar_character <- function(package_name) {
-    is.character(package_name) && (length(package_name) == 1) && (nchar(package_name) != 0)
+is_scalar_character <- function(vector) {
+    is.character(vector) && (length(vector) == 1) && (nchar(vector) != 0)
+}
+
+is_scalar_logical <- function(vector) {
+    is.logical(vector) && (length(vector) == 1)
+}
+
+is_environment <- function(env) {
+    is.environment(env)
 }
 
 get_package_name <- function(fun) {
