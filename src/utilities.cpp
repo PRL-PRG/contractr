@@ -46,11 +46,35 @@ SEXP lang8(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y, SEXP z) {
     return s;
 }
 
-SEXP lang9(SEXP r, SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y, SEXP z) {
+SEXP lang9(SEXP r,
+           SEXP s,
+           SEXP t,
+           SEXP u,
+           SEXP v,
+           SEXP w,
+           SEXP x,
+           SEXP y,
+           SEXP z) {
     PROTECT(r);
     r = LCONS(r, list8(s, t, u, v, w, x, y, z));
     UNPROTECT(1);
     return r;
+}
+
+SEXP lang10(SEXP q,
+            SEXP r,
+            SEXP s,
+            SEXP t,
+            SEXP u,
+            SEXP v,
+            SEXP w,
+            SEXP x,
+            SEXP y,
+            SEXP z) {
+    PROTECT(q);
+    q = LCONS(q, list9(r, s, t, u, v, w, x, y, z));
+    UNPROTECT(1);
+    return q;
 }
 
 SEXP list7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y) {
@@ -65,6 +89,21 @@ SEXP list8(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y, SEXP z) {
     s = CONS(s, list7(t, u, v, w, x, y, z));
     UNPROTECT(1);
     return s;
+}
+
+SEXP list9(SEXP r,
+           SEXP s,
+           SEXP t,
+           SEXP u,
+           SEXP v,
+           SEXP w,
+           SEXP x,
+           SEXP y,
+           SEXP z) {
+    PROTECT(r);
+    r = CONS(r, list8(s, t, u, v, w, x, y, z));
+    UNPROTECT(1);
+    return r;
 }
 
 SEXP delayed_assign(SEXP variable,

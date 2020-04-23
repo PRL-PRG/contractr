@@ -1,9 +1,10 @@
-assert_type <- function(value, missing_value, pkg_name, fun_name,
+assert_type <- function(value, missing_value, call_trace, pkg_name, fun_name,
                         call_id, param_name, param_count, param_idx) {
   .Call(
     C_assert_type,
     value,
     missing_value,
+    call_trace,
     pkg_name,
     fun_name,
     call_id,
@@ -22,4 +23,8 @@ set_assert_type_fun <- function(fun) {
 #' @export
 get_contract_assertions <- function() {
     .Call(C_get_contract_assertions)
+}
+
+concatenate_call_trace <- function(call_trace) {
+    .Call(C_concatenate_call_trace, Map(deparse, call_trace))
 }

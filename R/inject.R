@@ -28,8 +28,10 @@ inject_type_assertion <- function(fun,
       check_params <- substitute({
       .contractr__call_id__ <- contractR:::get_next_call_id();
       .contractr__parameter_count__ <- length(formals(sys.function()))
+      .contractr__call_trace__ <- contractR:::concatenate_call_trace(sys.calls())
       .Call(
         contractR:::C_inject_type_assertion,
+        .contractr__call_trace__,
         PKG_NAME,
         FUN_NAME,
         .contractr__call_id__,
@@ -46,6 +48,7 @@ inject_type_assertion <- function(fun,
           contractR:::assert_type(
             .contractr__retval__,
             FALSE,
+            .contractr__call_trace__,
             PKG_NAME,
             FUN_NAME,
             .contractr__call_id__,

@@ -11,7 +11,40 @@
 #include <Rinternals.h>
 #include <stdlib.h> // for NULL
 
+std::string concatenate_call_trace(SEXP call_trace,
+                                   const std::string& indentation = "") {
+    int size = LENGTH(call_trace);
+
+    std::string result = "<" + std::to_string(size) + " frame(s)>";
+
+    for (int i = size - 1; i >= 0; --i) {
+        SEXP call = VECTOR_ELT(call_trace, i);
+        int call_length = LENGTH(call);
+
+        result.append("\n")
+            .append(indentation)
+            .append(i == 0 ? "└── " : "├── ")
+            .append(CHAR(STRING_ELT(call, 0)));
+
+        for (int j = 1; j < call_length; ++j) {
+            result.append("\n")
+                .append(indentation)
+                .append(i != 0 ? "│   " : "    ")
+                .append(CHAR(STRING_ELT(call, j)));
+        }
+    }
+    return result;
+}
+
+SEXP r_concatenate_call_trace(SEXP call_trace) {
+    const std::string call_trace_string =
+        concatenate_call_trace(call_trace, std::string(14, ' '));
+
+    return Rf_mkString(call_trace_string.c_str());
+}
+
 void assert_parameter_type(SEXP value,
+                           const char* const call_trace,
                            const std::string& package_name,
                            const std::string& function_name,
                            int call_id,
@@ -28,15 +61,16 @@ void assert_parameter_type(SEXP value,
         warningcall(
             R_NilValue,
             "contract violation for '%s::%s'\n   ├── declared types for "
-            "%d parameters\n   └── received argument for untyped "
-            "parameter '%s' (position %d) of type %s",
+            "%d parameters\n   ├── received argument for untyped "
+            "parameter '%s' (position %d) of type %s\n   └── trace: %s",
             package_name.c_str(),
             function_name.c_str(),
             parameter_count,
             parameter_name.c_str(),
             /* NOTE: indexing starts from 1 in R */
             formal_parameter_position + 1,
-            actual_type.c_str());
+            actual_type.c_str(),
+            call_trace);
 
     } else {
         const tastr::ast::Node& node = get_function_parameter_type(
@@ -55,14 +89,16 @@ void assert_parameter_type(SEXP value,
             warningcall(
                 R_NilValue,
                 "contract violation for parameter '%s' (position %d) of "
-                "'%s::%s'\n   ├── expected: %s\n   └── actual: %s",
+                "'%s::%s'\n   ├── expected: %s\n   ├── actual: %s\n   └── "
+                "trace: %s",
                 parameter_name.c_str(),
                 /* NOTE: indexing starts from 1 in R */
                 formal_parameter_position + 1,
                 package_name.c_str(),
                 function_name.c_str(),
                 expected_type.c_str(),
-                actual_type.c_str());
+                actual_type.c_str(),
+                call_trace);
         }
     }
 
@@ -74,10 +110,12 @@ void assert_parameter_type(SEXP value,
                            formal_parameter_position,
                            actual_type,
                            expected_type,
-                           contract_status);
+                           contract_status,
+                           call_trace);
 }
 
 void assert_return_type(SEXP value,
+                        const char* const call_trace,
                         const std::string& package_name,
                         const std::string& function_name,
                         int call_id,
@@ -100,11 +138,13 @@ void assert_return_type(SEXP value,
     if (!contract_status) {
         warningcall(R_NilValue,
                     "contract violation for return value of "
-                    "'%s::%s'\n   ├── expected: %s\n   └── actual: %s",
+                    "'%s::%s'\n   ├── expected: %s\n   ├── actual: %s\n   "
+                    "└── trace: %s",
                     package_name.c_str(),
                     function_name.c_str(),
                     expected_type.c_str(),
-                    actual_type.c_str());
+                    actual_type.c_str(),
+                    call_trace);
     }
 
     add_contract_assertion(package_name,
@@ -115,11 +155,13 @@ void assert_return_type(SEXP value,
                            formal_parameter_position,
                            actual_type,
                            expected_type,
-                           contract_status);
+                           contract_status,
+                           call_trace);
 }
 
 SEXP assert_type(SEXP value,
                  SEXP is_value_missing,
+                 SEXP call_trace,
                  SEXP pkg_name,
                  SEXP fun_name,
                  SEXP call_id,
@@ -132,6 +174,7 @@ SEXP assert_type(SEXP value,
     std::string parameter_name(R_CHAR(Rf_asChar(param_name)));
     int parameter_count = Rf_asInteger(param_count);
     int formal_parameter_position = Rf_asInteger(param_idx);
+    const char* const concatenated_call_trace = CHAR(asChar(call_trace));
 
     SEXP value_to_check =
         (is_value_missing == R_TrueValue) ? R_MissingArg : value;
@@ -140,6 +183,7 @@ SEXP assert_type(SEXP value,
 
     if (formal_parameter_position == -1) {
         assert_return_type(value_to_check,
+                           concatenated_call_trace,
                            package_name,
                            function_name,
                            int_call_id,
@@ -147,6 +191,7 @@ SEXP assert_type(SEXP value,
                            parameter_count);
     } else {
         assert_parameter_type(value_to_check,
+                              concatenated_call_trace,
                               package_name,
                               function_name,
                               int_call_id,
@@ -158,7 +203,8 @@ SEXP assert_type(SEXP value,
     return value;
 }
 
-void inject_argument_type_assertion(SEXP pkg_name,
+void inject_argument_type_assertion(SEXP call_trace,
+                                    SEXP pkg_name,
                                     SEXP fun_name,
                                     SEXP call_id,
                                     SEXP param_sym,
@@ -198,15 +244,16 @@ void inject_argument_type_assertion(SEXP pkg_name,
     SEXP assert_type_fun = PROTECT(Rf_lang3(R_TripleColonSymbol,
                                             Rf_install("contractR"),
                                             Rf_install("assert_type")));
-    SEXP call = PROTECT(lang9(assert_type_fun,
-                              call_value,
-                              value_missing,
-                              pkg_name,
-                              fun_name,
-                              call_id,
-                              param_name,
-                              param_count,
-                              param_index));
+    SEXP call = PROTECT(lang10(assert_type_fun,
+                               call_value,
+                               value_missing,
+                               call_trace,
+                               pkg_name,
+                               fun_name,
+                               call_id,
+                               param_name,
+                               param_count,
+                               param_index));
 
 #ifdef DEBUG
     Rprintf("\ncontractR/src/inject.c: *** %s '%s' for '%s:::%s' with call id "
@@ -228,7 +275,8 @@ void inject_argument_type_assertion(SEXP pkg_name,
     UNPROTECT(2);
 }
 
-SEXP inject_type_assertion(SEXP pkg_name,
+SEXP inject_type_assertion(SEXP call_trace,
+                           SEXP pkg_name,
                            SEXP fun_name,
                            SEXP call_id,
                            SEXP param_count,
@@ -250,6 +298,10 @@ SEXP inject_type_assertion(SEXP pkg_name,
         Rf_error("argument rho must be an environment");
     }
 
+    if (TYPEOF(call_trace) != STRSXP) {
+        Rf_error("argument call_trace must be a character vector");
+    }
+
     SEXP params = FORMALS(fun);
     for (int index = 0; params != R_NilValue; index++, params = CDR(params)) {
         SEXP param_sym = TAG(params);
@@ -257,7 +309,8 @@ SEXP inject_type_assertion(SEXP pkg_name,
         SEXP param_name = PROTECT(Rf_mkString(R_CHAR(PRINTNAME(param_sym))));
         SEXP param_index = PROTECT(Rf_ScalarInteger(index));
 
-        inject_argument_type_assertion(pkg_name,
+        inject_argument_type_assertion(call_trace,
+                                       pkg_name,
                                        fun_name,
                                        call_id,
                                        param_sym,
@@ -312,6 +365,10 @@ SEXP r_get_contract_assertions() {
         return get_contract_assertion(index).get_contract_status();
     };
 
+    auto get_call_trace = [](int index) -> std::string {
+        return get_contract_assertion(index).get_call_trace();
+    };
+
     std::vector<SEXP> columns = {
         PROTECT(create_character_vector(size, get_package_name)),
         PROTECT(create_character_vector(size, get_function_name)),
@@ -321,7 +378,8 @@ SEXP r_get_contract_assertions() {
         PROTECT(create_integer_vector(size, get_parameter_position)),
         PROTECT(create_character_vector(size, get_actual_type)),
         PROTECT(create_character_vector(size, get_expected_type)),
-        PROTECT(create_logical_vector(size, get_contract_status))};
+        PROTECT(create_logical_vector(size, get_contract_status)),
+        PROTECT(create_character_vector(size, get_call_trace))};
 
     std::vector<std::string> names = {"package_name",
                                       "function_name",
@@ -331,7 +389,8 @@ SEXP r_get_contract_assertions() {
                                       "parameter_position",
                                       "actual_type",
                                       "expected_type",
-                                      "contract_status"};
+                                      "contract_status",
+                                      "call_trace"};
 
     SEXP df = PROTECT(create_data_frame(columns, names));
 
