@@ -1,10 +1,18 @@
 test_injection("into a function", {
   f <- function(a, b) a + b
 
-  inject_type_assertion(f, fun_name = "f", pkg_name = "mypkg")
+  insert_contract(f, "<int, int> => int", fun_name = "f", pkg_name = "mypkg")
 
-  expect_length(.injected_functions, 1)
-  expect_type_assertion(f)
+  expect_length(contractR:::get_injected_function_count(), 1)
+
+  expect_true(has_contract(f))
+
+  remove_contract(f)
+
+  expect_equal(contractR:::get_injected_function_count(), 0)
+
+  expect_false(has_contract(f))
+
 })
 
 test_injection("into an environment", {
@@ -13,12 +21,12 @@ test_injection("into an environment", {
   e$g <- function(y) y
   e$h <- sin
 
-  expect_silent(inject_environment_type_assertions(e, "e"))
+  expect_silent(insert_environment_contract(e, "e", FALSE))
 
-  expect_length(.injected_functions, 0)
-  expect_false(is_type_assertion_injected(e$f))
-  expect_false(is_type_assertion_injected(e$g))
-  expect_false(is_type_assertion_injected(e$h))
+  expect_equal(contractR:::get_injected_function_count(), 0)
+  expect_false(has_contract(e$f))
+  expect_false(has_contract(e$g))
+  expect_false(has_contract(e$h))
   expect_identical(e$h, sin)
 })
 
@@ -34,8 +42,8 @@ test_injection("into a package", {
 
       insert_package_contract("TestPackage")
 
-      expect_true(is_type_assertion_injected(foo1))
+      expect_true(has_contract(foo1))
 
-      expect_false(is_type_assertion_injected(TestPackage:::bar))
+      expect_false(has_contract(TestPackage:::bar))
   })
 })

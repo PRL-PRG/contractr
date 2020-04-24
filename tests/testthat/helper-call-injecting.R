@@ -6,5 +6,5 @@ test_injection <- function(desc, code) {
 }
 
 expect_type_assertion <- function(f) {
-  expect_true(is_type_assertion_injected(f))
+  expect_true(has_contract(f))
 }
