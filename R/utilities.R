@@ -10,6 +10,10 @@ is_environment <- function(env) {
     is.environment(env)
 }
 
+is_function <- function(fun) {
+    is.function(fun)
+}
+
 get_package_name <- function(fun) {
     name <- environmentName(environment(fun))
     if (name == "R_GlobalEnv") ".GlobalEnv"
@@ -19,3 +23,17 @@ get_package_name <- function(fun) {
 concatenate_call_trace <- function(call_trace) {
     .Call(C_concatenate_call_trace, Map(deparse, call_trace))
 }
+
+remove_package_prefix <- function(package_names) {
+    prefix <- "package:"
+    ifelse(startsWith(package_names, prefix),
+           substring(package_names, nchar(prefix) + 1),
+           package_names)
+}
+
+
+add_package_prefix <- function(package_names) {
+    prefix <- "package:"
+    paste0(prefix, package_names)
+}
+

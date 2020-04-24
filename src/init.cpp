@@ -16,7 +16,7 @@ static const R_CallMethodDef callMethods[] = {
     {"inject_type_assertion", (DL_FUNC) &inject_type_assertion, 7},
     {"assert_type", (DL_FUNC) &assert_type, 9},
     {"environment_name", (DL_FUNC) &environment_name, 1},
-    {"get_contract_assertions", (DL_FUNC) &r_get_contract_assertions, 0},
+    {"get_assertions", (DL_FUNC) &r_get_contract_assertions, 0},
     {"concatenate_call_trace", (DL_FUNC) &r_concatenate_call_trace, 1},
 
     /* severity */
