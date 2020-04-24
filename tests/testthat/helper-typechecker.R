@@ -44,7 +44,7 @@ expect_arg_contract_violation <- function(object, index, expected_type, actual_t
         str_glue("parameter\\s+\\Q'{parameter_name}'\\E", parameter_name = parameter_name),
         str_glue("position\\s+\\Q{index}\\E", index = index),
         str_glue("expected.*\\Q{expected_type}\\E\\n", expected_type = expected_type),
-        str_glue("actual.*\\Q{actual_type}\\E$", actual_type = actual_type)
+        str_glue("actual.*\\Q{actual_type}\\E\\n", actual_type = actual_type)
     )
 
     warning_message <- object$warnings[index]
@@ -76,7 +76,7 @@ expect_ret_contract_violation <- function(object, expected_type, actual_type) {
     patterns <- c(
         str_glue("return value"),
         str_glue("expected.*\\Q{expected_type}\\E\\n", expected_type = expected_type),
-        str_glue("actual.*\\Q{actual_type}\\E$", actual_type = actual_type)
+        str_glue("actual.*\\Q{actual_type}\\E\\n", actual_type = actual_type)
     )
 
     warning_message <- tail(object$warnings, n = 1)
