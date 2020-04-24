@@ -1,10 +1,12 @@
 .injected_functions <- new.env(parent=emptyenv())
-.no_retval_marker <- new.env(parent=emptyenv())
-.call_id <- new.env()
 
-.call_id$counter <- -1L
+.no_retval_marker <- new.env(parent=emptyenv())
+
+.state <- new.env()
+.state$call_id <- -1L
+.state$autoinject <- TRUE
 
 get_next_call_id <- function() {
-    .call_id$counter <- .call_id$counter + 1
-    .call_id$counter
+    .state$call_id <- .state$call_id + 1
+    .state$call_id
 }

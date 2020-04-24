@@ -1,5 +1,4 @@
 
-
 strip_package_prefix <- function(package_names, prefix = "package:") {
     ifelse(startsWith(package_names, prefix),
            substring(package_names, nchar(prefix) + 1),
@@ -7,10 +6,15 @@ strip_package_prefix <- function(package_names, prefix = "package:") {
 }
 
 .onLoad <- function(libname, pkgname) {
+
+    set_autoinject()
+
     handle_package <- function(package_name, ...) {
-        fun_names <- insert_package_contract(package_name)
-        if (length(fun_names) != 0) {
-            message("Added contract to ", length(fun_names), " ", package_name, " function(s)")
+        if (should_autoinject()) {
+            fun_names <- insert_package_contract(package_name)
+            if (length(fun_names) != 0) {
+                message("Added contract to ", length(fun_names), " ", package_name, " function(s)")
+            }
         }
     }
 
