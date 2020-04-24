@@ -109,7 +109,7 @@ inject_environment_type_assertions <- function(env,
 
 #' @export
 insert_package_contract <- function(package_name) {
-    needs_prefix <- !(package_name %in% c(".GlobalEnv", "Autoloads"))
+    needs_prefix <- !(package_name %in% c(".GlobalEnv", "Autoloads", "tools:callr"))
     if (needs_prefix) {
         package_name <- paste0("package:", package_name)
     }
@@ -122,6 +122,13 @@ insert_package_contract <- function(package_name) {
 
 
 #' @export
-is_type_assertion_injected <- function(f) {
-  identical(body(f)[[3]][[2]], quote(contractR:::C_inject_type_assertion))
+is_type_assertion_injected <- function(fun) {
+    id <- injectr:::sexp_address(fun)
+    exists(id, envir = .injected_functions)
 }
+
+#' @export
+get_contract_assertions <- function() {
+    .Call(C_get_contract_assertions)
+}
+
