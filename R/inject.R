@@ -36,17 +36,16 @@ inject_type_assertion <- function(fun,
     check_retval <- substitute({
         .contractr__retval__ <- returnValue(contractR:::.no_retval_marker)     # nolint
         if (!identical(.contractr__retval__, contractR:::.no_retval_marker)) {
-          contractR:::assert_type(
-            .contractr__retval__,
-            FALSE,
-            .contractr__call_trace__,
-            PKG_NAME,
-            FUN_NAME,
-            .contractr__call_id__,
-            ".contractr__retval__",
-            .contractr__parameter_count__,
-            -1
-          )
+          .Call(contractR:::C_assert_type,
+                .contractr__retval__,
+                FALSE,
+                .contractr__call_trace__,
+                PKG_NAME,
+                FUN_NAME,
+                .contractr__call_id__,
+                ".contractr__retval__",
+                .contractr__parameter_count__,
+                -1)
         }
       },
       list(PKG_NAME=pkg_name, FUN_NAME=fun_name)

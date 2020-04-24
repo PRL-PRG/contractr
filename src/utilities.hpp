@@ -48,6 +48,18 @@ SEXP lang10(SEXP q,
             SEXP y,
             SEXP z);
 
+SEXP lang11(SEXP p,
+            SEXP q,
+            SEXP r,
+            SEXP s,
+            SEXP t,
+            SEXP u,
+            SEXP v,
+            SEXP w,
+            SEXP x,
+            SEXP y,
+            SEXP z);
+
 SEXP list7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y);
 
 SEXP list8(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y, SEXP z);
@@ -61,6 +73,17 @@ SEXP list9(SEXP r,
            SEXP x,
            SEXP y,
            SEXP z);
+
+SEXP list10(SEXP q,
+            SEXP r,
+            SEXP s,
+            SEXP t,
+            SEXP u,
+            SEXP v,
+            SEXP w,
+            SEXP x,
+            SEXP y,
+            SEXP z);
 
 SEXP delayed_assign(SEXP variable,
                     SEXP value,
@@ -94,6 +117,11 @@ SEXP create_integer_vector(int size,
 
 SEXP create_data_frame(const std::vector<SEXP> columns,
                        const std::vector<std::string>& names);
+
+SEXP create_dot_call(SEXP function, SEXP arguments);
+
+SEXP create_assert_type_call(SEXP arguments);
+
 }
 
 #endif /* CONTRACTR_UTILITIES_HPP */

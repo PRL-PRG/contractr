@@ -15,3 +15,7 @@ get_package_name <- function(fun) {
     if (name == "R_GlobalEnv") ".GlobalEnv"
     else name
 }
+
+concatenate_call_trace <- function(call_trace) {
+    .Call(C_concatenate_call_trace, Map(deparse, call_trace))
+}

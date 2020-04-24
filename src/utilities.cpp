@@ -1,16 +1,20 @@
 #include "utilities.hpp"
 
-SEXP DotCallSym = NULL;
+SEXP DotCallSymbol = NULL;
 SEXP DelayedAssign = NULL;
 SEXP SystemDotFile = NULL;
 SEXP PackageSymbol = NULL;
+SEXP ContractRSymbol = NULL;
+SEXP AssertTypeSymbol = NULL;
 SEXPTYPE MISSINGSXP = 19883;
 
 void initialize_globals() {
-    DotCallSym = Rf_install(".Call");
+    DotCallSymbol = Rf_install(".Call");
     DelayedAssign = Rf_install("delayedAssign");
     SystemDotFile = Rf_install("system.file");
     PackageSymbol = Rf_install("package");
+    ContractRSymbol = Rf_install("contractR");
+    AssertTypeSymbol = Rf_install("C_assert_type");
 }
 
 SEXPTYPE type_of_sexp(SEXP value) {
@@ -77,6 +81,23 @@ SEXP lang10(SEXP q,
     return q;
 }
 
+SEXP lang11(SEXP p,
+            SEXP q,
+            SEXP r,
+            SEXP s,
+            SEXP t,
+            SEXP u,
+            SEXP v,
+            SEXP w,
+            SEXP x,
+            SEXP y,
+            SEXP z) {
+    PROTECT(p);
+    p = LCONS(p, list10(q, r, s, t, u, v, w, x, y, z));
+    UNPROTECT(1);
+    return p;
+}
+
 SEXP list7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y) {
     PROTECT(s);
     s = CONS(s, Rf_list6(t, u, v, w, x, y));
@@ -104,6 +125,22 @@ SEXP list9(SEXP r,
     r = CONS(r, list8(s, t, u, v, w, x, y, z));
     UNPROTECT(1);
     return r;
+}
+
+SEXP list10(SEXP q,
+            SEXP r,
+            SEXP s,
+            SEXP t,
+            SEXP u,
+            SEXP v,
+            SEXP w,
+            SEXP x,
+            SEXP y,
+            SEXP z) {
+    PROTECT(q);
+    q = CONS(q, list9(r, s, t, u, v, w, x, y, z));
+    UNPROTECT(1);
+    return q;
 }
 
 SEXP delayed_assign(SEXP variable,
@@ -211,4 +248,22 @@ SEXP create_data_frame(const std::vector<SEXP> columns,
     UNPROTECT(1);
 
     return df;
+}
+
+SEXP create_dot_call(SEXP function, SEXP arguments) {
+    SEXP dot_call_arguments = PROTECT(CONS(function, arguments));
+    SEXP dot_call = PROTECT(LCONS(DotCallSymbol, dot_call_arguments));
+    UNPROTECT(2);
+    return dot_call;
+}
+
+SEXP create_assert_type_call(SEXP arguments) {
+    SEXP assert_type_fun = PROTECT(
+        Rf_lang3(R_TripleColonSymbol, ContractRSymbol, AssertTypeSymbol));
+
+    SEXP call = PROTECT(create_dot_call(assert_type_fun, arguments));
+
+    UNPROTECT(2);
+
+    return call;
 }

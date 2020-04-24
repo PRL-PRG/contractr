@@ -247,20 +247,15 @@ void inject_argument_type_assertion(SEXP call_trace,
         evaluate_call = false;
     }
 
-    // TODO: make a constant
-    SEXP assert_type_fun = PROTECT(Rf_lang3(R_TripleColonSymbol,
-                                            Rf_install("contractR"),
-                                            Rf_install("assert_type")));
-    SEXP call = PROTECT(lang10(assert_type_fun,
-                               call_value,
-                               value_missing,
-                               call_trace,
-                               pkg_name,
-                               fun_name,
-                               call_id,
-                               param_name,
-                               param_count,
-                               param_index));
+    SEXP call = PROTECT(create_assert_type_call(list9(call_value,
+                                                      value_missing,
+                                                      call_trace,
+                                                      pkg_name,
+                                                      fun_name,
+                                                      call_id,
+                                                      param_name,
+                                                      param_count,
+                                                      param_index)));
 
 #ifdef DEBUG
     Rprintf("\ncontractR/src/inject.c: *** %s '%s' for '%s:::%s' with call id "
@@ -279,7 +274,7 @@ void inject_argument_type_assertion(SEXP call_trace,
         SET_PRCODE(value, call);
     }
 
-    UNPROTECT(2);
+    UNPROTECT(1);
 }
 
 SEXP inject_type_assertion(SEXP call_trace,
