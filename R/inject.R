@@ -76,11 +76,11 @@ inject_environment_type_assertions <- function(env,
 
     var_names <- ls(envir=env, all.names=TRUE, sorted=FALSE)
 
-    typed_var_names <- import_type_declarations(env_name)
+    typed_var_names <- get_typed_function_names(env_name)
 
     required_var_names <- intersect(var_names, typed_var_names)
 
-    modified_var_names <- c()
+    modified_var_names <- character(0)
 
     for (var_name in required_var_names) {
 
@@ -114,10 +114,9 @@ insert_package_contract <- function(package_name) {
         package_name <- paste0("package:", package_name)
     }
     package_env <- as.environment(package_name)
-    inject_environment_type_assertions(package_env,
-                                       strip_package_prefix(package_name),
-                                       unlock = TRUE)
-
+    env_name <- strip_package_prefix(package_name);
+    import_type_declarations(env_name)
+    inject_environment_type_assertions(package_env, env_name, unlock = TRUE)
 }
 
 

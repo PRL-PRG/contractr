@@ -13,21 +13,29 @@ test_injection("into an environment", {
   e$g <- function(y) y
   e$h <- sin
 
-  expect_warning(inject_environment_type_assertions("e", e), regexp="Unable to inject type checks into `e:::h`: .*")
+  expect_silent(inject_environment_type_assertions(e, "e"))
 
-  expect_length(.injected_functions, 2)
-  expect_type_assertion(e$f)
-  expect_type_assertion(e$g)
+  expect_length(.injected_functions, 0)
+  expect_false(is_type_assertion_injected(e$f))
+  expect_false(is_type_assertion_injected(e$g))
   expect_false(is_type_assertion_injected(e$h))
   expect_identical(e$h, sin)
 })
 
 test_injection("into a package", {
   withr::with_temp_libpaths({
-    devtools::install("TestPackage", quick=TRUE)
-    inject_environment_type_assertions("TestPackage")
+      devtools::install("TestPackage", quick=TRUE)
+      library(TestPackage)
 
-    expect_type_assertion(TestPackage::foo1)
-    expect_type_assertion(TestPackage:::bar)
+      set_type_declaration(foo1,
+                           "any => any",
+                           package_name = "TestPackage",
+                           function_name = "foo1")
+
+      insert_package_contract("TestPackage")
+
+      expect_true(is_type_assertion_injected(foo1))
+
+      expect_false(is_type_assertion_injected(TestPackage:::bar))
   })
 })
