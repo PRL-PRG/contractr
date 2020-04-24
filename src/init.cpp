@@ -19,6 +19,10 @@ static const R_CallMethodDef callMethods[] = {
     {"get_contract_assertions", (DL_FUNC) &r_get_contract_assertions, 0},
     {"concatenate_call_trace", (DL_FUNC) &r_concatenate_call_trace, 1},
 
+    /* severity */
+    {"set_severity", (DL_FUNC) &r_set_severity, 1},
+    {"get_severity", (DL_FUNC) &r_get_severity, 0},
+
     /* type checking utilities */
     {"infer_type", (DL_FUNC) &r_infer_type, 3},
     {"check_type", (DL_FUNC) &r_check_type, 4},

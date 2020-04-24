@@ -6,10 +6,21 @@
 #include "type_declaration_cache.hpp"
 #include "utilities.hpp"
 #include "ContractAssertion.hpp"
+#include "message.hpp"
+#include "Severity.hpp"
 
 #include <R_ext/Rdynload.h>
 #include <Rinternals.h>
 #include <stdlib.h> // for NULL
+
+SEXP r_set_severity(SEXP severity) {
+    set_severity(to_severity(CHAR(asChar(severity))));
+    return R_NilValue;
+}
+
+SEXP r_get_severity() {
+    return mkString(to_string(get_severity()).c_str());
+}
 
 std::string concatenate_call_trace(SEXP call_trace,
                                    const std::string& indentation = "") {
@@ -57,9 +68,7 @@ void assert_parameter_type(SEXP value,
 
     if (parameter_count <= formal_parameter_position) {
         contract_status = false;
-
-        warningcall(
-            R_NilValue,
+        show_message(
             "contract violation for '%s::%s'\n   ├── declared types for "
             "%d parameters\n   ├── received argument for untyped "
             "parameter '%s' (position %d) of type %s\n   └── trace: %s",
@@ -86,8 +95,7 @@ void assert_parameter_type(SEXP value,
         expected_type = type_to_string(node);
 
         if (!contract_status) {
-            warningcall(
-                R_NilValue,
+            show_message(
                 "contract violation for parameter '%s' (position %d) of "
                 "'%s::%s'\n   ├── expected: %s\n   ├── actual: %s\n   └── "
                 "trace: %s",
@@ -136,15 +144,14 @@ void assert_return_type(SEXP value,
     std::string actual_type = infer_type(value, parameter_name);
 
     if (!contract_status) {
-        warningcall(R_NilValue,
-                    "contract violation for return value of "
-                    "'%s::%s'\n   ├── expected: %s\n   ├── actual: %s\n   "
-                    "└── trace: %s",
-                    package_name.c_str(),
-                    function_name.c_str(),
-                    expected_type.c_str(),
-                    actual_type.c_str(),
-                    call_trace);
+        show_message("contract violation for return value of "
+                     "'%s::%s'\n   ├── expected: %s\n   ├── actual: %s\n   "
+                     "└── trace: %s",
+                     package_name.c_str(),
+                     function_name.c_str(),
+                     expected_type.c_str(),
+                     actual_type.c_str(),
+                     call_trace);
     }
 
     add_contract_assertion(package_name,

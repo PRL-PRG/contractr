@@ -7,6 +7,7 @@ strip_package_prefix <- function(package_names, prefix = "package:") {
 
 .onLoad <- function(libname, pkgname) {
 
+    set_severity()
     set_autoinject()
 
     handle_package <- function(package_name, ...) {
