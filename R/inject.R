@@ -1,13 +1,3 @@
-
-state <- new.env()
-state$current_call_id <- -1L
-
-get_next_call_id <- function() {
-    state$current_call_id <- state$current_call_id + 1
-    state$current_call_id
-}
-
-
 #' @export
 inject_type_assertion <- function(fun,
                                   type_declaration = NULL,

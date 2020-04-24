@@ -1,7 +1,4 @@
 
-.injected_functions <- new.env(parent=emptyenv())
-.no_retval_marker <- new.env(parent=emptyenv())
-
 
 strip_package_prefix <- function(package_names, prefix = "package:") {
     ifelse(startsWith(package_names, prefix),
