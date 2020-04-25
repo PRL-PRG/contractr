@@ -84,12 +84,12 @@ SEXP r_get_assertions() {
         return get_contract_assertion(index).get_function_name();
     };
 
-    auto get_expected_parameter_count = [](int index) -> int {
-        return get_contract_assertion(index).get_expected_parameter_count();
-    };
-
     auto get_actual_parameter_count = [](int index) -> int {
         return get_contract_assertion(index).get_actual_parameter_count();
+    };
+
+    auto get_expected_parameter_count = [](int index) -> int {
+        return get_contract_assertion(index).get_expected_parameter_count();
     };
 
     auto get_parameter_position = [](int index) -> int {
@@ -100,12 +100,12 @@ SEXP r_get_assertions() {
         return get_contract_assertion(index).get_parameter_name();
     };
 
-    auto get_expected_type = [](int index) -> std::string {
-        return get_contract_assertion(index).get_expected_type();
-    };
-
     auto get_actual_type = [](int index) -> std::string {
         return get_contract_assertion(index).get_actual_type();
+    };
+
+    auto get_expected_type = [](int index) -> std::string {
+        return get_contract_assertion(index).get_expected_type();
     };
 
     auto get_assertion_status = [](int index) -> bool {
@@ -117,12 +117,12 @@ SEXP r_get_assertions() {
         PROTECT(create_character_vector(size, get_call_trace)),
         PROTECT(create_character_vector(size, get_package_name)),
         PROTECT(create_character_vector(size, get_function_name)),
-        PROTECT(create_integer_vector(size, get_expected_parameter_count)),
         PROTECT(create_integer_vector(size, get_actual_parameter_count)),
+        PROTECT(create_integer_vector(size, get_expected_parameter_count)),
         PROTECT(create_integer_vector(size, get_parameter_position)),
         PROTECT(create_character_vector(size, get_parameter_name)),
-        PROTECT(create_character_vector(size, get_expected_type)),
         PROTECT(create_character_vector(size, get_actual_type)),
+        PROTECT(create_character_vector(size, get_expected_type)),
         PROTECT(create_logical_vector(size, get_assertion_status))};
 
     std::vector<std::string> names = {"call_id",
