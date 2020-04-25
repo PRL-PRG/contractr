@@ -267,3 +267,21 @@ SEXP create_assert_type_call(SEXP arguments) {
 
     return call;
 }
+
+SEXP create_list(const std::vector<SEXP>& values,
+                 const std::vector<std::string>& names) {
+    int size = values.size();
+    SEXP list = PROTECT(allocVector(VECSXP, size));
+
+    for (int i = 0; i < size; ++i) {
+        SET_VECTOR_ELT(list, i, values[i]);
+    }
+
+    set_names(list, size, [&names](int index) -> std::string {
+        return names[index];
+    });
+
+    UNPROTECT(1);
+
+    return list;
+}
