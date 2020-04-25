@@ -11,6 +11,7 @@ char buffer[MESSAGE_BUFFER_SIZE];
 std::string escaped_buffer;
 
 void escape_printf_specifiers() {
+    escaped_buffer.clear();
     int i = 0;
     while (buffer[i] != '\0') {
         char letter = buffer[i];
