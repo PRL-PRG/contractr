@@ -1,6 +1,7 @@
 #include <tastr/parser/parser.hpp>
-/* comment prevents reorganization of include files by clang */
-#include "Typechecker.hpp"
+#include "TypeChecker.hpp"
+#include "r_api.hpp"
+#include "check_type.hpp"
 
 SEXP r_check_type(SEXP value_sym, SEXP param_name, SEXP type, SEXP rho) {
     const std::string type_string = CHAR(asChar(type));
@@ -27,17 +28,17 @@ SEXP r_check_type(SEXP value_sym, SEXP param_name, SEXP type, SEXP rho) {
 
     SEXP value = PROTECT(lookup_value(rho, value_sym, true));
 
-    const std::string package_name = "package";
-    const std::string function_name = "function";
     const std::string parameter_name = CHAR(asChar(param_name));
-    const int formal_parameter_position = 0;
 
-    TypeChecker checker(
-        package_name, function_name, parameter_name, formal_parameter_position);
-
-    bool result = checker.typecheck(value, node);
+    bool result = check_type(parameter_name, value, node);
 
     UNPROTECT(1);
 
     return result ? R_TrueValue : R_FalseValue;
+}
+
+bool check_type(const std::string& parameter_name,
+                SEXP value,
+                const tastr::ast::Node& node) {
+    return TypeChecker().typecheck(parameter_name, value, node);
 }

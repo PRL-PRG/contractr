@@ -5,6 +5,8 @@
 #include <set>
 #include <vector>
 
+#include "r_api.hpp"
+
 template <typename T>
 bool has_na(SEXP value, T check_na) {
     int length = LENGTH(value);
@@ -55,8 +57,8 @@ const std::string union_types(const std::vector<std::string>& types) {
 
     int null_index = -1;
 
-    for(int i = 0; i < strings.size(); ++i) {
-        if(strings[i] == "null") {
+    for (int i = 0; i < strings.size(); ++i) {
+        if (strings[i] == "null") {
             null_index = i;
             break;
         }
@@ -64,11 +66,10 @@ const std::string union_types(const std::vector<std::string>& types) {
 
     std::string prefix = "";
 
-    if(null_index != -1) {
-        if(strings.size() == 1) {
+    if (null_index != -1) {
+        if (strings.size() == 1) {
             prefix = "null";
-        }
-        else {
+        } else {
             prefix = "? ";
         }
         strings.erase(strings.begin() + null_index);

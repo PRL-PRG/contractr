@@ -1,15 +1,5 @@
 #include "Severity.hpp"
 
-Severity severity_ = Severity::Warning;
-
-Severity get_severity() {
-    return severity_;
-}
-
-void set_severity(Severity severity) {
-    severity_ = severity;
-}
-
 std::string to_string(Severity severity) {
     if (severity == Severity::Silence) {
         return "silence";

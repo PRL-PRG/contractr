@@ -2,7 +2,6 @@
 #define CONTRACTR_CONTRACT_ASSERTION_HPP
 
 #include <string>
-#include <Rinternals.h>
 
 class ContractAssertion {
   public:
@@ -105,7 +104,5 @@ void add_contract_assertion(int call_id,
                             const std::string& actual_type,
                             const std::string& expected_type,
                             const bool assertion_status);
-
-SEXP r_capture_assertions(SEXP sym, SEXP env);
 
 #endif /* CONTRACTR_CONTRACT_ASSERTION_HPP */

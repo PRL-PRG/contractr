@@ -1,58 +1,10 @@
-#include "inject.hpp"
-
-#include "Typechecker.hpp"
+#include "check_type.hpp"
 #include "infer_type.hpp"
-#include "logger.hpp"
 #include "type_declaration_cache.hpp"
 #include "utilities.hpp"
-#include "ContractAssertion.hpp"
 #include "message.hpp"
-#include "Severity.hpp"
-
-#include <R_ext/Rdynload.h>
-#include <Rinternals.h>
-#include <stdlib.h> // for NULL
-
-SEXP r_set_severity(SEXP severity) {
-    set_severity(to_severity(CHAR(asChar(severity))));
-    return R_NilValue;
-}
-
-SEXP r_get_severity() {
-    return mkString(to_string(get_severity()).c_str());
-}
-
-std::string concatenate_call_trace(SEXP call_trace,
-                                   const std::string& indentation = "") {
-    int size = LENGTH(call_trace);
-
-    std::string result = "<" + std::to_string(size) + " frame(s)>";
-
-    for (int i = size - 1; i >= 0; --i) {
-        SEXP call = VECTOR_ELT(call_trace, i);
-        int call_length = LENGTH(call);
-
-        result.append("\n")
-            .append(indentation)
-            .append(i == 0 ? "└── " : "├── ")
-            .append(CHAR(STRING_ELT(call, 0)));
-
-        for (int j = 1; j < call_length; ++j) {
-            result.append("\n")
-                .append(indentation)
-                .append(i != 0 ? "│   " : "    ")
-                .append(CHAR(STRING_ELT(call, j)));
-        }
-    }
-    return result;
-}
-
-SEXP r_concatenate_call_trace(SEXP call_trace) {
-    const std::string call_trace_string =
-        concatenate_call_trace(call_trace, std::string(14, ' '));
-
-    return Rf_mkString(call_trace_string.c_str());
-}
+#include "ContractAssertion.hpp"
+#include "r_api.hpp"
 
 void assert_parameter_type(SEXP value,
                            const char* const call_trace,
@@ -86,12 +38,7 @@ void assert_parameter_type(SEXP value,
         const tastr::ast::Node& node = get_function_parameter_type(
             package_name, function_name, parameter_position);
 
-        TypeChecker type_checker(package_name,
-                                 function_name,
-                                 parameter_name,
-                                 parameter_position);
-
-        assertion_status = type_checker.typecheck(value, node);
+        assertion_status = check_type(parameter_name, value, node);
 
         expected_type = type_to_string(node);
 
@@ -139,10 +86,7 @@ void assert_return_type(SEXP value,
 
     int parameter_position = -1;
 
-    TypeChecker type_checker(
-        package_name, function_name, parameter_name, parameter_position);
-
-    bool assertion_status = type_checker.typecheck(value, node);
+    bool assertion_status = check_type(parameter_name, value, node);
 
     std::string expected_type = type_to_string(node);
 
@@ -332,83 +276,4 @@ SEXP inject_type_assertion(SEXP call_trace,
     }
 
     return R_NilValue;
-}
-
-SEXP r_get_contract_assertions() {
-    int size = get_contract_assertion_count();
-
-    auto get_call_id = [](int index) -> int {
-        return get_contract_assertion(index).get_call_id();
-    };
-
-    auto get_call_trace = [](int index) -> std::string {
-        return get_contract_assertion(index).get_call_trace();
-    };
-
-    auto get_package_name = [](int index) -> std::string {
-        return get_contract_assertion(index).get_package_name();
-    };
-
-    auto get_function_name = [](int index) -> std::string {
-        return get_contract_assertion(index).get_function_name();
-    };
-
-    auto get_expected_parameter_count = [](int index) -> int {
-        return get_contract_assertion(index).get_expected_parameter_count();
-    };
-
-    auto get_actual_parameter_count = [](int index) -> int {
-        return get_contract_assertion(index).get_actual_parameter_count();
-    };
-
-    auto get_parameter_position = [](int index) -> int {
-        return get_contract_assertion(index).get_parameter_position();
-    };
-
-    auto get_parameter_name = [](int index) -> std::string {
-        return get_contract_assertion(index).get_parameter_name();
-    };
-
-    auto get_expected_type = [](int index) -> std::string {
-        return get_contract_assertion(index).get_expected_type();
-    };
-
-    auto get_actual_type = [](int index) -> std::string {
-        return get_contract_assertion(index).get_actual_type();
-    };
-
-    auto get_assertion_status = [](int index) -> bool {
-        return get_contract_assertion(index).get_assertion_status();
-    };
-
-    std::vector<SEXP> columns = {
-        PROTECT(create_integer_vector(size, get_call_id)),
-        PROTECT(create_character_vector(size, get_call_trace)),
-        PROTECT(create_character_vector(size, get_package_name)),
-        PROTECT(create_character_vector(size, get_function_name)),
-        PROTECT(create_integer_vector(size, get_expected_parameter_count)),
-        PROTECT(create_integer_vector(size, get_actual_parameter_count)),
-        PROTECT(create_integer_vector(size, get_parameter_position)),
-        PROTECT(create_character_vector(size, get_parameter_name)),
-        PROTECT(create_character_vector(size, get_expected_type)),
-        PROTECT(create_character_vector(size, get_actual_type)),
-        PROTECT(create_logical_vector(size, get_assertion_status))};
-
-    std::vector<std::string> names = {"call_id",
-                                      "call_trace",
-                                      "package_name",
-                                      "function_name",
-                                      "actual_parameter_count",
-                                      "expected_parameter_count",
-                                      "parameter_position",
-                                      "parameter_name",
-                                      "actual_type",
-                                      "expected_type",
-                                      "assertion_status"};
-
-    SEXP df = PROTECT(create_data_frame(columns, names));
-
-    UNPROTECT(columns.size() + 1);
-
-    return df;
 }

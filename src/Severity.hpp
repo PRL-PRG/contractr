@@ -1,19 +1,10 @@
-#ifndef CONTRACTR_SEVERITY_HPP
-#define CONTRACTR_SEVERITY_HPP
+#ifndef CONTRACTR_SEVERITY_ENUM_HPP
+#define CONTRACTR_SEVERITY_ENUM_HPP
 
 #include <string>
 #include <iostream>
 
-#include <R_ext/Rdynload.h>
-#include <Rinternals.h>
-
 enum class Severity { Silence, Warning, Error, Undefined };
-
-extern Severity severity_;
-
-Severity get_severity();
-
-void set_severity(Severity severity);
 
 std::string to_string(Severity severity);
 
@@ -23,4 +14,4 @@ std::ostream& operator<<(std::ostream& os, const Severity& severity);
 
 std::istream& operator>>(std::istream& is, Severity& severity);
 
-#endif /* CONTRACTR_SEVERITY_HPP */
+#endif /* CONTRACTR_SEVERITY_ENUM_HPP */

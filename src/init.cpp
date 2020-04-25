@@ -1,11 +1,8 @@
 #define R_NO_REMAP
-#include "inject.hpp"
+
 #include "type_declaration_cache.hpp"
 #include "utilities.hpp"
-#include "Typechecker.hpp"
-#include "infer_type.hpp"
-#include "ContractAssertion.hpp"
-
+#include "r_api.hpp"
 #include <R.h>
 #include <R_ext/Rdynload.h>
 #include <Rinternals.h>
@@ -16,8 +13,7 @@ extern "C" {
 static const R_CallMethodDef callMethods[] = {
     {"inject_type_assertion", (DL_FUNC) &inject_type_assertion, 7},
     {"assert_type", (DL_FUNC) &assert_type, 9},
-    {"environment_name", (DL_FUNC) &environment_name, 1},
-    {"get_assertions", (DL_FUNC) &r_get_contract_assertions, 0},
+    {"get_assertions", (DL_FUNC) &r_get_assertions, 0},
     {"concatenate_call_trace", (DL_FUNC) &r_concatenate_call_trace, 1},
     {"capture_assertions", (DL_FUNC) &r_capture_assertions, 2},
 
@@ -51,6 +47,7 @@ static const R_CallMethodDef callMethods[] = {
 
 void R_init_contractR(DllInfo* dll) {
     R_registerRoutines(dll, NULL, callMethods, NULL, NULL);
+
     R_useDynamicSymbols(dll, FALSE);
 
     initialize_globals();

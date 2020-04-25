@@ -1,5 +1,5 @@
-#ifndef CONTRACTR_TYPECHECKER_HPP
-#define CONTRACTR_TYPECHECKER_HPP
+#ifndef CONTRACTR_TYPE_CHECKER_HPP
+#define CONTRACTR_TYPE_CHECKER_HPP
 
 #include "logger.hpp"
 #include "utilities.hpp"
@@ -8,37 +8,18 @@
 #include <functional>
 #include <tastr/visitor/visitor.hpp>
 
-SEXP r_check_type(SEXP value_sym, SEXP parameter_name, SEXP type, SEXP rho);
-
 class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
   private:
     using seq_index_t = int;
 
-    const std::string& package_name_;
-    const std::string& function_name_;
-    const std::string& parameter_name_;
-    int formal_parameter_position_;
-    bool result_;
-
-    bool is_dot_dot_dot_parameter_() {
-        return parameter_name_ == "...";
-    }
-
   public:
-    TypeChecker(const std::string& package_name,
-                const std::string& function_name,
-                const std::string& parameter_name,
-                int formal_parameter_position)
-        : ConstNodeVisitor()
-        , package_name_(package_name)
-        , function_name_(function_name)
-        , parameter_name_(parameter_name)
-        , formal_parameter_position_(formal_parameter_position)
-        , result_(false) {
+    TypeChecker(): ConstNodeVisitor(), result_(false) {
     }
 
-    bool typecheck(SEXP value, const tastr::ast::Node& node) {
-        if (is_dot_dot_dot_parameter_()) {
+    bool typecheck(const std::string& parameter_name,
+                   SEXP value,
+                   const tastr::ast::Node& node) {
+        if (is_dot_dot_dot_parameter_(parameter_name)) {
             push_result_(node.is_vararg_type_node());
         } else {
             na_ = false;
@@ -407,6 +388,10 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
     }
 
   private:
+    bool is_dot_dot_dot_parameter_(const std::string& parameter_name) {
+        return parameter_name == "...";
+    }
+
     bool is_vector_type_(SEXP value) {
         SEXPTYPE sexptype = type_of_sexp(value);
         return (sexptype == INTSXP || sexptype == REALSXP ||
@@ -525,6 +510,7 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
         return seq_index;
     }
 
+    bool result_;
     std::vector<bool> result_stack_;
     std::vector<SEXP> value_stack_;
     std::vector<seq_index_t> seq_index_stack_;
@@ -532,4 +518,4 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
     bool vector_;
 };
 
-#endif /* CONTRACTR_TYPECHECKER_HPP */
+#endif /* CONTRACTR_TYPE_CHECKER_HPP */

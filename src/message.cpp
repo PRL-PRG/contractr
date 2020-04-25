@@ -1,5 +1,6 @@
 #include "message.hpp"
-#include "Severity.hpp"
+#include "severity.hpp"
+#include <Rinternals.h>
 
 #include <cstdarg>
 #include <cstdio>
