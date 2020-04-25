@@ -25,7 +25,7 @@ void escape_printf_specifiers() {
 
 void show_message(const char* format, ...) {
     Severity severity = get_severity();
-    if (severity == Severity::Silent) {
+    if (severity == Severity::Silence) {
         return;
     }
 

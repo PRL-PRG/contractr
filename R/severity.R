@@ -7,8 +7,8 @@ set_severity <- function(severity) {
         }
     }
 
-    if (!(severity %in% c("warning", "error", "silent"))) {
-        stop("severity should be 'warning', 'error' or 'silent'; not '", severity, "'")
+    if (!(severity %in% c("warning", "error", "silence"))) {
+        stop("severity should be 'warning', 'error' or 'silence'; not '", severity, "'")
     }
 
     invisible(.Call(C_set_severity, severity))

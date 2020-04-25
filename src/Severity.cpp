@@ -11,8 +11,8 @@ void set_severity(Severity severity) {
 }
 
 std::string to_string(Severity severity) {
-    if (severity == Severity::Silent) {
-        return "silent";
+    if (severity == Severity::Silence) {
+        return "silence";
     } else if (severity == Severity::Warning) {
         return "warning";
     } else if (severity == Severity::Error) {
@@ -22,8 +22,8 @@ std::string to_string(Severity severity) {
 }
 
 Severity to_severity(const std::string& str) {
-    if (str == "silent") {
-        return Severity::Silent;
+    if (str == "silence") {
+        return Severity::Silence;
     } else if (str == "warning") {
         return Severity::Warning;
     } else if (str == "error") {

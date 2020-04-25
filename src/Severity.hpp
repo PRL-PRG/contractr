@@ -7,7 +7,7 @@
 #include <R_ext/Rdynload.h>
 #include <Rinternals.h>
 
-enum class Severity { Silent, Warning, Error, Undefined };
+enum class Severity { Silence, Warning, Error, Undefined };
 
 extern Severity severity_;
 
