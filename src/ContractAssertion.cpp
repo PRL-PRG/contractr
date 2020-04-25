@@ -24,7 +24,7 @@ void add_contract_assertion(const std::string& package_name,
                             const int formal_parameter_position,
                             const std::string& actual_type,
                             const std::string& expected_type,
-                            const bool contract_status,
+                            const bool assertion_status,
                             const std::string& call_trace) {
     ContractAssertion assertion(package_name,
                                 function_name,
@@ -34,7 +34,7 @@ void add_contract_assertion(const std::string& package_name,
                                 formal_parameter_position,
                                 actual_type,
                                 expected_type,
-                                contract_status,
+                                assertion_status,
                                 call_trace);
 
     add_contract_assertion(assertion);

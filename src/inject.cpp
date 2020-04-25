@@ -62,12 +62,12 @@ void assert_parameter_type(SEXP value,
                            const std::string& parameter_name,
                            int parameter_count,
                            int formal_parameter_position) {
-    bool contract_status = true;
+    bool assertion_status = true;
     std::string actual_type = infer_type(value, parameter_name);
     std::string expected_type;
 
     if (parameter_count <= formal_parameter_position) {
-        contract_status = false;
+        assertion_status = false;
         show_message(
             "contract violation for '%s::%s'\n   ├── declared types for "
             "%d parameters\n   ├── received argument for untyped "
@@ -90,11 +90,11 @@ void assert_parameter_type(SEXP value,
                                  parameter_name,
                                  formal_parameter_position);
 
-        contract_status = type_checker.typecheck(value, node);
+        assertion_status = type_checker.typecheck(value, node);
 
         expected_type = type_to_string(node);
 
-        if (!contract_status) {
+        if (!assertion_status) {
             show_message(
                 "contract violation for parameter '%s' (position %d) of "
                 "'%s::%s'\n   ├── expected: %s\n   ├── actual: %s\n   └── "
@@ -118,7 +118,7 @@ void assert_parameter_type(SEXP value,
                            formal_parameter_position,
                            actual_type,
                            expected_type,
-                           contract_status,
+                           assertion_status,
                            call_trace);
 }
 
@@ -137,13 +137,13 @@ void assert_return_type(SEXP value,
     TypeChecker type_checker(
         package_name, function_name, parameter_name, formal_parameter_position);
 
-    bool contract_status = type_checker.typecheck(value, node);
+    bool assertion_status = type_checker.typecheck(value, node);
 
     std::string expected_type = type_to_string(node);
 
     std::string actual_type = infer_type(value, parameter_name);
 
-    if (!contract_status) {
+    if (!assertion_status) {
         show_message("contract violation for return value of "
                      "'%s::%s'\n   ├── expected: %s\n   ├── actual: %s\n   "
                      "└── trace: %s",
@@ -162,7 +162,7 @@ void assert_return_type(SEXP value,
                            formal_parameter_position,
                            actual_type,
                            expected_type,
-                           contract_status,
+                           assertion_status,
                            call_trace);
 }
 
@@ -363,8 +363,8 @@ SEXP r_get_contract_assertions() {
         return get_contract_assertion(index).get_expected_type();
     };
 
-    auto get_contract_status = [](int index) -> bool {
-        return get_contract_assertion(index).get_contract_status();
+    auto get_assertion_status = [](int index) -> bool {
+        return get_contract_assertion(index).get_assertion_status();
     };
 
     auto get_call_trace = [](int index) -> std::string {
@@ -380,7 +380,7 @@ SEXP r_get_contract_assertions() {
         PROTECT(create_integer_vector(size, get_parameter_position)),
         PROTECT(create_character_vector(size, get_actual_type)),
         PROTECT(create_character_vector(size, get_expected_type)),
-        PROTECT(create_logical_vector(size, get_contract_status)),
+        PROTECT(create_logical_vector(size, get_assertion_status)),
         PROTECT(create_character_vector(size, get_call_trace))};
 
     std::vector<std::string> names = {"package_name",
@@ -391,7 +391,7 @@ SEXP r_get_contract_assertions() {
                                       "parameter_position",
                                       "actual_type",
                                       "expected_type",
-                                      "contract_status",
+                                      "assertion_status",
                                       "call_trace"};
 
     SEXP df = PROTECT(create_data_frame(columns, names));

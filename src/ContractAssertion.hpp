@@ -13,7 +13,7 @@ class ContractAssertion {
                       const int parameter_position,
                       const std::string& actual_type,
                       const std::string& expected_type,
-                      const bool contract_status,
+                      const bool assertion_status,
                       const std::string& call_trace)
         : package_name_(package_name)
         , function_name_(function_name)
@@ -23,7 +23,7 @@ class ContractAssertion {
         , parameter_position_(parameter_position)
         , actual_type_(actual_type)
         , expected_type_(expected_type)
-        , contract_status_(contract_status)
+        , assertion_status_(assertion_status)
         , call_trace_(call_trace) {
     }
 
@@ -59,8 +59,8 @@ class ContractAssertion {
         return expected_type_;
     }
 
-    bool get_contract_status() const {
-        return contract_status_;
+    bool get_assertion_status() const {
+        return assertion_status_;
     }
 
     const std::string& get_call_trace() const {
@@ -76,7 +76,7 @@ class ContractAssertion {
     const int parameter_position_;
     const std::string actual_type_;
     const std::string expected_type_;
-    const bool contract_status_;
+    const bool assertion_status_;
     const std::string call_trace_;
 };
 
@@ -94,7 +94,7 @@ void add_contract_assertion(const std::string& package_name,
                             const int formal_parameter_position,
                             const std::string& actual_type,
                             const std::string& expected_type,
-                            const bool contract_status,
+                            const bool assertion_status,
                             const std::string& call_trace);
 
 #endif /* CONTRACTR_CONTRACT_ASSERTION_HPP */
