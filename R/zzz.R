@@ -13,7 +13,8 @@
         }
     }
 
-    loaded_packages <- remove_package_prefix(search())
+    remove_packages <- c(".GlobalEnv", "Autoloads", "tools:callr")
+    loaded_packages <- setdiff(remove_package_prefix(search()), remove_packages)
     installed_packages <- installed.packages()[, 1]
     remaining_packages <- setdiff(installed_packages, loaded_packages)
 
