@@ -21,6 +21,7 @@ void show_message(const char* format, ...) {
     va_list vlist;
     va_start(vlist, format);
     vsnprintf(buffer, MESSAGE_BUFFER_SIZE, format, vlist);
+    va_end(vlist);
 
     if (severity == Severity::Warning) {
         warningcall(R_NilValue, buffer);
