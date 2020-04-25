@@ -5,6 +5,7 @@
 #include <cstdio>
 
 const int MESSAGE_BUFFER_SIZE = 10000;
+char buffer[MESSAGE_BUFFER_SIZE];
 
 void show_message(const char* format, ...) {
     Severity severity = get_severity();
@@ -17,7 +18,6 @@ void show_message(const char* format, ...) {
         return;
     }
 
-    char buffer[MESSAGE_BUFFER_SIZE];
     va_list vlist;
     va_start(vlist, format);
     vsnprintf(buffer, MESSAGE_BUFFER_SIZE, format, vlist);
