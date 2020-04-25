@@ -4,6 +4,7 @@
 #include "utilities.hpp"
 #include "Typechecker.hpp"
 #include "infer_type.hpp"
+#include "ContractAssertion.hpp"
 
 #include <R.h>
 #include <R_ext/Rdynload.h>
@@ -18,6 +19,7 @@ static const R_CallMethodDef callMethods[] = {
     {"environment_name", (DL_FUNC) &environment_name, 1},
     {"get_assertions", (DL_FUNC) &r_get_contract_assertions, 0},
     {"concatenate_call_trace", (DL_FUNC) &r_concatenate_call_trace, 1},
+    {"capture_assertions", (DL_FUNC) &r_capture_assertions, 2},
 
     /* severity */
     {"set_severity", (DL_FUNC) &r_set_severity, 1},

@@ -44,3 +44,23 @@ void add_contract_assertion(int call_id,
 
     add_contract_assertion(assertion);
 }
+
+SEXP r_capture_assertions(SEXP sym, SEXP env) {
+    std::vector<ContractAssertion> saved_contract_assertions(
+        std::move(contract_assertions));
+    contract_assertions = std::vector<ContractAssertion>();
+
+    PROTECT(sym);
+    PROTECT(env);
+    SEXP result = PROTECT(Rf_eval(Rf_findVarInFrame(env, sym), env));
+    SEXP assertions = PROTECT(r_get_contract_assertions());
+
+    contract_assertions = std::move(saved_contract_assertions);
+
+    SEXP list =
+        PROTECT(create_list({result, assertions}, {"result", "assertions"}));
+
+    UNPROTECT(5);
+
+    return list;
+}
