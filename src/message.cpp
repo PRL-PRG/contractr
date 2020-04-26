@@ -7,22 +7,25 @@
 
 const int MESSAGE_BUFFER_SIZE = 10000;
 char buffer[MESSAGE_BUFFER_SIZE];
-
-std::string escaped_buffer;
+char escaped_buffer[MESSAGE_BUFFER_SIZE];
 
 void escape_printf_specifiers() {
-    escaped_buffer.clear();
-    int i = 0;
-    while (buffer[i] != '\0') {
-        char letter = buffer[i];
+    int index = 0;
+    int escaped_index = 0;
+
+    while ((buffer[index] != '\0') &&
+           (escaped_index + 1) < MESSAGE_BUFFER_SIZE) {
+        char letter = buffer[index++];
+
+        /* insert extra % to escape % for printf and friends */
         if (letter == '%') {
-            escaped_buffer.append("%%");
-        } else {
-            escaped_buffer.push_back(letter);
+            escaped_buffer[escaped_index++] = letter;
         }
-        ++i;
+
+        escaped_buffer[escaped_index++] = letter;
     }
-    escaped_buffer.push_back('\0');
+
+    escaped_buffer[escaped_index] = '\0';
 }
 
 void show_message(const char* format, ...) {
@@ -44,12 +47,12 @@ void show_message(const char* format, ...) {
     escape_printf_specifiers();
 
     if (severity == Severity::Warning) {
-        warningcall(R_NilValue, escaped_buffer.c_str());
+        warningcall(R_NilValue, escaped_buffer);
         return;
     }
 
     if (severity == Severity::Error) {
-        errorcall(R_NilValue, escaped_buffer.c_str());
+        errorcall(R_NilValue, escaped_buffer);
         return;
     }
 }
