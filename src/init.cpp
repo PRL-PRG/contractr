@@ -11,18 +11,23 @@
 extern "C" {
 
 static const R_CallMethodDef callMethods[] = {
-    {"inject_type_assertion", (DL_FUNC) &inject_type_assertion, 7},
-    {"assert_type", (DL_FUNC) &assert_type, 9},
-    {"get_assertions", (DL_FUNC) &r_get_assertions, 0},
-    {"concatenate_call_trace", (DL_FUNC) &r_concatenate_call_trace, 1},
+    /* contract insertion  */
+    {"insert_function_contract", (DL_FUNC) &r_insert_function_contract, 3},
+    {"create_result_contract", (DL_FUNC) &r_create_result_contract, 4},
+
+    /*  contract assertion */
+    {"assert_contract", (DL_FUNC) &r_assert_contract, 3},
     {"capture_assertions", (DL_FUNC) &r_capture_assertions, 2},
+    {"get_assertions", (DL_FUNC) &r_get_assertions, 0},
 
     /* severity */
     {"set_severity", (DL_FUNC) &r_set_severity, 1},
     {"get_severity", (DL_FUNC) &r_get_severity, 0},
 
-    /* type checking utilities */
+    /* type checking */
     {"infer_type", (DL_FUNC) &r_infer_type, 3},
+
+    /*  type inference */
     {"check_type", (DL_FUNC) &r_check_type, 4},
 
     /*  type declaration cache */

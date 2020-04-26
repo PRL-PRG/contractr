@@ -102,17 +102,16 @@ modify_function <- function(fun, fun_name, pkg_name) {
 
 create_argval_contract_code <- function(fun_name, pkg_name) {
     substitute({
-        .contractr__call_id__ <- contractR:::get_next_call_id();
-        .contractr__parameter_count__ <- length(formals(sys.function()))
-        .contractr__call_trace__ <- contractR:::concatenate_call_trace(sys.calls())
-        .Call(contractR:::C_inject_type_assertion,
-              .contractr__call_trace__,
-              PKG_NAME,
-              FUN_NAME,
-              .contractr__call_id__,
-              .contractr__parameter_count__,
-              sys.function(),
+        ## TODO: sys.calls needs to be handled properly
+        .contractr__contract <- .Call(contractR:::C_create_result_contract,
+                                      contractR:::get_next_call_id(),
+                                      Map(deparse, sys.calls()),
+                                      PKG_NAME,
+                                      FUN_NAME)
+        .Call(contractR:::C_insert_function_contract,
+              .contractr__contract, sys.function(),
               sys.frame(sys.nframe()))
+
     }, list(PKG_NAME=pkg_name,
             FUN_NAME=fun_name))
 }
@@ -122,16 +121,10 @@ create_retval_contract_code <- function(fun_name, pkg_name) {
     substitute({
         .contractr__retval__ <- returnValue(contractR:::.no_retval_marker)     # nolint
         if (!identical(.contractr__retval__, contractR:::.no_retval_marker)) {
-            .Call(contractR:::C_assert_type,
+            .Call(contractR:::C_assert_contract,
+                  .contractr__contract,
                   .contractr__retval__,
-                  FALSE,
-                  .contractr__call_trace__,
-                  PKG_NAME,
-                  FUN_NAME,
-                  .contractr__call_id__,
-                  ".contractr__retval__",
-                  .contractr__parameter_count__,
-                  -1)
+                  FALSE)
         }
     }, list(PKG_NAME=pkg_name,
             FUN_NAME=fun_name))

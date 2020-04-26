@@ -5,7 +5,7 @@ SEXP DelayedAssign = NULL;
 SEXP SystemDotFile = NULL;
 SEXP PackageSymbol = NULL;
 SEXP ContractRSymbol = NULL;
-SEXP AssertTypeSymbol = NULL;
+SEXP AssertContractSymbol = NULL;
 SEXPTYPE MISSINGSXP = 19883;
 
 void initialize_globals() {
@@ -14,7 +14,7 @@ void initialize_globals() {
     SystemDotFile = Rf_install("system.file");
     PackageSymbol = Rf_install("package");
     ContractRSymbol = Rf_install("contractR");
-    AssertTypeSymbol = Rf_install("C_assert_type");
+    AssertContractSymbol = Rf_install("C_assert_contract");
 }
 
 SEXPTYPE type_of_sexp(SEXP value) {
@@ -257,11 +257,11 @@ SEXP create_dot_call(SEXP function, SEXP arguments) {
     return dot_call;
 }
 
-SEXP create_assert_type_call(SEXP arguments) {
-    SEXP assert_type_fun = PROTECT(
-        Rf_lang3(R_TripleColonSymbol, ContractRSymbol, AssertTypeSymbol));
+SEXP create_assert_contract_call(SEXP arguments) {
+    SEXP assert_contract_fun = PROTECT(
+        Rf_lang3(R_TripleColonSymbol, ContractRSymbol, AssertContractSymbol));
 
-    SEXP call = PROTECT(create_dot_call(assert_type_fun, arguments));
+    SEXP call = PROTECT(create_dot_call(assert_contract_fun, arguments));
 
     UNPROTECT(2);
 

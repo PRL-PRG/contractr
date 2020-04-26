@@ -1,8 +1,7 @@
-#include "r_api.hpp"
-#include <string>
+#include "call_trace.hpp"
 
 std::string concatenate_call_trace(SEXP call_trace,
-                                   const std::string& indentation = "") {
+                                   const std::string& indentation) {
     int size = LENGTH(call_trace);
 
     std::string result = "<" + std::to_string(size) + " frame(s)>";
@@ -24,11 +23,4 @@ std::string concatenate_call_trace(SEXP call_trace,
         }
     }
     return result;
-}
-
-SEXP r_concatenate_call_trace(SEXP call_trace) {
-    const std::string call_trace_string =
-        concatenate_call_trace(call_trace, std::string(14, ' '));
-
-    return Rf_mkString(call_trace_string.c_str());
 }

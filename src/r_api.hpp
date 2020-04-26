@@ -6,20 +6,18 @@
 #include <R_ext/Rdynload.h>
 
 extern "C" {
-/* injection  */
-SEXP inject_type_assertion(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+/* contract insertion  */
+SEXP r_insert_function_contract(SEXP, SEXP, SEXP);
+SEXP r_create_result_contract(SEXP, SEXP, SEXP, SEXP);
 
-/* call traces  */
-SEXP r_concatenate_call_trace(SEXP);
+/*  contract assertion */
+SEXP r_assert_contract(SEXP, SEXP, SEXP);
+SEXP r_capture_assertions(SEXP sym, SEXP env);
+SEXP r_get_assertions();
 
 /*  severity */
 SEXP r_set_severity(SEXP severity);
 SEXP r_get_severity();
-
-/*  contract assertions */
-SEXP assert_type(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-SEXP r_capture_assertions(SEXP sym, SEXP env);
-SEXP r_get_assertions();
 
 /*  type checking */
 SEXP r_check_type(SEXP value_sym, SEXP parameter_name, SEXP type, SEXP rho);

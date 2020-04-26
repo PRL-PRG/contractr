@@ -120,7 +120,7 @@ SEXP create_data_frame(const std::vector<SEXP> columns,
 
 SEXP create_dot_call(SEXP function, SEXP arguments);
 
-SEXP create_assert_type_call(SEXP arguments);
+SEXP create_assert_contract_call(SEXP arguments);
 
 SEXP create_list(const std::vector<SEXP>& values,
                  const std::vector<std::string>& names);
