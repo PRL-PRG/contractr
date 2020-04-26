@@ -6,10 +6,13 @@
 #include <filesystem>
 #include <limits>
 #include <tastr/parser/parser.hpp>
-#include <unordered_map>
+#include <map>
 #include <cassert>
 
 namespace fs = std::filesystem;
+
+/* the keys are unique numbers, map is faster compared to unordered map  */
+std::map<const tastr::ast::Node*, std::string> type_representation_cache;
 
 using packdecl_t =
     std::pair<std::string, std::unique_ptr<tastr::ast::TopLevelNode>>;
@@ -407,6 +410,18 @@ get_function_type(const std::string& package_name,
     }
 }
 
-std::string type_to_string(const tastr::ast::Node& node) {
-    return tastr::parser::to_string(node);
+const std::string& type_to_string(const tastr::ast::Node& node) {
+    auto iter = type_representation_cache.find(&node);
+    /*  node is cached */
+    if (iter != type_representation_cache.end()) {
+        return iter->second;
+    }
+    /* node is not cached; cache and return */
+    else {
+        auto iter2 =
+            type_representation_cache
+                .insert({&node, std::move(tastr::parser::to_string(node))})
+                .first;
+        return iter2->second;
+    }
 }
