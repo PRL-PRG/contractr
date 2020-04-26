@@ -1,0 +1,18 @@
+type `.local` <? integer[] | double, ??? | double[]> => null;
+type `.norm.mu.V` <double[], ^double[], ^double[]> => double;
+type `.W.stat.func` <^double[]> => double;
+type `asMethod` <logical> => character;
+type `coef` <???> => ^double[];
+type `cov4.wt` <^double[], double[], logical, character, any => any> => ^double[];
+type `filter` <character[]> => logical[];
+type `fitted` <double[] | ???> => struct<`V1`:double[], `V2`:double[], `V3`:double[], `V4`:double[], `V5`:double[], `V6`:double[], `V7`:double[], `V8`:double[]>;
+type `frobenius.norm` <^double[]> => double;
+type `FUN` <double[]> => double;
+type `mean3` <^double[] | struct<>, any => any> => double[];
+type `Mean3Cov4` <^double[]> => struct<`location`:double[], `scatter`:^double[]>;
+type `MeanCov` <^double[]> => struct<`location`:double[], `scatter`:^double[]>;
+type `plot` <???, double[] | ???> => null;
+type `S1` <^double[]> => struct<`location`:double[], `scatter`:^double[]>;
+type `S2` <^double[], double[], double, double, logical, double, character, any => any, logical> => struct<`location`:double[], `scatter`:^double[]> | ^double[];
+type `screeplot.ics` <null, character, character, character, character, character[] | integer[] | symbol, logical, ??? | double> => null;
+type `summary` < > => ???;

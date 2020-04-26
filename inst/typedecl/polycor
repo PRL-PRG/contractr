@@ -1,0 +1,10 @@
+type `binBvn` <double, double[], double[], symbol | double> => ^double[];
+type `chisq` <double[], ^double[], double, double[] | ???, ???, double, double> => double;
+type `f` <double> => double;
+type `filter` <character[]> => logical[];
+type `fn` <double[]> => double;
+type `FUN` <double[]> => logical;
+type `hetcor.data.frame` <struct<`x1`:double[], `x2`:double[], `y1`:integer[], `y2`:integer[]>, logical, logical, character, double, logical, ???> => struct<`correlations`:^double[], `type`:^character[], `NA.method`:character, `ML`:logical, `std.errors`:^double[], `n`:integer, `tests`:^double[]>;
+type `hetcor.default` <double[], double[], logical, logical, symbol, double, logical> => struct<`correlations`:^double[], `type`:^character[], `NA.method`:character, `ML`:logical, `std.errors`:^double[], `n`:integer, `tests`:^double[]>;
+type `polychor` <integer[], integer[], logical, language, logical, double> => double;
+type `se.r` <double, integer> => double;

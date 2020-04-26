@@ -1,0 +1,6 @@
+type `check.commonprob` <^double[]> => logical;
+type `commonprob2sigma` <^double[], null> => ^double[];
+type `filter` <character[]> => logical[];
+type `ra2ba` <^double[]> => ^double[];
+type `rmvbin` <double, double[] | ???, language | ^double[], language, ^double[] | language, null, null> => ^double[];
+type `simul.commonprob` <double[], double[], character, double, double> => double[];

@@ -1,0 +1,6 @@
+type `ash1` <struct<`nc`:integer[], `ab`:double[], `nskip`:integer>, double, double[]> => struct<`x`:double[], `y`:double[], `m`:double, `ab`:double[], `kopt`:double[], `ier`:integer>;
+type `ash2` <struct<`nc`:^integer[], `ab`:^double[], `nskip`:integer>, double[], double[]> => struct<`z`:^double[], `x`:double[], `y`:double[], `ab`:^double[], `m`:double[], `kopt`:double[], `ier`:double>;
+type `bin1` <double[], double[], double> => struct<`nc`:integer[], `ab`:double[], `nskip`:integer>;
+type `bin2` <^double[], ^double[], double[]> => struct<`nc`:^integer[], `ab`:^double[], `nskip`:integer>;
+type `center` <double[], integer> => tuple<double[]>;
+type `filter` <character[]> => logical[];

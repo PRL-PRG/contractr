@@ -1,0 +1,10 @@
+type `aspolygonlist` <tuple<> | tuple<tuple<double[], double[]>>> => tuple<> | tuple<struct<`x`:double[], `y`:double[]>>;
+type `ensuredouble` <tuple<struct<`x`:double[], `y`:double[]>>> => tuple<struct<`x`:double[], `y`:double[]>>;
+type `filter` <character[]> => logical[];
+type `fun` <symbol, symbol> => null;
+type `FUN` <struct<`x`:double[], `y`:double[]> | double[]> => struct<`x`:double[], `y`:double[]> | double[];
+type `validpoly` <struct<`x`:double[], `y`:double[]> | tuple<struct<`x`:double[], `y`:double[]>>> => logical;
+type `validxy` <struct<`x`:double[], `y`:double[]>> => logical;
+type `ensurexydouble` <struct<`x`:integer[], `y`:integer[]> | struct<`x`:double, `y`:double>> => struct<`x`:double[], `y`:double[]>;
+type `xrange` <struct<`x`:integer[], `y`:integer[]>> => integer[];
+type `yrange` <struct<`x`:integer[], `y`:integer[]>> => integer[];

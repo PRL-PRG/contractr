@@ -1,0 +1,9 @@
+type `condentropy` <integer[], integer[], character> => double;
+type `condinformation` <integer[], integer[], integer[], character> => double;
+type `discretize` <struct<`Murder`:double[], `Assault`:integer[], `UrbanPop`:integer[], `Rape`:double[]>, character, double> => struct<`Murder`:integer[], `Assault`:integer[], `UrbanPop`:integer[], `Rape`:integer[]>;
+type `entropy` <struct<`Murder`:integer[], `Assault`:integer[], `UrbanPop`:integer[], `Rape`:integer[]> | integer[], character> => double;
+type `filter` <character[]> => logical[];
+type `interinformation` <struct<`Murder`:integer[], `Assault`:integer[], `UrbanPop`:integer[], `Rape`:integer[]>, character> => double;
+type `multiinformation` <struct<`Murder`:integer[], `Assault`:integer[], `UrbanPop`:integer[], `Rape`:integer[]>, character> => double;
+type `mutinformation` <struct<`Murder`:integer[], `Assault`:integer[], `UrbanPop`:integer[], `Rape`:integer[]> | integer[], ? integer[], character> => ^double[];
+type `natstobits` <double> => double;

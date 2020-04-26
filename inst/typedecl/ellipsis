@@ -1,0 +1,9 @@
+type `check_dots_used` <environment, any => any> => null;
+type `dots` <environment, logical> => tuple<> | struct<`..1`:null, `..2`:null> | struct<`foof`:null> | struct<`na.mr`:null> | struct<`x`:null, `y`:null, `..3`:null, `..4`:null, `..5`:null> | struct<`x`:null, `y`:null, `z`:null> | struct<`NA`:null>;
+type `eval_bare` <language, environment> => null;
+type `exit_handler` <any => any> => language;
+type `filter` <character[]> => logical[];
+type `FUN` <double> => logical;
+type `paste_line` <character> => character;
+type `safe_median.numeric` <double | ^integer[], double | ???, logical> => double;
+type `::` <environment, any => any> => null;

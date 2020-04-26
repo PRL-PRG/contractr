@@ -1,0 +1,2 @@
+type `filter` <character[]> => logical[];
+type `FUN` <? character> => ? logical | character[];

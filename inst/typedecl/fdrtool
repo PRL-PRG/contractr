@@ -1,0 +1,15 @@
+type `ecdf.pval` <double[], double> => any => any;
+type `f` <double[]> => double[];
+type `F` <double[]> => double[];
+type `fA` <double[]> => double[];
+type `FA` <double[]> => double[];
+type `fdr` <double[]> => double[];
+type `Fdr` <double[]> => double[];
+type `fdr.pval` <double[]> => double[];
+type `Fdr.pval` <double[]> => double[];
+type `filter` <character[]> => logical[];
+type `fitted.monoreg` <struct<`x`:double[], `y`:double[], `w`:double[], `yf`:double[], `type`:character, `call`:language>, ???> => double[];
+type `gcmlcm` <double[], double[], character[]> => struct<`x.knots`:double[], `y.knots`:double[], `slope.knots`:double[]>;
+type `plot.grenander` <struct<`F`:any => any, `x.knots`:double[], `F.knots`:double[], `f.knots`:double[]>, character> => struct<`mfrow`:integer[]>;
+type `plot.monoreg` <struct<`x`:double[], `y`:double[], `w`:double[], `yf`:double[], `type`:character, `call`:language>, ???, ???, character[], double[] | ???> => ? struct<`mfrow`:integer[]>;
+type `residuals.monoreg` <struct<`x`:double[], `y`:double[], `w`:double[], `yf`:double[], `type`:character, `call`:language>, ???> => double[];

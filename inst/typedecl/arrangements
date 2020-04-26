@@ -1,0 +1,13 @@
+type `.subset2` <double, ? double, ? logical, null, logical, null> => logical;
+type `$` <double | character, ? character, ? logical> => ? ^integer[];
+type `combinations` <? character[] | double, double, null, null, ? double[], logical, ? character, double, ? double, ? double[], ? double, null> => ^character[] | ^integer[] | list<integer[]>;
+type `filter` <character[]> => logical[];
+type `icombinations` <double, double, null, null, null, logical, null> => environment;
+type `ipartitions` <double, ? double, logical, null> => environment;
+type `ipermutations` <double, double, null, null, null, logical, null> => environment;
+type `ncombinations` <? character[] | double, double, null, null, ? double[], logical, logical> => integer | raw[];
+type `npartitions` <double, ? double, logical> => integer | raw[];
+type `npermutations` <? character[] | double, ? double, null, null, ? double[], logical, logical> => integer | raw[];
+type `partitions` <double, ? double, logical, ? character, integer, null, null, null, null> => ^integer[] | tuple<integer[], integer[], integer[]> | list<integer[]>;
+type `permutations` <? character[] | double, ? double, null, null, ? double[], logical, ? character, double, ? double, ? double[], ? double, null> => ^character[] | ^integer[] | list<integer[]>;
+type `validate_n_value` <double, null, null, ???> => double;

@@ -1,0 +1,8 @@
+type `filter` <character[]> => logical[];
+type `bobyqa` <double[], any => any, double[], double[], struct<`maxfun`:double> | tuple<> | struct<`npt`:double> | struct<`iprint`:double>, ???> => struct<`par`:double[], `fval`:double, `feval`:integer, `ierr`:double, `msg`:character>;
+type `commonArgs` <double[], any => any, tuple<> | struct<`maxfun`:double> | struct<`npt`:double> | struct<`iprint`:double>, environment> => environment;
+type `fn1` <double[]> => ^double[];
+type `FUN` <character> => ? double;
+type `newuoa` <double[], any => any, struct<`maxfun`:double> | tuple<> | struct<`npt`:double> | struct<`iprint`:double>, ???> => struct<`par`:double[], `fval`:double, `feval`:integer, `ierr`:double, `msg`:character>;
+type `uobyqa` <double[], any => any, struct<`maxfun`:double> | tuple<> | struct<`iprint`:double>, ???> => struct<`par`:double[], `fval`:double, `feval`:integer, `ierr`:double, `msg`:character>;
+type `::` <double[], any => any, double[] | struct<`maxfun`:double, `iprint`:double>, double[] | ???, struct<`maxfun`:double, `iprint`:double>, ??? | double> => struct<`par`:double[], `fval`:double, `feval`:integer, `ierr`:double, `msg`:character>;

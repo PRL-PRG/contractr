@@ -1,0 +1,16 @@
+type `arandi` <integer[], integer[], logical> => double;
+type `binder` <^integer[], ^double[]> => double[];
+type `cltoSim` <double[]> => ^double[];
+type `comp.psm` <^double[]> => ^double[];
+type `ent` <integer[]> => double;
+type `filter` <character[]> => logical[];
+type `FUN` <double[] | struct<`cl`:integer[], `val`:double> | character, ^double[]> => ^double[] | struct<`cl`:integer[], `val`:double>;
+type `laugreen` <^double[], null, double> => struct<`cl`:double[], `value`:double, `method`:character, `iter.lg`:double>;
+type `medv` <^double[], double> => integer[];
+type `mi` <integer[], integer[]> => double;
+type `norm.label` <character[] | double[]> => integer[];
+type `one.constr.val` <integer, integer, ^double[]> => double;
+type `pear` <^integer[], ^double[]> => double[];
+type `relabel` <^double[], logical> => struct<`cls`:^integer[], `P`:^double[], `loss.val`:double, `cl`:integer[]>;
+type `Simtocl` <^double[]> => double[];
+type `vi.dist` <integer[], integer[], logical, double> => double[];

@@ -1,0 +1,13 @@
+type `AIC` <double> => ???;
+type `AIC1` <double, double> => double[];
+type `anova` <null, null> => null;
+type `betabin` <language, struct<`seed`:integer[], `root`:integer[], `n`:integer[], `y`:integer[]>, character[], null, logical, any => any, tuple<>, logical, struct<`maxit`:double>, ???> => language;
+type `deviance` <???> => double;
+type `df.residual` <???> => integer;
+type `filter` <character[]> => logical[];
+type `fn` <double[]> => double;
+type `FUN` <double, ???> => double[];
+type `invlink` <double[], character> => double[];
+type `is.singular` <^double[]> => logical;
+type `tr` <character> => character;
+type `withWarnings` <struct<`par`:double[], `value`:double, `counts`:^integer[], `convergence`:integer, `message`:null, `hessian`:^double[]>> => struct<`value`:struct<`par`:double[], `value`:double, `counts`:^integer[], `convergence`:integer, `message`:null, `hessian`:^double[]>, `warnings`:null> | struct<`value`:struct<`par`:double[], `value`:double, `counts`:^integer[], `convergence`:integer, `message`:null, `hessian`:^double[]>, `warnings`:list<struct<`message`:character, `call`:language>>>;

@@ -1,0 +1,3 @@
+type `filter` <character[]> => logical[];
+type `::` <double, double, double, double, double, character> => character[];
+type `viridis` <double, double, double, double, double, character> => character[];

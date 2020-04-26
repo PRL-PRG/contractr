@@ -1,0 +1,15 @@
+type `buildStartupMessage` <character | ??? | symbol, character, ? character, null, logical, ? character[], ? character[], any => any | symbol> => null;
+type `f` <struct<`message`:character, `call`:language, `package`:character, `type`:character, `endline`:logical>> => null;
+type `filter` <character[]> => logical[];
+type `fun` <struct<`message`:character, `call`:language, `package`:character, `type`:character, `endline`:logical> | character, any => any | symbol | character[]> => null;
+type `infoShow` <character, character, ? symbol> => null;
+type `mystartupMessage` <character, null, character, character, any => any | symbol, logical> => null;
+type `readVersionInformation` <character, ? character> => struct<`ver`:character, `title`:character>;
+type `startupEndline` <struct<`message`:character, `call`:language, `package`:character, `type`:character, `endline`:logical>> => logical;
+type `startupMessage` <character, null, character, character, logical> => null;
+type `StartupMessage` <character, language, character, character, logical> => struct<`message`:character, `call`:language, `package`:character, `type`:character, `endline`:logical>;
+type `startupPackage` <struct<`message`:character, `call`:language, `package`:character, `type`:character, `endline`:logical>> => character;
+type `NEWS` <character, null> => null;
+type `onlytypeStartupMessages` <null, character[]> => null;
+type `startupType` <struct<`message`:character, `call`:language, `package`:character, `type`:character, `endline`:logical>> => character;
+type `suppressStartupMessages` <null> => null;

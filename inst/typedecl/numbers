@@ -1,0 +1,15 @@
+type `agm` <double, double> => double;
+type `coprime` <double, double> => logical;
+type `egyptian_complete` <double, double, logical> => double;
+type `egyptian_methods` <double, double> => null;
+type `filter` <character[]> => logical[];
+type `FUN` <integer> => double;
+type `isNatural` <double[]> => logical[];
+type `modinv` <double, double> => double;
+type `omega` <double> => integer;
+type `Omega` <double> => integer;
+type `primeSieve` <double> => double[];
+type `print_eg` <double, double, double[]> => null;
+type `quadratic_residues` <double> => double[];
+type `radical` <double> => double;
+type `twinPrimes` <double, double> => ^integer[];

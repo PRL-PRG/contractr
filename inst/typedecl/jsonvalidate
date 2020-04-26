@@ -1,0 +1,10 @@
+type `::` <character, character, logical, logical, logical, character> => logical | any => any;
+type `filter` <character[]> => logical[];
+type `fun` <symbol, symbol> => character;
+type `get_meta_schema_version` <character> => character;
+type `get_string` <character> => character;
+type `json_validator` <character, character> => any => any;
+type `json_validator_ajv` <character> => any => any;
+type `json_validator_imjv` <character> => any => any;
+type `tmp` <character, logical, logical, logical> => logical;
+type `v` <character, logical, logical, logical> => logical;

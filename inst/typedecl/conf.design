@@ -1,0 +1,14 @@
+type `.listMat` <^double[] | ^character[], any => any> => tuple<character[]> | struct<`Blocks`:integer[], `A`:integer[], `B`:integer[], `C`:integer[]> | struct<`Blocks`:integer[], `D`:integer[], `E`:integer[]> | struct<`G`:character[]> | struct<`Blocks`:integer[], `T1`:integer[], `T2`:integer[], `T3`:integer[]>;
+type `.paste0` <character[]> => character[];
+type `.space` <^double[], double> => ^double[];
+type `.zf` <integer[]> => character[];
+type `conf.design` <^double[], double, character, null> => struct<`Blocks`:integer[], `A`:integer[], `B`:integer[], `C`:integer[]>;
+type `conf.set` <^double[], double> => ^double[];
+type `direct.sum` <struct<`Blocks`:integer[], `A`:integer[], `B`:integer[], `C`:integer[]>, struct<`Blocks`:integer[], `D`:integer[], `E`:integer[]>, character[]> => struct<`Blocks`:integer[], `A`:integer[], `B`:integer[], `C`:integer[], `Blocksa`:integer[], `D`:integer[], `E`:integer[]>;
+type `factorize.default` <double, double[], ???> => double[];
+type `factorize.factor` <integer[], character, character[], ???> => struct<`fa`:integer[], `fb`:integer[]>;
+type `filter` <character[]> => logical[];
+type `FUN` <struct<> | double[]> => character[] | tuple<integer[]> | logical;
+type `join` <integer[]> => integer[];
+type `primes` <double | integer[]> => double[];
+type `rjoin` <struct<`Blocks`:integer[], `A`:integer[], `B`:integer[], `C`:integer[]>, character> => struct<`Part`:integer[], `Blocks`:integer[], `A`:integer[], `B`:integer[], `C`:integer[]>;

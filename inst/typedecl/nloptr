@@ -1,0 +1,13 @@
+type `$` <double[]> => double[];
+type `eval_f` <double[]> => double;
+type `eval_g_eq` <double[]> => double[];
+type `eval_g_eq_wrapper` <double[]> => double;
+type `eval_g_ineq` <double[]> => double[];
+type `eval_g_ineq_wrapper` <double[]> => double[];
+type `eval_grad_f` <double[]> => double[];
+type `eval_jac_g_eq` <double[]> => ^double[];
+type `eval_jac_g_ineq` <double[]> => ^double[];
+type `filter` <character[]> => logical[];
+type `fn` <double[]> => double[];
+type `fun` <double[] | symbol, symbol> => double[] | struct<`nloptr.show.inequality.warning`:null>;
+type `print.nloptr` <struct<`x0`:double[], `eval_f`:any => any, `lower_bounds`:double[], `upper_bounds`:double[], `num_constraints_ineq`:double, `eval_g_ineq`:null, `num_constraints_eq`:double, `eval_g_eq`:null, `options`:struct<`algorithm`:character, `stopval`:double, `ftol_rel`:double, `ftol_abs`:double, `xtol_rel`:double, `xtol_abs`:double[], `maxeval`:double, `maxtime`:double, `tol_constraints_ineq`:double[], `tol_constraints_eq`:double[], `print_level`:double, `check_derivatives`:logical, `check_derivatives_tol`:double, `check_derivatives_print`:character, `print_options_doc`:logical, `population`:double, `ranseed`:double>, `local_options`:null, `nloptr_environment`:environment, `call`:language, `termination_conditions`:character, `status`:integer, `message`:character, `iterations`:integer, `objective`:double, `solution`:double[], `version`:character, `num.evals`:double> | struct<`x0`:double[], `eval_f`:any => any, `lower_bounds`:double[], `upper_bounds`:double[], `num_constraints_ineq`:integer, `eval_g_ineq`:any => any, `num_constraints_eq`:double, `eval_g_eq`:null, `options`:struct<`algorithm`:character, `stopval`:double, `ftol_rel`:double, `ftol_abs`:double, `xtol_rel`:double, `xtol_abs`:double[], `maxeval`:double, `maxtime`:double, `tol_constraints_ineq`:double[], `tol_constraints_eq`:double[], `print_level`:double, `check_derivatives`:logical, `check_derivatives_tol`:double, `check_derivatives_print`:character, `print_options_doc`:logical, `population`:double, `ranseed`:double>, `local_options`:null, `nloptr_environment`:environment, `call`:language, `termination_conditions`:character, `status`:integer, `message`:character, `iterations`:integer, `objective`:double, `solution`:double[], `version`:character, `num.evals`:double>, logical, ???> => null;

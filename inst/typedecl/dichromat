@@ -1,0 +1,2 @@
+type `dichromat` <character[], character[]> => character[];
+type `filter` <character[]> => logical[];

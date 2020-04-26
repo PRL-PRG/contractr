@@ -1,0 +1,12 @@
+type `.nextMethod` <integer[]> => struct<`age`:^integer[]> | double;
+type `[` <??? | integer[] | ^logical[] | double, character | double | ???, ???, logical> => struct<`age`:integer[]> | ^integer[];
+type `[[` <???, ???> => character | double;
+type `begin` <???> => null;
+type `colmean` <double | ???> => double;
+type `filter` <character[]> => logical[];
+type `FUN` <character[]> => character;
+type `goto` <double, ???> => null;
+type `next_block` <??? | double[]> => struct<`age`:integer[]> | integer[];
+type `process_blocks` <any => any, double | ???> => double;
+type `read_lines` <integer[] | double> => struct<`gender`:integer[]> | ^integer[];
+type `write_dm` <character | integer> => null;

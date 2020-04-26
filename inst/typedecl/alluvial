@@ -1,0 +1,4 @@
+type `alluvial` <struct<`Class`:character[], `Survived`:character[]>, double[], integer[] | character[], ? double | character[], ??? | integer[], logical[], double, double, double, double, logical | character, ? tuple<null, integer[], null> | tuple<integer[], integer[], null> | tuple<null, null, integer[]>, null, double, double> => struct<`endpoints`:tuple<^double[], ^double[]>>;
+type `alluvial_ts` <struct<`country`:integer[], `year`:integer[], `refugees`:integer[]>, ? character | double, character[] | double, ? character[], ? double, character, logical, double, character, double, character, ? character, double, double, logical, character, double, logical, double> => null;
+type `filter` <character[]> => logical[];
+type `FUN` <double[], double | struct<>, double[], double> => ^character[] | ^double[];

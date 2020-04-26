@@ -1,0 +1,17 @@
+type `autoplot.microbenchmark` <struct<`expr`:integer[], `time`:double[]>, ???, logical, double> => struct<`data`:struct<`expr`:integer[], `time`:double[], `ntime`:double[]>, `layers`:tuple<environment>, `scales`:environment, `mapping`:struct<`x`:language, `y`:language>, `theme`:tuple<>, `coordinates`:environment, `facet`:environment, `plot_env`:environment, `labels`:struct<`x`:character, `y`:character>>;
+type `coalesce` <null> => character | double;
+type `convert_to_unit` <double[], character> => double[];
+type `f` <? character | double> => logical;
+type `filter` <character[]> => logical[];
+type `find_prefix` <double[], any => any, double, double, logical> => character;
+type `fun` <symbol, symbol> => ? list<character | any => any>;
+type `FUN` <? double[] | language | symbol> => double[] | character | expression;
+type `microbenchmark` <? language | symbol, null, integer, ??? | character, ? any => any | character, ? character | double | integer[] | pairlist, ? language | double> => struct<`expr`:integer[], `time`:double[]>;
+type `print.microbenchmark` <struct<`expr`:integer[], `time`:double[]>, ??? | character, ??? | character, ??? | double, ???> => struct<`expr`:integer[], `min`:double[], `lq`:double[], `mean`:double[], `median`:double[], `uq`:double[], `max`:double[], `neval`:double[], `cld`:character[]>;
+type `register_s3_method` <character, character, character, null> => null;
+type `summary.microbenchmark` <struct<`expr`:integer[], `time`:double[]>, symbol | character, ???> => struct<`expr`:integer[], `min`:double[], `lq`:double[], `mean`:double[], `median`:double[], `uq`:double[], `max`:double[], `neval`:double[], `cld`:character[]>;
+type `::` <language, null, integer, ???, null, character, ? character> => struct<`expr`:integer[], `time`:double[]>;
+type `boxplot.microbenchmark` <struct<`expr`:integer[], `time`:double[]>, character, logical, ???, ???, logical, ???> => struct<`stats`:^double[], `n`:double[], `conf`:^double[], `out`:double[], `group`:double[], `names`:character[]>;
+type `check` <struct<`2 + 2`:double, `2 + a`:double, `sum(2# a)`:double, `sum(2# 2)`:double> | struct<`rnorm(1e+05)`:double[], `x`:double[]>> => logical;
+type `get_nanotime` < > => double;
+type `microtiming_precision` <integer, double> => double[];

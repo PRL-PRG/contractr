@@ -1,0 +1,5 @@
+type `circle` <double, double[]> => null;
+type `filter` <character[]> => logical[];
+type `ones` <double, double> => ^double[];
+type `origin` <double[], ???> => null;
+type `textxy` <double[], double[], integer[] | character[] | expression, double[], double, double, ???> => null;

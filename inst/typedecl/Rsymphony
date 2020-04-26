@@ -1,0 +1,6 @@
+type `filter` <character[]> => logical[];
+type `glp_bounds` <tuple<> | struct<`lower`:struct<`ind`:integer[], `val`:double[]>, `upper`:struct<`ind`:integer[], `val`:double[]>>, integer> => struct<`type`:integer[], `upper`:double[], `lower`:double[]>;
+type `glp_bounds_check_sanity` <struct<`ind`:integer[], `val`:double[]>, integer> => null;
+type `glp_fix_bound_type` <struct<`type`:integer[], `upper`:double[], `lower`:double[]>> => struct<`type`:integer[], `upper`:double[], `lower`:double[]>;
+type `make_csc_matrix.matrix` <^double[]> => struct<`matbeg`:integer[], `matind`:integer[], `values`:double[]>;
+type `Rsymphony_solve_LP` <double[], ^double[], character[], double[], ? struct<`lower`:struct<`ind`:integer[], `val`:double[]>, `upper`:struct<`ind`:integer[], `val`:double[]>>, ? character[], logical, double, double, double, double, logical, logical, logical> => struct<`solution`:double[], `objval`:double, `status`:integer>;

@@ -1,0 +1,5 @@
+type `clean.up` < > => integer;
+type `escQuote` <character[] | logical[]> => character[];
+type `filter` <character[]> => logical[];
+type `FUN` <struct<`A`:double[], `B`:double[], `C`:double[]> | character[] | double[]> => logical | character | struct<>;
+type `testPerl` <character, logical> => logical;

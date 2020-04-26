@@ -1,0 +1,2 @@
+type `austen_books` < > => struct<`text`:character[], `book`:integer[]>;
+type `filter` <character[]> => logical[];

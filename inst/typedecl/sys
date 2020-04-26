@@ -1,0 +1,9 @@
+type `as_text` <raw[], ???> => character;
+type `exec_background` <character, character, logical, logical, null> => integer;
+type `exec_internal` <character, null, null, logical, double> => struct<`status`:integer, `stdout`:raw[], `stderr`:raw[]>;
+type `exec_status` <integer, logical> => integer;
+type `exec_wait` <character, ? character[], integer, integer, ? character, double> => integer;
+type `execute` <character, ? character[], any => any | logical, any => any | logical, ? character, logical, double> => integer;
+type `filter` <character[]> => logical[];
+type `r_wait` <character[], integer, integer, ? character> => integer;
+type `rbin` < > => character;

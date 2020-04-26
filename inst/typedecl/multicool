@@ -1,0 +1,7 @@
+type `$` <integer[]> => list<integer[]> | struct<`set`:integer[], `b`:integer> | integer[];
+type `B` <integer[]> => double[];
+type `filter` <character[]> => logical[];
+type `generateCompositions` <double> => list<integer[]>;
+type `is.wholenumber` <integer[], double> => logical[];
+type `S2` <double | integer[], integer[]> => double[];
+type `Stirling2C` <double, double> => double;

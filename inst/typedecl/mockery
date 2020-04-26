@@ -1,0 +1,15 @@
+type `expect_args` <any => any, double, struct<`Sepal.Length`:double[], `Sepal.Width`:double[], `Petal.Length`:double[], `Petal.Width`:double[], `Species`:integer[]>> => logical;
+type `expect_call` <any => any, double, language> => logical;
+type `expect_called` <any => any, double> => struct<`message`:character, `srcref`:null, `trace`:null>;
+type `f` <???> => logical;
+type `filter` <character[]> => logical[];
+type `format_call` <language> => character;
+type `is_mock` <any => any> => logical;
+type `length.mock` <any => any> => integer;
+type `m` <double> => null;
+type `mock` <double | language | ???, logical, environment> => any => any;
+type `mock_args` <any => any> => tuple<tuple<struct<`Sepal.Length`:double[], `Sepal.Width`:double[], `Petal.Length`:double[], `Petal.Width`:double[], `Species`:integer[]>>> | tuple<struct<`object`:struct<`Sepal.Length`:double[], `Sepal.Width`:double[], `Petal.Length`:double[], `Petal.Width`:double[], `Species`:integer[]>>> | tuple<struct<`x`:double>, struct<`y`:double>>;
+type `mock_calls` <any => any> => tuple<language>;
+type `mock_through_tree` <tuple<tuple<struct<`parent_env`:environment, `funcs`:environment>>>, character, any => any | logical> => null;
+type `ordinal` <integer> => character;
+type `stub` <any => any, character, logical | any => any, double> => null;

@@ -1,0 +1,16 @@
+type `apldrop<-` <^double[], double[], double> => ^double[];
+type `apltake<-` <^integer[], double, double> => ^double[];
+type `arev` <^double[], logical[] | integer> => ^double[];
+type `ashift` <^double[], ^double[]> => ^double[];
+type `cilleruelo` <double, double> => ^double[];
+type `eq` <^integer[], ^integer[]> => logical;
+type `filter` <character[]> => logical[];
+type `FUN` <double[]> => ^double[] | character[];
+type `is.associative` <^double[]> => logical;
+type `is.hadamard` <^double[]> => logical;
+type `is.necessary` <^double[], double> => logical;
+type `is.normal` <^integer[]> => logical;
+type `is.persymmetric` <^double[]> => logical;
+type `magic.constant` <integer, double, double> => double;
+type `magicplot` <^double[], logical, logical, ???> => null;
+type `S` <integer> => ^double[];

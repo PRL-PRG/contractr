@@ -1,0 +1,6 @@
+type `filter` <character[]> => logical[];
+type `FUN` <double[], integer, logical, logical, logical> => double;
+type `geary` <double[], logical> => double;
+type `kurtosis` <double[], logical> => double;
+type `moment` <^double[] | struct<>, double, logical, logical, logical> => double[];
+type `skewness` <double[], logical> => double;

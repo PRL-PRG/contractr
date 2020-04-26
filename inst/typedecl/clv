@@ -1,0 +1,3 @@
+type `check.res` <integer[], double, symbol, symbol> => null;
+type `clust.method` <^double[], integer> => integer[];
+type `filter` <character[]> => logical[];

@@ -1,0 +1,8 @@
+type `bitAnd` <^double[], ^double[]> => ^double[];
+type `bitFlip` <^double[], double> => ^double[];
+type `bitOr` <^double[], ^double[]> => ^double[];
+type `bitShiftL` <^double[], double[]> => ^double[];
+type `bitShiftR` <^double[], double[]> => ^double[];
+type `bitXor` <^double[], ^double[]> => ^double[];
+type `cksum` <character[]> => double[];
+type `filter` <character[]> => logical[];

@@ -1,0 +1,15 @@
+type `filter` <character[]> => logical[];
+type `_fseq` <character[] | double | tuple<character> | struct<> | integer[]> => character[] | ^double[];
+type `[[` <character[] | double | struct<> | tuple<character> | integer[]> => character[] | ^double[] | tuple<character, character, character> | tuple<character, double>;
+type `%+%` <character | double, character> => character;
+type `%s%` <character, double | tuple<character, character>> => character;
+type `assert_diff_time` <double> => null;
+type `FUN` <double[]> => integer | character;
+type `parse_ms` <double[]> => struct<`days`:double[], `hours`:double[], `minutes`:double[], `seconds`:double[]>;
+type `pretty_bytes` <double> => character;
+type `pretty_dt` <double, logical> => character;
+type `pretty_ms` <double[], logical> => character[];
+type `pretty_sec` <double[], logical> => character[];
+type `time_ago` <double, character[]> => character;
+type `trim` <character[]> => character[];
+type `::` <double[], logical> => character[];

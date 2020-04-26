@@ -1,0 +1,4 @@
+type `.option_needs_argument` < > => logical;
+type `.option_needs_argument_helper` <character, language | symbol> => logical;
+type `filter` <character[]> => logical[];
+type `parse_args2` <character[], logical> => struct<`options`:struct<`add_numbers`:logical, `help`:logical>, `args`:character>;

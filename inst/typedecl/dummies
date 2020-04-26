@@ -1,0 +1,2 @@
+type `filter` <character[]> => logical[];
+type `fun` <character, character> => struct<`dummy.classes`:null>;

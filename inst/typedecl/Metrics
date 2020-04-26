@@ -1,0 +1,5 @@
+type `filter` <character[]> => logical[];
+type `FUN` <double[], double[]> => double[];
+type `msle` <double[], double[]> => double;
+type `rmsle` <double[], double[]> => double;
+type `z2r` <double> => double;

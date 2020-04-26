@@ -1,0 +1,3 @@
+type `caim` <^double[]> => double;
+type `disc.Topdown` <struct<`Sepal.Length`:double[], `Sepal.Width`:double[], `Petal.Length`:double[], `Petal.Width`:double[], `Species`:integer[]>, double> => struct<`cutp`:tuple<double[], double[], double[], double[]>, `Disc.data`:struct<`Sepal.Length`:integer[], `Sepal.Width`:integer[], `Petal.Length`:integer[], `Petal.Width`:integer[], `Species`:integer[]>>;
+type `filter` <character[]> => logical[];

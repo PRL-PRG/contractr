@@ -1,0 +1,11 @@
+type `as.data.frame.feather` <struct<`mpg`:null, `cyl`:null, `disp`:null, `hp`:null, `drat`:null, `wt`:null, `qsec`:null, `vs`:null, `am`:null, `gear`:null, `carb`:null>, null, logical, logical> => struct<`mpg`:double[], `cyl`:double[], `disp`:double[], `hp`:double[], `drat`:double[], `wt`:double[], `qsec`:double[], `vs`:double[], `am`:double[], `gear`:double[], `carb`:double[]>;
+type `close.feather` <struct<`mpg`:null, `cyl`:null, `disp`:null, `hp`:null, `drat`:null, `wt`:null, `qsec`:null, `vs`:null, `am`:null, `gear`:null, `carb`:null>, ???> => null;
+type `closeFeather` <struct<`mpg`:null, `cyl`:null, `disp`:null, `hp`:null, `drat`:null, `wt`:null, `qsec`:null, `vs`:null, `am`:null, `gear`:null, `carb`:null>> => null;
+type `coldataFeather` <struct<`mpg`:null, `cyl`:null, `disp`:null, `hp`:null, `drat`:null, `wt`:null, `qsec`:null, `vs`:null, `am`:null, `gear`:null, `carb`:null>, integer[]> => struct<`mpg`:double[], `cyl`:double[], `disp`:double[], `hp`:double[], `drat`:double[], `wt`:double[], `qsec`:double[], `vs`:double[], `am`:double[], `gear`:double[], `carb`:double[]>;
+type `dim.feather` <struct<`mpg`:null, `cyl`:null, `disp`:null, `hp`:null, `drat`:null, `wt`:null, `qsec`:null, `vs`:null, `am`:null, `gear`:null, `carb`:null>> => double[];
+type `feather` <character> => struct<`mpg`:null, `cyl`:null, `disp`:null, `hp`:null, `drat`:null, `wt`:null, `qsec`:null, `vs`:null, `am`:null, `gear`:null, `carb`:null>;
+type `feather_example` <character> => character;
+type `filter` <character[]> => logical[];
+type `openFeather` <character> => struct<`mpg`:null, `cyl`:null, `disp`:null, `hp`:null, `drat`:null, `wt`:null, `qsec`:null, `vs`:null, `am`:null, `gear`:null, `carb`:null>;
+type `read_feather` <character, null> => struct<`mpg`:double[], `cyl`:double[], `disp`:double[], `hp`:double[], `drat`:double[], `wt`:double[], `qsec`:double[], `vs`:double[], `am`:double[], `gear`:double[], `carb`:double[]>;
+type `rowsFeather` <struct<`mpg`:null, `cyl`:null, `disp`:null, `hp`:null, `drat`:null, `wt`:null, `qsec`:null, `vs`:null, `am`:null, `gear`:null, `carb`:null>> => double;

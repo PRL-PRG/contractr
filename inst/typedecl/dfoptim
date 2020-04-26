@@ -1,0 +1,6 @@
+type `f` <double[]> => double;
+type `filter` <character[]> => logical[];
+type `fnm` <double[], ??? | double> => double;
+type `fnmb` <double[]> => double;
+type `g` <double[]> => double[];
+type `ginv` <double[]> => double[];

@@ -1,0 +1,7 @@
+type `attribute.default` <double[], double[], double[] | language, double, character, ? character, logical, double, double, double, logical, ? language | double[], ? language | double[], language | double[] | symbol, language | logical, character | ???> => null;
+type `conditional.quantile` <double[], double[], ? double[], double[], character, ???> => double[];
+type `discrimination.plot` <double[], double[], double, character, null, null, logical, character[] | language, logical, integer[], character, double | ???> => null;
+type `filter` <character[]> => logical[];
+type `lines.attrib` <struct<`baseline.tf`:logical, `bs`:double, `bs.baseline`:double, `ss`:double, `bs.reliability`:double, `bs.resol`:double, `bs.uncert`:double, `y.i`:double[], `obar.i`:double[], `prob.y`:double[], `obar`:double, `thres`:double[], `check`:double, `bins`:logical, `obs`:double[], `pred`:double[]>, character> => null;
+type `plot.cont.cont` <struct<`baseline.tf`:logical, `MAE`:double, `MSE`:double, `ME`:double, `MSE.baseline`:double, `MSE.pers`:double, `SS.baseline`:double, `obs`:double[], `pred`:double[], `baseline`:double[]>, ???> => double[];
+type `plot.prob.bin` <struct<`baseline.tf`:logical, `bs`:double, `bs.baseline`:double, `ss`:double, `bs.reliability`:double, `bs.resol`:double, `bs.uncert`:double, `y.i`:double[], `obar.i`:double[], `prob.y`:double[], `obar`:double, `thres`:double[], `check`:double, `bins`:logical, `obs`:logical[], `pred`:double[]>, logical> => null;

@@ -1,0 +1,17 @@
+type `corrscale` <double> => double;
+type `f` <^double[], ^double[], double[]> => double;
+type `filter` <character[]> => logical[];
+type `fn` <double[], ^double[], double[]> => double;
+type `FUN` <double[]> => double[];
+type `jj` <^double[]> => ^double[];
+type `quad.3diag` <^complex[], ^complex[], ^complex[]> => complex[];
+type `quad.3form` <^complex[], ^complex[], ^complex[]> => ^complex[];
+type `quad.3tdiag` <^complex[], ^complex[], ^complex[]> => complex[];
+type `quad.3tform` <^complex[], ^complex[], ^complex[]> => ^complex[];
+type `quad.diag` <^complex[], ^complex[]> => complex[];
+type `quad.form.inv` <^complex[], ^complex[]> => ^complex[];
+type `quad.tdiag` <^complex[], ^complex[]> => complex[];
+type `quad.tform` <^complex[], ^complex[]> => ^complex[];
+type `quad.tform.inv` <^complex[], ^complex[]> => ^complex[];
+type `sample.n.fit` <double, double, double, any => any, character> => struct<`rect`:struct<`w`:double, `h`:double, `left`:double, `top`:double>, `text`:struct<`x`:double[], `y`:double[]>>;
+type `sigmahatsquared.A` <^double[], ^double[], double[]> => double;

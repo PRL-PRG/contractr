@@ -1,0 +1,10 @@
+type `::` <character[], struct<`reserved`:any => any, `number`:any => any, `null`:any => any, `operator`:any => any, `call`:any => any, `string`:any => any, `comment`:any => any>> => character[];
+type `default_style` < > => struct<`reserved`:any => any, `number`:any => any, `null`:any => any, `operator`:any => any, `call`:any => any, `string`:any => any, `comment`:any => any>;
+type `do_subst` <character[], struct<`line1`:integer[], `col1`:integer[], `line2`:integer[], `col2`:integer[], `id`:integer[], `parent`:integer[], `token`:character[], `terminal`:logical[], `text`:character[]>, character[]> => character[];
+type `filter` <character[]> => logical[];
+type `FUN` <integer> => character;
+type `operator_tokens` < > => character[];
+type `replace_in_place` <character, integer[], integer[], character[]> => character;
+type `reserved_words` < > => character[];
+type `fun` <symbol, symbol> => environment;
+type `highlight` <character[], struct<`reserved`:any => any, `number`:any => any, `null`:any => any, `operator`:any => any, `call`:any => any, `string`:any => any, `comment`:any => any>> => character[];

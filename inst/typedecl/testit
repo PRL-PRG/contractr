@@ -1,0 +1,12 @@
+type `%==%` <? character | double | integer[], ? character | double | integer[]> => logical;
+type `all_true` <logical[] | character> => logical;
+type `assert` <character | language, language | logical> => null;
+type `assert2` <? character, language, environment, logical> => null;
+type `filter` <character[]> => logical[];
+type `has_warning` <character[] | double | integer[]> => logical;
+type `one_expression` <language> => logical;
+type `sys.source2` <character, environment, environment> => null;
+type `test_pkg` <character, character[]> => null;
+type `has_error` <language | double, logical | language> => logical;
+type `(` < > => integer[];
+type `deparse_key` <language> => character;

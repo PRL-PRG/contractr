@@ -1,0 +1,11 @@
+type `filter` <character[]> => logical[];
+type `combn` <character[] | double[], double, ? any => any, logical, ??? | double> => ^character[] | ^integer[];
+type `dmnom` <double[], double, double[]> => double;
+type `fun` <double[], double, double> => double;
+type `FUN` <integer> => integer[];
+type `logfact` <double[]> => double[];
+type `nCm` <double, double, double> => double;
+type `nsimplex` <double, double> => double;
+type `permn` <double, ? any => any, ???> => list<integer[]>;
+type `rmultinomial` <double[], ^double[], integer> => ^integer[];
+type `rmultinomial.1` <double, double[]> => integer[];

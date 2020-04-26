@@ -1,0 +1,3 @@
+type `filter` <character[]> => logical[];
+type `survivalROC` <integer[], integer[], double[], ? integer, double, ? integer[], character, null, ? double, character> => struct<`cut.values`:double[], `TP`:double[], `FP`:double[], `predict.time`:double, `Survival`:double, `AUC`:double>;
+type `survivalROC.C` <integer[], integer[], double[], double, double> => struct<`cut.values`:double[], `TP`:double[], `FP`:double[], `predict.time`:double, `Survival`:double, `AUC`:double>;

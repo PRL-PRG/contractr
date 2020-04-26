@@ -1,0 +1,6 @@
+type `blup` <struct<`ID`:integer[], `pID0`:double[], `pID1`:double[], `hID0`:double[], `hID1`:double[], `G`:double[], `P`:double[]>, double, logical> => language;
+type `countGen` <struct<`id`:integer[], `dam`:double[], `sire`:double[]>> => integer[];
+type `filter` <character[]> => logical[];
+type `FUN` <double[]> => logical;
+type `gblup` <struct<`ID`:integer[], `P`:double[]>, ^double[], double> => language;
+type `trimPed` <struct<`id`:integer[], `dam`:double[], `sire`:double[]>, logical[], null> => logical[];

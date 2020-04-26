@@ -1,0 +1,8 @@
+type `cadr` <double[]> => double;
+type `Compose` <any => any> => any => any;
+type `Curry` <symbol, double> => any => any;
+type `CurryL` <language, double> => any => any | language;
+type `double` <double> => double;
+type `f` <double[], any => any> => double[];
+type `filter` <character[]> => logical[];
+type `multi.argument.Compose` <any => any | double> => any => any | double;

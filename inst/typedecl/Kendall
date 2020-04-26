@@ -1,0 +1,7 @@
+type `filter` <character[]> => logical[];
+type `fun` <character, character> => struct<`name`:character, `path`:character, `dynamicLookup`:logical, `handle`:null, `info`:null>;
+type `Kendall` <double[], double[]> => struct<`tau`:double, `sl`:double, `S`:double, `D`:double, `varS`:double>;
+type `MannKendall` <double[]> => struct<`tau`:double, `sl`:double, `S`:double, `D`:double, `varS`:double>;
+type `print.Kendall` <struct<`tau`:double, `sl`:double, `S`:double, `D`:double, `varS`:double>, ???> => null;
+type `SeasonalMannKendall` <double[]> => struct<`tau`:double, `sl`:double, `S`:double, `D`:double, `varS`:double>;
+type `summary.Kendall` <struct<`tau`:double, `sl`:double, `S`:double, `D`:double, `varS`:double>, ???> => null;

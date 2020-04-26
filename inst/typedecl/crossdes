@@ -1,0 +1,17 @@
+type `allcombs` <double, double> => ^integer[];
+type `balmin.RMD` <double, double, double> => ^double[];
+type `des.MOLS` <double, double> => ^double[];
+type `design.row` <^double[]> => tuple<double[], ^double[], ^double[], logical[]>;
+type `factor.comb` <double, double> => ^double[];
+type `filter` <character[]> => logical[];
+type `find.BIB` <double, double, double, double> => ^double[];
+type `GF` <double, double> => tuple<^double[], ^double[]>;
+type `isCbalanced` <^double[], logical> => tuple<logical, ^double[]>;
+type `isGYD` <^double[], logical, logical> => struct<``:logical[], ``:logical[], `Number of occurrences of treatments in d`:double[], `Row incidence matrix of d`:^double[], `Column incidence matrix of d`:^double[], `Concurrence w.r.t. rows`:^double[], `Concurrence w.r.t. columns`:^double[]>;
+type `MOLS` <double, double, double[] | language> => double[];
+type `mult` <double[], double[]> => double[];
+type `redu` <double[], double[]> => double[];
+type `redu.modp` <double[], double[], double> => double[];
+type `Td` <^double[]> => ^double[];
+type `williams` <double> => ^double[];
+type `williams.BIB` <^integer[]> => ^double[];

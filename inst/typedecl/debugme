@@ -1,0 +1,7 @@
+type `filter` <character[]> => logical[];
+type `fun` <symbol, symbol> => null;
+type `get_debug_levels` <character[]> => logical[];
+type `initialize_colors` <character[]> => character[];
+type `initialize_debug_levels` <character[], logical[]> => logical[];
+type `initialize_output_file` < > => null;
+type `parse_env_vars` < > => character[];

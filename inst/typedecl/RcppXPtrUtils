@@ -1,0 +1,12 @@
+type `.args` <character, logical> => character[];
+type `.fname` <character> => character;
+type `.type` <character> => character;
+type `$` <null, null> => null;
+type `checkXPtr` <character, character[], logical> => null;
+type `cppXPtr` <character[], character[], character[], logical, character, logical | symbol, logical> => character;
+type `filter` <character[]> => logical[];
+type `FUN` <character> => character;
+type `isFunction` <character> => logical;
+type `print.XPtr` < > => ???;
+type `sanitize_amp` <character> => character;
+type `tokenize_signature` <character> => character[];

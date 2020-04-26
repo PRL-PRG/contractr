@@ -1,0 +1,16 @@
+type `:::` < > => character;
+type `addFormats` <character[]> => null;
+type `anydate.default` <character[] | double[], character, logical, logical> => double[];
+type `anydate.factor` <integer[], language, logical, language> => double[];
+type `anytime_cpp` <character[] | double[], character, logical, logical, logical, logical> => double[];
+type `anytime.default` <character[], character, logical, logical, logical> => double[];
+type `assertDate` <character[] | double> => double[];
+type `assertTime` <character[]> => double[];
+type `filter` <character[]> => logical[];
+type `fun` <symbol, symbol> => logical;
+type `getFormats` < > => character[];
+type `getTZ` < > => character;
+type `removeFormats` <character> => null;
+type `setInitialTZ` <character> => null;
+type `utcdate.default` <character[], character, logical> => double[];
+type `utctime` <character[], character, logical, logical> => double[];

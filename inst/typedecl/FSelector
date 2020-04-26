@@ -1,0 +1,7 @@
+type `filter` <character[]> => logical[];
+type `find_neighbours` <integer> => null;
+type `FUN` <double[] | struct<`to_be_saved`:logical, `result`:double>> => ? double | struct<`to_be_saved`:logical, `result`:double>;
+type `gain.ratio` <language, struct<`Sepal.Length`:double[], `Sepal.Width`:double[], `Petal.Length`:double[], `Petal.Width`:double[], `Species`:integer[]>, character> => struct<`attr_importance`:double[]>;
+type `information.gain` <language, struct<`Sepal.Length`:double[], `Sepal.Width`:double[], `Petal.Length`:double[], `Petal.Width`:double[], `Species`:integer[]>, character> => struct<`attr_importance`:double[]>;
+type `symmetrical.uncertainty` <language, struct<`Sepal.Length`:double[], `Sepal.Width`:double[], `Petal.Length`:double[], `Petal.Width`:double[], `Species`:integer[]>, character> => struct<`attr_importance`:double[]>;
+type `update_weights` <integer> => null;

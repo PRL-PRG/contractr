@@ -1,0 +1,17 @@
+type `.addREADME` <character, ???> => ? logical;
+type `.baseLoad` <integer, language> => pairlist;
+type `addMemoization.default` <any => any, language, ???> => any => any;
+type `clearCache.default` <symbol, ???, logical, logical> => character[];
+type `filter` <character[]> => logical[];
+type `fun` <symbol, character> => ? character;
+type `FUN` <character> => logical;
+type `generateCache.default` <tuple<double, double> | struct<`expr`:language> | struct<`some`:double, `vari`:double, `ables`:double> | struct<`what`:any => any, ``:double>, character, ? ???> => character;
+type `getCachePath.default` <null, null, character, ???> => character;
+type `getCacheRootPath.default` <? character, ???> => ? character;
+type `getChecksum.default` <tuple<double, double> | struct<`expr`:language> | struct<`some`:double, `vari`:double, `ables`:double> | struct<`what`:any => any, ``:double>, ???> => character;
+type `memoizedCall.default` <any => any, double, environment, logical, null, null> => double;
+type `readCacheHeader.default` <character | integer, ???> => struct<`identifier`:character, `version`:character, `comment`:character, `timestamp`:double>;
+type `saveCache.default` <double[], ? tuple<double, double> | struct<`some`:double, `vari`:double, `ables`:double>, null, character, ? character, ? character, null, null, ???> => character;
+type `setCacheRootPath.default` <character, ???> => struct<`R.cache.rootPath`:character> | struct<`R.cache.rootPath`:null>;
+type `setupCacheRootPath.default` <character, ???> => character;
+type `sleep` <double, environment> => double;

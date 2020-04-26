@@ -1,0 +1,6 @@
+type `f` <double[], double[]> => ^double[];
+type `filter` <character[]> => logical[];
+type `FUN` <character[] | double[], double[]> => ? double[];
+type `plot.kernelFunction` <struct<`name`:character, `B`:double, `C`:double>, ???, double[], double, character, ???> => null;
+type `rescale` <^double[], double[], struct<`name`:character>, ???> => ^double[];
+type `sketch` <^double[], logical, integer, double> => null;

@@ -1,0 +1,2 @@
+type `filter` <character[]> => logical[];
+type `tensor` <^double[], ^integer[], double[], double[]> => ^double[];

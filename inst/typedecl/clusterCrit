@@ -1,0 +1,2 @@
+type `filter` <character[]> => logical[];
+type `fun` <character, character> => struct<`name`:character, `path`:character, `dynamicLookup`:logical, `handle`:null, `info`:null>;

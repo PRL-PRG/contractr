@@ -1,0 +1,7 @@
+type `dmnorm` <^double[], double[], ^double[], logical> => double[];
+type `dmt` <^double[], double[], ^double[], double, logical> => double[];
+type `filter` <character[]> => logical[];
+type `fun` <character, character> => null;
+type `rmnorm` <double, double[], ^double[] | ???, ? ^double[]> => ^double[];
+type `rmt` <double, double[], ^double[], double, null> => ^double[];
+type `::` <^double[], double[], ^double[], logical> => double[];

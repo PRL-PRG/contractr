@@ -1,0 +1,8 @@
+type `delTriple` <^double[], character, character, double | character> => ^double[];
+type `dimcalc_ndocs` <symbol> => any => any;
+type `dimcalc_raw` < > => any => any;
+type `dimcalc_share` <double> => any => any;
+type `filter` <character[]> => logical[];
+type `print.textmatrix` <^integer[], double, double, ???> => ^integer[];
+type `setTriple` <^double[], character, character, double | character> => integer[];
+type `summary.textmatrix` <^integer[], ???> => double[];
