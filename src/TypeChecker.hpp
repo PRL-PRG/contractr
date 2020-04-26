@@ -6,11 +6,13 @@
 
 #include <cassert>
 #include <functional>
+#include <algorithm>
 #include <tastr/visitor/visitor.hpp>
 
 class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
   private:
     using seq_index_t = int;
+    using name_element_t = std::pair<SEXP, SEXP>;
 
   public:
     TypeChecker(): ConstNodeVisitor(), result_(false) {
@@ -235,8 +237,7 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
         if (!result) {
             push_result_(result);
         } else {
-            push_value_(value);
-            node.get_parameters().accept(*this);
+            typecheck_struct_(value, node.get_parameters());
         }
     }
 
@@ -388,6 +389,146 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
     }
 
   private:
+    void typecheck_struct_(SEXP list,
+                           const tastr::ast::ParameterNode& parameter_node) {
+        SEXP list_names = getAttrib(list, R_NamesSymbol);
+        int parameter_size = parameter_node.get_parameter_count();
+        int list_size = LENGTH(list);
+
+        /* if list does not have names, it cannot be a struct */
+        if (list_names == R_NilValue) {
+            push_result_(false);
+        }
+        /*  if list names are not as long as the list, it cannot be a struct */
+        else if (LENGTH(list_names) < list_size) {
+            push_result_(false);
+        }
+        /* base case; all lists are subtypes of structs of size 0 */
+        else if (parameter_size == 0) {
+            push_result_(true);
+        }
+        /* if list size is smaller than parameter size, then definitely it won't
+           have all the elements and it cannot be a subtype  */
+        else if (list_size < parameter_size) {
+            push_result_(false);
+        }
+        /* walk over all struct parameters in the type and match against list elements  */
+        else {
+            std::vector<name_element_t> rlist;
+
+            /* convert r list to custom representation for sorting */
+            for (int i = 0; i < list_size; ++i) {
+                SEXP name = STRING_ELT(list_names, i);
+                SEXP element = VECTOR_ELT(list, i);
+                rlist.push_back({name, element});
+            }
+
+            auto comparator = [](name_element_t& a, name_element_t& b) -> bool {
+                if (a.first == NA_STRING) {
+                    return true;
+                } else if (b.first == NA_STRING) {
+                    return false;
+                } else {
+                    return std::string(CHAR(a.first)) <
+                           std::string(CHAR(b.first));
+                }
+            };
+
+            /* sort rlist by name for quick search  */
+            std::sort(rlist.begin(), rlist.end(), comparator);
+
+            /*  go through all the struct elements and search for list elements
+             * that match that name */
+
+            bool result = true;
+
+            for (int i = 0; i < parameter_size; ++i) {
+                const tastr::ast::TagTypePairNode& pair_node =
+                    tastr::ast::as<tastr::ast::TagTypePairNode>(
+                        parameter_node.at(i));
+
+                const tastr::ast::IdentifierNode& identifier(
+                    pair_node.get_identifier());
+                const tastr::ast::Node& type_node = pair_node.get_type();
+
+                int index = binary_search_(rlist, identifier);
+
+                /* if element with this name is not found; bail out */
+                if (index == -1) {
+                    result = false;
+                    break;
+                }
+
+                /* if element with the name is found, check for all consecutive
+                 * elements with this name since list can have repeated elements
+                 */
+                do {
+                    SEXP element = rlist[index].second;
+
+                    push_value_(element);
+                    type_node.accept(*this);
+
+                    /* if an element matched by name but the type did not match;
+                     * bail out early */
+                    if (!pop_result_()) {
+                        result = false;
+                        break;
+                    }
+
+                    ++index;
+                } while (index < list_size &&
+                         match_names_(identifier, rlist[index].first));
+
+                /*  if the do loop above set result to false then bail out */
+                if (!result) {
+                    break;
+                }
+            }
+
+            push_result_(result);
+        }
+    }
+
+    int binary_search_(const std::vector<name_element_t>& rlist,
+                       const tastr::ast::IdentifierNode& identifier) {
+        int left = 0;
+        int right = rlist.size() - 1;
+        int mid = 0;
+
+        while (left <= right) {
+            mid = left + (right - left) / 2;
+
+            int match = match_names_(identifier, rlist[mid].first);
+
+            if (match == 0) {
+                return mid;
+            } else if (match < 1) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return -1;
+    }
+
+    int match_names_(const tastr::ast::IdentifierNode& identifier, SEXP name) {
+        if (identifier.is_missing()) {
+            if (name == NA_STRING) {
+                return 0;
+            } else {
+                return -1;
+            }
+        } else if (name == NA_STRING) {
+            return 1;
+        } else if (identifier.get_name() < CHAR(name)) {
+            return -1;
+        } else if (identifier.get_name() > CHAR(name)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
     bool is_dot_dot_dot_parameter_(const std::string& parameter_name) {
         return parameter_name == "...";
     }
