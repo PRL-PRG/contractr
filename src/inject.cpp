@@ -207,14 +207,15 @@ void inject_argument_type_assertion(SEXP call_trace,
                                                       param_count,
                                                       param_index)));
 
-#ifdef DEBUG
+#ifndef NDEBUG
     Rprintf("\ncontractR/src/inject.c: *** %s '%s' for '%s:::%s' with call id "
             "%d in '%s' [%d]\n",
             evaluate_call ? "calling" : "injecting",
             R_CHAR(Rf_asChar(Rf_deparse1(call, FALSE, 0))),
             R_CHAR(Rf_asChar(pkg_name)),
             R_CHAR(Rf_asChar(fun_name)),
-            asInteger(call_id) R_CHAR(Rf_asChar(param_name)),
+            asInteger(call_id),
+            R_CHAR(Rf_asChar(param_name)),
             asInteger(param_index));
 #endif
 

@@ -1,8 +1,3 @@
-#' @export
-clear_type_declaration_cache <- function() {
-    ## TODO: get typed packages and functions and revert them to uninjected state
-    .Call(C_clear_type_declaration_cache)
-}
 
 #' @export
 import_type_declarations <- function(package_name) {
@@ -49,30 +44,26 @@ set_type_declaration <- function(fun,
 }
 
 #' @export
-remove_type_declaration <- function(fun,
-                                    package_name = get_package_name(fun),
-                                    function_name = as.character(substitute(fun))) {
-    stopifnot(is_scalar_character(package_name))
-    stopifnot(is_scalar_character(function_name))
-    .Call(C_remove_type_declaration, package_name, function_name)
-}
-
-#' @export
 show_function_type_declaration <- function(fun,
                                            package_name = get_package_name(fun),
-                                           function_name = as.character(substitute(fun))) {
+                                           function_name = as.character(substitute(fun)),
+                                           style = TRUE) {
     stopifnot(is_scalar_character(package_name))
     stopifnot(is_scalar_character(function_name))
-    invisible(.Call(C_show_function_type_declaration, package_name, function_name))
+    stopifnot(is_scalar_logical(style))
+    invisible(.Call(C_show_function_type_declaration, package_name, function_name, style))
 }
 
 #' @export
-show_package_type_declarations <- function(package_name) {
+show_package_type_declarations <- function(package_name,
+                                           style = TRUE) {
     stopifnot(is_scalar_character(package_name))
-    invisible(.Call(C_show_package_type_declarations, package_name))
+    stopifnot(is_scalar_logical(style))
+    invisible(.Call(C_show_package_type_declarations, package_name, style))
 }
 
 #' @export
-show_type_declarations <- function() {
-    invisible(.Call(C_show_type_declarations))
+show_type_declarations <- function(style = TRUE) {
+    stopifnot(is_scalar_logical(style))
+    invisible(.Call(C_show_type_declarations, style))
 }

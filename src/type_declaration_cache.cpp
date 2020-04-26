@@ -1,5 +1,5 @@
 #include "type_declaration_cache.hpp"
-
+#include "r_api.hpp"
 #include "utilities.hpp"
 
 #undef length
@@ -7,19 +7,118 @@
 #include <limits>
 #include <tastr/parser/parser.hpp>
 #include <unordered_map>
+#include <cassert>
 
 namespace fs = std::filesystem;
 
-using package_name_t = std::string;
-using function_name_t = std::string;
+using packdecl_t =
+    std::pair<std::string, std::unique_ptr<tastr::ast::TopLevelNode>>;
 
-using package_type_declaration_t =
-    std::unordered_map<function_name_t, tastr::ast::TypeNodeUPtr>;
-
-static std::unordered_map<package_name_t, package_type_declaration_t>
-    type_declaration_cache;
+static std::vector<packdecl_t> type_declaration_cache;
 
 fs::path type_declaration_directory = "";
+
+using index_t = int;
+const index_t INVALID_INDEX = -1;
+
+bool is_invalid_index(index_t index) {
+    return index == INVALID_INDEX;
+}
+
+bool is_valid_index(index_t index) {
+    return !is_invalid_index(index);
+}
+
+index_t get_package_index(const std::string& package_name) {
+    index_t size = type_declaration_cache.size();
+    for (index_t i = 0; i < size; ++i) {
+        if (type_declaration_cache[i].first == package_name) {
+            return i;
+        }
+    }
+    return INVALID_INDEX;
+}
+
+index_t get_function_index(index_t package_index,
+                           const std::string& function_name) {
+    if (is_invalid_index(package_index)) {
+        return INVALID_INDEX;
+    }
+
+    const std::unique_ptr<tastr::ast::TopLevelNode>& top_level_node =
+        type_declaration_cache[package_index].second;
+
+    index_t size = top_level_node->size();
+
+    for (index_t index = 0; index < size; ++index) {
+        const std::string& name =
+            top_level_node->at(index).get_identifier().get_name();
+        if (name == function_name) {
+            return index;
+        }
+    }
+
+    return INVALID_INDEX;
+}
+
+SEXP r_get_typed_package_names() {
+    int size = type_declaration_cache.size();
+
+    SEXP result = PROTECT(allocVector(STRSXP, size));
+
+    for (int i = 0; i < size; ++i) {
+        const std::string& package_name = type_declaration_cache[i].first;
+        SET_STRING_ELT(result, i, mkChar(package_name.c_str()));
+    }
+
+    UNPROTECT(1);
+
+    return result;
+}
+
+SEXP r_get_typed_function_names(SEXP pkg_name) {
+    const std::string package_name = CHAR(asChar(pkg_name));
+
+    index_t package_index = get_package_index(package_name);
+
+    if (is_invalid_index(package_index)) {
+        return allocVector(STRSXP, 0);
+    }
+
+    const std::unique_ptr<tastr::ast::TopLevelNode>& top_level_node =
+        type_declaration_cache[package_index].second;
+
+    int size = top_level_node->size();
+
+    SEXP result = PROTECT(allocVector(STRSXP, size));
+
+    for (int index = 0; index < size; ++index) {
+        const std::string& function_name =
+            top_level_node->at(index).get_identifier().get_name();
+        SET_STRING_ELT(result, index, mkChar(function_name.c_str()));
+    }
+
+    UNPROTECT(1);
+
+    return result;
+}
+
+SEXP r_is_package_typed(SEXP pkg_name) {
+    const std::string package_name = CHAR(asChar(pkg_name));
+    index_t index = get_package_index(package_name);
+
+    return is_valid_index(index) ? R_TrueValue : R_FalseValue;
+}
+
+SEXP r_is_function_typed(SEXP pkg_name, SEXP fun_name) {
+    const std::string package_name = CHAR(asChar(pkg_name));
+    index_t package_index = get_package_index(package_name);
+
+    const std::string function_name = CHAR(asChar(fun_name));
+    index_t function_index = get_function_index(package_index, function_name);
+
+    return is_valid_index(function_index) ? R_TrueValue : R_FalseValue;
+}
 
 void initialize_type_declaration_cache() {
     SEXP path = PROTECT(mkString("typedecl"));
@@ -33,12 +132,7 @@ void initialize_type_declaration_cache() {
     }
 }
 
-SEXP clear_type_declaration_cache() {
-    type_declaration_cache.clear();
-    return R_NilValue;
-}
-
-SEXP import_type_declarations(SEXP pkg_name) {
+SEXP r_import_type_declarations(SEXP pkg_name) {
     const std::string package_name = CHAR(asChar(pkg_name));
 
     fs::path package_typedecl_filepath =
@@ -62,94 +156,29 @@ SEXP import_type_declarations(SEXP pkg_name) {
         return allocVector(STRSXP, 0);
     }
 
-    package_type_declaration_t package_map;
-
     SEXP function_names =
         PROTECT(allocVector(STRSXP, result.get_top_level_node()->size()));
 
-    int index = 0;
-    for (const std::unique_ptr<tastr::ast::TypeDeclarationNode>& decl:
-         result.get_top_level_node()->get_type_declarations()) {
-        std::string name(decl->get_identifier().get_name());
-        package_map.insert(std::make_pair(name, decl->get_type().clone()));
+    int size = result.get_top_level_node()->size();
+
+    for (int index = 0; index < size; ++index) {
+        const tastr::ast::TypeDeclarationNode& decl =
+            result.get_top_level_node()->at(index);
+        std::string name(decl.get_identifier().get_name());
         SET_STRING_ELT(function_names, index, mkChar(name.c_str()));
     }
 
-    type_declaration_cache.insert({package_name, std::move(package_map)});
+    packdecl_t package_type_declaration =
+        std::make_pair(package_name, std::move(result.get_top_level_node()));
+
+    type_declaration_cache.push_back(std::move(package_type_declaration));
 
     UNPROTECT(1);
 
     return function_names;
 }
 
-SEXP get_typed_package_names() {
-    SEXP result = PROTECT(allocVector(STRSXP, type_declaration_cache.size()));
-    int index = 0;
-    for (auto iter = type_declaration_cache.begin();
-         iter != type_declaration_cache.end();
-         ++iter, ++index) {
-        const std::string& package_name = iter->first;
-        SET_STRING_ELT(result, index, mkChar(package_name.c_str()));
-    }
-
-    UNPROTECT(1);
-
-    return result;
-}
-
-SEXP get_typed_function_names(SEXP pkg_name) {
-    if (is_package_typed(pkg_name) != R_TrueValue) {
-        return allocVector(STRSXP, 0);
-    }
-
-    const std::string package_name = CHAR(asChar(pkg_name));
-    auto package_iter = type_declaration_cache.find(package_name);
-
-    const package_type_declaration_t& package_map = package_iter->second;
-
-    SEXP result = PROTECT(allocVector(STRSXP, package_map.size()));
-    int index = 0;
-
-    for (auto iter = package_map.begin(); iter != package_map.end();
-         ++iter, ++index) {
-        const std::string& function_name = iter->first;
-        SET_STRING_ELT(result, index, mkChar(function_name.c_str()));
-    }
-
-    UNPROTECT(1);
-
-    return result;
-}
-
-SEXP is_package_typed(SEXP pkg_name) {
-    const std::string package_name = CHAR(asChar(pkg_name));
-    auto package_iter = type_declaration_cache.find(package_name);
-    if (package_iter == type_declaration_cache.end()) {
-        return R_FalseValue;
-    } else {
-        return R_TrueValue;
-    }
-}
-
-SEXP is_function_typed(SEXP pkg_name, SEXP fun_name) {
-    const std::string package_name = CHAR(asChar(pkg_name));
-    const std::string function_name = CHAR(asChar(fun_name));
-
-    auto package_iter = type_declaration_cache.find(package_name);
-    if (package_iter == type_declaration_cache.end()) {
-        return R_FalseValue;
-    } else {
-        const package_type_declaration_t& package_map = package_iter->second;
-        auto iter = package_map.find(function_name);
-        if (iter == package_map.end()) {
-            return R_FalseValue;
-        } else {
-            return R_TrueValue;
-        }
-    }
-}
-
-SEXP set_type_declaration(SEXP pkg_name, SEXP fun_name, SEXP type_decl) {
+SEXP r_set_type_declaration(SEXP pkg_name, SEXP fun_name, SEXP type_decl) {
     const std::string package_name = CHAR(asChar(pkg_name));
     const std::string function_name = CHAR(asChar(fun_name));
     const std::string type_declaration = CHAR(asChar(type_decl));
@@ -166,111 +195,122 @@ SEXP set_type_declaration(SEXP pkg_name, SEXP fun_name, SEXP type_decl) {
         return R_NilValue;
     }
 
-    const tastr::ast::TypeDeclarationNode& decl =
-        result.get_top_level_node()->at(0);
+    index_t package_index = get_package_index(package_name);
 
-    auto package_iter = type_declaration_cache.find(package_name);
+    index_t function_index = get_function_index(package_index, function_name);
 
-    if (package_iter == type_declaration_cache.end()) {
-        package_type_declaration_t package_map;
-        package_map.insert(
-            std::make_pair(function_name, decl.get_type().clone()));
-        type_declaration_cache.insert({package_name, std::move(package_map)});
+    std::unique_ptr<tastr::ast::TopLevelNode> pack_node =
+        std::move(result.get_top_level_node());
+
+    /* package is not present; add it */
+    if (is_invalid_index(package_index)) {
+        packdecl_t packdecl =
+            std::make_pair(package_name, std::move(pack_node));
+
+        type_declaration_cache.push_back(std::move(packdecl));
+
     }
+    /* package is present but function is not  */
+    else if (is_invalid_index(function_index)) {
+        std::unique_ptr<tastr::ast::TypeDeclarationNode> fun_node =
+            std::move(pack_node->get_type_declarations()[0]);
 
+        type_declaration_cache[package_index]
+            .second->get_type_declarations()
+            .push_back(std::move(fun_node));
+    }
+    /* package and function, both are present  */
     else {
-        package_type_declaration_t& package_map = package_iter->second;
-        package_map[function_name] = std::move(decl.get_type().clone());
+        std::unique_ptr<tastr::ast::TypeDeclarationNode> fun_node =
+            std::move(pack_node->get_type_declarations()[0]);
+
+        type_declaration_cache[package_index]
+            .second->get_type_declarations()[function_index] =
+            std::move(fun_node);
     }
 
     return R_NilValue;
 }
 
-SEXP remove_type_declaration(SEXP pkg_name, SEXP fun_name) {
-    const std::string package_name = CHAR(asChar(pkg_name));
-    const std::string function_name = CHAR(asChar(fun_name));
+void show_function_type_declaration_(index_t package_index,
+                                     index_t function_index,
+                                     bool style) {
+    assert(is_valid_index(package_index));
+    assert(is_valid_index(function_index));
 
-    auto package_iter = type_declaration_cache.find(package_name);
+    const tastr::ast::TypeDeclarationNode& node =
+        type_declaration_cache[package_index].second->at(function_index);
 
-    if (package_iter == type_declaration_cache.end()) {
-        return R_FalseValue;
-    }
-
-    else {
-        package_type_declaration_t& package_map = package_iter->second;
-        auto iter = package_map.find(function_name);
-
-        if (iter == package_map.end()) {
-            return R_FalseValue;
-        }
-
-        else {
-            package_map.erase(iter);
-            return R_TrueValue;
-        }
-    }
-}
-
-void show_function_type_declaration_(const std::string& package_name,
-                                     const std::string& function_name,
-                                     const tastr::ast::TypeNodeUPtr& type) {
-    tastr::ast::TypeDeclarationNode node(
-        /* FIXME: hacky space */
-        std::move(wrap(new tastr::ast::KeywordNode("type "))),
-        std::move(wrap(new tastr::ast::IdentifierNode(function_name))),
-        type->clone(),
-        std::move(wrap(new tastr::ast::TerminatorNode(";"))));
-
-    bool style = true;
+    std::cout << std::endl;
     tastr::parser::unparse_stdout(node, false, style);
     std::cout << std::endl;
 }
 
-void show_package_type_declarations_(
-    const std::string& package_name,
-    const package_type_declaration_t& package) {
-    std::cout << std::string(80, '#') << std::endl;
-    std::cout << "## " << package_name << std::endl;
-    std::cout << std::string(80, '#') << std::endl;
-    for (auto function_iter = package.cbegin(); function_iter != package.cend();
-         ++function_iter) {
-        show_function_type_declaration_(
-            package_name, function_iter->first, function_iter->second);
-    }
-    std::cout << std::endl;
-}
-
-SEXP show_function_type_declaration(SEXP pkg_name, SEXP fun_name) {
+SEXP r_show_function_type_declaration(SEXP pkg_name,
+                                      SEXP fun_name,
+                                      SEXP style) {
     const std::string package_name = CHAR(asChar(pkg_name));
     const std::string function_name = CHAR(asChar(fun_name));
 
-    auto package_iter = type_declaration_cache.find(package_name);
-    if (package_iter != type_declaration_cache.end()) {
-        const package_type_declaration_t& package = package_iter->second;
-        auto function_iter = package.find(function_name);
-        if (function_iter != package.end()) {
-            show_function_type_declaration_(
-                package_name, function_iter->first, function_iter->second);
-        }
+    index_t package_index = get_package_index(package_name);
+    index_t function_index = get_function_index(package_index, function_name);
+
+    /*  function not found */
+    if (is_invalid_index(package_index)) {
+        errorcall(R_NilValue,
+                  "type declarations not available for '%s::%s'",
+                  package_name.c_str(),
+                  function_name.c_str());
     }
+    /* function found  */
+    else {
+        show_function_type_declaration_(
+            package_index, function_index, asLogical(style));
+    }
+
     return R_NilValue;
 }
 
-SEXP show_package_type_declarations(SEXP pkg_name) {
+void show_package_type_declarations_(index_t package_index, bool style) {
+    assert(is_valid_index(package_index));
+
+    const std::string& package_name =
+        type_declaration_cache[package_index].first;
+
+    const tastr::ast::TopLevelNode& node =
+        *type_declaration_cache[package_index].second.get();
+
+    std::cout << std::string(80, '#') << std::endl;
+    std::cout << "## " << package_name << std::endl;
+    std::cout << std::string(80, '#') << std::endl;
+
+    std::cout << std::endl;
+    tastr::parser::unparse_stdout(node, false, style);
+    std::cout << std::endl;
+}
+
+SEXP r_show_package_type_declarations(SEXP pkg_name, SEXP style) {
     const std::string package_name = CHAR(asChar(pkg_name));
-    auto iter = type_declaration_cache.find(package_name);
-    if (iter != type_declaration_cache.end()) {
-        show_package_type_declarations_(package_name, iter->second);
+    index_t package_index = get_package_index(package_name);
+
+    /*  package not found */
+    if (is_invalid_index(package_index)) {
+        errorcall(R_NilValue,
+                  "type declarations not available for package '%s'",
+                  package_name.c_str());
+
     }
+    /* package found  */
+    else {
+        show_package_type_declarations_(package_index, asLogical(style));
+    }
+
     return R_NilValue;
 }
 
-SEXP show_type_declarations() {
-    for (auto package_iter = type_declaration_cache.cbegin();
-         package_iter != type_declaration_cache.cend();
-         ++package_iter) {
-        show_package_type_declarations_(package_iter->first,
-                                        package_iter->second);
+SEXP r_show_type_declarations(SEXP style) {
+    for (int i = 0; i < type_declaration_cache.size(); ++i) {
+        show_package_type_declarations_(i, asLogical(style));
     }
     return R_NilValue;
 }
@@ -340,9 +380,10 @@ get_function_return_type(const std::string& package_name,
 const tastr::ast::FunctionTypeNode&
 get_function_type(const std::string& package_name,
                   const std::string& function_name) {
-    auto package_iter = type_declaration_cache.find(package_name);
+    index_t package_index = get_package_index(package_name);
+    index_t function_index = get_function_index(package_index, function_name);
 
-    if (package_iter == type_declaration_cache.end()) {
+    if (is_invalid_index(function_index)) {
         errorcall(R_NilValue,
                   "type declaration not available for '%s::%s'",
                   package_name.c_str(),
@@ -350,28 +391,18 @@ get_function_type(const std::string& package_name,
         exit(1);
     }
 
-    const package_type_declaration_t& package_map = package_iter->second;
+    const tastr::ast::TypeNode& node = type_declaration_cache[package_index]
+                                           .second->at(function_index)
+                                           .get_type();
 
-    auto function_iter = package_map.find(function_name);
-
-    if (function_iter == package_map.end()) {
-        errorcall(R_NilValue,
-                  "type declaration not available for '%s::%s'",
-                  package_name.c_str(),
-                  function_name.c_str());
-        exit(1);
-    }
-
-    tastr::ast::TypeNode* node = function_iter->second.get();
-
-    if (node->is_function_type_node()) {
-        return *tastr::ast::as<tastr::ast::FunctionTypeNode>(node);
+    if (node.is_function_type_node()) {
+        return tastr::ast::as<tastr::ast::FunctionTypeNode>(node);
     } else {
         errorcall(R_NilValue,
                   "'%s::%s' has type %s which is not a function type",
                   package_name.c_str(),
                   function_name.c_str(),
-                  type_to_string(*node).c_str());
+                  type_to_string(node).c_str());
         exit(1);
     }
 }
