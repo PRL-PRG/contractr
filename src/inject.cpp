@@ -1,5 +1,5 @@
 #include "utilities.hpp"
-#include "ContractAssertion.hpp"
+#include "Contract.hpp"
 #include "call_trace.hpp"
 #include "r_api.hpp"
 #include "contract.hpp"
@@ -20,11 +20,10 @@ char* copy_c_string(const char* str) {
     return duplicate;
 }
 
-ContractAssertion* create_argument_contract(ContractAssertion* result_contract,
-                                            SEXP r_parameter_name,
-                                            int parameter_position) {
-    ContractAssertion* argument_contract =
-        new ContractAssertion(*result_contract);
+Contract* create_argument_contract(Contract* result_contract,
+                                   SEXP r_parameter_name,
+                                   int parameter_position) {
+    Contract* argument_contract = new Contract(*result_contract);
     /* NOTE: this contract is not an owner unlike result contract  */
     argument_contract->set_owner(false);
     argument_contract->set_parameter_name(
@@ -51,7 +50,7 @@ SEXP r_create_result_contract(SEXP r_call_id,
     const tastr::ast::FunctionTypeNode* function_type =
         get_function_type(package_index, function_index);
 
-    ContractAssertion* contract = new ContractAssertion(true);
+    Contract* contract = new Contract(true);
     contract->set_call_id(call_id);
     contract->set_call_trace(call_trace);
     contract->set_package_name(package_name);
@@ -70,8 +69,7 @@ SEXP r_assert_contract(SEXP r_contract, SEXP value, SEXP is_value_missing) {
         return value;
     }
 
-    ContractAssertion* contract =
-        static_cast<ContractAssertion*>(R_ExternalPtrAddr(r_contract));
+    Contract* contract = static_cast<Contract*>(R_ExternalPtrAddr(r_contract));
     R_SetExternalPtrAddr(r_contract, nullptr);
 
     contract->assert(value, asLogical(is_value_missing));
@@ -83,7 +81,7 @@ SEXP r_assert_contract(SEXP r_contract, SEXP value, SEXP is_value_missing) {
     return value;
 }
 
-void insert_argument_contract(ContractAssertion* contract,
+void insert_argument_contract(Contract* contract,
                               SEXP param_sym,
                               SEXP value,
                               SEXP rho) {
@@ -160,8 +158,7 @@ SEXP r_insert_function_contract(SEXP r_contract, SEXP fun, SEXP rho) {
         return R_NilValue;
     }
 
-    ContractAssertion* contract =
-        static_cast<ContractAssertion*>(R_ExternalPtrAddr(r_contract));
+    Contract* contract = static_cast<Contract*>(R_ExternalPtrAddr(r_contract));
 
     SEXP params = FORMALS(fun);
 
@@ -178,7 +175,7 @@ SEXP r_insert_function_contract(SEXP r_contract, SEXP fun, SEXP rho) {
         SEXP param_sym = TAG(params);
         SEXP value = Rf_findVarInFrame(rho, param_sym);
 
-        ContractAssertion* argument_contract =
+        Contract* argument_contract =
             create_argument_contract(contract, param_sym, index);
 
         insert_argument_contract(argument_contract, param_sym, value, rho);

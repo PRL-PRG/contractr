@@ -2,18 +2,18 @@
 #include "r_api.hpp"
 #include "utilities.hpp"
 
-std::vector<ContractAssertion*> contracts;
+std::vector<Contract*> contracts;
 std::vector<bool> contract_status;
 
 void initialize_contracts() {
     contract_status.push_back(true);
 }
 
-void add_contract(ContractAssertion* contract) {
+void add_contract(Contract* contract) {
     contracts.push_back(contract);
 }
 
-const ContractAssertion& get_contract(int index) {
+const Contract& get_contract(int index) {
     return *contracts[index];
 }
 
@@ -26,15 +26,14 @@ SEXP r_clear_contracts() {
 }
 
 void destroy_r_contract(SEXP r_contract) {
-    ContractAssertion* contract =
-        static_cast<ContractAssertion*>(R_ExternalPtrAddr(r_contract));
+    Contract* contract = static_cast<Contract*>(R_ExternalPtrAddr(r_contract));
     if (contract) {
         delete contract;
         R_SetExternalPtrAddr(r_contract, nullptr);
     }
 }
 
-SEXP create_r_contract(ContractAssertion* contract) {
+SEXP create_r_contract(Contract* contract) {
     SEXP externalptr =
         PROTECT(R_MakeExternalPtr(contract, R_NilValue, R_NilValue));
 
@@ -70,8 +69,8 @@ bool contracts_are_disabled() {
 
 SEXP r_capture_contracts(SEXP sym, SEXP env, SEXP r_separate) {
     bool separate = asLogical(r_separate);
-    std::vector<ContractAssertion*> saved_contracts(std::move(contracts));
-    contracts = std::vector<ContractAssertion*>();
+    std::vector<Contract*> saved_contracts(std::move(contracts));
+    contracts = std::vector<Contract*>();
 
     PROTECT(sym);
     PROTECT(env);
@@ -100,7 +99,6 @@ SEXP r_capture_contracts(SEXP sym, SEXP env, SEXP r_separate) {
 
     return list;
 }
-
 
 SEXP r_get_contracts() {
     int size = contracts.size();

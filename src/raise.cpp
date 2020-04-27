@@ -7,7 +7,7 @@
 
 typedef void (*raise_function_t)(SEXP, const char*, ...);
 
-void raise_return_type_failure(const ContractAssertion* contract,
+void raise_return_type_failure(const Contract* contract,
                                raise_function_t raise_function) {
     const char* RETURN_TYPE_FAILURE_MESSAGE =
         "contract violation for return value of '%s::%s'\n" //
@@ -24,7 +24,7 @@ void raise_return_type_failure(const ContractAssertion* contract,
                    contract->get_call_trace());
 }
 
-void raise_parameter_outside_limit(const ContractAssertion* contract,
+void raise_parameter_outside_limit(const Contract* contract,
                                    raise_function_t raise_function) {
     const char* PARAMETER_OUTSIDE_LIMIT_MESSAGE =
         "contract violation for '%s::%s'\n"                               //
@@ -45,7 +45,7 @@ void raise_parameter_outside_limit(const ContractAssertion* contract,
                    contract->get_call_trace());
 }
 
-void raise_argument_type_failure(const ContractAssertion* contract,
+void raise_argument_type_failure(const Contract* contract,
                                  raise_function_t raise_function) {
     const char* ARGUMENT_TYPE_FAILURE_MESSAGE =
         "contract violation for parameter '%s' (position %d) of '%s::%s'\n" //
@@ -65,7 +65,7 @@ void raise_argument_type_failure(const ContractAssertion* contract,
                    contract->get_call_trace());
 }
 
-void raise_contract_failure(const ContractAssertion* contract) {
+void raise_contract_failure(const Contract* contract) {
     Severity severity = get_severity();
 
     if (contract->get_assertion_status()) {

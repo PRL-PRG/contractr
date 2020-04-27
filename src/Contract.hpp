@@ -1,5 +1,5 @@
-#ifndef CONTRACTR_CONTRACT_ASSERTION_HPP
-#define CONTRACTR_CONTRACT_ASSERTION_HPP
+#ifndef CONTRACTR_CONTRACT_CLASS_HPP
+#define CONTRACTR_CONTRACT_CLASS_HPP
 
 #include <tastr/ast/ast.hpp>
 #include <string>
@@ -12,9 +12,9 @@
 #include "r_api.hpp"
 #undef length
 
-class ContractAssertion {
+class Contract {
   public:
-    ContractAssertion(bool owner)
+    Contract(bool owner)
         : owner_(owner)
         , call_id_(-1)
         , call_trace_(nullptr)
@@ -30,7 +30,7 @@ class ContractAssertion {
         , function_type_(nullptr) {
     }
 
-    ~ContractAssertion() {
+    ~Contract() {
         if (is_owner()) {
             free((char*) (call_trace_));
             free((char*) (package_name_));
@@ -141,7 +141,8 @@ class ContractAssertion {
             const tastr::ast::Node& node =
                 get_function_return_type(get_function_type());
 
-            assertion_status_ = check_type(get_parameter_name(), actual_value, node);
+            assertion_status_ =
+                check_type(get_parameter_name(), actual_value, node);
             expected_type_ = type_to_string(node);
             actual_type_ = infer_type(actual_value);
         }
@@ -155,7 +156,8 @@ class ContractAssertion {
             const tastr::ast::Node& node = get_function_parameter_type(
                 get_function_type(), get_parameter_position());
 
-            assertion_status_ = check_type(get_parameter_name(), actual_value, node);
+            assertion_status_ =
+                check_type(get_parameter_name(), actual_value, node);
             expected_type_ = type_to_string(node);
             actual_type_ = infer_type(actual_value, get_parameter_name());
         }
@@ -182,4 +184,4 @@ class ContractAssertion {
     const tastr::ast::FunctionTypeNode* function_type_;
 };
 
-#endif /* CONTRACTR_CONTRACT_ASSERTION_HPP */
+#endif /* CONTRACTR_CONTRACT_CLASS_HPP */
