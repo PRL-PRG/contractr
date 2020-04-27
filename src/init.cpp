@@ -14,7 +14,7 @@ extern "C" {
 static const R_CallMethodDef callMethods[] = {
     /* contract insertion  */
     {"insert_function_contract", (DL_FUNC) &r_insert_function_contract, 3},
-    {"create_result_contract", (DL_FUNC) &r_create_result_contract, 4},
+    {"create_result_contract", (DL_FUNC) &r_create_result_contract, 5},
 
     /*  contract assertion */
     {"assert_contract", (DL_FUNC) &r_assert_contract, 3},
@@ -37,6 +37,7 @@ static const R_CallMethodDef callMethods[] = {
 
     /*  type declaration cache */
     {"import_type_declarations", (DL_FUNC) &r_import_type_declarations, 1},
+    {"get_type_index", (DL_FUNC) &r_get_type_index, 2},
     {"get_typed_package_names", (DL_FUNC) &r_get_typed_package_names, 0},
     {"get_typed_function_names", (DL_FUNC) &r_get_typed_function_names, 1},
     {"is_package_typed", (DL_FUNC) &r_is_package_typed, 1},

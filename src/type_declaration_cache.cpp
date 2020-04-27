@@ -42,6 +42,10 @@ index_t get_package_index(const std::string& package_name) {
     return INVALID_INDEX;
 }
 
+const std::string& get_package_name(index_t package_index) {
+    return type_declaration_cache[package_index].first;
+}
+
 index_t get_function_index(index_t package_index,
                            const std::string& function_name) {
     if (is_invalid_index(package_index)) {
@@ -62,6 +66,31 @@ index_t get_function_index(index_t package_index,
     }
 
     return INVALID_INDEX;
+}
+
+const std::string& get_function_name(index_t package_index,
+                                     index_t function_index) {
+    return type_declaration_cache[package_index]
+        .second->at(function_index)
+        .get_identifier()
+        .get_name();
+}
+
+SEXP r_get_type_index(SEXP pkg_name, SEXP fun_name) {
+    const std::string package_name = CHAR(asChar(pkg_name));
+    index_t package_index = get_package_index(package_name);
+
+    const std::string function_name = CHAR(asChar(fun_name));
+    index_t function_index = get_function_index(package_index, function_name);
+
+    SEXP type_index = PROTECT(allocVector(INTSXP, 2));
+
+    INTEGER(type_index)[0] = package_index;
+    INTEGER(type_index)[1] = function_index;
+
+    UNPROTECT(1);
+
+    return type_index;
 }
 
 SEXP r_get_typed_package_names() {
@@ -318,12 +347,9 @@ SEXP r_show_type_declarations(SEXP style) {
     return R_NilValue;
 }
 
-int get_function_parameter_count(const std::string& package_name,
-                                 const std::string& function_name) {
-    const tastr::ast::FunctionTypeNode& function_type =
-        get_function_type(package_name, function_name);
-
-    const tastr::ast::Node& node = function_type.get_parameter();
+int get_function_parameter_count(
+    const tastr::ast::FunctionTypeNode* function_type) {
+    const tastr::ast::Node& node = function_type->get_parameter();
 
     if (node.is_parameter_node()) {
         return tastr::ast::as<tastr::ast::ParameterNode>(node)
@@ -334,14 +360,10 @@ int get_function_parameter_count(const std::string& package_name,
 }
 
 const tastr::ast::Node&
-get_function_parameter_type(const std::string& package_name,
-                            const std::string& function_name,
+get_function_parameter_type(const tastr::ast::FunctionTypeNode* function_type,
                             int formal_parameter_position) {
     /* NOTE: this cannot be null as get_function_type never returns null */
-    const tastr::ast::FunctionTypeNode& function_type =
-        get_function_type(package_name, function_name);
-
-    const tastr::ast::Node& node = function_type.get_parameter();
+    const tastr::ast::Node& node = function_type->get_parameter();
 
     if (node.is_any_type_node()) {
         return node;
@@ -354,16 +376,13 @@ get_function_parameter_type(const std::string& package_name,
         int parameter_count = parameter_node.get_parameter_count();
 
         if (formal_parameter_position >= parameter_count) {
-            errorcall(
-                R_NilValue,
-                "type for parameter %d requested for '%s::%s' which has type "
-                "%s with %d parameters",
-                /* NOTE: indexing starts from 1 in R */
-                formal_parameter_position + 1,
-                package_name.c_str(),
-                function_name.c_str(),
-                type_to_string(function_type).c_str(),
-                parameter_count);
+            errorcall(R_NilValue,
+                      "type for parameter %d requested for function with type "
+                      "%s and %d parameters",
+                      /* NOTE: indexing starts from 1 in R */
+                      formal_parameter_position + 1,
+                      type_to_string(*function_type).c_str(),
+                      parameter_count);
         }
 
         return parameter_node.at(formal_parameter_position);
@@ -371,26 +390,18 @@ get_function_parameter_type(const std::string& package_name,
 }
 
 const tastr::ast::Node&
-get_function_return_type(const std::string& package_name,
-                         const std::string& function_name) {
+get_function_return_type(const tastr::ast::FunctionTypeNode* function_type) {
     /* NOTE: this cannot be null as get_function_type never returns null */
-    const tastr::ast::FunctionTypeNode& function_type =
-        get_function_type(package_name, function_name);
-
-    return function_type.get_return_type();
+    return function_type->get_return_type();
 }
 
-const tastr::ast::FunctionTypeNode&
-get_function_type(const std::string& package_name,
-                  const std::string& function_name) {
-    index_t package_index = get_package_index(package_name);
-    index_t function_index = get_function_index(package_index, function_name);
-
+const tastr::ast::FunctionTypeNode* get_function_type(int package_index,
+                                                      int function_index) {
     if (is_invalid_index(function_index)) {
         errorcall(R_NilValue,
                   "type declaration not available for '%s::%s'",
-                  package_name.c_str(),
-                  function_name.c_str());
+                  get_package_name(package_index).c_str(),
+                  get_function_name(package_index, function_index).c_str());
         exit(1);
     }
 
@@ -399,12 +410,12 @@ get_function_type(const std::string& package_name,
                                            .get_type();
 
     if (node.is_function_type_node()) {
-        return tastr::ast::as<tastr::ast::FunctionTypeNode>(node);
+        return &tastr::ast::as<tastr::ast::FunctionTypeNode>(node);
     } else {
         errorcall(R_NilValue,
                   "'%s::%s' has type %s which is not a function type",
-                  package_name.c_str(),
-                  function_name.c_str(),
+                  get_package_name(package_index).c_str(),
+                  get_function_name(package_index, function_index).c_str(),
                   type_to_string(node).c_str());
         exit(1);
     }

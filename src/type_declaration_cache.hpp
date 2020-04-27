@@ -12,22 +12,18 @@ void initialize_type_declaration_cache();
 
 const std::string& type_to_string(const tastr::ast::Node& node);
 
-int get_function_parameter_count(const std::string& package_name,
-                                 const std::string& function_name);
+int get_function_parameter_count(
+    const tastr::ast::FunctionTypeNode* function_type);
 
 const tastr::ast::Node&
-get_function_parameter_type(const std::string& package_name,
-                            const std::string& function_name,
+get_function_parameter_type(const tastr::ast::FunctionTypeNode* function_type,
                             int formal_parameter_position);
 
 const tastr::ast::Node&
-get_function_return_type(const std::string& package_name,
-                         const std::string& function_name);
+get_function_return_type(const tastr::ast::FunctionTypeNode* function_type);
 
-const tastr::ast::FunctionTypeNode&
-get_function_type(const std::string& package_name,
-                  const std::string& function_name);
-
+const tastr::ast::FunctionTypeNode* get_function_type(int package_index,
+                                                      int function_index);
 }
 
 #endif /* CONTRACTR_TYPE_DECLARATION_CACHE_H */

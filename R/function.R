@@ -107,13 +107,15 @@ create_argval_contract_code <- function(fun_name, pkg_name) {
                                       contractR:::get_next_call_id(),
                                       Map(deparse, sys.calls()),
                                       PKG_NAME,
-                                      FUN_NAME)
+                                      FUN_NAME,
+                                      TYPE_INDEX)
         .Call(contractR:::C_insert_function_contract,
               .contractr__contract, sys.function(),
               sys.frame(sys.nframe()))
 
     }, list(PKG_NAME=pkg_name,
-            FUN_NAME=fun_name))
+            FUN_NAME=fun_name,
+            TYPE_INDEX=.Call(contractR:::C_get_type_index, pkg_name, fun_name)))
 }
 
 

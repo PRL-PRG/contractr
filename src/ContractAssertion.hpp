@@ -5,6 +5,7 @@
 #include <string>
 #include <Rinternals.h>
 #include "utilities.hpp"
+#include <tastr/ast/ast.hpp>
 #undef length
 
 class ContractAssertion {
@@ -21,7 +22,8 @@ class ContractAssertion {
         , parameter_name_(nullptr)
         , actual_type_("")
         , expected_type_("")
-        , assertion_status_(false) {
+        , assertion_status_(false)
+        , function_type_(nullptr) {
     }
 
     ~ContractAssertion() {
@@ -119,6 +121,14 @@ class ContractAssertion {
         return assertion_status_;
     }
 
+    const tastr::ast::FunctionTypeNode* get_function_type() {
+        return function_type_;
+    }
+
+    void set_function_type(const tastr::ast::FunctionTypeNode* function_type) {
+        function_type_ = function_type;
+    }
+
     SEXP assert(SEXP value, bool is_missing) {
         SEXP value_to_check = is_missing ? R_MissingArg : value;
 
@@ -147,6 +157,7 @@ class ContractAssertion {
     std::string actual_type_;
     std::string expected_type_;
     bool assertion_status_;
+    const tastr::ast::FunctionTypeNode* function_type_;
 };
 
 std::ostream& operator<<(std::ostream& os,

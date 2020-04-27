@@ -3,6 +3,7 @@
 #include "call_trace.hpp"
 #include "r_api.hpp"
 #include "contract.hpp"
+#include "type_declaration_cache.hpp"
 
 char result_name[] = ".contractr__return_value";
 
@@ -35,13 +36,19 @@ ContractAssertion* create_argument_contract(ContractAssertion* result_contract,
 SEXP r_create_result_contract(SEXP r_call_id,
                               SEXP r_call_trace,
                               SEXP r_package_name,
-                              SEXP r_function_name) {
+                              SEXP r_function_name,
+                              SEXP r_type_index) {
     int call_id = asInteger(r_call_id);
     // TODO: optimize creation of call_trace
     const char* call_trace = copy_c_string(
         concatenate_call_trace(r_call_trace, std::string(14, ' ')).c_str());
     const char* package_name = copy_c_string(CHAR(asChar(r_package_name)));
     const char* function_name = copy_c_string(CHAR(asChar(r_function_name)));
+    int package_index = INTEGER(r_type_index)[0];
+    int function_index = INTEGER(r_type_index)[1];
+
+    const tastr::ast::FunctionTypeNode* function_type =
+        get_function_type(package_index, function_index);
 
     ContractAssertion* contract = new ContractAssertion(true);
     contract->set_call_id(call_id);
@@ -50,12 +57,14 @@ SEXP r_create_result_contract(SEXP r_call_id,
     contract->set_function_name(function_name);
     contract->set_parameter_position(-1);
     contract->set_parameter_name(result_name);
+    contract->set_function_type(function_type);
+    contract->set_expected_parameter_count(
+        get_function_parameter_count(function_type));
 
     return create_r_contract(contract);
 }
 
 SEXP r_assert_contract(SEXP r_contract, SEXP value, SEXP is_value_missing) {
-
     if (contracts_are_disabled()) {
         return value;
     }
@@ -142,7 +151,7 @@ SEXP r_insert_function_contract(SEXP r_contract, SEXP fun, SEXP rho) {
         Rf_error("contract must be an external pointer");
     }
 
-    if(contracts_are_disabled()) {
+    if (contracts_are_disabled()) {
         return R_NilValue;
     }
 

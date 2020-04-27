@@ -8,7 +8,7 @@
 extern "C" {
 /* contract insertion  */
 SEXP r_insert_function_contract(SEXP, SEXP, SEXP);
-SEXP r_create_result_contract(SEXP, SEXP, SEXP, SEXP);
+SEXP r_create_result_contract(SEXP, SEXP, SEXP, SEXP, SEXP);
 
 /*  contract assertion */
 SEXP r_assert_contract(SEXP, SEXP, SEXP);
@@ -31,6 +31,7 @@ SEXP r_infer_type(SEXP value_sym, SEXP parameter_name, SEXP rho);
 
 /*  type declaration cache */
 SEXP r_import_type_declarations(SEXP pkg_name);
+SEXP r_get_type_index(SEXP pkg_name, SEXP fun_name);
 SEXP r_is_package_typed(SEXP pkg_name);
 SEXP r_is_function_typed(SEXP pkg_name, SEXP fun_name);
 SEXP r_get_typed_package_names();

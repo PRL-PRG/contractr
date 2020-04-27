@@ -12,8 +12,6 @@
 void ContractAssertion::assert_parameter_type_(SEXP value) {
     assertion_status_ = true;
     actual_type_ = infer_type(value, get_parameter_name());
-    expected_parameter_count_ =
-        get_function_parameter_count(get_package_name(), get_function_name());
 
     /* parameter outside limits  */
     if (get_parameter_position() >= get_expected_parameter_count()) {
@@ -34,7 +32,7 @@ void ContractAssertion::assert_parameter_type_(SEXP value) {
     /* parameter is within limits  */
     else {
         const tastr::ast::Node& node = get_function_parameter_type(
-            get_package_name(), get_function_name(), get_parameter_position());
+            get_function_type(), get_parameter_position());
 
         assertion_status_ = check_type(get_parameter_name(), value, node);
 
@@ -58,11 +56,8 @@ void ContractAssertion::assert_parameter_type_(SEXP value) {
 }
 
 void ContractAssertion::assert_return_type_(SEXP value) {
-    expected_parameter_count_ =
-        get_function_parameter_count(get_package_name(), get_function_name());
-
     const tastr::ast::Node& node =
-        get_function_return_type(get_package_name(), get_function_name());
+        get_function_return_type(get_function_type());
 
     parameter_position_ = -1;
 
@@ -104,4 +99,3 @@ std::ostream& operator<<(std::ostream& os,
 
     return os;
 }
-
