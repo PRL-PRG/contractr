@@ -4,7 +4,6 @@
 #include "r_api.hpp"
 #include "contract.hpp"
 #include "type_declaration_cache.hpp"
-#include "raise.hpp"
 
 char result_name[] = ".contractr__return_value";
 
@@ -62,28 +61,6 @@ SEXP r_create_result_contract(SEXP r_call_id,
         get_function_parameter_count(function_type));
 
     return create_r_contract(contract);
-}
-
-SEXP r_assert_contract(SEXP r_contract, SEXP value, SEXP is_value_missing) {
-    if (contracts_are_disabled()) {
-        return value;
-    }
-
-    Contract* contract = extract_from_r_contract(r_contract);
-
-    if (contract == nullptr) {
-        errorcall(R_NilValue,
-                  "invalid contract reference encountered while asserting");
-        return value;
-    }
-
-    contract->assert(value, asLogical(is_value_missing));
-
-    raise_contract_failure(contract);
-
-    add_contract(contract);
-
-    return value;
 }
 
 void insert_argument_contract(Contract* contract,

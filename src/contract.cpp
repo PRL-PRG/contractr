@@ -1,6 +1,7 @@
 #include "contract.hpp"
 #include "r_api.hpp"
 #include "utilities.hpp"
+#include "raise.hpp"
 
 std::vector<Contract*> contracts;
 std::vector<bool> contract_status;
@@ -9,7 +10,7 @@ void initialize_contracts() {
     contract_status.push_back(true);
 }
 
-void add_contract(Contract* contract) {
+void accumulate_contract(Contract* contract) {
     contracts.push_back(contract);
 }
 
@@ -52,6 +53,28 @@ Contract* extract_from_r_contract(SEXP r_contract) {
     Contract* contract = static_cast<Contract*>(R_ExternalPtrAddr(r_contract));
     R_SetExternalPtrAddr(r_contract, nullptr);
     return contract;
+}
+
+SEXP r_assert_contract(SEXP r_contract, SEXP value, SEXP is_value_missing) {
+    if (contracts_are_disabled()) {
+        return value;
+    }
+
+    Contract* contract = extract_from_r_contract(r_contract);
+
+    if (contract == nullptr) {
+        errorcall(R_NilValue,
+                  "invalid contract reference encountered while asserting");
+        return value;
+    }
+
+    contract->assert(value, asLogical(is_value_missing));
+
+    raise_contract_failure(contract);
+
+    accumulate_contract(contract);
+
+    return value;
 }
 
 SEXP r_enable_contracts() {

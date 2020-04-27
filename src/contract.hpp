@@ -6,13 +6,15 @@
 
 void initialize_contracts();
 
-void add_contract(Contract* contract);
+void accumulate_contract(Contract* contract);
 
 void destroy_r_contract(SEXP r_contract);
 
 SEXP create_r_contract(Contract* contract);
 
 Contract* extract_from_r_contract(SEXP r_contract);
+
+SEXP r_assert_contract(SEXP r_contract, SEXP value, SEXP is_value_missing);
 
 bool contracts_are_enabled();
 
