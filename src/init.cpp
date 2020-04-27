@@ -17,8 +17,9 @@ static const R_CallMethodDef callMethods[] = {
 
     /*  contract assertion */
     {"assert_contract", (DL_FUNC) &r_assert_contract, 3},
-    {"capture_assertions", (DL_FUNC) &r_capture_assertions, 2},
-    {"get_assertions", (DL_FUNC) &r_get_assertions, 0},
+    {"capture_contracts", (DL_FUNC) &r_capture_contracts, 3},
+    {"get_contracts", (DL_FUNC) &r_get_contracts, 0},
+    {"clear_contracts", (DL_FUNC) &r_clear_contracts, 0},
 
     /* severity */
     {"set_severity", (DL_FUNC) &r_set_severity, 1},

@@ -30,7 +30,9 @@ class ContractAssertion {
             free((char*) (package_name_));
             free((char*) (function_name_));
         }
-        free((char*) (parameter_name_));
+        if (parameter_position_ != -1) {
+            free((char*) (parameter_name_));
+        }
     }
 
     bool is_owner() const {
@@ -146,12 +148,6 @@ class ContractAssertion {
     std::string expected_type_;
     bool assertion_status_;
 };
-
-const ContractAssertion& get_contract_assertion(int index);
-
-int get_contract_assertion_count();
-
-void add_contract_assertion(const ContractAssertion& assertion);
 
 std::ostream& operator<<(std::ostream& os,
                          const ContractAssertion& contract_assertion);

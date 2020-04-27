@@ -12,8 +12,9 @@ SEXP r_create_result_contract(SEXP, SEXP, SEXP, SEXP);
 
 /*  contract assertion */
 SEXP r_assert_contract(SEXP, SEXP, SEXP);
-SEXP r_capture_assertions(SEXP sym, SEXP env);
-SEXP r_get_assertions();
+SEXP r_capture_contracts(SEXP sym, SEXP env, SEXP separate);
+SEXP r_get_contracts();
+SEXP r_clear_contracts();
 
 /*  severity */
 SEXP r_set_severity(SEXP severity);

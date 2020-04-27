@@ -2,6 +2,7 @@
 #include "ContractAssertion.hpp"
 #include "call_trace.hpp"
 #include "r_api.hpp"
+#include "contract.hpp"
 
 char result_name[] = ".contractr__return_value";
 
@@ -50,13 +51,16 @@ SEXP r_create_result_contract(SEXP r_call_id,
     contract->set_parameter_position(-1);
     contract->set_parameter_name(result_name);
 
-    return R_MakeExternalPtr(contract, R_NilValue, R_NilValue);
+    return create_r_contract(contract);
 }
 
 SEXP r_assert_contract(SEXP r_contract, SEXP value, SEXP is_value_missing) {
     ContractAssertion* contract =
         static_cast<ContractAssertion*>(R_ExternalPtrAddr(r_contract));
+    R_SetExternalPtrAddr(r_contract, nullptr);
+
     contract->assert(value, asLogical(is_value_missing));
+    add_contract(contract);
     return value;
 }
 
@@ -93,8 +97,8 @@ void insert_argument_contract(ContractAssertion* contract,
         evaluate_call = false;
     }
 
-    SEXP r_contract =
-        PROTECT(R_MakeExternalPtr(contract, R_NilValue, R_NilValue));
+    SEXP r_contract = PROTECT(create_r_contract(contract));
+
     SEXP call = PROTECT(create_assert_contract_call(
         list3(r_contract, call_value, value_missing)));
 
