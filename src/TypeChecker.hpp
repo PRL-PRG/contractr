@@ -145,6 +145,11 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
         push_result_(rtype == EXTPTRSXP);
     }
 
+    void visit(const tastr::ast::DataFrameTypeNode& node) override final {
+        SEXP value = pop_value_();
+        push_result_(is_data_frame(value));
+    }
+
     void visit(const tastr::ast::BytecodeTypeNode& node) override final {
         SEXP value = pop_value_();
         SEXPTYPE rtype = type_of_sexp(value);
@@ -411,7 +416,8 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
         else if (list_size < parameter_size) {
             push_result_(false);
         }
-        /* walk over all struct parameters in the type and match against list elements  */
+        /* walk over all struct parameters in the type and match against list
+           elements  */
         else {
             std::vector<name_element_t> rlist;
 

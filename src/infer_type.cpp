@@ -141,7 +141,14 @@ std::string infer_type(const std::string& parameter_name, SEXP value) {
     }
 
     else if (type_of_sexp(value) == VECSXP) {
-        return infer_list_type(value);
+        /* if list has data.frame class it is a dataframe  */
+        if (is_data_frame(value)) {
+            return "dataframe";
+        }
+        /* infer non dataframe list type  */
+        else {
+            return infer_list_type(value);
+        }
     }
 
     else if (type_of_sexp(value) == CLOSXP) {

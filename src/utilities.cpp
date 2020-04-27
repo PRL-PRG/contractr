@@ -185,6 +185,34 @@ SEXP lookup_value(SEXP rho, SEXP value_sym, bool evaluate) {
     return value;
 }
 
+bool has_class(SEXP object, const std::string& class_name) {
+    SEXP class_names = getAttrib(object, R_ClassSymbol);
+
+    if (class_names == R_NilValue) {
+        return false;
+    }
+
+    if (type_of_sexp(class_names) != STRSXP) {
+        return false;
+    }
+
+    /* efficient to compare from the end for data.frame  */
+    for (int i = LENGTH(class_names) - 1; i >= 0; --i) {
+        SEXP name = STRING_ELT(class_names, i);
+        if (name != NA_STRING) {
+            if (class_name == CHAR(name)) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+bool is_data_frame(SEXP object) {
+    return (type_of_sexp(object) == VECSXP) && has_class(object, "data.frame");
+}
+
 void set_class(SEXP object, const std::string& class_name) {
     setAttrib(object, R_ClassSymbol, mkString(class_name.c_str()));
 }
