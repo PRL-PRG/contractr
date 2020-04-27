@@ -4,6 +4,7 @@
 #include "r_api.hpp"
 #include "contract.hpp"
 #include "type_declaration_cache.hpp"
+#include "raise.hpp"
 
 char result_name[] = ".contractr__return_value";
 
@@ -74,7 +75,11 @@ SEXP r_assert_contract(SEXP r_contract, SEXP value, SEXP is_value_missing) {
     R_SetExternalPtrAddr(r_contract, nullptr);
 
     contract->assert(value, asLogical(is_value_missing));
+
+    raise_contract_failure(contract);
+
     add_contract(contract);
+
     return value;
 }
 

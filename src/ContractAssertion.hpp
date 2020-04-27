@@ -1,11 +1,15 @@
 #ifndef CONTRACTR_CONTRACT_ASSERTION_HPP
 #define CONTRACTR_CONTRACT_ASSERTION_HPP
 
-#include <iostream>
+#include <tastr/ast/ast.hpp>
 #include <string>
 #include <Rinternals.h>
+
 #include "utilities.hpp"
-#include <tastr/ast/ast.hpp>
+#include "check_type.hpp"
+#include "infer_type.hpp"
+#include "type_declaration_cache.hpp"
+#include "r_api.hpp"
 #undef length
 
 class ContractAssertion {
@@ -130,12 +134,30 @@ class ContractAssertion {
     }
 
     SEXP assert(SEXP value, bool is_missing) {
-        SEXP value_to_check = is_missing ? R_MissingArg : value;
+        SEXP actual_value = is_missing ? R_MissingArg : value;
 
+        /* return type contract  */
         if (get_parameter_position() == -1) {
-            assert_return_type_(value_to_check);
-        } else {
-            assert_parameter_type_(value_to_check);
+            const tastr::ast::Node& node =
+                get_function_return_type(get_function_type());
+
+            assertion_status_ = check_type(get_parameter_name(), actual_value, node);
+            expected_type_ = type_to_string(node);
+            actual_type_ = infer_type(actual_value);
+        }
+        /* parameter outside limits  */
+        else if (get_parameter_position() >= get_expected_parameter_count()) {
+            assertion_status_ = false;
+            actual_type_ = infer_type(actual_value, get_parameter_name());
+        }
+        /* parameter is within limits  */
+        else {
+            const tastr::ast::Node& node = get_function_parameter_type(
+                get_function_type(), get_parameter_position());
+
+            assertion_status_ = check_type(get_parameter_name(), actual_value, node);
+            expected_type_ = type_to_string(node);
+            actual_type_ = infer_type(actual_value, get_parameter_name());
         }
 
         return value;
@@ -159,8 +181,5 @@ class ContractAssertion {
     bool assertion_status_;
     const tastr::ast::FunctionTypeNode* function_type_;
 };
-
-std::ostream& operator<<(std::ostream& os,
-                         const ContractAssertion& contract_assertion);
 
 #endif /* CONTRACTR_CONTRACT_ASSERTION_HPP */
