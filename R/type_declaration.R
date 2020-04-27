@@ -2,7 +2,18 @@
 #' @export
 import_type_declarations <- function(package_name) {
     stopifnot(is_scalar_character(package_name))
-    .Call(C_import_type_declarations, package_name)
+    filepath <- system.file("TYPEDECLARATION", package = package_name)
+    if (filepath == "" || dir.exists(filepath)) {
+        filepath <- system.file(file.path("TYPEDECLARATION", package_name),
+                                package = "contractR")
+    }
+    if (filepath == "" || dir.exists(filepath)) {
+        msg <- sprintf("No type declarations found for package %s", package_name)
+        message(msg)
+        character(0)
+    } else {
+        .Call(C_import_type_declarations, package_name, filepath)
+    }
 }
 
 #' @export

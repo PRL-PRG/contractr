@@ -8,8 +8,6 @@
 
 extern "C" {
 
-void initialize_type_declaration_cache();
-
 const std::string& type_to_string(const tastr::ast::Node& node);
 
 int get_function_parameter_count(

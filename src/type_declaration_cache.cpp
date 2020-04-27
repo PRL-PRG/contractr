@@ -3,13 +3,10 @@
 #include "utilities.hpp"
 
 #undef length
-#include <filesystem>
 #include <limits>
 #include <tastr/parser/parser.hpp>
 #include <map>
 #include <cassert>
-
-namespace fs = std::filesystem;
 
 /* the keys are unique numbers, map is faster compared to unordered map  */
 std::map<const tastr::ast::Node*, std::string> type_representation_cache;
@@ -18,8 +15,6 @@ using packdecl_t =
     std::pair<std::string, std::unique_ptr<tastr::ast::TopLevelNode>>;
 
 static std::vector<packdecl_t> type_declaration_cache;
-
-fs::path type_declaration_directory = "";
 
 using index_t = int;
 const index_t INVALID_INDEX = -1;
@@ -152,28 +147,10 @@ SEXP r_is_function_typed(SEXP pkg_name, SEXP fun_name) {
     return is_valid_index(function_index) ? R_TrueValue : R_FalseValue;
 }
 
-void initialize_type_declaration_cache() {
-    SEXP path = PROTECT(mkString("typedecl"));
-    type_declaration_directory = fs::path(CHAR(asChar(system_file(path))));
-    UNPROTECT(1);
-
-    if (!fs::is_directory(type_declaration_directory)) {
-        warningcall(R_NilValue,
-                    "type declaration directory '%s' does not exist",
-                    type_declaration_directory.c_str());
-    }
-}
-
-SEXP r_import_type_declarations(SEXP pkg_name) {
+SEXP r_import_type_declarations(SEXP pkg_name, SEXP typedecl_filepath) {
     const std::string package_name = CHAR(asChar(pkg_name));
 
-    fs::path package_typedecl_filepath =
-        type_declaration_directory / fs::path(package_name);
-
-    /* return empty vector if types are not present  */
-    if (!fs::is_regular_file(package_typedecl_filepath)) {
-        return allocVector(STRSXP, 0);
-    }
+    std::string package_typedecl_filepath(CHAR(asChar(typedecl_filepath)));
 
     tastr::parser::ParseResult result(
         tastr::parser::parse_file(package_typedecl_filepath));

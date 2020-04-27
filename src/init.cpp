@@ -1,6 +1,5 @@
 #define R_NO_REMAP
 
-#include "type_declaration_cache.hpp"
 #include "utilities.hpp"
 #include "contract.hpp"
 #include "r_api.hpp"
@@ -36,7 +35,7 @@ static const R_CallMethodDef callMethods[] = {
     {"check_type", (DL_FUNC) &r_check_type, 4},
 
     /*  type declaration cache */
-    {"import_type_declarations", (DL_FUNC) &r_import_type_declarations, 1},
+    {"import_type_declarations", (DL_FUNC) &r_import_type_declarations, 2},
     {"get_type_index", (DL_FUNC) &r_get_type_index, 2},
     {"get_typed_package_names", (DL_FUNC) &r_get_typed_package_names, 0},
     {"get_typed_function_names", (DL_FUNC) &r_get_typed_function_names, 1},
@@ -58,8 +57,6 @@ void R_init_contractR(DllInfo* dll) {
     R_useDynamicSymbols(dll, FALSE);
 
     initialize_globals();
-
-    initialize_type_declaration_cache();
 
     initialize_contracts();
 }
