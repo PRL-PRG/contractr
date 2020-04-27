@@ -1,4 +1,4 @@
-#include "contract.hpp"
+#include "Contract.hpp"
 #include "r_api.hpp"
 #include "utilities.hpp"
 #include "raise.hpp"

@@ -1,5 +1,5 @@
-#ifndef CONTRACTR_CONTRACT_CLASS_HPP
-#define CONTRACTR_CONTRACT_CLASS_HPP
+#ifndef CONTRACTR_CONTRACT_HPP
+#define CONTRACTR_CONTRACT_HPP
 
 #include <tastr/ast/ast.hpp>
 #include <string>
@@ -8,7 +8,7 @@
 #include "utilities.hpp"
 #include "check_type.hpp"
 #include "infer_type.hpp"
-#include "type_declaration_cache.hpp"
+#include "type_declaration.hpp"
 #include "r_api.hpp"
 #undef length
 
@@ -191,4 +191,24 @@ class Contract {
     bool asserted_;
 };
 
-#endif /* CONTRACTR_CONTRACT_CLASS_HPP */
+void initialize_contracts();
+
+void accumulate_contract(Contract* contract);
+
+void destroy_r_contract(SEXP r_contract);
+
+SEXP create_r_contract(Contract* contract);
+
+Contract* extract_from_r_contract(SEXP r_contract);
+
+SEXP r_assert_contract(SEXP r_contract, SEXP value, SEXP is_value_missing);
+
+Contract* create_argument_contract(Contract* result_contract,
+                                   SEXP r_parameter_name,
+                                   int parameter_position);
+
+bool contracts_are_enabled();
+
+bool contracts_are_disabled();
+
+#endif /* CONTRACTR_CONTRACT_HPP */

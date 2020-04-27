@@ -1,7 +1,7 @@
 #define R_NO_REMAP
 
 #include "utilities.hpp"
-#include "contract.hpp"
+#include "Contract.hpp"
 #include "r_api.hpp"
 #include <R.h>
 #include <R_ext/Rdynload.h>

@@ -1,8 +1,8 @@
 #include "utilities.hpp"
 #include "Contract.hpp"
 #include "r_api.hpp"
-#include "contract.hpp"
-#include "type_declaration_cache.hpp"
+#include "Contract.hpp"
+#include "type_declaration.hpp"
 
 void insert_argument_contract(Contract* contract,
                               SEXP param_sym,
