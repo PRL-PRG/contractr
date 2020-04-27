@@ -1,4 +1,5 @@
 #include "utilities.hpp"
+#include <cstring>
 
 SEXP DotCallSymbol = NULL;
 SEXP DelayedAssign = NULL;
@@ -6,7 +7,10 @@ SEXP SystemDotFile = NULL;
 SEXP PackageSymbol = NULL;
 SEXP ContractRSymbol = NULL;
 SEXP AssertContractSymbol = NULL;
+
 SEXPTYPE MISSINGSXP = 19883;
+
+const char* UNDEFINED_NAME = "<undefined>";
 
 void initialize_globals() {
     DotCallSymbol = Rf_install(".Call");
@@ -15,6 +19,15 @@ void initialize_globals() {
     PackageSymbol = Rf_install("package");
     ContractRSymbol = Rf_install("contractR");
     AssertContractSymbol = Rf_install("C_assert_contract");
+}
+
+char* copy_c_string(const char* source) {
+    int size = strlen(source);
+    int bytes = (size + 1) * sizeof(char);
+    char* destination = (char*) malloc(bytes);
+    /* size + 1 will also copy the null character at the end  */
+    memcpy(destination, source, bytes);
+    return destination;
 }
 
 SEXPTYPE type_of_sexp(SEXP value) {

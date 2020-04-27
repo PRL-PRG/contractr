@@ -42,3 +42,7 @@ bool check_type(const std::string& parameter_name,
                 const tastr::ast::Node& node) {
     return TypeChecker().typecheck(parameter_name, value, node);
 }
+
+bool check_type(SEXP value, const tastr::ast::Node& node) {
+    return check_type(UNDEFINED_NAME, value, node);
+}

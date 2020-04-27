@@ -15,9 +15,13 @@ extern SEXP PackageSymbol;
 
 extern SEXPTYPE MISSINGSXP;
 
+extern const char* UNDEFINED_NAME;
+
 extern "C" {
 
 void initialize_globals();
+
+char* copy_c_string(const char* source);
 
 SEXPTYPE type_of_sexp(SEXP value);
 
@@ -124,7 +128,6 @@ SEXP create_assert_contract_call(SEXP arguments);
 
 SEXP create_list(const std::vector<SEXP>& values,
                  const std::vector<std::string>& names);
-
 }
 
 #endif /* CONTRACTR_UTILITIES_HPP */

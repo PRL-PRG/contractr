@@ -16,6 +16,10 @@ Contract* extract_from_r_contract(SEXP r_contract);
 
 SEXP r_assert_contract(SEXP r_contract, SEXP value, SEXP is_value_missing);
 
+Contract* create_argument_contract(Contract* result_contract,
+                                   SEXP r_parameter_name,
+                                   int parameter_position);
+
 bool contracts_are_enabled();
 
 bool contracts_are_disabled();

@@ -23,7 +23,7 @@ class Contract {
         , actual_parameter_count_(-1)
         , expected_parameter_count_(-1)
         , parameter_position_(-1)
-        , parameter_name_(nullptr)
+        , parameter_name_(UNDEFINED_NAME)
         , actual_type_("")
         , expected_type_("")
         , function_type_(nullptr)
@@ -153,15 +153,14 @@ class Contract {
             const tastr::ast::Node& node =
                 get_function_return_type(get_function_type());
 
-            assertion_status_ =
-                check_type(get_parameter_name(), actual_value, node);
+            assertion_status_ = check_type(actual_value, node);
             expected_type_ = type_to_string(node);
             actual_type_ = infer_type(actual_value);
         }
         /* parameter outside limits  */
         else if (get_parameter_position() >= get_expected_parameter_count()) {
             assertion_status_ = false;
-            actual_type_ = infer_type(actual_value, get_parameter_name());
+            actual_type_ = infer_type(get_parameter_name(), actual_value);
         }
         /* parameter is within limits  */
         else {
@@ -171,7 +170,7 @@ class Contract {
             assertion_status_ =
                 check_type(get_parameter_name(), actual_value, node);
             expected_type_ = type_to_string(node);
-            actual_type_ = infer_type(actual_value, get_parameter_name());
+            actual_type_ = infer_type(get_parameter_name(), actual_value);
         }
     }
 

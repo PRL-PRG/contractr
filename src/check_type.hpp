@@ -5,9 +5,10 @@
 #include <string>
 #include <Rinternals.h>
 
-
 bool check_type(const std::string& parameter_name,
                 SEXP value,
                 const tastr::ast::Node& node);
+
+bool check_type(SEXP value, const tastr::ast::Node& node);
 
 #endif /* CONTRACTR_CHECK_TYPE_HPP */

@@ -127,7 +127,7 @@ std::string infer_list_type(SEXP value) {
     }
 }
 
-std::string infer_type(SEXP value, const std::string& parameter_name) {
+std::string infer_type(const std::string& parameter_name, SEXP value) {
     if (parameter_name == "...") {
         return "...";
     }
@@ -239,9 +239,13 @@ std::string infer_type(SEXP value, const std::string& parameter_name) {
     return "<unhandled case>";
 }
 
+std::string infer_type(SEXP value) {
+    return infer_type(UNDEFINED_NAME, value);
+}
+
 SEXP r_infer_type(SEXP value_sym, SEXP parameter_name, SEXP rho) {
     SEXP value = PROTECT(lookup_value(rho, value_sym, true));
-    std::string type = infer_type(value, CHAR(asChar(parameter_name)));
+    std::string type = infer_type(CHAR(asChar(parameter_name)), value);
     UNPROTECT(1);
     return mkString(type.c_str());
 }

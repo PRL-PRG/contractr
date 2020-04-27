@@ -4,6 +4,8 @@
 #include <string>
 #include <Rinternals.h>
 
-std::string infer_type(SEXP value, const std::string& parameter_name = "");
+std::string infer_type(const std::string& parameter_name, SEXP value);
+
+std::string infer_type(SEXP value);
 
 #endif /* CONTRACTR_INFER_TYPE_HPP */
