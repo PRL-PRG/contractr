@@ -15,6 +15,9 @@ SEXP r_assert_contract(SEXP, SEXP, SEXP);
 SEXP r_capture_contracts(SEXP sym, SEXP env, SEXP separate);
 SEXP r_get_contracts();
 SEXP r_clear_contracts();
+SEXP r_enable_contracts();
+SEXP r_disable_contracts();
+SEXP r_reinstate_contract_status();
 
 /*  severity */
 SEXP r_set_severity(SEXP severity);

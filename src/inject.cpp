@@ -55,6 +55,11 @@ SEXP r_create_result_contract(SEXP r_call_id,
 }
 
 SEXP r_assert_contract(SEXP r_contract, SEXP value, SEXP is_value_missing) {
+
+    if (contracts_are_disabled()) {
+        return value;
+    }
+
     ContractAssertion* contract =
         static_cast<ContractAssertion*>(R_ExternalPtrAddr(r_contract));
     R_SetExternalPtrAddr(r_contract, nullptr);
@@ -135,6 +140,10 @@ SEXP r_insert_function_contract(SEXP r_contract, SEXP fun, SEXP rho) {
 
     if (TYPEOF(r_contract) != EXTPTRSXP) {
         Rf_error("contract must be an external pointer");
+    }
+
+    if(contracts_are_disabled()) {
+        return R_NilValue;
     }
 
     ContractAssertion* contract =

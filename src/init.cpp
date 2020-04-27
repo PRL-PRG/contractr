@@ -2,6 +2,7 @@
 
 #include "type_declaration_cache.hpp"
 #include "utilities.hpp"
+#include "contract.hpp"
 #include "r_api.hpp"
 #include <R.h>
 #include <R_ext/Rdynload.h>
@@ -20,6 +21,9 @@ static const R_CallMethodDef callMethods[] = {
     {"capture_contracts", (DL_FUNC) &r_capture_contracts, 3},
     {"get_contracts", (DL_FUNC) &r_get_contracts, 0},
     {"clear_contracts", (DL_FUNC) &r_clear_contracts, 0},
+    {"enable_contracts", (DL_FUNC) &r_enable_contracts, 0},
+    {"disable_contracts", (DL_FUNC) &r_disable_contracts, 0},
+    {"reinstate_contract_status", (DL_FUNC) &r_reinstate_contract_status, 0},
 
     /* severity */
     {"set_severity", (DL_FUNC) &r_set_severity, 1},
@@ -55,5 +59,7 @@ void R_init_contractR(DllInfo* dll) {
     initialize_globals();
 
     initialize_type_declaration_cache();
+
+    initialize_contracts();
 }
 }
