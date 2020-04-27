@@ -1,8 +1,6 @@
 #ifndef CONTRACTR_TYPE_DECLARATION_H
 #define CONTRACTR_TYPE_DECLARATION_H
 
-#include "logger.hpp"
-#undef length
 #include <string>
 #include <tastr/ast/ast.hpp>
 

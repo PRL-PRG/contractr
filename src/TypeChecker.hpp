@@ -1,7 +1,6 @@
 #ifndef CONTRACTR_TYPE_CHECKER_HPP
 #define CONTRACTR_TYPE_CHECKER_HPP
 
-#include "logger.hpp"
 #include "utilities.hpp"
 
 #include <cassert>
