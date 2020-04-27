@@ -28,6 +28,10 @@ SEXP r_clear_contracts() {
 void destroy_r_contract(SEXP r_contract) {
     Contract* contract = static_cast<Contract*>(R_ExternalPtrAddr(r_contract));
     if (contract) {
+        if (contract->is_asserted()) {
+            errorcall(R_NilValue,
+                      "asserted contract deleted without accumulation");
+        }
         delete contract;
         R_SetExternalPtrAddr(r_contract, nullptr);
     }
@@ -42,6 +46,12 @@ SEXP create_r_contract(Contract* contract) {
     UNPROTECT(1);
 
     return externalptr;
+}
+
+Contract* extract_from_r_contract(SEXP r_contract) {
+    Contract* contract = static_cast<Contract*>(R_ExternalPtrAddr(r_contract));
+    R_SetExternalPtrAddr(r_contract, nullptr);
+    return contract;
 }
 
 SEXP r_enable_contracts() {

@@ -12,6 +12,8 @@ void destroy_r_contract(SEXP r_contract);
 
 SEXP create_r_contract(Contract* contract);
 
+Contract* extract_from_r_contract(SEXP r_contract);
+
 bool contracts_are_enabled();
 
 bool contracts_are_disabled();

@@ -69,8 +69,13 @@ SEXP r_assert_contract(SEXP r_contract, SEXP value, SEXP is_value_missing) {
         return value;
     }
 
-    Contract* contract = static_cast<Contract*>(R_ExternalPtrAddr(r_contract));
-    R_SetExternalPtrAddr(r_contract, nullptr);
+    Contract* contract = extract_from_r_contract(r_contract);
+
+    if (contract == nullptr) {
+        errorcall(R_NilValue,
+                  "invalid contract reference encountered while asserting");
+        return value;
+    }
 
     contract->assert(value, asLogical(is_value_missing));
 

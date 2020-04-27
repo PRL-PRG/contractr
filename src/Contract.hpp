@@ -26,8 +26,9 @@ class Contract {
         , parameter_name_(nullptr)
         , actual_type_("")
         , expected_type_("")
+        , function_type_(nullptr)
         , assertion_status_(false)
-        , function_type_(nullptr) {
+        , asserted_(false) {
     }
 
     ~Contract() {
@@ -121,10 +122,6 @@ class Contract {
         return expected_type_;
     }
 
-    bool get_assertion_status() const {
-        return assertion_status_;
-    }
-
     const tastr::ast::FunctionTypeNode* get_function_type() {
         return function_type_;
     }
@@ -133,7 +130,22 @@ class Contract {
         function_type_ = function_type;
     }
 
-    SEXP assert(SEXP value, bool is_missing) {
+    bool get_assertion_status() const {
+        return assertion_status_;
+    }
+
+    bool is_asserted() const {
+        return asserted_;
+    }
+
+    void assert(SEXP value, bool is_missing) {
+        if (is_asserted()) {
+            Rf_errorcall(R_NilValue, "contract is being reasserted");
+            return;
+        }
+
+        asserted_ = true;
+
         SEXP actual_value = is_missing ? R_MissingArg : value;
 
         /* return type contract  */
@@ -161,14 +173,9 @@ class Contract {
             expected_type_ = type_to_string(node);
             actual_type_ = infer_type(actual_value, get_parameter_name());
         }
-
-        return value;
     }
 
   private:
-    void assert_parameter_type_(SEXP value);
-    void assert_return_type_(SEXP value);
-
     bool owner_;
     int call_id_;
     const char* call_trace_;
@@ -180,8 +187,9 @@ class Contract {
     const char* parameter_name_;
     std::string actual_type_;
     std::string expected_type_;
-    bool assertion_status_;
     const tastr::ast::FunctionTypeNode* function_type_;
+    bool assertion_status_;
+    bool asserted_;
 };
 
 #endif /* CONTRACTR_CONTRACT_CLASS_HPP */
