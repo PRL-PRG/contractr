@@ -70,8 +70,8 @@ insert_function_contract <- function(fun,
     stopifnot(is_environment(env))
 
     if (has_contract(fun)) {
-        message <- sprintf("cannot insert contract twice in '%s::%s'", fun_name, pkg_name)
-        warning(message)
+        msg <- sprintf("Contract already inserted in '%s::%s'", pkg_name, fun_name)
+        message(msg)
     }
     else {
         id <- injectr:::sexp_address(fun)
