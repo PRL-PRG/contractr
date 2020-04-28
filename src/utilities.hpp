@@ -4,6 +4,7 @@
 #include <Rinternals.h>
 #include <string>
 #include <functional>
+#include <vector>
 
 extern SEXP R_TrueValue;
 extern SEXP R_FalseValue;

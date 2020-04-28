@@ -17,4 +17,4 @@ RoxygenNote: 7.1.0.9000
 Imports: 
     injectr
 Remotes: PRL-PRG/injectr
-SystemRequirements: C++17
+SystemRequirements: C++11

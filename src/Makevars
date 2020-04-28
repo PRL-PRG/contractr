@@ -2,5 +2,5 @@ TASTR_DIRPATH := $(realpath ../../tastr)
 TASTR_INCLUDE_PATH := $(TASTR_DIRPATH)/build/include
 TASTR_LIBRARY_PATH := $(TASTR_DIRPATH)/build/lib
 GIT_COMMIT_INFO != git log --pretty=oneline -1
-PKG_CPPFLAGS=-I$(R_HOME)/src/include/ -I$(TASTR_INCLUDE_PATH) -I$(TASTR_INCLUDE_PATH)/tastr -DGIT_COMMIT_INFO='"$(GIT_COMMIT_INFO)"' --std=c++17 -g3 -O0 -ggdb3
+PKG_CPPFLAGS=-I$(R_HOME)/src/include/ -I$(TASTR_INCLUDE_PATH) -I$(TASTR_INCLUDE_PATH)/tastr -DGIT_COMMIT_INFO='"$(GIT_COMMIT_INFO)"' --std=c++11 -g3 -O2 -ggdb3
 PKG_LIBS=$(TASTR_LIBRARY_PATH)/libtastr.a
