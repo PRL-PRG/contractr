@@ -10,7 +10,7 @@ install: clean
 	$(R_EXECUTABLE) CMD INSTALL --with-keep.source .
 
 clean:
-	rm -rf contractR*.tar.gz
+	rm -rf contractr*.tar.gz
 	rm -rf *.Rcheck
 	rm -rf src/*.so
 	rm -rf src/*.o
@@ -20,7 +20,7 @@ document:
 	$(R_EXECUTABLE) --slave -e "pkgdown::build_site()"
 
 check: build
-	$(R_EXECUTABLE) CMD check --output=$(R_CMD_CHECK_OUTPUT_DIRPATH) contractR_*.tar.gz
+	$(R_EXECUTABLE) CMD check --output=$(R_CMD_CHECK_OUTPUT_DIRPATH) contractr_*.tar.gz
 
 test:
 	$(R_EXECUTABLE) --slave -e "devtools::test()"

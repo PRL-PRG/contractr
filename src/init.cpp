@@ -51,7 +51,7 @@ static const R_CallMethodDef callMethods[] = {
     {"show_type_declarations", (DL_FUNC) &r_show_type_declarations, 1},
     {NULL, NULL, 0}};
 
-void R_init_contractR(DllInfo* dll) {
+void R_init_contractr(DllInfo* dll) {
     R_registerRoutines(dll, NULL, callMethods, NULL, NULL);
 
     R_useDynamicSymbols(dll, FALSE);

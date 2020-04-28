@@ -44,7 +44,7 @@ void insert_argument_contract(Contract* contract,
 
 #ifndef NDEBUG
     Rprintf(
-        "\ncontractR/src/inject.cpp: *** %s '%s' for '%s:::%s' with call id "
+        "\ncontractr/src/inject.cpp: *** %s '%s' for '%s:::%s' with call id "
         "%d in '%s' [%d]\n",
         evaluate_call ? "calling" : "injecting",
         R_CHAR(Rf_asChar(Rf_deparse1(call, FALSE, 0))),

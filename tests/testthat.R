@@ -1,4 +1,4 @@
 library(testthat)
-library(contractR)
+library(contractr)
 
-test_check("contractR")
+test_check("contractr")

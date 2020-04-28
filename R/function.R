@@ -103,27 +103,27 @@ modify_function <- function(fun, fun_name, pkg_name) {
 create_argval_contract_code <- function(fun_name, pkg_name) {
     substitute({
         ## TODO: sys.calls needs to be handled properly
-        .contractr__contract <- .Call(contractR:::C_create_result_contract,
-                                      contractR:::get_next_call_id(),
+        .contractr__contract <- .Call(contractr:::C_create_result_contract,
+                                      contractr:::get_next_call_id(),
                                       Map(deparse, sys.calls()),
                                       PKG_NAME,
                                       FUN_NAME,
                                       TYPE_INDEX)
-        .Call(contractR:::C_insert_function_contract,
+        .Call(contractr:::C_insert_function_contract,
               .contractr__contract, sys.function(),
               sys.frame(sys.nframe()))
 
     }, list(PKG_NAME=pkg_name,
             FUN_NAME=fun_name,
-            TYPE_INDEX=.Call(contractR:::C_get_type_index, pkg_name, fun_name)))
+            TYPE_INDEX=.Call(contractr:::C_get_type_index, pkg_name, fun_name)))
 }
 
 
 create_retval_contract_code <- function(fun_name, pkg_name) {
     substitute({
-        .contractr__retval__ <- returnValue(contractR:::.no_retval_marker)     # nolint
-        if (!identical(.contractr__retval__, contractR:::.no_retval_marker)) {
-            .Call(contractR:::C_assert_contract,
+        .contractr__retval__ <- returnValue(contractr:::.no_retval_marker)     # nolint
+        if (!identical(.contractr__retval__, contractr:::.no_retval_marker)) {
+            .Call(contractr:::C_assert_contract,
                   .contractr__contract,
                   .contractr__retval__,
                   FALSE)

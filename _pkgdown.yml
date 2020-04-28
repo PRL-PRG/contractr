@@ -1,11 +1,11 @@
-url: https://prl-prg.github.io/contractR/
+url: https://prl-prg.github.io/contractr/
 
 template:
   params:
     bootswatch: cosmo
 
 navbar:
-  title: "contractR"
+  title: "contractr"
   left:
     - text: "Articles"
       href: articles/index.html
@@ -13,5 +13,5 @@ navbar:
       href: reference/index.html
   right:
    - icon: fa-github
-     href: https://github.com/PRL-PRG/contractR
+     href: https://github.com/PRL-PRG/contractr
 

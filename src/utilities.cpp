@@ -5,7 +5,7 @@ SEXP DotCallSymbol = NULL;
 SEXP DelayedAssign = NULL;
 SEXP SystemDotFile = NULL;
 SEXP PackageSymbol = NULL;
-SEXP ContractRSymbol = NULL;
+SEXP ContractrSymbol = NULL;
 SEXP AssertContractSymbol = NULL;
 
 SEXPTYPE MISSINGSXP = 19883;
@@ -17,7 +17,7 @@ void initialize_globals() {
     DelayedAssign = Rf_install("delayedAssign");
     SystemDotFile = Rf_install("system.file");
     PackageSymbol = Rf_install("package");
-    ContractRSymbol = Rf_install("contractR");
+    ContractrSymbol = Rf_install("contractr");
     AssertContractSymbol = Rf_install("C_assert_contract");
 }
 
@@ -167,7 +167,7 @@ SEXP delayed_assign(SEXP variable,
 }
 
 SEXP system_file(SEXP path) {
-    SEXP package_name = PROTECT(mkString("contractR"));
+    SEXP package_name = PROTECT(mkString("contractr"));
     SEXP call = PROTECT(Rf_lang3(SystemDotFile, path, package_name));
     SET_TAG(CDDR(call), PackageSymbol);
     SEXP result = Rf_eval(call, R_GlobalEnv);
@@ -300,7 +300,7 @@ SEXP create_dot_call(SEXP function, SEXP arguments) {
 
 SEXP create_assert_contract_call(SEXP arguments) {
     SEXP assert_contract_fun = PROTECT(
-        Rf_lang3(R_TripleColonSymbol, ContractRSymbol, AssertContractSymbol));
+        Rf_lang3(R_TripleColonSymbol, ContractrSymbol, AssertContractSymbol));
 
     SEXP call = PROTECT(create_dot_call(assert_contract_fun, arguments));
 

@@ -3,13 +3,13 @@ test_injection("into a function", {
 
   insert_contract(f, "<int, int> => int", fun_name = "f", pkg_name = "mypkg")
 
-  expect_length(contractR:::get_injected_function_count(), 1)
+  expect_length(contractr:::get_injected_function_count(), 1)
 
   expect_true(has_contract(f))
 
   remove_contract(f)
 
-  expect_equal(contractR:::get_injected_function_count(), 0)
+  expect_equal(contractr:::get_injected_function_count(), 0)
 
   expect_false(has_contract(f))
 
@@ -23,7 +23,7 @@ test_injection("into an environment", {
 
   expect_silent(insert_environment_contract(e, "e", FALSE))
 
-  expect_equal(contractR:::get_injected_function_count(), 0)
+  expect_equal(contractr:::get_injected_function_count(), 0)
   expect_false(has_contract(e$f))
   expect_false(has_contract(e$g))
   expect_false(has_contract(e$h))

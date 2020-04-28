@@ -1,6 +1,6 @@
 context("type assertion")
 
-.__assert_type_fun__ <- contractR:::assert_type # nolint
+.__assert_type_fun__ <- contractr:::assert_type # nolint
 checks <- list()
 
 teardown({
@@ -21,7 +21,7 @@ test_that("simple function", {
   checks <<- list()
   
   f <- function(a, b) {
-    .Call(C_inject_type_assertion, "contractR", "f", sys.function(), sys.frame(sys.nframe()))
+    .Call(C_inject_type_assertion, "contractr", "f", sys.function(), sys.frame(sys.nframe()))
 
     # here we are trying to get the value twice to have the test
     # check that the type check happens only once
@@ -37,7 +37,7 @@ test_that("simple function", {
     list(
       value=quote(1+1),
       value_missing=FALSE,
-      pkg_name="contractR",
+      pkg_name="contractr",
       fun_name="f",
       param_name="a",
       param_index=0
@@ -48,7 +48,7 @@ test_that("simple function", {
     list(
       value=quote(2+2),
       value_missing=FALSE,
-      pkg_name="contractR",
+      pkg_name="contractr",
       fun_name="f",
       param_name="b",
       param_index=1
@@ -60,7 +60,7 @@ test_that("function with ...", {
   checks <<- list()
 
   f <- function(a, ...) {
-    .Call(C_inject_type_assertion, "contractR", "f", sys.function(), sys.frame(sys.nframe()))
+    .Call(C_inject_type_assertion, "contractr", "f", sys.function(), sys.frame(sys.nframe()))
 
     list(...)
     a + sum(c(...))
@@ -73,7 +73,7 @@ test_that("function with ...", {
     list(
       value=NULL,
       value_missing=FALSE,
-      pkg_name="contractR",
+      pkg_name="contractr",
       fun_name="f",
       param_name="...",
       param_index=1
@@ -84,7 +84,7 @@ test_that("function with ...", {
     list(
       value=quote(1+1),
       value_missing=FALSE,
-      pkg_name="contractR",
+      pkg_name="contractr",
       fun_name="f",
       param_name="a",
       param_index=0
@@ -96,7 +96,7 @@ test_that("function with missing ...", {
   checks <<- list()
 
   f <- function(a, ...) {
-    .Call(C_inject_type_assertion, "contractR", "f", sys.function(), sys.frame(sys.nframe()))
+    .Call(C_inject_type_assertion, "contractr", "f", sys.function(), sys.frame(sys.nframe()))
 
     list(...)
     a + sum(c(...))
@@ -109,7 +109,7 @@ test_that("function with missing ...", {
     list(
       value=NULL,
       value_missing=TRUE,
-      pkg_name="contractR",
+      pkg_name="contractr",
       fun_name="f",
       param_name="...",
       param_index=1
@@ -120,7 +120,7 @@ test_that("function with missing ...", {
     list(
       value=quote(1+1),
       value_missing=FALSE,
-      pkg_name="contractR",
+      pkg_name="contractr",
       fun_name="f",
       param_name="a",
       param_index=0
@@ -132,7 +132,7 @@ test_that("function with missing argument", {
   checks <<- list()
 
   f <- function(a, b) {
-    .Call(C_inject_type_assertion, "contractR", "f", sys.function(), sys.frame(sys.nframe()))
+    .Call(C_inject_type_assertion, "contractr", "f", sys.function(), sys.frame(sys.nframe()))
 
     if (missing(b)) b <- 3
     a + b
@@ -145,7 +145,7 @@ test_that("function with missing argument", {
     list(
       value=NULL,
       value_missing=TRUE,
-      pkg_name="contractR",
+      pkg_name="contractr",
       fun_name="f",
       param_name="b",
       param_index=1
@@ -156,7 +156,7 @@ test_that("function with missing argument", {
     list(
       value=quote(1+1),
       value_missing=FALSE,
-      pkg_name="contractR",
+      pkg_name="contractr",
       fun_name="f",
       param_name="a",
       param_index=0
@@ -168,7 +168,7 @@ test_that("function with default argument", {
   checks <<- list()
 
   f <- function(a, b=2+2) {
-    .Call(C_inject_type_assertion, "contractR", "f", sys.function(), sys.frame(sys.nframe()))
+    .Call(C_inject_type_assertion, "contractr", "f", sys.function(), sys.frame(sys.nframe()))
     a + b
   }
 
@@ -179,7 +179,7 @@ test_that("function with default argument", {
     list(
       value=quote(1+1),
       value_missing=FALSE,
-      pkg_name="contractR",
+      pkg_name="contractr",
       fun_name="f",
       param_name="a",
       param_index=0
@@ -190,7 +190,7 @@ test_that("function with default argument", {
     list(
       value=quote(2+2),
       value_missing=FALSE,
-      pkg_name="contractR",
+      pkg_name="contractr",
       fun_name="f",
       param_name="b",
       param_index=1
