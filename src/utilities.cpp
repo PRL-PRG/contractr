@@ -10,7 +10,7 @@ SEXP AssertContractSymbol = NULL;
 
 SEXPTYPE MISSINGSXP = 19883;
 
-const char* UNDEFINED_NAME = "<undefined>";
+const std::string UNDEFINED_STRING_VALUE = "<undefined>";
 
 void initialize_globals() {
     DotCallSymbol = Rf_install(".Call");

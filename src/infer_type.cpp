@@ -247,7 +247,7 @@ std::string infer_type(const std::string& parameter_name, SEXP value) {
 }
 
 std::string infer_type(SEXP value) {
-    return infer_type(UNDEFINED_NAME, value);
+    return infer_type(UNDEFINED_STRING_VALUE, value);
 }
 
 SEXP r_infer_type(SEXP value_sym, SEXP parameter_name, SEXP rho) {

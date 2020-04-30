@@ -44,5 +44,5 @@ bool check_type(const std::string& parameter_name,
 }
 
 bool check_type(SEXP value, const tastr::ast::Node& node) {
-    return check_type(UNDEFINED_NAME, value, node);
+    return check_type(UNDEFINED_STRING_VALUE, value, node);
 }

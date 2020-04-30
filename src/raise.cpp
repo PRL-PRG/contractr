@@ -17,11 +17,11 @@ void raise_return_type_failure(const Contract* contract,
 
     raise_function(R_NilValue,
                    RETURN_TYPE_FAILURE_MESSAGE,
-                   contract->get_package_name(),
-                   contract->get_function_name(),
+                   contract->get_package_name().c_str(),
+                   contract->get_function_name().c_str(),
                    contract->get_expected_type().c_str(),
                    contract->get_actual_type().c_str(),
-                   contract->get_call_trace());
+                   contract->get_call_trace().c_str());
 }
 
 void raise_parameter_outside_limit(const Contract* contract,
@@ -35,14 +35,14 @@ void raise_parameter_outside_limit(const Contract* contract,
 
     raise_function(R_NilValue,
                    PARAMETER_OUTSIDE_LIMIT_MESSAGE,
-                   contract->get_package_name(),
-                   contract->get_function_name(),
+                   contract->get_package_name().c_str(),
+                   contract->get_function_name().c_str(),
                    contract->get_expected_parameter_count(),
                    contract->get_actual_type().c_str(),
-                   contract->get_parameter_name(),
+                   contract->get_parameter_name().c_str(),
                    /* NOTE: indexing starts from 1 in R */
                    contract->get_parameter_position() + 1,
-                   contract->get_call_trace());
+                   contract->get_call_trace().c_str());
 }
 
 void raise_argument_type_failure(const Contract* contract,
@@ -55,14 +55,14 @@ void raise_argument_type_failure(const Contract* contract,
 
     raise_function(R_NilValue,
                    ARGUMENT_TYPE_FAILURE_MESSAGE,
-                   contract->get_parameter_name(),
+                   contract->get_parameter_name().c_str(),
                    /* NOTE: indexing starts from 1 in R */
                    contract->get_parameter_position() + 1,
-                   contract->get_package_name(),
-                   contract->get_function_name(),
+                   contract->get_package_name().c_str(),
+                   contract->get_function_name().c_str(),
                    contract->get_expected_type().c_str(),
                    contract->get_actual_type().c_str(),
-                   contract->get_call_trace());
+                   contract->get_call_trace().c_str());
 }
 
 void raise_contract_failure(const Contract* contract) {

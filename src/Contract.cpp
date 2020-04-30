@@ -82,10 +82,7 @@ Contract* create_argument_contract(Contract* result_contract,
                                    SEXP r_parameter_name,
                                    int parameter_position) {
     Contract* argument_contract = new Contract(*result_contract);
-    /* NOTE: this contract is not an owner unlike result contract  */
-    argument_contract->set_owner(false);
-    argument_contract->set_parameter_name(
-        copy_c_string(R_CHAR(PRINTNAME(r_parameter_name))));
+    argument_contract->set_parameter_name(R_CHAR(PRINTNAME(r_parameter_name)));
     argument_contract->set_parameter_position(parameter_position);
 
     return argument_contract;
@@ -98,17 +95,17 @@ SEXP r_create_result_contract(SEXP r_call_id,
                               SEXP r_type_index) {
     int call_id = asInteger(r_call_id);
     // TODO: optimize creation of call_trace
-    const char* call_trace = copy_c_string(
-        concatenate_call_trace(r_call_trace, std::string(14, ' ')).c_str());
-    const char* package_name = copy_c_string(CHAR(asChar(r_package_name)));
-    const char* function_name = copy_c_string(CHAR(asChar(r_function_name)));
+    std::string call_trace =
+        concatenate_call_trace(r_call_trace, std::string(14, ' '));
+    std::string package_name = CHAR(asChar(r_package_name));
+    std::string function_name = CHAR(asChar(r_function_name));
     int package_index = INTEGER(r_type_index)[0];
     int function_index = INTEGER(r_type_index)[1];
 
     const tastr::ast::FunctionTypeNode* function_type =
         get_function_type(package_index, function_index);
 
-    Contract* contract = new Contract(true);
+    Contract* contract = new Contract();
     contract->set_call_id(call_id);
     contract->set_call_trace(call_trace);
     contract->set_package_name(package_name);

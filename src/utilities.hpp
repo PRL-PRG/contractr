@@ -16,7 +16,7 @@ extern SEXP PackageSymbol;
 
 extern SEXPTYPE MISSINGSXP;
 
-extern const char* UNDEFINED_NAME;
+extern const std::string UNDEFINED_STRING_VALUE;
 
 extern "C" {
 
