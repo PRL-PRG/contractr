@@ -147,6 +147,22 @@ SEXP r_is_function_typed(SEXP pkg_name, SEXP fun_name) {
     return is_valid_index(function_index) ? R_TrueValue : R_FalseValue;
 }
 
+SEXP r_is_type_well_formed(SEXP r_type) {
+    std::string type = CHAR(asChar(r_type));
+
+    tastr::parser::ParseResult result(tastr::parser::parse_string(type));
+
+    SEXP status = PROTECT(ScalarLogical(static_cast<bool>(result)));
+    SEXP message = PROTECT(mkString(result.get_error_message().c_str()));
+    SEXP location = PROTECT(mkString(to_string(result.get_error_location()).c_str()));
+    SEXP list = PROTECT(create_list({status, message, location},
+                                    {"status", "message", "location"}));
+
+    UNPROTECT(4);
+
+    return list;
+}
+
 SEXP r_import_type_declarations(SEXP pkg_name, SEXP typedecl_filepath) {
     const std::string package_name = CHAR(asChar(pkg_name));
 

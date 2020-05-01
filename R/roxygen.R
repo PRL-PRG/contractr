@@ -18,15 +18,18 @@ get_annotated_function_name <- function(call) {
 
 #' @export
 roxy_tag_parse.roxy_tag_type <- function(x) {
-    parse_result <- list(state = TRUE, error_message = "hello")
+    type_declaration <- x$raw
+    parse_result <- is_type_well_formed(type_declaration)
 
-    if (!parse_result$state) {
-        message <- sprintf("invalid type format: %s", parse_result$error_message)
+    if (!parse_result$status) {
+        message <- sprintf("parsing error in %s at %s",
+                           parse_result$message,
+                           parse_result$location)
         roxy_tag_warning(x, message)
         return()
     }
 
-    x$val <- list(type_declaration = x$raw)
+    x$val <- list(type_declaration = type_declaration)
 
     x
 }
@@ -83,12 +86,13 @@ roclet_output.roclet_type <- function(x, results, base_path, ...) {
     INST_DIRPATH <- file.path(base_path, "inst")
     TYPEDECL_FILEPATH <- file.path(INST_DIRPATH, "TYPEDECLARATION")
 
+    cat("Writing TYPEDECLARATION\n")
     dir.create(INST_DIRPATH, showWarnings = FALSE)
     file.create(TYPEDECL_FILEPATH)
 
     for (element in results) {
 
-        comment <- sprintf("# extracted from %s:%s",
+        comment <- sprintf("# declared at %s:%s",
                            element$location$file,
                            element$location$line)
 

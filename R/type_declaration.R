@@ -1,5 +1,12 @@
 
 #' @export
+is_type_well_formed <- function(type_declaration) {
+    stopifnot(is_scalar_character(type_declaration))
+    type_declaration <- paste0("type fun ", type_declaration, ";")
+    invisible(.Call(C_is_type_well_formed, type_declaration))
+}
+
+#' @export
 import_type_declarations <- function(package_name) {
     stopifnot(is_scalar_character(package_name))
     filepath <- system.file("TYPEDECLARATION", package = package_name)

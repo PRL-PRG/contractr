@@ -35,6 +35,7 @@ static const R_CallMethodDef callMethods[] = {
     {"check_type", (DL_FUNC) &r_check_type, 4},
 
     /*  type declaration cache */
+    {"is_type_well_formed", (DL_FUNC) &r_is_type_well_formed, 1},
     {"import_type_declarations", (DL_FUNC) &r_import_type_declarations, 2},
     {"get_type_index", (DL_FUNC) &r_get_type_index, 2},
     {"get_typed_package_names", (DL_FUNC) &r_get_typed_package_names, 0},

@@ -30,6 +30,7 @@ SEXP r_check_type(SEXP value_sym, SEXP parameter_name, SEXP type, SEXP rho);
 SEXP r_infer_type(SEXP value_sym, SEXP parameter_name, SEXP rho);
 
 /*  type declaration cache */
+SEXP r_is_type_well_formed(SEXP r_type);
 SEXP r_import_type_declarations(SEXP pkg_name, SEXP typedecl_filepath);
 SEXP r_get_type_index(SEXP pkg_name, SEXP fun_name);
 SEXP r_is_package_typed(SEXP pkg_name);
