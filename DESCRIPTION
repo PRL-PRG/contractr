@@ -15,6 +15,9 @@ Suggests:
     testthat (>= 2.1.0)
 RoxygenNote: 7.1.0.9000
 Imports: 
-    injectr
+    injectr,
+    roxygen2
+Depends:
+    roxygen2
 Remotes: PRL-PRG/injectr
 SystemRequirements: C++11
