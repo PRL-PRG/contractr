@@ -67,32 +67,35 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
     visit(const tastr::ast::CharacterAScalarTypeNode& node) override final {
         SEXP value = pop_value_();
         satisfies_vector_or_scalar_(
-            value, STRSXP, [](SEXP vector, int index) -> bool {
+            value, {STRSXP}, [](SEXP vector, int index) -> bool {
                 return STRING_ELT(vector, index) == NA_STRING;
             });
     }
 
     void visit(const tastr::ast::ComplexAScalarTypeNode& node) override final {
         SEXP value = pop_value_();
-        satisfies_vector_or_scalar_(
-            value, CPLXSXP, [](SEXP vector, int index) -> bool {
-                Rcomplex v = COMPLEX_ELT(vector, index);
-                return (v.r == NA_REAL) || (v.i == NA_REAL);
-            });
+        satisfies_vector_or_scalar_(value,
+                                    {CPLXSXP, REALSXP, INTSXP, LGLSXP},
+                                    [](SEXP vector, int index) -> bool {
+                                        Rcomplex v = COMPLEX_ELT(vector, index);
+                                        return (v.r == NA_REAL) ||
+                                               (v.i == NA_REAL);
+                                    });
     }
 
     void visit(const tastr::ast::DoubleAScalarTypeNode& node) override final {
         SEXP value = pop_value_();
-        satisfies_vector_or_scalar_(
-            value, REALSXP, [](SEXP vector, int index) -> bool {
-                return ISNAN(REAL_ELT(vector, index));
-            });
+        satisfies_vector_or_scalar_(value,
+                                    {REALSXP, INTSXP, LGLSXP},
+                                    [](SEXP vector, int index) -> bool {
+                                        return ISNAN(REAL_ELT(vector, index));
+                                    });
     }
 
     void visit(const tastr::ast::IntegerAScalarTypeNode& node) override final {
         SEXP value = pop_value_();
         satisfies_vector_or_scalar_(
-            value, INTSXP, [](SEXP vector, int index) -> bool {
+            value, {INTSXP, LGLSXP}, [](SEXP vector, int index) -> bool {
                 return INTEGER_ELT(vector, index) == NA_INTEGER;
             });
     }
@@ -100,7 +103,7 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
     void visit(const tastr::ast::LogicalAScalarTypeNode& node) override final {
         SEXP value = pop_value_();
         satisfies_vector_or_scalar_(
-            value, LGLSXP, [](SEXP vector, int index) -> bool {
+            value, {LGLSXP}, [](SEXP vector, int index) -> bool {
                 return LOGICAL_ELT(vector, index) == NA_LOGICAL;
             });
     }
@@ -108,7 +111,7 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
     void visit(const tastr::ast::RawAScalarTypeNode& node) override final {
         SEXP value = pop_value_();
         satisfies_vector_or_scalar_(
-            value, RAWSXP, [](SEXP vector, int index) -> bool {
+            value, {RAWSXP}, [](SEXP vector, int index) -> bool {
                 /* NOTE: no such thing as a raw
                  * NA */
                 return false;
@@ -546,8 +549,18 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
     };
 
     template <typename T>
-    void satisfies_vector_or_scalar_(SEXP value, SEXPTYPE type, T check_na) {
-        if (type_of_sexp(value) != type) {
+    void satisfies_vector_or_scalar_(SEXP value,
+                                     std::vector<SEXPTYPE> types,
+                                     T check_na) {
+        bool match = false;
+        for (SEXPTYPE type: types) {
+            if (type_of_sexp(value) == type) {
+                match = true;
+                break;
+            }
+        }
+
+        if (!match) {
             push_result_(false);
             return;
         }
