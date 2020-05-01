@@ -482,7 +482,7 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
 
                     ++index;
                 } while (index < list_size &&
-                         match_names_(identifier, rlist[index].first));
+                         match_names_(identifier, rlist[index].first) == 0);
 
                 /*  if the do loop above set result to false then bail out */
                 if (!result) {
