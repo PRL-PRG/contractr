@@ -12,5 +12,5 @@ type `is.necessary` <^double[], double> => logical;
 type `is.normal` <^integer[]> => logical;
 type `is.persymmetric` <^double[]> => logical;
 type `magic.constant` <integer, double, double> => double;
-type `magicplot` <^double[], logical, logical, ???> => null;
+type `magicplot` <^double[], logical, logical, null> => null;
 type `S` <integer> => ^double[];

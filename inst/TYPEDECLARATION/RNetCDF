@@ -1,5 +1,5 @@
 type `filter` <character[]> => logical[];
 type `fun` <symbol, symbol> => null;
 type `FUN` <double[]> => character;
-type `print_att` <integer, struct<`id`:integer, `name`:character, `type`:character, `length`:double>, character, ? struct<`id`:integer, `name`:character, `type`:character, `ndims`:integer, `dimids`:integer[], `natts`:integer>> => null;
+type `print_att` <integer, struct<`id`:integer, `name`:character, `type`:character, `length`:double>, character, null | struct<`id`:integer, `name`:character, `type`:character, `ndims`:integer, `dimids`:integer[], `natts`:integer>> => null;
 type `print_grp` <integer, double> => null;

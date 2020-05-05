@@ -2,7 +2,7 @@ type `Dist_Case` <double[], double> => double[];
 type `Dist_Case_Control` <double[], double, double> => double[];
 type `Dist_Control` <double[], double> => double[];
 type `fast.logistf.control` <double, double, double, double, double, double> => struct<`maxit`:double, `maxhs`:double, `maxstep`:double, `lconv`:double, `gconv`:double, `xconv`:double>;
-type `fast.logistf.fit` <^double[], double[], null, null, logical, ? integer[], null, ???> => struct<`beta`:double[], `var`:^double[], `pi`:double[], `hat.diag`:^double[], `loglik`:double, `iter`:double, `evals`:double, `conv`:double[]>;
+type `fast.logistf.fit` <^double[], double[], null, null, logical, null | integer[], null, null> => struct<`beta`:double[], `var`:^double[], `pi`:double[], `hat.diag`:^double[], `loglik`:double, `iter`:double, `evals`:double, `conv`:double[]>;
 type `filter` <character[]> => logical[];
 type `Get_RequiredSampleSize.SKAT_Power` <struct<`Power`:^double[]>, double> => struct<`alpha = 1.00e-02`:double, `alpha = 1.00e-03`:character, `alpha = 1.00e-06`:character> | struct<`alpha = 1.00e-02`:double, `alpha = 1.00e-03`:double, `alpha = 1.00e-06`:character>;
 type `MSG_SKAT_Example` < > => null;

@@ -1,12 +1,12 @@
-type `DHSimulate` <double, double[], logical, any => any, ???> => double[];
+type `DHSimulate` <double, double[], logical, any => any, null> => double[];
 type `DLAcfToAR` <double[], logical, logical> => ^double[];
 type `DLLoglikelihood` <double[], double[], logical> => double;
 type `DLResiduals` <double[], double[], logical, logical> => double[];
-type `DLSimulate` <double, double[], logical, any => any, ???> => double[];
+type `DLSimulate` <double, double[], logical, any => any, null> => double[];
 type `exactLoglikelihood` <double[], double[], logical> => struct<`LL`:double, `sigmaSq`:double>;
 type `filter` <character[]> => logical[];
 type `fun` <character, character> => struct<`name`:character, `path`:character, `dynamicLookup`:logical, `handle`:null, `info`:null>;
-type `innovationVariance` <double[], character[], ??? | double[]> => double;
+type `innovationVariance` <double[], character[], null | double[]> => double;
 type `is.toeplitz` <double | ^integer[]> => logical;
 type `PredictionVariance` <double[], double, logical> => double[];
 type `SimGLP` <double[], double[]> => double[];

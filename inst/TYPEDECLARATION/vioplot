@@ -1,4 +1,4 @@
 type `filter` <character[]> => logical[];
 type `FUN` <double[]> => double[];
-type `vioplot.default` <double[], double[], null, double, null, ? double[], ? character[], logical, character, character, double, double, character, character, double, character, character, ???, logical> => struct<`upper`:double[], `lower`:double[], `median`:double[], `q1`:double[], `q3`:double[]>;
-type `vioplot.formula` <language, symbol, character | double | ???, ? character[], ? integer | character, ? integer[], null> => struct<`upper`:double[], `lower`:double[], `median`:double[], `q1`:double[], `q3`:double[]>;
+type `vioplot.default` <double[], double[], null, double, null, null | double[], null | character[], logical, character, character, double, double, character, character, double, character, character, null, logical> => struct<`upper`:double[], `lower`:double[], `median`:double[], `q1`:double[], `q3`:double[]>;
+type `vioplot.formula` <language, symbol, character | double | null, null | character[], null | integer | character, null | integer[], null> => struct<`upper`:double[], `lower`:double[], `median`:double[], `q1`:double[], `q3`:double[]>;

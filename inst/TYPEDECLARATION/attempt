@@ -1,13 +1,13 @@
 type `.f` <language | double, symbol | double, symbol, symbol> => character | double;
 type `as_num_msg` <character> => double;
 type `as_num_warn` <character> => double;
-type `attempt` <language | symbol | double, ? character, logical, logical> => character | double;
+type `attempt` <language | symbol | double, null | character, logical, logical> => character | double;
 type `filter` <character[]> => logical[];
 type `FUN` <character> => logical;
 type `if_all` <integer[], language, language> => character[];
 type `if_any` <integer[], any => any, language> => character[];
 type `if_else` <double, any => any, language, language> => character;
-type `if_none` <integer[], any => any, language> => ? double[];
+type `if_none` <integer[], any => any, language> => null | double[];
 type `if_not` <double, any => any, language> => character;
 type `if_then` <double, any => any, language> => character;
 type `is_try_error` <character> => logical;

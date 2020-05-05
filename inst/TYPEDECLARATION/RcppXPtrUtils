@@ -7,6 +7,6 @@ type `cppXPtr` <character[], character[], character[], logical, character, logic
 type `filter` <character[]> => logical[];
 type `FUN` <character> => character;
 type `isFunction` <character> => logical;
-type `print.XPtr` < > => ???;
+type `print.XPtr` < > => null;
 type `sanitize_amp` <character> => character;
 type `tokenize_signature` <character> => character[];

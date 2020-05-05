@@ -10,7 +10,7 @@ type `fun` <symbol, symbol> => null;
 type `FUN` <any => any> => logical;
 type `gargle_api_key` < > => character;
 type `gargle_default_oauth_cache_path` < > => character;
-type `gargle_oauth_cache` < > => ? logical;
+type `gargle_oauth_cache` < > => null | logical;
 type `gargle_oauth_email` < > => null;
 type `gargle_oob_default` < > => logical;
 type `gargle_quiet` < > => logical;
@@ -18,5 +18,5 @@ type `init_AuthState` <character, struct<`appname`:character, `secret`:character
 type `is_string` <character> => logical;
 type `is.oauth_app` <struct<`appname`:character, `secret`:character, `key`:character, `redirect_uri`:character>> => logical;
 type `isFALSE` <logical> => logical;
-type `map_lgl` <struct<`one`:any => any, ``:any => any> | struct<`one`:any => any, `two`:any => any> | tuple<any => any> | struct<`credentials_app_default`:any => any> | struct<`credentials_byo_oauth2`:any => any> | struct<`credentials_gce`:any => any> | struct<`credentials_service_account`:any => any> | struct<`credentials_user_oauth2`:any => any> | struct<`one`:any => any>, any => any, ???> => logical[];
-type `map_mold` <struct<`one`:any => any, ``:any => any> | struct<`one`:any => any, `two`:any => any> | tuple<any => any> | struct<`credentials_app_default`:any => any> | struct<`credentials_byo_oauth2`:any => any> | struct<`credentials_gce`:any => any> | struct<`credentials_service_account`:any => any> | struct<`credentials_user_oauth2`:any => any> | struct<`one`:any => any>, any => any, logical, ???> => logical[];
+type `map_lgl` <struct<`one`:any => any, ``:any => any> | struct<`one`:any => any, `two`:any => any> | tuple<any => any> | struct<`credentials_app_default`:any => any> | struct<`credentials_byo_oauth2`:any => any> | struct<`credentials_gce`:any => any> | struct<`credentials_service_account`:any => any> | struct<`credentials_user_oauth2`:any => any> | struct<`one`:any => any>, any => any, null> => logical[];
+type `map_mold` <struct<`one`:any => any, ``:any => any> | struct<`one`:any => any, `two`:any => any> | tuple<any => any> | struct<`credentials_app_default`:any => any> | struct<`credentials_byo_oauth2`:any => any> | struct<`credentials_gce`:any => any> | struct<`credentials_service_account`:any => any> | struct<`credentials_user_oauth2`:any => any> | struct<`one`:any => any>, any => any, logical, null> => logical[];

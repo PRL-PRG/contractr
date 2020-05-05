@@ -1,4 +1,4 @@
 type `filter` <character[]> => logical[];
 type `readJPEG` <character | raw[], logical> => ^double[];
-type `writeJPEG` <^double[], character | raw[], double, character, ???> => ? raw[];
+type `writeJPEG` <^double[], character | raw[], double, character, null> => null | raw[];
 type `readfun` <character, logical> => double[];

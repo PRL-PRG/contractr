@@ -7,7 +7,7 @@ type `DNA_GM` <double, double, double> => struct<`low`:double, `high`:double, `w
 type `DNA_N` <double, double, double> => struct<`low`:double, `high`:double, `weight`:character, `SWF.e.fun`:any => any, `SWF.q.fun`:any => any, `SWF.norm`:double, `norm`:double, `hinges`:double[], `name`:character, `label`:character>;
 type `DNA_P` <double, double, double> => struct<`low`:double, `high`:double, `weight`:character, `SWF.e.fun`:any => any, `SWF.q.fun`:any => any, `SWF.norm`:double, `norm`:double, `hinges`:double[], `name`:character, `label`:character>;
 type `ETM_bands` <character> => tuple<>;
-type `Far_red` <character> => ? struct<`low`:double, `high`:double, `weight`:character, `SWF.e.fun`:null, `SWF.q.fun`:null, `SWF.norm`:null, `norm`:null, `hinges`:double[], `name`:character, `label`:character>;
+type `Far_red` <character> => null | struct<`low`:double, `high`:double, `weight`:character, `SWF.e.fun`:null, `SWF.q.fun`:null, `SWF.norm`:null, `norm`:null, `hinges`:double[], `name`:character, `label`:character>;
 type `filter` <character[]> => logical[];
 type `FIR` <character> => struct<`low`:double, `high`:double, `weight`:character, `SWF.e.fun`:null, `SWF.q.fun`:null, `SWF.norm`:null, `norm`:null, `hinges`:double[], `name`:character, `label`:character>;
 type `FLAV` <double, double, double> => struct<`low`:double, `high`:double, `weight`:character, `SWF.e.fun`:any => any, `SWF.q.fun`:any => any, `SWF.norm`:double, `norm`:double, `hinges`:double[], `name`:character, `label`:character>;

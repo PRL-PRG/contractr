@@ -1,4 +1,4 @@
 type `.confusionMatrix` <double[], integer[], logical, character> => struct<`cutoffs`:double[], `tp`:double[], `fp`:double[], `tn`:double[], `fn`:double[], `n.pos`:integer, `n.neg`:integer, `n.pos.pred`:double[], `n.neg.pred`:double[]>;
 type `filter` <character[]> => logical[];
 type `fun` <symbol, character> => null;
-type `plot.AUC` <struct<`cutoffs`:double[], `fpr`:double[], `tpr`:double[]> | struct<`cutoffs`:double[], `measure`:double[]>, null, ???, character, logical, double, double> => null;
+type `plot.AUC` <struct<`cutoffs`:double[], `fpr`:double[], `tpr`:double[]> | struct<`cutoffs`:double[], `measure`:double[]>, null, null, character, logical, double, double> => null;

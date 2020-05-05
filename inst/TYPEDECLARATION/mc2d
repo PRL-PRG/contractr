@@ -1,6 +1,6 @@
 type `beau` <integer> => double[];
 type `filter` <character[]> => logical[];
-type `FUN` <^double[] | symbol, double[], double[]> => ? double[] | ^integer[] | character;
+type `FUN` <^double[] | symbol, double[], double[]> => null | double[] | ^integer[] | character;
 type `graph` <^double[], character, character> => null;
-type `hist.mcnode` <double[], ???> => null;
+type `hist.mcnode` <double[], null> => null;
 type `pmax.default` <integer[], logical> => integer[];

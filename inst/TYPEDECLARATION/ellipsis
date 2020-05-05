@@ -5,5 +5,5 @@ type `exit_handler` <any => any> => language;
 type `filter` <character[]> => logical[];
 type `FUN` <double> => logical;
 type `paste_line` <character> => character;
-type `safe_median.numeric` <double | ^integer[], double | ???, logical> => double;
+type `safe_median.numeric` <double | ^integer[], double | null, logical> => double;
 type `::` <environment, any => any> => null;

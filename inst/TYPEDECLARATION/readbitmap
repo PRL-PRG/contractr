@@ -1,2 +1,2 @@
 type `filter` <character[]> => logical[];
-type `read.bitmap` <character, ???, logical, ???> => double[];
+type `read.bitmap` <character, null, logical, null> => double[];

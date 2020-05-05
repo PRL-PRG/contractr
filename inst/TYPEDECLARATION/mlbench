@@ -1,5 +1,5 @@
 type `filter` <character[]> => logical[];
-type `as.data.frame.mlbench` <struct<`x`:^double[], `classes`:integer[]>, null, logical, ???> => struct<`x.1`:double[], `x.2`:double[], `x.3`:double[], `x.4`:double[], `x.5`:double[], `x.6`:double[], `x.7`:double[], `x.8`:double[], `x.9`:double[], `x.10`:double[], `x.11`:double[], `x.12`:double[], `x.13`:double[], `x.14`:double[], `x.15`:double[], `x.16`:double[], `x.17`:double[], `x.18`:double[], `x.19`:double[], `x.20`:double[], `classes`:integer[]>;
+type `as.data.frame.mlbench` <struct<`x`:^double[], `classes`:integer[]>, null, logical, null> => struct<`x.1`:double[], `x.2`:double[], `x.3`:double[], `x.4`:double[], `x.5`:double[], `x.6`:double[], `x.7`:double[], `x.8`:double[], `x.9`:double[], `x.10`:double[], `x.11`:double[], `x.12`:double[], `x.13`:double[], `x.14`:double[], `x.15`:double[], `x.16`:double[], `x.17`:double[], `x.18`:double[], `x.19`:double[], `x.20`:double[], `classes`:integer[]>;
 type `mlbench.friedman1` <double, double> => struct<`x`:^double[], `y`:double[]>;
 type `mlbench.twonorm` <double, double> => struct<`x`:^double[], `classes`:integer[]>;
 type `bayesclass.mlbench.2dnormals` <struct<`x`:^double[], `classes`:integer[]>> => integer[];
@@ -19,6 +19,6 @@ type `mlbench.smiley` <double, double, double> => struct<`x`:^double[], `classes
 type `mlbench.spirals` <double, double, double> => struct<`x`:^double[], `classes`:integer[]>;
 type `mlbench.threenorm` <double, double> => struct<`x`:^double[], `classes`:integer[]>;
 type `mlbench.xor` <double, double> => struct<`x`:^double[], `classes`:integer[]>;
-type `plot.mlbench` <struct<`x`:^double[], `classes`:integer[]>, character, character, ???> => null;
+type `plot.mlbench` <struct<`x`:^double[], `classes`:integer[]>, character, character, null> => null;
 type `simplex` <double, double, logical> => ^double[];
 type `::` <integer, double, double, double> => struct<`x`:^double[], `classes`:integer[]> | struct<`x`:^double[], `y`:double[]>;

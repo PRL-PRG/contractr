@@ -1,6 +1,6 @@
 type `.local` <character, symbol, symbol> => character[] | double;
-type `[` <character, ??? | character, ???, logical> => ? ^double[] | ^character[] | tuple<> | struct<`c3`:tuple<double>, `c4`:tuple<double>>;
-type `[<-` <???, ???, ? double | ^character[]> => character;
+type `[` <character, null | character, null, logical> => null | ^double[] | ^character[] | tuple<> | struct<`c3`:tuple<double>, `c4`:tuple<double>>;
+type `[<-` <null, null, null | double | ^character[]> => character;
 type `adjustGraph3d` <character, character> => null;
 type `canonicalizeAndMergeScene` <struct<`v1`:^double[], `v2`:^double[], `v3`:^double[], `color`:integer[], `color2`:null, `fill`:logical, `material`:character, `col.mesh`:null, `alpha`:double[], `smooth`:double>, character> => struct<`v1`:^double[], `v2`:^double[], `v3`:^double[], `color`:integer[], `color2`:^logical[], `fill`:logical[], `material`:character, `col.mesh`:^logical[], `alpha`:double[], `smooth`:double[]>;
 type `colorScene` <struct<`v1`:^double[], `v2`:^double[], `v3`:^double[], `color`:integer[], `color2`:null, `fill`:logical, `material`:character, `col.mesh`:null, `alpha`:double[], `smooth`:double>> => struct<`v1`:^double[], `v2`:^double[], `v3`:^double[], `color`:integer[], `color2`:null, `fill`:logical, `material`:character, `col.mesh`:null, `alpha`:double[], `smooth`:double>;
@@ -8,13 +8,13 @@ type `colorTriangles` <struct<`v1`:^double[], `v2`:^double[], `v3`:^double[], `c
 type `expandParLongData` < > => double;
 type `filter` <character[]> => logical[];
 type `FUN` <^double[] | tuple<double> | character> => ^integer[] | double | tuple<double, double, double, double, null> | tuple<double, double, null> | tuple<double, null>;
-type `imputation` <^double[], character, ? character, ? character> => ^double[];
-type `is.na` <???> => logical;
+type `imputation` <^double[], character, null | character, null | character> => ^double[];
+type `is.na` <null> => logical;
 type `is.Triangles3D` <struct<`v1`:^double[], `v2`:^double[], `v3`:^double[], `color`:integer[], `color2`:null, `fill`:logical, `material`:character, `col.mesh`:null, `alpha`:double[], `smooth`:double>> => logical;
 type `misc3dLine` <double[], double[], character, double, double> => struct<`v1.1`:double[], `v1.2`:double[], `v1.3`:double[], `v2.1`:double[], `v2.2`:double[], `v2.3`:double[], `v3.1`:double[], `v3.2`:double[], `v3.3`:double[], `color`:integer[], `alpha`:double[]>;
 type `parLongData` <character | double, character, double, double, character, character> => character;
 type `parMEAN` <character, character, double, double, character, character> => character;
-type `partition` <^double[] | ???, character[] | language> => character[] | ^double[] | ???;
+type `partition` <^double[] | null, character[] | language> => character[] | ^double[] | null;
 type `parTRAJ` <character, character, double, double, character, character> => character;
 type `plot3dPdf` <double, double> => struct<`v1`:^double[], `v2`:^double[], `v3`:^double[], `color`:integer[], `color2`:null, `fill`:logical, `material`:character, `col.mesh`:null, `alpha`:double[], `smooth`:double>;
 type `plotAllCriterion` <character[], logical> => null;

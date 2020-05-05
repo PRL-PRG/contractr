@@ -1,10 +1,10 @@
-type `.scagnostics.for.data` <double, double, ? character[]> => ^double[];
+type `.scagnostics.for.data` <double, double, null | character[]> => ^double[];
 type `filter` <character[]> => logical[];
 type `fun` <symbol, symbol> => logical;
 type `FUN` < > => double[];
-type `scagnostics.data.frame` <struct<`mpg`:double[], `cyl`:double[], `disp`:double[], `hp`:double[], `drat`:double[], `wt`:double[], `qsec`:double[], `vs`:double[], `am`:double[], `gear`:double[], `carb`:double[]>, double, double, ???> => ^double[];
-type `scagnostics.default` <double[], double[], double, double, ???> => double[];
-type `scagnostics.matrix` <^double[], double, double, ???> => ^double[];
+type `scagnostics.data.frame` <struct<`mpg`:double[], `cyl`:double[], `disp`:double[], `hp`:double[], `drat`:double[], `wt`:double[], `qsec`:double[], `vs`:double[], `am`:double[], `gear`:double[], `carb`:double[]>, double, double, null> => ^double[];
+type `scagnostics.default` <double[], double[], double, double, null> => double[];
+type `scagnostics.matrix` <^double[], double, double, null> => ^double[];
 type `scagnosticsExemplars` <^double[]> => logical[];
 type `scagnosticsGrid` <^double[]> => struct<`x`:integer[], `y`:integer[]>;
 type `scagnosticsOutliers` <^double[]> => logical[];

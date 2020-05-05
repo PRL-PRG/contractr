@@ -5,5 +5,5 @@ type `entropy` <struct<`Murder`:integer[], `Assault`:integer[], `UrbanPop`:integ
 type `filter` <character[]> => logical[];
 type `interinformation` <struct<`Murder`:integer[], `Assault`:integer[], `UrbanPop`:integer[], `Rape`:integer[]>, character> => double;
 type `multiinformation` <struct<`Murder`:integer[], `Assault`:integer[], `UrbanPop`:integer[], `Rape`:integer[]>, character> => double;
-type `mutinformation` <struct<`Murder`:integer[], `Assault`:integer[], `UrbanPop`:integer[], `Rape`:integer[]> | integer[], ? integer[], character> => ^double[];
+type `mutinformation` <struct<`Murder`:integer[], `Assault`:integer[], `UrbanPop`:integer[], `Rape`:integer[]> | integer[], null | integer[], character> => ^double[];
 type `natstobits` <double> => double;

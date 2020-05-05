@@ -1,5 +1,5 @@
-type `abind` <double[] | ^integer[] | struct<`a`:double[], `b`:double[]> | struct<`x`:^integer[], `y`:^double[]> | tuple<integer[], ^integer[]> | struct<`x`:integer[], ``:^integer[]>, double | symbol, ? double, null, logical, symbol | logical, logical, logical, logical | character, logical> => ^double[];
-type `acorn.default` <integer[], double, double, double, ???, logical> => integer[];
-type `adrop.default` <integer[], double | integer[], logical, logical, ???> => ^integer[];
+type `abind` <double[] | ^integer[] | struct<`a`:double[], `b`:double[]> | struct<`x`:^integer[], `y`:^double[]> | tuple<integer[], ^integer[]> | struct<`x`:integer[], ``:^integer[]>, double | symbol, null | double, null, logical, symbol | logical, logical, logical, logical | character, logical> => ^double[];
+type `acorn.default` <integer[], double, double, double, null, logical> => integer[];
+type `adrop.default` <integer[], double | integer[], logical, logical, null> => ^integer[];
 type `filter` <character[]> => logical[];
-type `FUN` <??? | symbol | struct<> | ^double[]> => integer;
+type `FUN` <null | symbol | struct<> | ^double[]> => integer;

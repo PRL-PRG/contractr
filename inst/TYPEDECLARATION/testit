@@ -1,7 +1,7 @@
-type `%==%` <? character | double | integer[], ? character | double | integer[]> => logical;
+type `%==%` <null | character | double | integer[], null | character | double | integer[]> => logical;
 type `all_true` <logical[] | character> => logical;
 type `assert` <character | language, language | logical> => null;
-type `assert2` <? character, language, environment, logical> => null;
+type `assert2` <null | character, language, environment, logical> => null;
 type `filter` <character[]> => logical[];
 type `has_warning` <character[] | double | integer[]> => logical;
 type `one_expression` <language> => logical;

@@ -1,7 +1,7 @@
-type `::` <struct<`x`:^double[], `y`:^double[], `range`:double[], `names`:character[]>, ???, character, ? double[], ? double[]> => struct<`x`:^double[], `y`:^double[], `range`:double[], `error`:integer>;
-type `.Last.projection` <??? | struct<`projection`:character, `parameters`:double[], `orientation`:double[]> | struct<`projection`:character, `parameters`:null, `orientation`:double[]>> => struct<`projection`:character, `parameters`:double[], `orientation`:double[]> | struct<`projection`:character, `parameters`:null, `orientation`:double[]>;
+type `::` <struct<`x`:^double[], `y`:^double[], `range`:double[], `names`:character[]>, null, character, null | double[], null | double[]> => struct<`x`:^double[], `y`:^double[], `range`:double[], `error`:integer>;
+type `.Last.projection` <null | struct<`projection`:character, `parameters`:double[], `orientation`:double[]> | struct<`projection`:character, `parameters`:null, `orientation`:double[]>> => struct<`projection`:character, `parameters`:double[], `orientation`:double[]> | struct<`projection`:character, `parameters`:null, `orientation`:double[]>;
 type `auto.format` <double[]> => character[];
 type `filter` <character[]> => logical[];
-type `map.grid` <struct<`x`:^double[], `y`:^double[], `range`:double[], `names`:character[]>, double, double, logical, logical, double, double, double, double, ???> => null;
-type `mapproject` <struct<`x`:double[], `y`:double[]>, ???, character, null, null> => struct<`x`:^double[], `y`:^double[], `range`:double[], `error`:integer>;
+type `map.grid` <struct<`x`:^double[], `y`:^double[], `range`:double[], `names`:character[]>, double, double, logical, logical, double, double, double, double, null> => null;
+type `mapproject` <struct<`x`:double[], `y`:double[]>, null, character, null, null> => struct<`x`:^double[], `y`:^double[], `range`:double[], `error`:integer>;
 type `pretty.range` <double[], double> => double[];

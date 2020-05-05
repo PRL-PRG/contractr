@@ -1,4 +1,4 @@
-type `.local` <???, double> => struct<`value`:double[], `geometry`:tuple<tuple<^double[], ^double[]>, tuple<^double[]>, tuple<^double[]>>>;
+type `.local` <null, double> => struct<`value`:double[], `geometry`:tuple<tuple<^double[], ^double[]>, tuple<^double[]>, tuple<^double[]>>>;
 type `fasterize` <character, character, null, null> => struct<`value`:double[], `geometry`:tuple<tuple<^double[], ^double[]>, tuple<^double[]>, tuple<^double[]>>>;
 type `filter` <character[]> => logical[];
 type `raster` <double> => struct<`value`:double[], `geometry`:tuple<tuple<^double[], ^double[]>, tuple<^double[]>, tuple<^double[]>>>;

@@ -1,4 +1,4 @@
-type `createError` <language, character, ???> => any => any;
+type `createError` <language, character, null> => any => any;
 type `filter` <character[]> => logical[];
 type `fun` <symbol> => struct<`stopwords_sources`:null>;
 type `get_stopwords_data` <character> => struct<`da`:character[], `de`:character[], `en`:character[], `es`:character[], `fi`:character[], `fr`:character[], `hu`:character[], `ir`:character[], `it`:character[], `nl`:character[], `no`:character[], `pt`:character[], `ro`:character[], `ru`:character[], `sv`:character[]>;

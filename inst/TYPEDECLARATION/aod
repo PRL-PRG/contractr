@@ -1,12 +1,12 @@
-type `AIC` <double> => ???;
+type `AIC` <double> => null;
 type `AIC1` <double, double> => double[];
 type `anova` <null, null> => null;
-type `betabin` <language, struct<`seed`:integer[], `root`:integer[], `n`:integer[], `y`:integer[]>, character[], null, logical, any => any, tuple<>, logical, struct<`maxit`:double>, ???> => language;
-type `deviance` <???> => double;
-type `df.residual` <???> => integer;
+type `betabin` <language, struct<`seed`:integer[], `root`:integer[], `n`:integer[], `y`:integer[]>, character[], null, logical, any => any, tuple<>, logical, struct<`maxit`:double>, null> => language;
+type `deviance` <null> => double;
+type `df.residual` <null> => integer;
 type `filter` <character[]> => logical[];
 type `fn` <double[]> => double;
-type `FUN` <double, ???> => double[];
+type `FUN` <double, null> => double[];
 type `invlink` <double[], character> => double[];
 type `is.singular` <^double[]> => logical;
 type `tr` <character> => character;

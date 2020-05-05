@@ -1,11 +1,11 @@
-type `convtests` <symbol, double, double, struct<`d`:double[], `u`:^double[], `v`:^double[]>, ^double[], double, double, ? double[], double, double, double, double> => struct<`converged`:logical, `k`:double>;
+type `convtests` <symbol, double, double, struct<`d`:double[], `u`:^double[], `v`:^double[]>, ^double[], double, double, null | double[], double, double, double, double> => struct<`converged`:logical, `k`:double>;
 type `cross` <^complex[], ^complex[]> => ^complex[];
 type `filter` <character[]> => logical[];
 type `FUN` <double[]> => double;
 type `norm2` <^complex[]> => double;
 type `orthog` <^complex[], ^complex[]> => ^complex[];
-type `prcomp_irlba` <^double[], double, logical, logical, logical, ???> => struct<`scale`:logical, `totalvar`:double, `sdev`:double[], `rotation`:^double[], `center`:double[], `x`:^double[]>;
+type `prcomp_irlba` <^double[], double, logical, logical, logical, null> => struct<`scale`:logical, `totalvar`:double, `sdev`:double[], `rotation`:^double[], `center`:double[], `x`:^double[]>;
 type `soft` <^double[], ^double[], double[]> => ^double[];
-type `ssvd` <^double[], double, double[], double, double, logical, logical, double, null, ???> => struct<`u`:^double[], `v`:^double[], `d`:^double[], `iter`:double, `lambda`:double[], `center`:logical, `scale`:logical, `n`:double[], `alpha`:double> | struct<`u`:^double[], `v`:^double[], `d`:^double[], `iter`:double, `lambda`:double, `center`:double[], `scale`:double[], `n`:double, `alpha`:double>;
-type `summary.irlba_prcomp` <struct<`scale`:logical, `totalvar`:double, `sdev`:double[], `rotation`:^double[], `center`:double[], `x`:^double[]>, ???> => struct<`scale`:logical, `totalvar`:double, `sdev`:double[], `rotation`:^double[], `center`:double[], `x`:^double[], `importance`:^double[]>;
-type `svdr` <^double[], double, double, integer, double, ? double[], null, logical> => struct<`d`:double[], `u`:^double[], `v`:^double[], `mprod`:double>;
+type `ssvd` <^double[], double, double[], double, double, logical, logical, double, null, null> => struct<`u`:^double[], `v`:^double[], `d`:^double[], `iter`:double, `lambda`:double[], `center`:logical, `scale`:logical, `n`:double[], `alpha`:double> | struct<`u`:^double[], `v`:^double[], `d`:^double[], `iter`:double, `lambda`:double, `center`:double[], `scale`:double[], `n`:double, `alpha`:double>;
+type `summary.irlba_prcomp` <struct<`scale`:logical, `totalvar`:double, `sdev`:double[], `rotation`:^double[], `center`:double[], `x`:^double[]>, null> => struct<`scale`:logical, `totalvar`:double, `sdev`:double[], `rotation`:^double[], `center`:double[], `x`:^double[], `importance`:^double[]>;
+type `svdr` <^double[], double, double, integer, double, null | double[], null, logical> => struct<`d`:double[], `u`:^double[], `v`:^double[], `mprod`:double>;

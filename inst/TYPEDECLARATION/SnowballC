@@ -1,4 +1,4 @@
 type `filter` <character[]> => logical[];
-type `wordStem` <? character[], character> => ? character[];
+type `wordStem` <null | character[], character> => null | character[];
 type `getStemLanguages` < > => character[];
 type `FUN` <character[], character> => character[];

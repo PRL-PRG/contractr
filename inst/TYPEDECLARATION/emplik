@@ -1,11 +1,11 @@
 type `constr` <double, double, double[], double[], double[], integer> => double;
 type `cumsumsurv` <double[]> => double[];
 type `DnR` <double[], double[], double[], double[]> => struct<`times`:double[], `n.risk`:double[], `n.event`:double[]>;
-type `el.cen.EM` <double[], double[], double[], any => any, double, double, double, double | ???> => struct<`loglik`:double, `times`:double[], `prob`:double[], `funMLE`:double, `lam`:double, `-2LLR`:double, `Pval`:double>;
-type `el.cen.EM2` <double[], double[], integer[], any => any, double[], double, double, ^double[] | ???> => struct<`loglik`:double, `times`:double[], `prob`:double[], `lam`:double[], `iters`:double, `-2LLR`:double, `Pval`:double>;
+type `el.cen.EM` <double[], double[], double[], any => any, double, double, double, double | null> => struct<`loglik`:double, `times`:double[], `prob`:double[], `funMLE`:double, `lam`:double, `-2LLR`:double, `Pval`:double>;
+type `el.cen.EM2` <double[], double[], integer[], any => any, double[], double, double, ^double[] | null> => struct<`loglik`:double, `times`:double[], `prob`:double[], `lam`:double[], `iters`:double, `-2LLR`:double, `Pval`:double>;
 type `el.cen.test` <double[], double[], any => any, double, double, double> => struct<`-2LLR`:double, `Pval`:double, `weights`:double[], `xtime`:double[], `iteration`:double, `error`:double>;
 type `el.ltrc.EM` <double[], double[], double[], any => any, double, double, double> => struct<`times`:double[], `prob`:double[], `-2LLR`:double, `Pval`:double>;
-type `el.test` <^double[], double[], ???, double, double, double, logical> => struct<`-2LLR`:double, `Pval`:double, `lambda`:double[], `grad`:double[], `hess`:^double[], `wts`:double[], `nits`:double>;
+type `el.test` <^double[], double[], null, double, double, double, logical> => struct<`-2LLR`:double, `Pval`:double, `lambda`:double[], `grad`:double[], `hess`:^double[], `wts`:double[], `nits`:double>;
 type `el.test.wt2` <^double[], double[], double[], double, double, logical, double, logical> => struct<`prob`:double[], `lambda`:double[], `grad`:double[], `hess`:null, `nits`:double>;
 type `emplikH.disc` <double[], double[], double[], double, any => any, double, double> => struct<`-2LLR`:double, `lambda`:double, `times`:double[], `jumps`:double[]>;
 type `emplikH.disc2` <double[], double[], double[], double[], double[], double[], double, any => any, any => any, double, double, double> => struct<`-2LLR`:double, `lambda`:double, `times1`:double[], `times2`:double[], `wts1`:double[], `wts2`:double[]>;

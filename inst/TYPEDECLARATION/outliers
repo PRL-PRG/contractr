@@ -5,4 +5,4 @@ type `outlier` <^double[], logical, logical> => double[] | ^logical[];
 type `pdixon` <double, integer, double> => double;
 type `pgrubbs` <double, integer, double> => double;
 type `rm.outlier` <^double[], logical, logical, logical> => ^double[];
-type `scores` <double[], character[], ? double, null> => double[];
+type `scores` <double[], character[], null | double, null> => double[];

@@ -4,8 +4,8 @@ type `FUN` <language> => struct<`lhs`:tuple<language>, `rhs`:tuple<language>> | 
 type `has_dot` <language> => logical;
 type `is_rhs_extended` <language> => logical;
 type `length.Formula` <language> => integer[];
-type `model.frame.Formula` <language, struct<`accuracy`:double[], `dyslexia`:integer[], `iq`:double[]>, logical | language | ??? | any => any, null, null, character> => struct<`accuracy`:double[], `dyslexia`:integer[], `iq`:double[]>;
-type `paste_formula` <? tuple<> | tuple<language> | tuple<symbol> | language, tuple<double> | tuple<language> | tuple<symbol> | tuple<> | language | symbol, character, character> => language;
+type `model.frame.Formula` <language, struct<`accuracy`:double[], `dyslexia`:integer[], `iq`:double[]>, logical | language | null | any => any, null, null, character> => struct<`accuracy`:double[], `dyslexia`:integer[], `iq`:double[]>;
+type `paste_formula` <null | tuple<> | tuple<language> | tuple<symbol> | language, tuple<double> | tuple<language> | tuple<symbol> | tuple<> | language | symbol, character, character> => language;
 type `split_formula` <language> => struct<`lhs`:tuple<language>, `rhs`:tuple<double>> | struct<`lhs`:tuple<language>, `rhs`:tuple<language>> | struct<`lhs`:tuple<language>, `rhs`:tuple<symbol>> | struct<`lhs`:tuple<symbol>, `rhs`:tuple<double>> | struct<`lhs`:tuple<symbol>, `rhs`:tuple<language>> | struct<`lhs`:tuple<symbol>, `rhs`:tuple<symbol>> | struct<`lhs`:null, `rhs`:tuple<double>> | struct<`lhs`:null, `rhs`:tuple<language>> | struct<`lhs`:null, `rhs`:tuple<symbol>>;
-type `model.matrix.Formula` <language, struct<`y1`:double[], `y2`:integer[], `log(y3)`:double[], `x1`:double[], `I(x2^2)`:double[], `log(x1)`:double[], `x3`:integer[], `x4`:integer[]>, ???, ? double, double, character> => ^double[];
+type `model.matrix.Formula` <language, struct<`y1`:double[], `y2`:integer[], `log(y3)`:double[], `x1`:double[], `I(x2^2)`:double[], `log(x1)`:double[], `x3`:integer[], `x4`:integer[]>, null, null | double, double, character> => ^double[];
 type `update_components` <language | symbol, language | symbol> => language | symbol;

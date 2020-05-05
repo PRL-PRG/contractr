@@ -1,11 +1,11 @@
-type `::` <^character[] | ^double[], double | ???, double> => ? ^double[];
+type `::` <^character[] | ^double[], double | null, double> => null | ^double[];
 type `filter` <character[]> => logical[];
 type `fliplr` <^integer[]> => ^integer[];
 type `flipud` <^integer[]> => ^integer[];
 type `fun` <symbol, symbol> => null;
 type `FUN` <integer, ^double[], integer> => character;
 type `hasTrailingSep` <character> => logical;
-type `imagesc` <^double[], integer[], ???, character[], character> => null;
+type `imagesc` <^double[], integer[], null, character[], character> => null;
 type `linspace` <double, double, double> => double[];
 type `logspace` <double, double, double> => double[];
 type `mod` <double, double> => double;
@@ -13,7 +13,7 @@ type `padarray` <^character[] | ^integer[], double[], character | double, charac
 type `pretty.axp` <character, character> => double[];
 type `primes` <double> => double[];
 type `rosser` < > => ^integer[];
-type `size` <^double[], ??? | double> => integer[];
+type `size` <^double[], null | double> => integer[];
 type `size_t` <integer[]> => integer[];
 type `sum` <^integer[], logical> => integer[];
 type `tic` <logical> => null;

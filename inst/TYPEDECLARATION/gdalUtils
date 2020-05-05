@@ -1,5 +1,5 @@
 type `filter` <character[]> => logical[];
-type `FUN` <character[] | ^double[] | ???> => character | logical;
+type `FUN` <character[] | ^double[] | null> => character | logical;
 type `gdal_check_validity` <character, character> => logical;
 type `gdal_python_utilities` <character> => ^character[];
 type `gdal_setInstallation` <null, logical, logical, logical> => null;
