@@ -21,7 +21,7 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
                    SEXP value,
                    const tastr::ast::Node& node) {
         if (is_dot_dot_dot_parameter_(parameter_name)) {
-            push_result_(node.is_vararg_type_node());
+            push_result_(node.is_vararg_type_node() || node.is_any_type_node());
         } else {
             na_ = false;
             vector_ = false;
