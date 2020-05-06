@@ -118,6 +118,12 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
             });
     }
 
+    void visit(const tastr::ast::ClassTypeNode& node) override final {
+        SEXP value = pop_value_();
+        const std::string& class_name = node.get_identifier().get_name();
+        push_result_(has_class(value, class_name));
+    }
+
     void visit(const tastr::ast::EnvironmentTypeNode& node) override final {
         SEXP value = pop_value_();
         SEXPTYPE rtype = type_of_sexp(value);
@@ -288,6 +294,19 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
         if (peek_result_()) {
             return;
         }
+        pop_result_();
+        push_value_(value);
+        node.get_second_type().accept(*this);
+    }
+
+    void visit(const tastr::ast::IntersectionTypeNode& node) override final {
+        SEXP value = peek_value_();
+        node.get_first_type().accept(*this);
+        /* if first type fails, then the typecheck fails  */
+        if (!peek_result_()) {
+            return;
+        }
+        /* first type check has succeeded, so we pop off the previous value  */
         pop_result_();
         push_value_(value);
         node.get_second_type().accept(*this);

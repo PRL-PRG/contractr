@@ -100,6 +100,8 @@ SEXP system_file(SEXP path);
 
 SEXP lookup_value(SEXP rho, SEXP value_sym, bool evaluate = false);
 
+SEXP get_class_names(SEXP object);
+
 bool has_class(SEXP object, const std::string& class_name);
 
 bool is_data_frame(SEXP object);

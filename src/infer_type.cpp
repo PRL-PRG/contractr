@@ -128,12 +128,28 @@ std::string infer_list_type(SEXP value) {
 }
 
 std::string infer_type(const std::string& parameter_name, SEXP value) {
+    SEXP class_names = R_NilValue;
+
     if (parameter_name == "...") {
         return "...";
     }
 
     else if (type_of_sexp(value) == MISSINGSXP) {
         return "???";
+    }
+
+    else if ((class_names = get_class_names(value)) != R_NilValue &&
+             type_of_sexp(class_names) == STRSXP) {
+        std::vector<std::string> class_types;
+
+        for (int index = 0; index < LENGTH(class_names); ++index) {
+            std::string class_type =
+                "$" + std::string(CHAR(STRING_ELT(class_names, index)));
+
+            class_types.push_back(class_type);
+        }
+
+        return join(class_types, " & ");
     }
 
     else if (type_of_sexp(value) == NILSXP) {

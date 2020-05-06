@@ -185,6 +185,10 @@ SEXP lookup_value(SEXP rho, SEXP value_sym, bool evaluate) {
     return value;
 }
 
+SEXP get_class_names(SEXP object) {
+    return getAttrib(object, R_ClassSymbol);
+}
+
 bool has_class(SEXP object, const std::string& class_name) {
     SEXP class_names = getAttrib(object, R_ClassSymbol);
 
