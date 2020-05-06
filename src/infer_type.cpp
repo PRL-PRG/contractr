@@ -135,7 +135,7 @@ std::string infer_type(const std::string& parameter_name, SEXP value) {
     }
 
     else if (type_of_sexp(value) == MISSINGSXP) {
-        return "???";
+        return "any";
     }
 
     else if ((class_names = get_class_names(value)) != R_NilValue &&
