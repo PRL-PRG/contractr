@@ -282,7 +282,8 @@ std::vector<std::string> get_class_names(SEXP object) {
                 break;
             default:
                 /* NOTE: these are handled separately */
-                /* class_names.push_back(sexptype_to_string(type_of_sexp(object))); */
+                /* class_names.push_back(sexptype_to_string(type_of_sexp(object)));
+                 */
                 break;
             }
         }
@@ -306,23 +307,11 @@ std::vector<std::string> get_class_names(SEXP object) {
 }
 
 bool has_class(SEXP object, const std::string& class_name) {
-    SEXP class_names = getAttrib(object, R_ClassSymbol);
+    std::vector<std::string> class_names = get_class_names(object);
 
-    if (class_names == R_NilValue) {
-        return false;
-    }
-
-    if (type_of_sexp(class_names) != STRSXP) {
-        return false;
-    }
-
-    /* efficient to compare from the end for data.frame  */
-    for (int i = LENGTH(class_names) - 1; i >= 0; --i) {
-        SEXP name = STRING_ELT(class_names, i);
-        if (name != NA_STRING) {
-            if (class_name == CHAR(name)) {
-                return true;
-            }
+    for (int i = 0; i < class_names.size(); ++i) {
+        if (class_names[i] == class_name) {
+            return true;
         }
     }
 
