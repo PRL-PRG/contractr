@@ -120,8 +120,20 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
 
     void visit(const tastr::ast::ClassTypeNode& node) override final {
         SEXP value = pop_value_();
-        const std::string& class_name = node.get_identifier().get_name();
-        push_result_(has_class(value, class_name));
+        const tastr::ast::ParameterNode& parameters = node.get_parameters();
+
+        for (int index = 0; index < parameters.get_parameter_count(); ++index) {
+            const std::string& class_name =
+                tastr::ast::as<tastr::ast::IdentifierNode>(parameters.at(index))
+                    .get_name();
+
+            if (!has_class(value, class_name)) {
+                push_result_(false);
+                return;
+            }
+        }
+
+        push_result_(true);
     }
 
     void visit(const tastr::ast::EnvironmentTypeNode& node) override final {
@@ -152,11 +164,6 @@ class TypeChecker final: public tastr::visitor::ConstNodeVisitor {
         SEXP value = pop_value_();
         SEXPTYPE rtype = type_of_sexp(value);
         push_result_(rtype == EXTPTRSXP);
-    }
-
-    void visit(const tastr::ast::DataFrameTypeNode& node) override final {
-        SEXP value = pop_value_();
-        push_result_(is_data_frame(value));
     }
 
     void visit(const tastr::ast::BytecodeTypeNode& node) override final {

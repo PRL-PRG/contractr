@@ -26,6 +26,8 @@ char* copy_c_string(const char* source);
 
 SEXPTYPE type_of_sexp(SEXP value);
 
+std::string sexptype_to_string(SEXPTYPE type);
+
 SEXP environment_name(SEXP env);
 
 SEXP lang7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y);
@@ -100,7 +102,7 @@ SEXP system_file(SEXP path);
 
 SEXP lookup_value(SEXP rho, SEXP value_sym, bool evaluate = false);
 
-SEXP get_class_names(SEXP object);
+std::vector<std::string> get_class_names(SEXP object);
 
 bool has_class(SEXP object, const std::string& class_name);
 

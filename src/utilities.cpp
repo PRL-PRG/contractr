@@ -37,6 +37,59 @@ SEXPTYPE type_of_sexp(SEXP value) {
     return TYPEOF(value);
 }
 
+std::string sexptype_to_string(SEXPTYPE type) {
+    if (type == NILSXP) {
+        return "NULL";
+    } else if (type == SYMSXP) {
+        return "symbol";
+    } else if (type == LISTSXP) {
+        return "pairlist";
+    } else if (type == CLOSXP) {
+        return "closure";
+    } else if (type == ENVSXP) {
+        return "environment";
+    } else if (type == PROMSXP) {
+        return "promise";
+    } else if (type == LANGSXP) {
+        return "language";
+    } else if (type == SPECIALSXP) {
+        return "special";
+    } else if (type == BUILTINSXP) {
+        return "builtin";
+    } else if (type == CHARSXP) {
+        return "char";
+    } else if (type == LGLSXP) {
+        return "logical";
+    } else if (type == INTSXP) {
+        return "integer";
+    } else if (type == REALSXP) {
+        return "double";
+    } else if (type == CPLXSXP) {
+        return "complex";
+    } else if (type == STRSXP) {
+        return "character";
+    } else if (type == DOTSXP) {
+        return "...";
+    } else if (type == ANYSXP) {
+        return "any";
+    } else if (type == EXPRSXP) {
+        return "expression";
+    } else if (type == VECSXP) {
+        return "list";
+    } else if (type == EXTPTRSXP) {
+        return "externalptr";
+    } else if (type == BCODESXP) {
+        return "bytecode";
+    } else if (type == WEAKREFSXP) {
+        return "weakref";
+    } else if (type == RAWSXP) {
+        return "raw";
+    } else if (type == S4SXP) {
+        return "S4";
+    }
+    return "CASE_NOT_HANDLED";
+}
+
 SEXP environment_name(SEXP env) {
     if (R_IsPackageEnv(env) == TRUE) {
         // cf. builtin.c:432 do_envirName
@@ -185,8 +238,71 @@ SEXP lookup_value(SEXP rho, SEXP value_sym, bool evaluate) {
     return value;
 }
 
-SEXP get_class_names(SEXP object) {
-    return getAttrib(object, R_ClassSymbol);
+std::string get_language_class(SEXP object) {
+    SEXP head = CAR(object);
+    if (type_of_sexp(head) == SYMSXP) {
+        std::string name(CHAR(PRINTNAME(head)));
+        if (name == "if" || name == "while" || name == "for" || name == "=" ||
+            name == "<-" || name == "(" || name == "{") {
+            return name;
+        }
+    }
+    return "call";
+}
+
+std::vector<std::string> get_class_names(SEXP object) {
+    std::vector<std::string> class_names;
+
+    SEXP klass = getAttrib(object, R_ClassSymbol);
+
+    /* class attribute not present  */
+    if (klass == R_NilValue) {
+        SEXP dim = getAttrib(object, R_DimSymbol);
+        int ndim = length(dim);
+
+        /* dimension attribute not present or of length 0  */
+        if (ndim == 0) {
+            SEXPTYPE t = TYPEOF(object);
+
+            switch (t) {
+            case CLOSXP:
+            case SPECIALSXP:
+            case BUILTINSXP:
+                class_names.push_back("function");
+                break;
+            case REALSXP:
+                /* NOTE: this is handled separately as ^double[]  */
+                /* class_names.push_back("numeric"); */
+                break;
+            case SYMSXP:
+                class_names.push_back("name");
+                break;
+            case LANGSXP:
+                class_names.push_back(get_language_class(object));
+                break;
+            default:
+                /* NOTE: these are handled separately */
+                /* class_names.push_back(sexptype_to_string(type_of_sexp(object))); */
+                break;
+            }
+        }
+        /* two dimensions  */
+        else if (ndim == 2) {
+            class_names.push_back("matrix");
+        }
+        /* not two dimensions  */
+        else {
+            class_names.push_back("array");
+        }
+    }
+    /* class attribute present  */
+    else if (type_of_sexp(klass) == STRSXP) {
+        for (int index = 0; index < LENGTH(klass); ++index) {
+            class_names.push_back(CHAR(STRING_ELT(klass, index)));
+        }
+    }
+
+    return class_names;
 }
 
 bool has_class(SEXP object, const std::string& class_name) {
