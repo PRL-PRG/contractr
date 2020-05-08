@@ -1,8 +1,0 @@
-type `create.wData.omega` <double[], double[], integer[], integer[], double, character, character> => struct<`id`:integer[], `Tstart`:double[], `Tstop`:double[], `status`:integer[], `strata`:double[]>;
-type `fillplot` <double[], double[], double[], character, double> => null;
-type `filter` <character[]> => logical[];
-type `FUN` <null | ^double[], double[] | symbol | tuple<double[], double[], null> | tuple<double[], null, double[]> | struct<`Normal`:double[], `Low`:double[], `Death`:null>, double[]> => null | double[] | character[] | ^integer[];
-type `msprepEngine` <^double[], ^double[], integer[], double[], double[], ^double[], integer[], null | ^double[]> => ^double[];
-type `NAfix` <^double[], double> => double[];
-type `subterms` <language, integer> => language;
-type `transMat` <tuple<double[], double[], null> | tuple<double[], null, double[]> | struct<`Normal`:double[], `Low`:double[], `Death`:null>, character[] | null> => ^integer[];

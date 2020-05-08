@@ -1,4 +1,14 @@
-type `.option_needs_argument` < > => logical;
-type `.option_needs_argument_helper` <character, language | symbol> => logical;
+type `.convert_to_getopt` <class<`OptionParserOption`>> => ^character[];
 type `filter` <character[]> => logical[];
-type `parse_args2` <character[], logical> => struct<`options`:struct<`add_numbers`:logical, `help`:logical>, `args`:character>;
+type `.get_long_options` <class<`OptionParser`>> => character[];
+type `.get_option_strings_and_n_arguments` <class<`OptionParser`>> => list<character[] | double[]>;
+type `.is_long_flag` <character> => logical;
+type `.is_option_string` <character, any> => logical;
+type `.is_short_flag` <character> => logical;
+type `make_option` <character[], character, character | null, null | character, double | null | character, character, character | null, null, null> => class<`OptionParserOption`>;
+type `.option_needs_argument` <class<`OptionParserOption`>> => logical;
+type `.option_needs_argument_helper` <character, any> => logical;
+type `OptionParser` <character, list<class<`OptionParserOption`>>, logical, null, character, character> => class<`OptionParser`>;
+type `parse_args` <class<`OptionParser`>, character[], any, logical, logical> => list<character | list<logical> | character | double>;
+type `parse_args2` <class<`OptionParser`>, character[], logical> => list<character | list<logical>>;
+type `.requires_argument` <character, class<`OptionParser`>> => logical;

@@ -1,3 +1,2 @@
-type `::` <double[], any => any, null | any => any, double | null, struct<`maxeval`:double>, double> => struct<`par`:double[], `value`:double, `convergence`:integer, `message`:character, `invhessian.lt`:double[], `info`:double[]>;
 type `filter` <character[]> => logical[];
-type `ucminf` <double[], any => any, null | any => any, null, struct<`trace`:double>, double> => struct<`par`:double[], `value`:double, `convergence`:integer, `message`:character, `invhessian.lt`:double[], `info`:double[]>;
+type `ucminf` <double[], class<`function`>, class<`function`>, ..., list<double>, double> => list<double[] | character>;

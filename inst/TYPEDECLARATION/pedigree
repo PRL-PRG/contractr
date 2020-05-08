@@ -1,6 +1,13 @@
-type `blup` <struct<`ID`:integer[], `pID0`:double[], `pID1`:double[], `hID0`:double[], `hID1`:double[], `G`:double[], `P`:double[]>, double, logical> => language;
-type `countGen` <struct<`id`:integer[], `dam`:double[], `sire`:double[]>> => integer[];
+type `add.Inds` <class<`data.frame`>> => class<`data.frame`>;
+type `blup` <class<`formula`>, class<`data.frame`>, double, logical> => class<`dgCMatrix`>;
+type `calcG` <class<`matrix`>, double[] | null, logical> => class<`dgeMatrix`>;
+type `calcInbreeding` <class<`data.frame`>> => double[];
+type `countGen` <class<`data.frame`>> => integer[];
+type `countOff` <class<`data.frame`>> => integer[];
 type `filter` <character[]> => logical[];
-type `FUN` <double[]> => logical;
-type `gblup` <struct<`ID`:integer[], `P`:double[]>, ^double[], double> => language;
-type `trimPed` <struct<`id`:integer[], `dam`:double[], `sire`:double[]>, logical[], null> => logical[];
+type `FUN` <double[]> => logical | <double[]> => logical;
+type `gblup` <class<`formula`>, class<`data.frame`>, class<`matrix`>, double> => class<`dgCMatrix`>;
+type `makeA` <class<`data.frame`>, logical[]> => logical;
+type `makeAinv` <class<`data.frame`>> => logical;
+type `orderPed` <class<`data.frame`>> => integer[];
+type `trimPed` <class<`data.frame`>, logical[], null> => logical[];

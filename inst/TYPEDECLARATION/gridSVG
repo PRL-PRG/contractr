@@ -1,0 +1,4 @@
+type `animUnit` <class<`unit`>, integer[], integer[]> => class<`animUnit`>;
+type `animValue` <character[], null, null> => class<`animValue`>;
+type `filter` <character[]> => logical[];
+type `fun` <any, any> => character[];

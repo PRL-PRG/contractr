@@ -1,4 +1,5 @@
 type `filter` <character[]> => logical[];
-type `read.ini` <character, character> => struct<`Hello World`:struct<`Foo`:character, `Foo1`:character>>;
+type `index` <character, character> => integer;
+type `read.ini` <character, character> => list<list<character>>;
 type `trim` <character> => character;
-type `write.ini` <struct<`Hello World`:struct<`Foo`:character>>, character, character> => null;
+type `write.ini` <list<list<character>>, character, character> => null;

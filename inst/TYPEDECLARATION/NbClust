@@ -1,7 +1,0 @@
-type `biserial.cor` <double[], double[], character[], double> => double;
-type `filter` <character[]> => logical[];
-type `GAP` <^double[], integer[], symbol, double, character, symbol, symbol> => struct<`Sgap`:double, `Sdgap`:double>;
-type `Indice.cindex` <double[], integer[]> => double;
-type `Indice.DB` <^double[], integer[], null, character, double, double> => struct<`DB`:double, `r`:double[], `R`:^double[], `d`:^double[], `S`:double[], `centers`:^double[]>;
-type `Indice.Gap` <^double[], ^integer[], character, double, character, null, character> => struct<`gap`:double, `diffu`:double>;
-type `Indice.S` <double[], integer[]> => double;

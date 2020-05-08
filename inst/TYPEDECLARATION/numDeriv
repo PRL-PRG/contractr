@@ -1,4 +1,10 @@
 type `filter` <character[]> => logical[];
-type `genD.default` <any => any, double[], character, tuple<> | struct<`d`:double>, null | environment | ^double[]> => struct<`D`:^double[], `p`:integer, `f0`:double, `func`:any => any, `x`:double, `d`:double, `method`:character, `method.args`:struct<`eps`:double, `d`:double, `zero.tol`:double, `r`:double, `v`:double, `show.details`:logical>> | struct<`D`:^double[], `p`:integer, `f0`:double[], `func`:any => any, `x`:double[], `d`:double, `method`:character, `method.args`:struct<`eps`:double, `d`:double, `zero.tol`:double, `r`:double, `v`:double>> | struct<`D`:^double[], `p`:integer, `f0`:integer, `func`:any => any, `x`:integer[], `d`:double, `method`:character, `method.args`:struct<`eps`:double, `d`:double, `zero.tol`:double, `r`:double, `v`:double, `show.details`:logical>>;
-type `hessian.default` <any => any, double[], character, null | tuple<> | struct<`d`:double>, null | environment | ^double[]> => ^double[];
-type `func` <double[], null> => double[];
+type `func` <double[], ...> => double[];
+type `genD` <class<`function`>, double[], character, any, ...> => class<`Darray`>;
+type `genD.default` <class<`function`>, double[], character, list<any>, ...> => class<`Darray`>;
+type `grad` <class<`function`>, double[], character, ^double[] | null, any, ...> => (^double[] | null);
+type `grad.default` <class<`function`>, double[], character, ^double[] | null, any, ...> => (^double[] | null);
+type `hessian` <class<`function`>, double[], character, any, ...> => class<`matrix`>;
+type `hessian.default` <class<`function`>, double[], character, list<any>, ...> => class<`matrix`>;
+type `jacobian` <class<`function`>, double[], character, null | double, any, ...> => class<`matrix`>;
+type `jacobian.default` <class<`function`>, double[], character, null | double, any, ...> => class<`matrix`>;

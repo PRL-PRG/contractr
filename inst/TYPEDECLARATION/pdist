@@ -1,4 +1,4 @@
-type `[` <double, double, null, logical> => double;
-type `as.matrix.pdist` <null> => ^double[];
+type `[` <class<`pdist`>, double, double, ..., logical> => double;
+type `as.matrix.pdist` <class<`pdist`>, ...> => class<`matrix`>;
 type `filter` <character[]> => logical[];
-type `pdist` <null, integer[], integer[]> => ^double[];
+type `pdist` <class<`matrix`>, null, integer[], integer[]> => class<`pdist`>;

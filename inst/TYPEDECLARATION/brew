@@ -1,5 +1,6 @@
-type `filter` <character[]> => logical[];
-type `brewCache` <null | environment> => null;
+type `brew` <character, character | class<`connection`, `terminal`>, null, environment, logical, logical, null | class<`function`>, logical> => (class<`try-error`> | null);
+type `brewCache` <null | environment> => (environment | null);
 type `brewCacheOff` < > => null;
 type `brewCacheOn` < > => null;
-type `fun` <symbol, symbol> => null;
+type `filter` <character[]> => logical[];
+type `fun` <any, any> => null;

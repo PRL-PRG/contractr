@@ -1,4 +1,4 @@
-type `alluvial` <struct<`Class`:character[], `Survived`:character[]>, double[], integer[] | character[], null | double | character[], null | integer[], logical[], double, double, double, double, logical | character, null | tuple<null, integer[], null> | tuple<integer[], integer[], null> | tuple<null, null, integer[]>, null, double, double> => struct<`endpoints`:tuple<^double[], ^double[]>>;
-type `alluvial_ts` <struct<`country`:integer[], `year`:integer[], `refugees`:integer[]>, null | character | double, character[] | double, null | character[], null | double, character, logical, double, character, double, character, null | character, double, double, logical, character, double, logical, double> => null;
+type `alluvial` <..., double[], character[], null | character, any, logical[], double, double, double, double, character | logical, null | list<null | integer[]>> => list<list<class<`matrix`>>>;
+type `alluvial_ts` <class<`data.frame`>, double | null, double, character[] | null, double | null, character, logical, double, character, double, character, character | null> => null;
 type `filter` <character[]> => logical[];
-type `FUN` <double[], double | struct<>, double[], double> => ^character[] | ^double[];
+type `FUN` <double[]> => character | <double[], double> => double[] | <integer> => class<`matrix`> | <integer, class<`data.frame`>, double[], double> => class<`matrix`> | <integer> => class<`matrix`>;

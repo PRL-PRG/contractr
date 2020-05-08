@@ -1,0 +1,13 @@
+type `as.difftime` <character[] | integer[], ...> => class<`difftime`>;
+type `as.difftime.default` <character[] | integer[], character, character, ...> => class<`difftime`>;
+type `as.factor` <character[], ...> => class<`factor`>;
+type `as.factor.default` <character[], ...> => class<`factor`>;
+type `as.ordered` <character[], ...> => class<`factor`, `ordered`>;
+type `as.ordered.default` <character[], ...> => class<`factor`, `ordered`>;
+type `filter` <character[]> => logical[];
+type `intersect` <integer[], integer[], ...> => integer[];
+type `intersect.default` <integer[], integer[], ...> => integer[];
+type `setdiff` <integer[], integer[], ...> => integer[];
+type `setdiff.default` <integer[], integer[], ...> => integer[];
+type `union` <integer[], integer[], ...> => integer[];
+type `union.default` <integer[], integer[], ...> => integer[];

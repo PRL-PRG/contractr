@@ -1,2 +1,3 @@
+type `countrycode` <character[], character, character, logical, null, null, null, logical> => (character | integer[]);
 type `filter` <character[]> => logical[];
-type `FUN` <null | character> => null | logical | character[];
+type `FUN` <character> => logical | <null | character> => character[] | <character | null> => (character | null);

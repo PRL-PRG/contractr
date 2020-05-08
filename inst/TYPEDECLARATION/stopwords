@@ -1,7 +1,6 @@
-type `createError` <language, character, null> => any => any;
+type `createError` <any, character, any> => class<`function`>;
 type `filter` <character[]> => logical[];
-type `fun` <symbol> => struct<`stopwords_sources`:null>;
-type `get_stopwords_data` <character> => struct<`da`:character[], `de`:character[], `en`:character[], `es`:character[], `fi`:character[], `fr`:character[], `hu`:character[], `ir`:character[], `it`:character[], `nl`:character[], `no`:character[], `pt`:character[], `ro`:character[], `ru`:character[], `sv`:character[]>;
+type `fun` <...> => list<null>;
+type `get_stopwords_data` <character> => list<character[]>;
 type `stopwords` <character, character> => character[];
-type `stopwords_options` < > => struct<`stopwords_sources`:character[]> | struct<`stopwords_sources`:null>;
-type `::` <character, character> => character[];
+type `stopwords_options` < > => list<character[] | null>;

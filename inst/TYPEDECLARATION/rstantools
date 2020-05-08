@@ -1,7 +1,10 @@
+type `.central_intervals` <class<`matrix`>, double> => class<`matrix`>;
 type `filter` <character[]> => logical[];
-type `.central_intervals` <^double[], double> => ^double[];
-type `.pred_errors` <^double[], double[]> => ^double[];
-type `fun` <symbol> => null;
-type `posterior_interval.default` <^double[], double, null> => ^double[];
-type `predictive_error.default` <^double[], double[], null> => ^double[];
-type `predictive_interval.default` <^double[], double, null> => ^double[];
+type `fun` <...> => null;
+type `posterior_interval` <class<`matrix`>, ...> => class<`matrix`>;
+type `posterior_interval.default` <class<`matrix`>, double, ...> => class<`matrix`>;
+type `.pred_errors` <class<`matrix`>, double[]> => class<`matrix`>;
+type `predictive_error` <class<`matrix`>, ...> => class<`matrix`>;
+type `predictive_error.default` <class<`matrix`>, double[], ...> => class<`matrix`>;
+type `predictive_interval` <class<`matrix`>, ...> => class<`matrix`>;
+type `predictive_interval.default` <class<`matrix`>, double, ...> => class<`matrix`>;

@@ -1,0 +1,4 @@
+type `dgig` <double[] | null, double | null, double | null, double | null, logical> => (double[] | null);
+type `f` <double[] | null, double | null, double | null, double | null, logical> => (double[] | null);
+type `filter` <character[]> => logical[];
+type `rgig` <double, double, double, double> => any;

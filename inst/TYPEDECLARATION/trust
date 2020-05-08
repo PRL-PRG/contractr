@@ -1,0 +1,6 @@
+type `check.objfun.output` <list<double[] | class<`matrix`> | double>, logical, any> => logical;
+type `f` <double> => double;
+type `filter` <character[]> => logical[];
+type `fred` <double> => double;
+type `norm` <double[]> => double;
+type `trust` <class<`function`>, double[], double, double, any, double, any, any, logical, logical, ...> => any;

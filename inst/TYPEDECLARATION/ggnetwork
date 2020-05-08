@@ -1,0 +1,15 @@
+type `filter` <character[]> => logical[];
+type `format_fortify` <class<`network`>, class<`matrix`>, character | null, double, null | character, logical, logical, class<`function`>, class<`function`>, class<`function`>, class<`function`>, class<`function`>> => class<`data.frame`>;
+type `fortify.network` <class<`network`>, null, character | class<`matrix`>, character | null, double, null | character, logical, logical, ...> => class<`data.frame`>;
+type `FUN` <character, class<`network`>> => (character[] | ^double[]) | <double> => class<`data.frame`> | <character, class<`network`>> => (character[] | double[]);
+type `geom_edges` <class<`uneval`> | null, class<`function`> | null, character, null | class<`arrow`>, double, double, double, logical, null, logical, ...> => class<`Layer`, `LayerInstance`, `gg`, `ggproto`>;
+type `geom_edgetext` <class<`uneval`> | null, null | class<`function`>, character, logical, ..., double, double, class<`unit`>, class<`unit`>, double, logical, null> => class<`Layer`, `LayerInstance`, `gg`, `ggproto`>;
+type `geom_edgetext_repel` <class<`uneval`>, class<`function`> | null, logical, ..., class<`unit`>, class<`unit`>, class<`unit`>, class<`unit`>, double, character, double, null> => class<`Layer`, `LayerInstance`, `gg`, `ggproto`>;
+type `geom_nodelabel` <class<`uneval`>, class<`function`> | null, character, ..., logical, double, double, class<`unit`>, class<`unit`>, double, logical, null> => class<`Layer`, `LayerInstance`, `gg`, `ggproto`>;
+type `geom_nodelabel_repel` <class<`uneval`>, class<`function`> | null, logical, ..., class<`unit`>, class<`unit`>, class<`unit`>, class<`unit`>, double, character, double, null> => class<`Layer`, `LayerInstance`, `gg`, `ggproto`>;
+type `geom_nodes` <class<`uneval`> | null, null, character, logical, null, logical, ...> => class<`Layer`, `LayerInstance`, `gg`, `ggproto`>;
+type `geom_nodetext` <class<`uneval`>, null, character, ..., logical, double, double, logical, logical, null, logical> => class<`Layer`, `LayerInstance`, `gg`, `ggproto`>;
+type `geom_nodetext_repel` <class<`uneval`>, null, logical, ..., class<`unit`>, class<`unit`>, character, double, null, double, double, double> => class<`Layer`, `LayerInstance`, `gg`, `ggproto`>;
+type `ggnetwork` <class<`matrix`> | class<`network`>, ...> => class<`data.frame`>;
+type `scale_safely` <double[], double> => double[];
+type `theme_blank` <double, character, ...> => class<`gg`, `theme`>;

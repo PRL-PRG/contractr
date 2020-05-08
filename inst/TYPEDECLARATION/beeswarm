@@ -1,0 +1,12 @@
+type `beeswarm` <class<`formula`> | list<double[]>, ...> => class<`data.frame`>;
+type `beeswarm.default` <list<double[]>, character[], logical, logical, double, double, null, any, null, character[], any, double> => class<`data.frame`>;
+type `beeswarm.formula` <class<`formula`>, any, any, null, null, any, null, any, any, ...> => class<`data.frame`>;
+type `bxplot` <class<`formula`> | list<double[]>, ...> => null;
+type `bxplot.default` <list<double[]>, double[], logical, logical, logical, character[] | double, character, null, null, double, ...> => null;
+type `bxplot.formula` <class<`formula`>, any, ..., any, null> => null;
+type `.calculateSwarm` <^double[], double, double, double, character> => ^double[];
+type `filter` <character[]> => logical[];
+type `FUN` <double[]> => double[] | <integer[]> => double[] | <double[]> => double[] | <integer[]> => double[] | <integer[]> => double[] | <double[]> => double[] | <integer[]> => double[] | <integer> => ^double[] | <double[]> => ^double[] | <integer> => double[] | <integer[]> => double[] | <double> => logical | <integer[]> => double[] | <double[]> => double[];
+type `swarmx` <double[], double[], double, double, null, double, double, character[]> => class<`data.frame`>;
+type `swarmy` <double[], double[], double, double, null, double, integer, character[]> => class<`data.frame`>;
+type `unlistGroup` <list<double[]>, character[] | double[] | ^logical[]> => (character[] | double[] | ^logical[]);

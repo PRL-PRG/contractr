@@ -1,0 +1,17 @@
+type `deprecated` < > => any;
+type `deprecate_soft` <character, character, null, null, null, any> => any;
+type `deprecate_stop` <character, character, null, null> => any;
+type `deprecate_warn` <character, character, character | null, null, null, any> => any;
+type `filter` <character[]> => logical[];
+type `fun` <any, any> => class<`function`>;
+type `has_crayon` < > => logical;
+type `lifecycle_build_message` <character, character, character | null, null, character> => character;
+type `lifecycle_verbosity` < > => character;
+type `new_deprecated_warning` <character, class<`rlang_trace`>> => class<`condition`, `lifecycle_warning_deprecated`, `warning`>;
+type `paste_line` <...> => character;
+type `push_warning` <class<`condition`, `lifecycle_warning_deprecated`, `warning`>> => list<class<`condition`, `lifecycle_warning_deprecated`, `warning`>>;
+type `signal_validate_arg` <class<`call`>, any> => (character | null);
+type `signal_validate_fn` <class<`call`>> => character;
+type `signal_validate_pkg` <environment> => character;
+type `signal_validate_what` <character, character, any> => list<character | class<`call`> | null | class<`call`>>;
+type `silver` <character> => character;

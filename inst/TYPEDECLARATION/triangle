@@ -1,0 +1,12 @@
+type `dltriangle` <double, double, double, double, double> => double;
+type `dTest` <double[]> => double | <double[]> => double;
+type `dtriangle` <double, double, double, double> => double;
+type `filter` <character[]> => logical[];
+type `pltriangle` <double, double, double, double, double> => double;
+type `pTest` <double[]> => double | <double[]> => double;
+type `ptriangle` <double, double, double, double> => double;
+type `qltriangle` <double, double, double, double, double> => double;
+type `qTest` <double[]> => double | <double[]> => double;
+type `qtriangle` <double, double, double, double> => double;
+type `rltriangle` <double, double, double, double, double> => double[];
+type `rtriangle` <double, double, double, double> => double[];

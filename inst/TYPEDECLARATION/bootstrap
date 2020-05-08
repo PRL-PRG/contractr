@@ -1,2 +1,0 @@
-type `filter` <character[]> => logical[];
-type `FUN` <double[], double[], any => any> => double | logical[];

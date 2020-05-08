@@ -1,8 +1,0 @@
-type `filter` <character[]> => logical[];
-type `FUN` <double[]> => character | double[];
-type `logml.bridge` <struct<`logml`:double, `niter`:double, `method`:character>, null> => double;
-type `post_prob.bridge` <struct<`logml`:double, `niter`:double, `method`:character>, struct<`logml`:double, `niter`:double, `method`:character>, null | double[], null> => double[];
-type `post_prob.bridge_list` <struct<`logml`:double[], `niter`:double[], `method`:character, `repetitions`:double>, struct<`logml`:double[], `niter`:double[], `method`:character, `repetitions`:double>, null, logical | symbol> => ^double[];
-type `post_prob.default` <double[], null | double[], null, null | character[]> => double[];
-type `print.bf_bridge` <struct<`bf`:double, `log`:logical>, null> => null;
-type `print.bridge` <struct<`logml`:double, `niter`:double, `method`:character, `q11`:double[], `q12`:double[], `q21`:double[], `q22`:double[]>, null> => null;

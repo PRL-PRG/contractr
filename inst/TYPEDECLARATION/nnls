@@ -1,6 +1,6 @@
+type `coef.nnls` <class<`nnls`> | class<`nnnpls`>, ...> => double[];
+type `coef.nnnpls` <class<`nnls`> | class<`nnnpls`>, ...> => double[];
 type `filter` <character[]> => logical[];
-type `fun` <character, character> => struct<`name`:character, `path`:character, `dynamicLookup`:logical, `handle`:null, `info`:null>;
-type `nnls` <^double[], double[]> => struct<`x`:double[], `deviance`:double, `residuals`:^double[], `fitted`:^double[], `mode`:integer, `passive`:integer, `bound`:integer[], `nsetp`:integer> | struct<`x`:double[], `deviance`:double, `residuals`:^double[], `fitted`:^double[], `mode`:integer, `passive`:integer[], `bound`:integer, `nsetp`:integer> | struct<`x`:double[], `deviance`:double, `residuals`:^double[], `fitted`:^double[], `mode`:integer, `passive`:integer[], `bound`:logical[], `nsetp`:integer>;
-type `coef.nnls` <struct<`x`:double[], `deviance`:double, `residuals`:^double[], `fitted`:^double[], `mode`:integer, `passive`:integer[], `bound`:integer, `nsetp`:integer> | struct<`x`:double[], `deviance`:double, `residuals`:^double[], `fitted`:^double[], `mode`:integer, `passive`:integer[], `bound`:logical[], `nsetp`:integer> | struct<`x`:double[], `deviance`:double, `residuals`:^double[], `fitted`:^double[], `mode`:integer, `passive`:integer, `bound`:integer[], `nsetp`:integer>, null> => double[];
-type `coef.nnnpls` <struct<`x`:double[], `deviance`:double, `residuals`:^double[], `fitted`:^double[], `mode`:integer, `passive`:integer[], `bound`:integer, `nsetp`:integer> | struct<`x`:double[], `deviance`:double, `residuals`:^double[], `fitted`:^double[], `mode`:integer, `passive`:integer[], `bound`:logical[], `nsetp`:integer>, null> => double[];
-type `nnnpls` <^double[], double[], double[]> => struct<`x`:double[], `deviance`:double, `residuals`:^double[], `fitted`:^double[], `mode`:integer, `passive`:integer[], `bound`:integer, `nsetp`:integer> | struct<`x`:double[], `deviance`:double, `residuals`:^double[], `fitted`:^double[], `mode`:integer, `passive`:integer[], `bound`:logical[], `nsetp`:integer>;
+type `fun` <character, character> => class<`DLLInfo`>;
+type `nnls` <class<`matrix`>, double[]> => class<`nnls`>;
+type `nnnpls` <class<`matrix`>, double[], double[]> => class<`nnnpls`>;

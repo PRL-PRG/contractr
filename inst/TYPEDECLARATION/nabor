@@ -1,3 +1,6 @@
-type `$` <^double[]> => null | struct<`nn.idx`:^integer[], `nn.dists`:^double[]>;
-type `FUN` < > => ^double[];
-type `knn` <^double[], ^double[], double, double, character | integer, double> => struct<`nn.idx`:^integer[], `nn.dists`:^double[]>;
+type `$` <...> => list<class<`matrix`>> | <...> => list<class<`matrix`>> | <...> => any | <...> => list<class<`matrix`>> | <...> => any | <...> => class<`Rcpp_WKNNF`> | <...> => list<class<`matrix`>>;
+type `filter` <character[]> => logical[];
+type `FUN` <...> => class<`WKNNF`>;
+type `knn` <class<`matrix`>, class<`matrix`>, double, double, character | integer, double> => list<class<`matrix`>>;
+type `WKNND` <...> => any;
+type `WKNNF` <...> => class<`WKNNF`>;

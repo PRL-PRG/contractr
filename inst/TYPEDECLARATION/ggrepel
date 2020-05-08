@@ -1,0 +1,5 @@
+type `%||%` <null, null> => null;
+type `filter` <character[]> => logical[];
+type `geom_label_repel` <null, null, character, character, logical, ..., double, double, double, double, double, null> => class<`Layer`, `LayerInstance`, `gg`, `ggproto`>;
+type `geom_text_repel` <null, null, character, character, logical, ..., double, double, null, null, double, null> => class<`Layer`, `LayerInstance`, `gg`, `ggproto`>;
+type `to_unit` <double> => class<`unit`>;

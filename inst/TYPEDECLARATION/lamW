@@ -1,0 +1,5 @@
+type `filter` <character[]> => logical[];
+type `lambertW0` <double> => double;
+type `lambertW0_C` <double> => double;
+type `lambertWm1` <double> => double;
+type `lambertWm1_C` <double> => double;

@@ -1,0 +1,17 @@
+type `$` <character, character, class<`function`> | double, logical> => null | < > => (null | class<`R6ClassGenerator`>) | <...> => (class<`AC`, `BC`, `R6`> | class<`Cloner`, `R6`> | class<`CountingQueue`, `Queue`, `R6`> | class<`CustomCloner`, `R6`> | class<`HistoryQueue`, `Queue`, `R6`> | class<`NP`, `R6`> | class<`Numbers`, `R6`> | class<`Queue`, `R6`> | class<`R6`> | class<`R6`, `Simple`>);
+type `all_named` <null | list<any>> => logical;
+type `assign_func_envs` <null | list<class<`function`>>, environment> => list<any>;
+type `create_super_env` <class<`R6ClassGenerator`>, environment, environment, logical, any> => list<environment | list<any> | environment | list<class<`function`>>>;
+type `filter` <character[]> => logical[];
+type `FUN` <class<`function`>> => class<`function`> | <character> => (character[] | null);
+type `get_functions` <null | list<any>> => (null | list<class<`function`>>);
+type `get_inherit` < > => (null | class<`R6ClassGenerator`>);
+type `get_nonfunctions` <null | list<any>> => (null | list<any>);
+type `get_superclassnames` <class<`R6ClassGenerator`> | null> => (character | null);
+type `has_private` < > => logical;
+type `is.R6` <class<`R6`> | class<`R6ClassGenerator`>> => logical;
+type `is.R6Class` <class<`R6`> | class<`R6ClassGenerator`>> => logical;
+type `list2env2` <null | list<any>, environment, any, any, any, logical> => (environment | null);
+type `merge_vectors` <null | list<any>, null | list<any>> => (null | list<any>);
+type `R6Class` <character | null, list<any>, null | list<any>, null | list<class<`function`>>, any, logical, logical, logical, logical, logical, environment, any> => class<`R6ClassGenerator`>;
+type `recursive_merge` <class<`R6ClassGenerator`> | null, any> => (null | list<double | list<any>>);

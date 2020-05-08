@@ -1,0 +1,6 @@
+type `$` <logical> => integer | < > => logical | <character | null, character, character, null | character> => character | <character[]> => character[] | <null> => class<`cache_info`> | < > => character | < > => character[] | <character> => character | < > => null | < > => null | <character, logical> => integer | < > => null | < > => list<class<`HoardFile`, `R6`>> | < > => logical | <character[]> => class<`data.frame`> | <character, character> => character;
+type `filter` <character[]> => logical[];
+type `FUN` <character> => character | <character> => list<character | double>;
+type `getsize` <double> => double;
+type `hoard` < > => class<`HoardClient`, `R6`>;
+type `.subset2` <any> => (character | null);

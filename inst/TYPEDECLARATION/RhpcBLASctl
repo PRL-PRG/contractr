@@ -1,7 +1,7 @@
 type `blas_get_num_procs` < > => integer;
 type `blas_set_num_threads` <double> => null;
 type `filter` <character[]> => logical[];
-type `fun` <character, character> => struct<`name`:character, `path`:character, `dynamicLookup`:logical, `handle`:null, `info`:null>;
+type `fun` <character, character> => class<`DLLInfo`>;
 type `get_num_cores` < > => integer;
 type `get_num_procs` < > => integer;
 type `omp_get_max_threads` < > => integer;

@@ -1,9 +1,0 @@
-type `filter` <character[]> => logical[];
-type `fun` <symbol, symbol> => null;
-type `inseq` <^double[], logical> => struct<`Sig`:^double[], `Dtm`:double[], `trunc`:integer, `sn`:integer>;
-type `mbmc` <^double[], double> => ^double[];
-type `mcse` <double[], character, null | any => any | language | symbol, character[], logical> => struct<`est`:double, `se`:double>;
-type `mcse.q` <double[], double, character, null | double, character[], logical> => struct<`est`:double, `se`:double>;
-type `msvec` <^double[], double, character> => ^double[];
-type `qqTest` <struct<`cov`:^double[], `cov.adj`:^double[], `vol`:double, `vol.adj`:double, `est`:double[], `nsim`:integer, `adjust`:logical> | struct<`cov`:^double[], `vol`:double, `est`:double[], `nsim`:integer, `method`:character, `large`:logical, `size`:double>> => null;
-type `quant` <double[]> => double;

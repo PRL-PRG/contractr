@@ -1,0 +1,5 @@
+type `filter` <character[]> => logical[];
+type `geom_beeswarm` <null, null, character[], double, null, double, character, logical, null, logical, ...> => class<`Layer`, `LayerInstance`, `gg`, `ggproto`>;
+type `geom_quasirandom` <null, null, double | null, logical, double, null, character, null, double, character, character, logical> => class<`Layer`, `LayerInstance`, `gg`, `ggproto`>;
+type `position_beeswarm` <character[], double, null, double> => class<`Position`, `PositionBeeswarm`, `gg`, `ggproto`>;
+type `position_quasirandom` <double | null, logical, double, null, character, null, double> => class<`Position`, `PositionQuasirandom`, `gg`, `ggproto`>;

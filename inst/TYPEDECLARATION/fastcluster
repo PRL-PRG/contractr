@@ -1,1 +1,4 @@
+type `::` <class<`matrix`> | class<`data.frame`>, character, null | class<`table`>, character, double | null> => class<`hclust`> | <class<`dist`>, character, null | class<`table`>> => class<`hclust`>;
 type `filter` <character[]> => logical[];
+type `hclust` <class<`dist`>, character, null | class<`table`>> => class<`hclust`>;
+type `hclust.vector` <class<`matrix`> | class<`data.frame`>, character, null | class<`table`>, character, double | null> => class<`hclust`>;

@@ -1,1 +1,6 @@
+type `ad.test` <double[]> => class<`htest`>;
+type `cvm.test` <double[]> => class<`htest`>;
 type `filter` <character[]> => logical[];
+type `lillie.test` <double[]> => class<`htest`>;
+type `pearson.test` <double[], double, logical> => class<`htest`>;
+type `sf.test` <double[]> => class<`htest`>;

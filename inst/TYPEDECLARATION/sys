@@ -1,9 +1,9 @@
-type `as_text` <raw[], null> => character;
+type `as_text` <raw[], ...> => character;
 type `exec_background` <character, character, logical, logical, null> => integer;
-type `exec_internal` <character, null, null, logical, double> => struct<`status`:integer, `stdout`:raw[], `stderr`:raw[]>;
+type `exec_internal` <character, null, null, logical, double> => list<integer | raw[]>;
 type `exec_status` <integer, logical> => integer;
-type `exec_wait` <character, null | character[], integer, integer, null | character, double> => integer;
-type `execute` <character, null | character[], any => any | logical, any => any | logical, null | character, logical, double> => integer;
+type `execute` <character, character[] | null, class<`function`> | logical, class<`function`> | logical, null | character, logical, double> => integer;
+type `exec_wait` <character, character[] | null, class<`connection`, `terminal`> | class<`connection`, `rawConnection`>, class<`connection`, `terminal`> | class<`connection`, `rawConnection`>, null | character, double> => integer;
 type `filter` <character[]> => logical[];
-type `r_wait` <character[], integer, integer, null | character> => integer;
 type `rbin` < > => character;
+type `r_wait` <character[], class<`connection`, `terminal`>, class<`connection`, `terminal`>, null | character> => integer;

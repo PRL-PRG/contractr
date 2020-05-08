@@ -1,0 +1,17 @@
+type `addDate` <double[], double, double> => double[];
+type `annualizedGrowth` <class<`matrix`, `mts`, `ts`> | class<`ts`>, ...> => (class<`matrix`, `mts`, `ts`> | class<`ts`>);
+type `annualizedGrowth.default` <class<`matrix`, `mts`, `ts`> | class<`ts`>, double, double, character[], ...> => (class<`matrix`, `mts`, `ts`> | class<`ts`>);
+type `diffLog` <class<`matrix`> | class<`matrix`, `mts`, `ts`>, double, any, any> => (class<`matrix`> | class<`matrix`, `mts`, `ts`>);
+type `diffLog.default` <class<`matrix`> | class<`matrix`, `mts`, `ts`>, double, double, character[]> => (class<`matrix`> | class<`matrix`, `mts`, `ts`>);
+type `filter` <character[]> => logical[];
+type `percentChange` <class<`matrix`, `mts`, `ts`>, ...> => class<`matrix`, `mts`, `ts`>;
+type `percentChange.default` <class<`matrix`, `mts`, `ts`>, null, double, logical, logical, ...> => class<`matrix`, `mts`, `ts`>;
+type `tfOnePlot` <class<`matrix`, `mts`, `ts`> | class<`ts`>, any, double[], double[], null | character, null | character, character | null, character[] | integer[], double, double, character[] | integer[], null> => (class<`matrix`, `mts`, `ts`> | class<`ts`>);
+type `tfplot` <class<`matrix`, `mts`, `ts`> | class<`ts`>, ...> => null;
+type `tfplot.default` <class<`matrix`, `mts`, `ts`> | class<`ts`>, ..., any, double[], double[], integer[], character | null, character | null, null | character[], integer[] | character[], double, double> => null;
+type `tfXaxis` <double[], any> => double[];
+type `tfYaxis` <logical, logical, character> => null;
+type `tsScan` <character, double, double, character, character[], ...> => class<`matrix`, `mts`, `ts`>;
+type `tsWrite` <class<`matrix`, `mts`, `ts`>, character, logical, character, double> => null;
+type `ytoypc` <class<`matrix`, `mts`, `ts`>, any> => class<`matrix`, `mts`, `ts`>;
+type `ytoypc.default` <class<`matrix`, `mts`, `ts`>, character[]> => class<`matrix`, `mts`, `ts`>;

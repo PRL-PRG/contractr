@@ -1,0 +1,2 @@
+type `filter` <character[]> => logical[];
+type `GenSA` <null, class<`function`>, double[], double[], list<double>, ...> => list<double[] | class<`matrix`>>;

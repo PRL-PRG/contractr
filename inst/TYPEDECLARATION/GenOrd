@@ -1,0 +1,6 @@
+type `contord` <list<double[]>, class<`matrix`>, list<any>, logical> => class<`matrix`>;
+type `corrcheck` <list<double[]>, list<any>, logical> => list<class<`dsyMatrix`>>;
+type `filter` <character[]> => logical[];
+type `FUN` <double[]> => logical[];
+type `ordcont` <list<double[]>, class<`matrix`>, list<any>, logical, double, double> => list<class<`matrix`> | double>;
+type `ordsample` <double, list<double[]>, class<`matrix`>, list<any>, logical, character> => class<`matrix`>;

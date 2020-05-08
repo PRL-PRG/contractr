@@ -1,6 +1,14 @@
+type `agostino.test` <double[], character[]> => class<`htest`>;
+type `all.cumulants` <class<`matrix`> | double[]> => (class<`matrix`> | double[]);
+type `all.moments` <class<`data.frame`> | class<`matrix`> | double[], double, logical, logical, logical> => (class<`matrix`> | double[]);
+type `anscombe.test` <double[], character[]> => class<`htest`>;
+type `bonett.test` <double[], character[]> => class<`htest`>;
+type `central2raw` <class<`matrix`> | double[], double[]> => (class<`matrix`> | double[]);
 type `filter` <character[]> => logical[];
-type `FUN` <double[], integer, logical, logical, logical> => double;
+type `FUN` <double[] | class<`matrix`> | class<`data.frame`>, double, logical, logical, logical> => double[] | <double[] | class<`matrix`>> => (double[] | class<`matrix`>);
 type `geary` <double[], logical> => double;
+type `jarque.test` <double[]> => class<`htest`>;
 type `kurtosis` <double[], logical> => double;
-type `moment` <^double[] | struct<>, double, logical, logical, logical> => double[];
+type `moment` <double[] | class<`matrix`> | class<`data.frame`>, double, logical, logical, logical> => double[];
+type `raw2central` <double[] | class<`matrix`>> => (double[] | class<`matrix`>);
 type `skewness` <double[], logical> => double;

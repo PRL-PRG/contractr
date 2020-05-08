@@ -1,0 +1,3 @@
+type `filter` <character[]> => logical[];
+type `solve.QP` <class<`matrix`>, double[], class<`matrix`>, double[], double, logical> => list<double[]>;
+type `solve.QP.compact` <class<`matrix`>, double[], class<`matrix`>, class<`matrix`>, double[], double, logical> => list<double[]>;

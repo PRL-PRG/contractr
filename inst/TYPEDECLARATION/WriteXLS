@@ -1,5 +1,6 @@
 type `clean.up` < > => integer;
 type `escQuote` <character[] | logical[]> => character[];
 type `filter` <character[]> => logical[];
-type `FUN` <struct<`A`:double[], `B`:double[], `C`:double[]> | character[] | double[]> => logical | character | struct<>;
+type `FUN` <class<`data.frame`>> => logical | <character[] | logical[]> => character | <class<`factor`> | class<`factor`, `ordered`> | double[]> => character | <character> => class<`data.frame`> | <class<`data.frame`>> => logical;
 type `testPerl` <character, logical> => logical;
+type `WriteXLS` <character[] | class<`data.frame`> | list<class<`data.frame`>>, character, null, character, logical, character[], logical, logical, logical, logical, logical, character> => logical;

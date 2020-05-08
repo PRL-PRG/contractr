@@ -1,2 +1,14 @@
+type `aic` <class<`array`>, double> => list<class<`matrix`>>;
+type `compare.clust` <double[], list<class<`matrix`>>, class<`matrix`>, double> => list<class<`matrix`> | list<class<`matrix`>>>;
+type `dataBased` <double[], double, class<`matrix`>> => list<class<`matrix`>>;
+type `ecr` <double[], class<`matrix`>, double> => list<class<`matrix`>>;
+type `ecr.iterative.1` <class<`matrix`>, double, any, any, any> => list<class<`matrix`> | double | character>;
+type `ecr.iterative.2` <class<`matrix`>, double, class<`array`>, any, any> => list<class<`matrix`> | double | character>;
 type `filter` <character[]> => logical[];
-type `FUN` <double[]> => integer;
+type `FUN` <double[]> => double | <double[]> => integer | <double[]> => integer;
+type `label.switching` <character[], class<`matrix`>, class<`matrix`>, double, class<`matrix`>, any, any, class<`array`>, any, double[], any, any> => list<class<`matrix`> | double[] | list<class<`matrix`>>>;
+type `myPrettyPrint` <double, double, double, double, character, character | double, character> => null;
+type `permute.mcmc` <class<`array`>, class<`matrix`>> => list<class<`array`>>;
+type `pra` <class<`array`>, class<`matrix`>> => list<class<`matrix`>>;
+type `sjw` <class<`array`>, class<`matrix`>, class<`function`>, double[], double, double, any> => list<class<`matrix`> | double | character>;
+type `stephens` <class<`array`>, any, any> => list<class<`matrix`> | double | character>;

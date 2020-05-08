@@ -1,4 +1,9 @@
-type `.confusionMatrix` <double[], integer[], logical, character> => struct<`cutoffs`:double[], `tp`:double[], `fp`:double[], `tn`:double[], `fn`:double[], `n.pos`:integer, `n.neg`:integer, `n.pos.pred`:double[], `n.neg.pred`:double[]>;
+type `accuracy` <double[], class<`factor`>, logical> => class<`AUC`, `accuracy`>;
+type `auc` <class<`AUC`, `accuracy`> | class<`AUC`, `roc`> | class<`AUC`, `sensitivity`> | class<`AUC`, `specificity`>, double, double> => double;
+type `.confusionMatrix` <double[], class<`factor`>, logical, character> => list<double[]>;
 type `filter` <character[]> => logical[];
-type `fun` <symbol, character> => null;
-type `plot.AUC` <struct<`cutoffs`:double[], `fpr`:double[], `tpr`:double[]> | struct<`cutoffs`:double[], `measure`:double[]>, null, null, character, logical, double, double> => null;
+type `fun` <any, character> => null;
+type `plot.AUC` <class<`AUC`, `accuracy`> | class<`AUC`, `roc`> | class<`AUC`, `sensitivity`> | class<`AUC`, `specificity`>, null, ..., character, logical, double, double> => null;
+type `roc` <double[], class<`factor`>> => class<`AUC`, `roc`>;
+type `sensitivity` <double[], class<`factor`>, logical> => class<`AUC`, `sensitivity`>;
+type `specificity` <double[], class<`factor`>, logical> => class<`AUC`, `specificity`>;

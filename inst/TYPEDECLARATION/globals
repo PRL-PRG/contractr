@@ -1,0 +1,15 @@
+type `$` <character, character, any, any> => character[];
+type `as_function` <class<`{`>, environment, environment, ...> => class<`function`>;
+type `filter` <character[]> => logical[];
+type `findGlobals` <class<`{`>, environment, ..., null, character[], character, logical, any, logical> => character[];
+type `find_globals_t` <class<`{`>, environment, ..., logical> => character[] | <class<`{`>, environment, ..., logical> => character[];
+type `fun` <any, character> => logical[];
+type `FUN` <environment> => character;
+type `getOption` <character, logical> => logical;
+type `[.Globals` <class<`Globals`, `list`>, logical[]> => class<`Globals`, `list`>;
+type `globalsByName` <character[], environment, any, ...> => class<`Globals`, `list`>;
+type `globalsOf` <class<`{`>, environment, ..., character, null, logical, logical, logical, logical, null> => class<`Globals`, `list`>;
+type `is_base_pkg` <character[]> => logical[];
+type `mdebug` <...> => logical;
+type `stop_if_not` <...> => null;
+type `where` <character, any, environment, any, character, logical> => environment;

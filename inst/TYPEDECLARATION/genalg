@@ -1,3 +1,5 @@
 type `filter` <character[]> => logical[];
-type `plot.rbga` <struct<`type`:character, `size`:double, `popSize`:double, `iters`:double, `suggestions`:null, `population`:^integer[], `elitism`:double, `mutationChance`:double, `evaluations`:double[], `best`:double[], `mean`:double[]> | struct<`type`:character, `stringMin`:double[], `stringMax`:double[], `popSize`:double, `iters`:double, `suggestions`:null, `population`:^double[], `elitism`:double, `mutationChance`:double, `evaluations`:double[], `best`:double[], `mean`:double[]>, character, double, null> => null | struct<`mfcol`:integer[]>;
-type `summary.rbga` <struct<`type`:character, `size`:double, `popSize`:double, `iters`:double, `suggestions`:null, `population`:^integer[], `elitism`:double, `mutationChance`:double, `evaluations`:double[], `best`:double[], `mean`:double[]>, logical, null> => character;
+type `plot.rbga` <class<`rbga`>, character, double, ...> => (null | list<integer[]>);
+type `rbga` <double[], double[], null, double, double, double, null, class<`function`>, class<`function`>, logical, logical> => class<`rbga`>;
+type `rbga.bin` <double, null, double, double, double, null, double, null, class<`function`>, logical, logical> => class<`rbga`>;
+type `summary.rbga` <class<`rbga`>, logical, ...> => character;

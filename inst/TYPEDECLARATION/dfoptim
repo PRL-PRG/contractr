@@ -1,6 +1,14 @@
 type `f` <double[]> => double;
 type `filter` <character[]> => logical[];
-type `fnm` <double[], null | double> => double;
+type `fnm` <double[], ...> => double;
 type `fnmb` <double[]> => double;
 type `g` <double[]> => double[];
 type `ginv` <double[]> => double[];
+type `.hjbexplore` <double[], double[], class<`function`>, double[], double[], double, class<`matrix`>, any> => list<double[]>;
+type `.hjbsearch` <double[], class<`function`>, double[], double[], double, class<`matrix`>, any, any, any> => list<double[]>;
+type `.hjexplore` <double[], double[], class<`function`>, double, class<`matrix`>, any> => list<double[]>;
+type `hjk` <double[], class<`function`>, list<any>, ...> => list<double[]>;
+type `hjkb` <double[], class<`function`>, double, double, list<any>, ...> => list<double[]>;
+type `.hjsearch` <double[], class<`function`>, double, class<`matrix`>, any, any, any> => list<double[]>;
+type `nmk` <double[], class<`function`>, list<any>, ...> => list<double[] | character>;
+type `nmkb` <double[], class<`function`>, double[], double, list<any>, ...> => list<double[] | character>;

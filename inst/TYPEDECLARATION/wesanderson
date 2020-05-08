@@ -1,2 +1,2 @@
 type `filter` <character[]> => logical[];
-type `wes_palette` <character, double | null, character[]> => character[];
+type `wes_palette` <character, any, character[]> => class<`palette`>;

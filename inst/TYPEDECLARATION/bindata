@@ -1,6 +1,6 @@
-type `check.commonprob` <^double[]> => logical;
-type `commonprob2sigma` <^double[], null> => ^double[];
+type `check.commonprob` <class<`matrix`>> => logical;
+type `commonprob2sigma` <class<`matrix`>, null> => class<`matrix`>;
 type `filter` <character[]> => logical[];
-type `ra2ba` <^double[]> => ^double[];
-type `rmvbin` <double, double[] | null, language | ^double[], language, ^double[] | language, null, null> => ^double[];
-type `simul.commonprob` <double[], double[], character, double, double> => double[];
+type `ra2ba` <class<`matrix`>> => class<`matrix`>;
+type `rmvbin` <double, any, any, any, any, null, null> => class<`matrix`>;
+type `simul.commonprob` <double[], double[], character, double, double> => class<`array`>;

@@ -1,3 +1,4 @@
+type `area` <double[], double[]> => double;
 type `filter` <character[]> => logical[];
-type `survivalROC` <integer[], integer[], double[], null | integer, double, null | integer[], character, null, null | double, character> => struct<`cut.values`:double[], `TP`:double[], `FP`:double[], `predict.time`:double, `Survival`:double, `AUC`:double>;
-type `survivalROC.C` <integer[], integer[], double[], double, double> => struct<`cut.values`:double[], `TP`:double[], `FP`:double[], `predict.time`:double, `Survival`:double, `AUC`:double>;
+type `survivalROC` <integer[], integer[], double[], null, double, null, character, null, double | null, character> => list<double[]>;
+type `survivalROC.C` <integer[], integer[], double[], double, double> => list<double[]>;

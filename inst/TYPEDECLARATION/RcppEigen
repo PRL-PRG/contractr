@@ -1,7 +1,7 @@
-type `:::` <struct<`ar1_unbounded`:tuple<character, character>, `ar2_unbounded`:tuple<character, character>> | struct<`dense_PPLU`:tuple<character[], character>, `dense_CPQR`:tuple<character[], character>> | struct<`wrap_vectors`:tuple<character[], character>, `as_Vec`:tuple<character, character>, `as_Array`:tuple<character, character>, `as_Mat`:tuple<character, character>, `as_Array2D`:tuple<character, character>>, character, symbol> => struct<`ar1_unbounded`:any => any, `ar2_unbounded`:any => any> | struct<`dense_PPLU`:any => any, `dense_CPQR`:any => any> | struct<`wrap_vectors`:any => any, `as_Vec`:any => any, `as_Array`:any => any, `as_Mat`:any => any, `as_Array2D`:any => any>;
-type `fastLm.default` <^double[], double[], integer, null> => struct<`coefficients`:^double[], `se`:^double[], `rank`:integer, `df.residual`:integer, `residuals`:double[], `s`:double, `fitted.values`:double[], `call`:language, `intercept`:logical>;
-type `fastLm.formula` <language, struct<`f1`:integer[], `f2`:integer[], `y`:^double[]>, integer, null> => struct<`coefficients`:^double[], `se`:^double[], `rank`:integer, `df.residual`:integer, `residuals`:double[], `s`:double, `fitted.values`:double[], `call`:language, `intercept`:integer, `formula`:language>;
-type `fastLmPure` <^double[], double[], integer> => struct<`coefficients`:^double[], `se`:^double[], `rank`:integer, `df.residual`:integer, `residuals`:double[], `s`:double, `fitted.values`:double[]>;
+type `fastLm` <class<`formula`>, ...> => class<`fastLm`>;
+type `fastLm.default` <class<`matrix`>, double[], integer, ...> => class<`fastLm`>;
+type `fastLm.formula` <class<`formula`>, class<`data.frame`>, integer, ...> => class<`fastLm`>;
+type `fastLmPure` <class<`matrix`>, double[], integer> => list<^double[]>;
 type `filter` <character[]> => logical[];
 type `FUN` <double[]> => logical;
-type `summary.fastLm` <struct<`coefficients`:^double[], `se`:^double[], `rank`:integer, `df.residual`:integer, `residuals`:double[], `s`:double, `fitted.values`:double[], `call`:language, `intercept`:integer, `formula`:language>, null> => struct<`coefficients`:^double[], `se`:^double[], `rank`:integer, `df.residual`:integer, `residuals`:double[], `s`:double, `fitted.values`:double[], `call`:language, `intercept`:integer, `formula`:language, `r.squared`:double, `adj.r.squared`:double>;
+type `summary.fastLm` <class<`fastLm`>, ...> => class<`summary.fastLm`>;

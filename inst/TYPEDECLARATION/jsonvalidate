@@ -1,10 +1,10 @@
-type `::` <character, character, logical, logical, logical, character> => logical | any => any;
+type `::` <character, character, logical, logical, logical, character> => logical | <character, character> => class<`function`>;
 type `filter` <character[]> => logical[];
-type `fun` <symbol, symbol> => character;
+type `fun` <any, any> => character;
 type `get_meta_schema_version` <character> => character;
 type `get_string` <character> => character;
-type `json_validator` <character, character> => any => any;
-type `json_validator_ajv` <character> => any => any;
-type `json_validator_imjv` <character> => any => any;
+type `json_validator` <character, character> => class<`function`>;
+type `json_validator_ajv` <character> => class<`function`>;
+type `json_validator_imjv` <character> => class<`function`>;
 type `tmp` <character, logical, logical, logical> => logical;
-type `v` <character, logical, logical, logical> => logical;
+type `v` <character, logical, logical, logical> => logical | <character, logical, logical, logical> => logical;

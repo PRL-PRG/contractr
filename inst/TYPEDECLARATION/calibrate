@@ -1,5 +1,12 @@
+type `calibrate` <class<`matrix`> | double[], class<`matrix`> | double[], double[], class<`matrix`>, any, double, logical, logical, logical, logical, character, logical> => list<null | class<`matrix`> | double[]>;
+type `canocor` <class<`matrix`>, class<`matrix`>> => list<class<`matrix`>>;
 type `circle` <double, double[]> => null;
+type `dlines` <class<`matrix`>, class<`matrix`>, character> => null;
 type `filter` <character[]> => logical[];
-type `ones` <double, double> => ^double[];
-type `origin` <double[], null> => null;
-type `textxy` <double[], double[], integer[] | character[] | expression, double[], double, double, null> => null;
+type `ones` <double, double> => class<`matrix`>;
+type `origin` <double[], ...> => null;
+type `PrinCoor` <class<`matrix`>, double> => list<class<`matrix`> | double[] | class<`data.frame`>>;
+type `rad2degree` <class<`matrix`> | double> => (class<`matrix`> | double);
+type `rda` <class<`data.frame`> | class<`matrix`>, class<`data.frame`> | class<`matrix`>, double> => list<class<`matrix`>>;
+type `shiftvector` <double[], class<`matrix`>, double[], logical> => list<double[]>;
+type `textxy` <double[], double[], integer[] | expression | character[], double[], double, double, ...> => null;

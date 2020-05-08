@@ -1,1 +1,9 @@
+type `$` < > => environment | <character> => list<double> | <...> => character | <character, list<double>> => list<double> | <character> => logical;
+type `cache_memory` <character> => list<class<`function`>>;
+type `cache_reset` < > => environment;
 type `filter` <character[]> => logical[];
+type `forget` <class<`function`, `memoised`>> => logical;
+type `is.memoised` <class<`function`> | class<`function`, `memoised`>> => logical;
+type `make_call` <class<`name`>, list<any>> => class<`call`>;
+type `memoise` <class<`function`>, ..., environment, list<class<`function`>>> => class<`function`, `memoised`>;
+type `validate_formulas` <...> => list<any>;

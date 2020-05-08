@@ -1,5 +1,5 @@
-type `addSpinner` <struct<`name`:character, `attribs`:struct<`id`:character, `class`:character, `style`:character>, `children`:tuple<>>, character, character> => struct<``:struct<`name`:character, `attribs`:tuple<>, `children`:tuple<struct<`name`:character, `attribs`:struct<`href`:character, `rel`:character, `type`:character>, `children`:tuple<>>, struct<`name`:character, `attribs`:tuple<>, `children`:tuple<character>>>>, ``:struct<`name`:character, `attribs`:struct<`style`:character, `style`:character, `style`:character>, `children`:tuple<struct<`name`:character, `attribs`:struct<`class`:character>, `children`:tuple<struct<`name`:character, `attribs`:struct<`class`:character, `style`:character>, `children`:tuple<>>, struct<`name`:character, `attribs`:struct<`class`:character, `style`:character>, `children`:tuple<>>>>, struct<`name`:character, `attribs`:struct<`id`:character, `class`:character, `style`:character>, `children`:tuple<>>>>>;
+type `addSpinner` <class<`shiny.tag`>, character, character> => class<`list`, `shiny.tag.list`>;
 type `filter` <character[]> => logical[];
-type `fun` <symbol> => any => any;
-type `FUN` <character> => struct<`height`:character> | struct<`width`:character>;
-type `get_style` <struct<`name`:character, `attribs`:struct<`id`:character, `class`:character, `style`:character>, `children`:tuple<>>> => struct<`width`:character, `height`:character>;
+type `fun` <...> => class<`function`>;
+type `FUN` <character> => list<character>;
+type `get_style` <class<`shiny.tag`>> => list<character>;

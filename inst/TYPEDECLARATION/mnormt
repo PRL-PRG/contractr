@@ -1,7 +1,12 @@
-type `dmnorm` <^double[], double[], ^double[], logical> => double[];
-type `dmt` <^double[], double[], ^double[], double, logical> => double[];
+type `biv.nt.prob` <double, double[], double[], double[], class<`matrix`>> => double;
+type `dmnorm` <class<`matrix`> | double[], double[], class<`matrix`>, logical> => double[];
+type `dmt` <class<`matrix`>, double[], class<`matrix`>, double, logical> => double[];
 type `filter` <character[]> => logical[];
 type `fun` <character, character> => null;
-type `rmnorm` <double, double[], ^double[] | null, null | ^double[]> => ^double[];
-type `rmt` <double, double[], ^double[], double, null> => ^double[];
-type `::` <^double[], double[], ^double[], logical> => double[];
+type `pd.solve` <class<`matrix`>, logical, logical> => class<`matrix`>;
+type `pmnorm` <class<`matrix`> | double[], double[], class<`matrix`> | double, ...> => double[];
+type `pmt` <double[], double[], class<`matrix`>, double, ...> => double;
+type `rmnorm` <double, double[], any, null | class<`matrix`>> => class<`matrix`>;
+type `rmt` <double, double[], class<`matrix`>, double, null> => class<`matrix`>;
+type `sadmvn` <double[], double[], double[], class<`matrix`>, double, double, double> => double;
+type `sadmvt` <double, double[], double[], double[], class<`matrix`>, double, double, double> => double;

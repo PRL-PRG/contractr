@@ -1,7 +1,15 @@
-type `$` <integer[]> => list<integer[]> | struct<`set`:integer[], `b`:integer> | integer[];
+type `$` < > => integer | < > => list<integer[]> | < > => list<integer[]> | <...> => class<`Rcpp_Multicool`> | < > => integer[];
+type `allPerm` <class<`mc`>> => class<`matrix`>;
 type `B` <integer[]> => double[];
+type `Bell` <integer[] | double> => double[];
 type `filter` <character[]> => logical[];
+type `FUN` <integer[], double> => double[] | <integer[]> => logical;
+type `genComp` <double, double, logical> => list<double[]>;
 type `generateCompositions` <double> => list<integer[]>;
+type `initMC` <character[] | double[]> => class<`mc`>;
 type `is.wholenumber` <integer[], double> => logical[];
+type `multinom` <character[] | integer[], logical, logical> => double;
+type `nextPerm` <class<`mc`>> => (character[] | double[]);
 type `S2` <double | integer[], integer[]> => double[];
+type `Stirling2` <double | integer[], integer[] | double> => double[];
 type `Stirling2C` <double, double> => double;

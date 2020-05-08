@@ -1,1 +1,11 @@
+type `fftw` <double[], double, double, null> => complex[];
+type `fftw2d` <class<`matrix`>, double, double> => class<`matrix`>;
+type `fftw_c2c_2d` <class<`matrix`>, double> => class<`matrix`>;
+type `fftw_c2r` <complex[], double, double | null> => double[];
+type `fftw_r2c` <double[], double> => complex[];
+type `fftw_r2c_2d` <class<`matrix`>, double> => class<`matrix`>;
 type `filter` <character[]> => logical[];
+type `mvfftw` <class<`matrix`>, double, double, double | null, double> => class<`matrix`>;
+type `mvfftw_c2c` <class<`matrix`>, double, double> => class<`matrix`>;
+type `mvfftw_c2r` <class<`matrix`>, double, double | null, double> => class<`matrix`>;
+type `mvfftw_r2c` <class<`matrix`>, double, double> => class<`matrix`>;

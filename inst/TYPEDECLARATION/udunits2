@@ -1,2 +1,10 @@
 type `filter` <character[]> => logical[];
-type `fun` <symbol, symbol> => null;
+type `fun` <any, any> => null | <any, any> => null;
+type `FUN` <character> => any;
+type `ud.are.convertible` <character, any> => logical;
+type `ud.convert` <double[] | null, character, character> => any;
+type `ud.get.name` <character> => character;
+type `ud.get.symbol` <character> => character;
+type `ud.have.unit.system` < > => logical;
+type `ud.is.parseable` <character> => logical;
+type `ud.set.encoding` <character> => any;

@@ -1,8 +1,9 @@
-type `fastLm.default` <^double[], double[], null> => struct<`coefficients`:double[], `stderr`:double[], `df.residual`:integer, `fitted.values`:double[], `residuals`:double[], `call`:language, `intercept`:logical>;
-type `fastLm.formula` <language, struct<`Girth`:double[], `Height`:double[], `Volume`:double[]>, null> => struct<`coefficients`:double[], `stderr`:double[], `df.residual`:integer, `fitted.values`:double[], `residuals`:double[], `call`:language, `intercept`:integer, `formula`:language>;
-type `fastLmPure` <^double[], double[]> => struct<`coefficients`:double[], `stderr`:double[], `df.residual`:integer>;
+type `fastLm` <class<`formula`>, ...> => class<`fastLm`>;
+type `fastLm.default` <class<`matrix`>, double[], ...> => class<`fastLm`>;
+type `fastLm.formula` <class<`formula`>, class<`data.frame`>, ...> => class<`fastLm`>;
+type `fastLmPure` <class<`matrix`>, double[]> => list<double[]>;
 type `filter` <character[]> => logical[];
-type `fun` <symbol, symbol> => character | logical;
+type `fun` <any, any> => character | <any, any> => logical;
 type `FUN` <double[]> => logical;
 type `gslSetErrorHandlerOff` < > => logical;
-type `summary.fastLm` <struct<`coefficients`:double[], `stderr`:double[], `df.residual`:integer, `fitted.values`:double[], `residuals`:double[], `call`:language, `intercept`:integer, `formula`:language>, null> => struct<`call`:language, `coefficients`:^double[], `r.squared`:double, `adj.r.squared`:double, `sigma`:double, `df`:integer, `residSum`:double[]>;
+type `summary.fastLm` <class<`fastLm`>, ...> => class<`summary.fastLm`>;

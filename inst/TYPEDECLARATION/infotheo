@@ -1,9 +1,9 @@
 type `condentropy` <integer[], integer[], character> => double;
 type `condinformation` <integer[], integer[], integer[], character> => double;
-type `discretize` <struct<`Murder`:double[], `Assault`:integer[], `UrbanPop`:integer[], `Rape`:double[]>, character, double> => struct<`Murder`:integer[], `Assault`:integer[], `UrbanPop`:integer[], `Rape`:integer[]>;
-type `entropy` <struct<`Murder`:integer[], `Assault`:integer[], `UrbanPop`:integer[], `Rape`:integer[]> | integer[], character> => double;
+type `discretize` <class<`data.frame`>, character, double> => class<`data.frame`>;
+type `entropy` <class<`data.frame`> | integer[], character> => double;
 type `filter` <character[]> => logical[];
-type `interinformation` <struct<`Murder`:integer[], `Assault`:integer[], `UrbanPop`:integer[], `Rape`:integer[]>, character> => double;
-type `multiinformation` <struct<`Murder`:integer[], `Assault`:integer[], `UrbanPop`:integer[], `Rape`:integer[]>, character> => double;
-type `mutinformation` <struct<`Murder`:integer[], `Assault`:integer[], `UrbanPop`:integer[], `Rape`:integer[]> | integer[], null | integer[], character> => ^double[];
+type `interinformation` <class<`data.frame`>, character> => double;
+type `multiinformation` <class<`data.frame`>, character> => double;
+type `mutinformation` <class<`data.frame`> | integer[], null | integer[], character> => (class<`matrix`> | double);
 type `natstobits` <double> => double;

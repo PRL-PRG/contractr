@@ -1,7 +1,7 @@
 type `filter` <character[]> => logical[];
-type `fun` <character, character> => struct<`name`:character, `path`:character, `dynamicLookup`:logical, `handle`:null, `info`:null>;
-type `Kendall` <double[], double[]> => struct<`tau`:double, `sl`:double, `S`:double, `D`:double, `varS`:double>;
-type `MannKendall` <double[]> => struct<`tau`:double, `sl`:double, `S`:double, `D`:double, `varS`:double>;
-type `print.Kendall` <struct<`tau`:double, `sl`:double, `S`:double, `D`:double, `varS`:double>, null> => null;
-type `SeasonalMannKendall` <double[]> => struct<`tau`:double, `sl`:double, `S`:double, `D`:double, `varS`:double>;
-type `summary.Kendall` <struct<`tau`:double, `sl`:double, `S`:double, `D`:double, `varS`:double>, null> => null;
+type `fun` <character, character> => class<`DLLInfo`>;
+type `Kendall` <double[], double[] | class<`ts`>> => class<`Kendall`>;
+type `MannKendall` <class<`ts`> | double[]> => class<`Kendall`>;
+type `print.Kendall` <class<`Kendall`>, ...> => null;
+type `SeasonalMannKendall` <class<`ts`>> => class<`Kendall`>;
+type `summary.Kendall` <class<`Kendall`>, ...> => null;

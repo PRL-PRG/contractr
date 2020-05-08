@@ -1,6 +1,7 @@
-type `ash1` <struct<`nc`:integer[], `ab`:double[], `nskip`:integer>, double, double[]> => struct<`x`:double[], `y`:double[], `m`:double, `ab`:double[], `kopt`:double[], `ier`:integer>;
-type `ash2` <struct<`nc`:^integer[], `ab`:^double[], `nskip`:integer>, double[], double[]> => struct<`z`:^double[], `x`:double[], `y`:double[], `ab`:^double[], `m`:double[], `kopt`:double[], `ier`:double>;
-type `bin1` <double[], double[], double> => struct<`nc`:integer[], `ab`:double[], `nskip`:integer>;
-type `bin2` <^double[], ^double[], double[]> => struct<`nc`:^integer[], `ab`:^double[], `nskip`:integer>;
-type `center` <double[], integer> => tuple<double[]>;
+type `ash1` <list<double[]>, double, double[]> => list<double[]>;
+type `ash2` <list<class<`matrix`> | integer>, double[], double[]> => list<class<`matrix`> | double[]>;
+type `bin1` <double[], double[], double> => list<double[]>;
+type `bin2` <class<`matrix`>, class<`matrix`>, double[]> => list<class<`matrix`> | integer>;
+type `center` <double[], integer> => list<double[]>;
 type `filter` <character[]> => logical[];
+type `nicerange` <double[], double> => double[];

@@ -1,1 +1,21 @@
-
+type `apply_base_algorithm` <class<`ts`>, character, ...> => class<`ts`>;
+type `filter` <character[]> => logical[];
+type `locf` <^double[], logical> => ^double[];
+type `ma` <class<`ts`>, double, character> => class<`ts`>;
+type `na_interpolation` <class<`ts`>, character, double, ...> => class<`ts`>;
+type `na_kalman` <class<`ts`>, character | list<double[] | class<`matrix`>>, logical, double, double, ...> => class<`ts`>;
+type `na_locf` <class<`ts`>, character, any, double> => (class<`ts`> | double[]);
+type `na.locf` <class<`ts`>, character, character, double> => class<`ts`>;
+type `na_ma` <class<`ts`>, double, character, double> => class<`ts`>;
+type `na_mean` <class<`ts`>, character, double> => class<`ts`>;
+type `na.mean` <class<`ts`>, character, double> => class<`ts`>;
+type `na_random` <class<`ts`>, double | null, double | null, double> => class<`ts`>;
+type `na_remove` <class<`ts`>> => double[];
+type `na_replace` <class<`ts`>, double, double> => class<`ts`>;
+type `na_seadec` <class<`ts`>, character, logical, double, ...> => class<`ts`>;
+type `na_seasplit` <class<`ts`>, character, logical, double, ...> => class<`ts`>;
+type `plotNA.distribution` <class<`ts`>, character, character, character, character, character, double, double, character, ...> => null;
+type `plotNA.distributionBar` <class<`ts`>, double, null, logical, logical, logical, double, character[], character, character, null, ...> => list<list<double[]>>;
+type `plotNA.gapsize` <class<`ts`>, double, logical, logical, character[], character, character, character, double, logical, logical, logical> => list<list<double[]>>;
+type `plotNA.imputations` <class<`ts`>, class<`ts`>, class<`ts`> | null, logical, character, character, character, character, character, character, character, double[]> => list<list<double[]>>;
+type `statsNA` <class<`ts`>, double, logical> => (null | list<integer | character>);

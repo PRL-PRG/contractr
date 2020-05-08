@@ -1,2 +1,16 @@
+type `as_blob` <character[]> => class<`blob`, `vctrs_list_of`, `vctrs_vctr`>;
+type `as.blob` <character[], ...> => class<`blob`, `vctrs_list_of`, `vctrs_vctr`>;
+type `as.blob.default` <character[], ...> => class<`blob`, `vctrs_list_of`, `vctrs_vctr`>;
+type `blob` <...> => class<`blob`, `vctrs_list_of`, `vctrs_vctr`>;
+type `check_raw_list` <list<raw[]>, any> => null;
 type `filter` <character[]> => logical[];
-type `fun` <symbol> => null;
+type `fun` <...> => null;
+type `has_colour` < > => logical;
+type `is_raw_list` <list<raw[]>> => logical;
+type `new_blob` <list<any>> => class<`blob`, `vctrs_list_of`, `vctrs_vctr`>;
+type `signal_soft_deprecated` <character, character, environment> => null;
+type `silver` <character> => character;
+type `validate_blob` <list<raw[]>> => null;
+type `vec_cast.blob` <character[], class<`blob`, `vctrs_list_of`, `vctrs_vctr`>, ...> => class<`blob`, `vctrs_list_of`, `vctrs_vctr`>;
+type `vec_cast.blob.character` <character[], class<`blob`, `vctrs_list_of`, `vctrs_vctr`>, ...> => class<`blob`, `vctrs_list_of`, `vctrs_vctr`>;
+type `warn_deprecated` <character, character> => character;

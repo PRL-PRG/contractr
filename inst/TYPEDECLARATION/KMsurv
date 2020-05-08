@@ -1,2 +1,2 @@
 type `filter` <character[]> => logical[];
-type `lifetab` <^double[], double, double[], double[]> => struct<`nsubs`:double[], `nlost`:double[], `nrisk`:double[], `nevent`:double[], `surv`:double[], `pdf`:^double[], `hazard`:^double[], `se.surv`:double[], `se.pdf`:^double[], `se.hazard`:^double[]>;
+type `lifetab` <^double[], double, double[], double[]> => class<`data.frame`>;

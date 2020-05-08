@@ -1,9 +1,8 @@
-type `$.rematch_allrecords` <tuple<struct<`match`:character[], `start`:integer[], `end`:integer[]>, struct<`match`:character, `start`:integer, `end`:integer>>, character> => tuple<character[], character> | tuple<integer[], integer>;
-type `$.rematch_records` <tuple<struct<`match`:character, `start`:integer, `end`:integer>, struct<`match`:character, `start`:integer, `end`:integer>>, character> => character[] | integer[];
 type `filter` <character[]> => logical[];
-type `FUN` <integer[]> => tuple<> | tuple<struct<`match`:character[], `start`:integer[], `end`:integer[]>, struct<`match`:character, `start`:integer, `end`:integer>> | logical | struct<`match`:character[], `start`:integer[], `end`:integer[]> | tuple<character[], character> | character[];
-type `re_exec` <character[], character, logical, null> => struct<`first`:tuple<struct<`match`:character, `start`:integer, `end`:integer>, struct<`match`:character, `start`:integer, `end`:integer>>, `last`:tuple<struct<`match`:character, `start`:integer, `end`:integer>, struct<`match`:character, `start`:integer, `end`:integer>>, `.text`:character[], `.match`:tuple<struct<`match`:character, `start`:integer, `end`:integer>, struct<`match`:character, `start`:integer, `end`:integer>>>;
-type `re_exec_all` <character[], character, logical, null> => struct<`first`:tuple<struct<`match`:character[], `start`:integer[], `end`:integer[]>, struct<`match`:character, `start`:integer, `end`:integer>>, `last`:tuple<struct<`match`:character[], `start`:integer[], `end`:integer[]>, struct<`match`:character, `start`:integer, `end`:integer>>, `.text`:character[], `.match`:tuple<struct<`match`:character[], `start`:integer[], `end`:integer[]>, struct<`match`:character, `start`:integer, `end`:integer>>>;
-type `re_match` <character[], character, logical, null> => struct<``:^character[], ``:^character[], ``:^character[], `.text`:character[], `.match`:^character[]>;
-type `re_match_all` <character[], character, logical, null> => struct<`first`:tuple<character[], character>, `last`:tuple<character[], character>, `.text`:character[], `.match`:tuple<character[], character>>;
-type `::` <character[], character, logical, null> => struct<`prefix`:character[], `space_after_prefix`:character[], `text`:character[], `.text`:character[], `.match`:character[]>;
+type `FUN` <...> => list<any> | <integer> => class<`rematch_allrecords`> | <integer[]> => logical | <integer> => list<character[] | integer[] | character | integer> | <integer> => list<character | integer> | <integer> => list<character[]> | <integer> => character[] | <integer> => list<character | integer> | <integer> => class<`rematch_records`>;
+type `re_exec` <character[], character, logical, ...> => class<`data.frame`, `tbl`, `tbl_df`>;
+type `re_exec_all` <character[], character, logical, ...> => class<`data.frame`, `tbl`, `tbl_df`>;
+type `re_match` <character[], character, logical, ...> => class<`data.frame`, `tbl`, `tbl_df`>;
+type `re_match_all` <character[], character, logical, ...> => class<`data.frame`, `tbl`, `tbl_df`>;
+type `$.rematch_allrecords` <class<`rematch_allrecords`>, character> => list<character[] | integer[]>;
+type `$.rematch_records` <class<`rematch_records`>, character> => (character[] | integer[]);

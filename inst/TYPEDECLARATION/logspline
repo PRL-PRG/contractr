@@ -1,0 +1,17 @@
+type `dlogspline` <double[], class<`logspline`>> => double[];
+type `doldlogspline` <double[], class<`oldlogspline`>> => double[];
+type `filter` <character[]> => logical[];
+type `logspline` <double[], any, any, double, any, double, double, logical, double, double> => class<`logspline`>;
+type `oldlogspline` <double[], any, any, any, any, any, any, any, any, logical> => class<`oldlogspline`>;
+type `oldlogspline.to.logspline` <class<`oldlogspline`>, any> => class<`logspline`>;
+type `plogspline` <double[], class<`logspline`>> => double[];
+type `plot.logspline` <class<`logspline`>, double, character, logical, any, character, character, character, ...> => null;
+type `plot.oldlogspline` <class<`oldlogspline`>, double, character, any, character, character, character, logical, ...> => null;
+type `poldlogspline` <double[], class<`oldlogspline`>> => double[];
+type `qlogspline` <double[], class<`logspline`>> => double[];
+type `qoldlogspline` <double[], class<`oldlogspline`>> => double[];
+type `rlogspline` <double, class<`logspline`>> => double[];
+type `roldlogspline` <double, class<`oldlogspline`>> => double[];
+type `summary.logspline` <class<`logspline`>, ...> => null;
+type `summary.oldlogspline` <class<`oldlogspline`>, ...> => null;
+type `unstrip` <class<`data.frame`> | class<`ts`> | double[]> => (class<`matrix`> | double[]);

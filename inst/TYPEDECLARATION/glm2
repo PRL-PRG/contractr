@@ -1,0 +1,4 @@
+type `filter` <character[]> => logical[];
+type `glm2` <class<`formula`>, class<`family`>, any, any, any, any, double[] | null, any, any, any, list<any>, logical> => class<`glm`, `lm`>;
+type `glm.fit2` <double[] | class<`matrix`>, double[] | class<`matrix`>, double[] | null, double[] | null, null, null, double[] | null, class<`family`>, list<any>, logical, logical> => list<any>;
+type `unless.null` <class<`function`>, any> => class<`function`>;

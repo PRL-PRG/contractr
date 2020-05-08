@@ -1,5 +1,11 @@
-type `abind` <double[] | ^integer[] | struct<`a`:double[], `b`:double[]> | struct<`x`:^integer[], `y`:^double[]> | tuple<integer[], ^integer[]> | struct<`x`:integer[], ``:^integer[]>, double | symbol, null | double, null, logical, symbol | logical, logical, logical, logical | character, logical> => ^double[];
-type `acorn.default` <integer[], double, double, double, null, logical> => integer[];
-type `adrop.default` <integer[], double | integer[], logical, logical, null> => ^integer[];
+type `abind` <..., any, double | null, null, logical, any, logical, logical, logical | character, logical> => (class<`array`> | class<`matrix`> | null);
+type `acorn` <class<`array`>, double, double, double, ...> => class<`array`>;
+type `acorn.default` <class<`array`>, double, double, double, ..., logical> => class<`array`>;
+type `adrop` <class<`array`>, integer[] | double, logical, logical, ...> => any;
+type `adrop.default` <class<`array`>, integer[] | double, logical, logical, ...> => any;
+type `afill<-` <class<`array`> | class<`matrix`>, ..., logical, logical, class<`matrix`>> => any;
+type `afill<-.default` <class<`array`> | class<`matrix`>, ..., logical, logical, class<`matrix`>> => any;
+type `asub` <class<`array`> | class<`matrix`> | integer[], double | integer[] | list<any>, any, logical | null, ...> => (class<`array`> | class<`matrix`> | integer[]);
+type `asub.default` <class<`array`> | class<`matrix`> | integer[], double | integer[] | list<any>, double[], logical | null, ...> => (class<`array`> | class<`matrix`> | integer[]);
 type `filter` <character[]> => logical[];
-type `FUN` <null | symbol | struct<> | ^double[]> => integer;
+type `FUN` <any> => logical | <class<`array`> | class<`data.frame`> | class<`matrix`> | double[]> => integer;

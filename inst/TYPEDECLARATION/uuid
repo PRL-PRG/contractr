@@ -1,2 +1,2 @@
 type `filter` <character[]> => logical[];
-type `UUIDgenerate` <null | logical> => character;
+type `UUIDgenerate` <null | logical, double> => character[];

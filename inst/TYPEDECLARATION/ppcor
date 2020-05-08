@@ -1,5 +1,5 @@
 type `filter` <character[]> => logical[];
-type `pcor` <struct<`hl`:double[], `disp`:double[], `deg`:double[], `BC`:double[]>, character[]> => struct<`estimate`:^double[], `p.value`:^double[], `statistic`:^double[], `n`:integer, `gp`:double, `method`:character>;
-type `pcor.test` <double[], double[], struct<`deg`:double[], `BC`:double[]>, character[]> => struct<`estimate`:double, `p.value`:double, `statistic`:double, `n`:integer, `gp`:double, `Method`:integer>;
-type `spcor` <struct<`hl`:double[], `disp`:double[], `deg`:double[], `BC`:double[]>, character[]> => struct<`estimate`:^double[], `p.value`:^double[], `statistic`:^double[], `n`:integer, `gp`:double, `method`:character>;
-type `spcor.test` <double[], double[], struct<`deg`:double[], `BC`:double[]>, character[]> => struct<`estimate`:double, `p.value`:double, `statistic`:double, `n`:integer, `gp`:double, `Method`:integer>;
+type `pcor` <class<`data.frame`>, character[]> => list<class<`matrix`> | double | character>;
+type `pcor.test` <double[], double[], class<`data.frame`>, character[]> => class<`data.frame`>;
+type `spcor` <class<`data.frame`>, character[]> => list<class<`matrix`> | double | character>;
+type `spcor.test` <double[], double[], class<`data.frame`>, character[]> => class<`data.frame`>;
