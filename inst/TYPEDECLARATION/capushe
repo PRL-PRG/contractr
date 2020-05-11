@@ -1,9 +1,7 @@
 type `AICcapushe` <class<`data.frame`>, double> => list<character | double>;
 type `BICcapushe` <class<`data.frame`>, double> => list<character | double>;
 type `capushe` <class<`data.frame`>, double, double, double, class<`function`>, double, double, double> => class<`Capushe`>;
-type `DDSE` <class<`data.frame`>, double, double, class<`function`>, double> => class<`DDSE`>;
+type `DDSE` <class<`data.frame`>, double, double, class<`function`> | character, double> => class<`DDSE`>;
 type `Djump` <class<`data.frame`>, double, double, double> => class<`Djump`>;
-type `filter` <character[]> => logical[];
-type `.local` <class<`Capushe`>, any, logical, logical, ...> => any | <class<`Capushe`>, class<`data.frame`>, logical, ...> => any | <class<`DDSE`>, any, logical, ...> => any | <class<`DDSE`>, class<`data.frame`>, logical, ...> => any | <class<`Djump`>, any, logical, ...> => any;
-type `plot` <class<`DDSE`>, any, ...> => any | <class<`Capushe`>, any, ...> => any | <class<`Djump`>, any, ...> => any;
-type `validation` <class<`Capushe`>, class<`data.frame`>, ...> => any | <class<`Capushe`> | class<`DDSE`>, class<`data.frame`>, ...> => any | <class<`DDSE`>, class<`data.frame`>, ...> => any;
+type `plot` <class<`DDSE`>, any, ...> => list<double[] | character> | <class<`Capushe`>, any, ...> => list<double[] | character> | <class<`Djump`>, any, ...> => list<double[] | character>;
+type `validation` <class<`Capushe`>, class<`data.frame`>, ...> => list<double[] | character> | <class<`Capushe`> | class<`DDSE`>, class<`data.frame`>, ...> => list<double[] | character> | <class<`DDSE`>, class<`data.frame`>, ...> => list<double[] | character>;

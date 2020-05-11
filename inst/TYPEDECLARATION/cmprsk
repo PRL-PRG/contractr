@@ -1,7 +1,6 @@
-type `crr` <double[], integer[], any, any, any, any, double, double, any, class<`function`>, double, double> => class<`crr`>;
+type `crr` <double[], integer[], any, any, any, any, double, double, any, class<`function`>, double, double, any, logical> => class<`crr`>;
 type `cuminc` <double[], integer[], any, any, double, double, any, class<`function`>> => class<`cuminc`>;
 type `[.cuminc` <class<`cuminc`>, logical[], ...> => class<`cuminc`>;
-type `filter` <character[]> => logical[];
 type `plot.cuminc` <class<`cuminc`>, character, any, double[], any, double, character, character, double | integer[], integer[] | double, double, ...> => null;
 type `plot.predict.crr` <class<`predict.crr`>, double | integer[], double[], double[], double, double, ...> => null;
 type `predict.crr` <class<`crr`>, class<`matrix`>, any, ...> => class<`predict.crr`>;

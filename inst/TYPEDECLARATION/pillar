@@ -27,7 +27,6 @@ type `distribute_pillars` <double, double> => class<`data.frame`>;
 type `expect_known_display` <any, character, ..., integer, logical> => class<`pillar_vertical`>;
 type `extra_cols` <class<`pillar_squeezed_colonnade`>, ...> => character;
 type `extra_cols.pillar_squeezed_colonnade` <class<`pillar_squeezed_colonnade`>, ..., double> => character;
-type `filter` <character[]> => logical[];
 type `flatten_colonnade` <class<`data.frame`> | list<character | integer[] | character[] | integer[]>> => list<any>;
 type `format_dec` <list<character[] | double[] | ^integer[]>> => character[];
 type `format_decimal` <^double[], double, ...> => list<character[] | double[] | ^integer[] | character | double | null | character[] | ^double[]>;
@@ -53,8 +52,7 @@ type `format_scientific` <^double[], double> => list<character[] | double[] | ch
 type `format_title` <character[], double> => character[];
 type `format_type_sum` <character | class<`type_sum_accel`> | double, double | null, ...> => character;
 type `format_type_sum.default` <character | double, double | null, ...> => character;
-type `fun` <character[]> => character[] | <any, any> => null | <...> => class<`matrix`> | <character[] | double[]> => character[] | <...> => double | <^character[]> => character[];
-type `FUN` <list<list<character>>> => character[] | <list<list<character[]>>> => list<list<character[]>> | <class<`pillar`> | class<`pillar_capital`>> => integer[] | <class<`data.frame`>> => list<list<character[]>> | <character> => character | <class<`pillar`> | class<`pillar_capital`> | list<list<character[] | double[] | ^integer[] | character[] | double[] | character | double | null | character | double | character[] | ^double[]>>> => integer[] | <^double[] | class<`Date`> | class<`POSIXct`, `POSIXt`> | null | ^character[] | class<`accel`> | class<`factor`> | class<`pillar_vertical`>, ...> => (class<`pillar_shaft`, `pillar_shaft_decimal`> | class<`pillar_shaft`, `pillar_shaft_simple`>) | <^character[] | class<`accel`> | class<`Date`> | class<`factor`> | class<`POSIXct`, `POSIXt`> | ^double[], null | character, ...> => class<`pillar_capital`> | <character[]> => character[] | <class<`pillar_capital`> | class<`pillar_shaft`, `pillar_shaft_decimal`> | class<`pillar_shaft`, `pillar_shaft_simple`> | class<`pillar_title`> | class<`pillar_type`> | class<`pillar_rif_title`> | class<`pillar_rif_type`> | list<any>> => integer | <class<`pillar_capital`> | class<`pillar_rif_shaft`, `pillar_shaft`> | class<`pillar_shaft`, `pillar_shaft_decimal`> | class<`pillar_shaft`, `pillar_shaft_simple`> | class<`pillar_title`> | class<`pillar_type`> | class<`pillar_colonnade`> | class<`pillar_rif_title`> | class<`pillar_rif_type`> | class<`pillar`> | list<any>> => (integer | null);
+type `FUN` <class<`pillar`> | class<`pillar_capital`>> => integer[] | <class<`pillar`> | class<`pillar_capital`> | list<list<character[] | double[] | ^integer[] | character[] | double[] | character | double | null | character | double | character[] | ^double[]>>> => integer[] | <^double[] | class<`Date`> | class<`POSIXct`, `POSIXt`> | null | ^character[] | class<`accel`> | class<`factor`> | class<`pillar_vertical`>, ...> => (class<`pillar_shaft`, `pillar_shaft_simple`> | class<`pillar_shaft`, `pillar_shaft_decimal`>) | <class<`pillar_capital`> | class<`pillar_shaft`, `pillar_shaft_decimal`> | class<`pillar_shaft`, `pillar_shaft_simple`> | class<`pillar_title`> | class<`pillar_type`> | class<`pillar_rif_title`> | class<`pillar_rif_type`> | list<any>> => integer | <class<`pillar_capital`> | class<`pillar_rif_shaft`, `pillar_shaft`> | class<`pillar_shaft`, `pillar_shaft_decimal`> | class<`pillar_shaft`, `pillar_shaft_simple`> | class<`pillar_title`> | class<`pillar_type`> | class<`pillar_colonnade`> | class<`pillar_rif_title`> | class<`pillar_rif_type`> | class<`pillar`> | list<any>> => (integer | null);
 type `get_decimal_width` <list<any>> => double;
 type `get_ellipsis` < > => character;
 type `get_extent` <character[] | class<`pillar_ornament`> | class<`pillar_vertical`>> => integer[];
@@ -101,7 +99,7 @@ type `pillar_capital` <^character[] | class<`accel`> | class<`Date`> | class<`fa
 type `pillar_format_parts` <class<`pillar`>, double, ...> => list<character[]>;
 type `pillar_get_width` <class<`pillar`>, null> => integer;
 type `pillar_na` <logical> => character;
-type `pillar_shaft` <^double[] | class<`Date`> | class<`POSIXct`, `POSIXt`> | null | ^character[] | class<`accel`> | class<`factor`> | class<`pillar_vertical`>, ...> => (class<`pillar_shaft`, `pillar_shaft_decimal`> | class<`pillar_shaft`, `pillar_shaft_simple`>);
+type `pillar_shaft` <^double[] | class<`Date`> | class<`POSIXct`, `POSIXt`> | null | ^character[] | class<`accel`> | class<`factor`> | class<`pillar_vertical`>, ...> => (class<`pillar_shaft`, `pillar_shaft_simple`> | class<`pillar_shaft`, `pillar_shaft_decimal`>);
 type `pillar_shaft.character` <^character[], ..., integer> => class<`pillar_shaft`, `pillar_shaft_simple`>;
 type `pillar_shaft.Date` <class<`Date`>, ...> => class<`pillar_shaft`, `pillar_shaft_simple`>;
 type `pillar_shaft.default` <class<`accel`>, ...> => class<`pillar_shaft`, `pillar_shaft_simple`>;

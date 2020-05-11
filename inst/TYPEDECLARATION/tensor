@@ -1,2 +1,1 @@
-type `filter` <character[]> => logical[];
 type `tensor` <class<`array`> | class<`matrix`>, class<`matrix`>, double[], double[]> => (class<`array`> | class<`matrix`> | double);

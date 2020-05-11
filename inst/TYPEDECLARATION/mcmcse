@@ -1,0 +1,11 @@
+type `batchSize` <class<`matrix`> | double[], character, class<`function`> | null> => double;
+type `confRegion` <list<class<`matrix`> | double[] | character>, double[], double> => class<`matrix`>;
+type `inseq` <class<`matrix`>, logical> => list<class<`matrix`> | double[]>;
+type `mbmC` <class<`matrix`>, double> => class<`matrix`>;
+type `mcse` <double[], null, class<`function`> | null, double, character, logical> => list<double>;
+type `mcse.initseq` <class<`matrix`>, null | class<`function`>, logical, logical> => list<class<`matrix`> | double[] | class<`matrix`> | null | double[]>;
+type `mcse.multi` <class<`matrix`>, character, double, null, class<`function`> | null, logical, logical> => list<class<`matrix`> | double[] | class<`matrix`> | double[] | character>;
+type `mcse.q` <double[], double, character, null, character[], logical> => list<double>;
+type `minESS` <double, double, double, null> => double;
+type `msveC` <class<`matrix`>, double, character> => class<`matrix`>;
+type `multiESS` <class<`matrix`>, null, null, ...> => double;

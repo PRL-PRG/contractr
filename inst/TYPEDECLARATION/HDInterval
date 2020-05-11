@@ -1,6 +1,4 @@
 type `checkCredMass` <double> => null;
-type `f` <double, class<`function`>, double, ...> => double | <double, double, ...> => double;
-type `filter` <character[]> => logical[];
 type `FUN` <character[] | double[], double, ...> => ^double[];
 type `hdi` <class<`data.frame`> | class<`density`> | class<`function`> | double[], double, ...> => (class<`matrix`> | double[]);
 type `hdi.data.frame` <class<`data.frame`>, double, ...> => class<`matrix`>;

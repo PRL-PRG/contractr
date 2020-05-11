@@ -1,3 +1,2 @@
-type `filter` <character[]> => logical[];
-type `gee` <any, any, any, any, any, null, null, double, double, class<`function`>, character, double> => class<`gee`, `glm`>;
+type `gee` <any, any, any, any, any, null, null, double, double, class<`function`>, character, double, logical, null, logical, double, logical> => class<`gee`, `glm`>;
 type `summary.gee` <class<`gee`, `glm`>, logical, ...> => class<`summary.gee`>;

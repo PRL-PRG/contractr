@@ -1,7 +1,4 @@
 type `bobyqa` <double[], class<`function`>, double[], double[], list<any>, ...> => class<`bobyqa`, `minqa`>;
 type `commonArgs` <double[], class<`function`>, list<any>, environment> => environment;
-type `filter` <character[]> => logical[];
-type `fn1` <double[]> => (class<`matrix`> | double);
-type `FUN` <character> => (double | null);
 type `newuoa` <double[], class<`function`>, list<any>, ...> => class<`minqa`, `newuoa`>;
 type `uobyqa` <double[], class<`function`>, list<any>, ...> => class<`minqa`, `uobyqa`>;

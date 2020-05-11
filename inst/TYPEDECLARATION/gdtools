@@ -1,0 +1,15 @@
+type `base64_raster_encode` <class<`raster`>, integer, integer, double, double, logical> => character;
+type `font_family_exists` <character> => logical;
+type `glyphs_match` <character[], character, logical, logical, character> => logical[];
+type `glyphs_match_` <character[], character, logical, logical, character> => logical[];
+type `match_family` <character, logical, logical, null> => character;
+type `m_str_extents` <character[], character[], double | integer[], logical[], logical[], null> => class<`matrix`>;
+type `m_str_extents_` <character[], character[], double[], logical[], logical[], character[]> => class<`matrix`>;
+type `raster_png_` <class<`raster`>, integer, integer, double, double, logical, character> => logical;
+type `raster_str` <class<`raster`>, double, double, logical> => character;
+type `raster_write` <class<`raster`>, character, double, double, logical> => character;
+type `str_extents` <character[], character, double, logical, logical, character> => class<`matrix`>;
+type `str_extents_` <character[], character, double, logical, logical, character> => class<`matrix`>;
+type `str_metrics` <character, character, double, logical, logical, character> => double[];
+type `str_metrics_` <character, character, double, logical, logical, character> => double[];
+type `sys_fonts` < > => class<`data.frame`, `tbl`, `tbl_df`>;

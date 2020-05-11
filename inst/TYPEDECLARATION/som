@@ -1,0 +1,12 @@
+type `ciplot` <double[], double[], double[], double, double, double[]> => null;
+type `filtering` <class<`data.frame`>, double, double, double, double> => class<`matrix`>;
+type `inrange` <double[], double[]> => logical[];
+type `normalize` <class<`matrix`>, logical> => class<`matrix`>;
+type `plotcell` <double, integer, class<`matrix`> | double[], double[], integer, double, double[], double> => null;
+type `plot.som` <class<`som`>, double, double[], logical, double, double, character, character, ...> => null;
+type `qerror` <class<`som`>, double> => double;
+type `som` <class<`matrix`>, double, double, character, null, character, character, character, null, null, double, null> => class<`som`>;
+type `somgrids` <double, double, logical, double, logical, double, double[]> => null;
+type `som.init` <class<`matrix`>, double, double, character> => class<`matrix`>;
+type `som.par` <class<`som`>> => list<double[]>;
+type `somsum` <list<any>> => class<`data.frame`>;

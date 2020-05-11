@@ -4,6 +4,4 @@ type `create_loop` <logical> => class<`event_loop`>;
 type `current_loop` < > => class<`event_loop`>;
 type `ensureInitialized` < > => null;
 type `execLater` <class<`function`> | class<`function`, `rlang_lambda_function`>, double, integer> => character;
-type `filter` <character[]> => logical[];
-type `fun` <...> => class<`event_loop`>;
 type `later` <class<`formula`> | class<`function`>, double, class<`event_loop`>> => class<`function`>;

@@ -1,6 +1,5 @@
 type `cyclem1` <double[], class<`function`>, class<`function`>, list<double | character>, ...> => list<double[]>;
 type `cyclem2` <double[], class<`function`>, list<double | character>, ...> => list<double[] | null>;
-type `filter` <character[]> => logical[];
 type `fpiter` <double[], class<`function`>, class<`function`> | null, list<any>, ...> => list<double[] | double[] | null>;
 type `squarem` <double[], class<`function`>, any, ..., list<any>> => list<double[] | double[] | null>;
 type `squarem1` <double[], class<`function`>, class<`function`>, ..., list<double>> => list<double[]>;

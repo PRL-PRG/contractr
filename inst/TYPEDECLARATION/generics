@@ -4,7 +4,6 @@ type `as.factor` <character[], ...> => class<`factor`>;
 type `as.factor.default` <character[], ...> => class<`factor`>;
 type `as.ordered` <character[], ...> => class<`factor`, `ordered`>;
 type `as.ordered.default` <character[], ...> => class<`factor`, `ordered`>;
-type `filter` <character[]> => logical[];
 type `intersect` <integer[], integer[], ...> => integer[];
 type `intersect.default` <integer[], integer[], ...> => integer[];
 type `setdiff` <integer[], integer[], ...> => integer[];

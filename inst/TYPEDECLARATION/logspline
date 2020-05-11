@@ -1,6 +1,5 @@
 type `dlogspline` <double[], class<`logspline`>> => double[];
 type `doldlogspline` <double[], class<`oldlogspline`>> => double[];
-type `filter` <character[]> => logical[];
 type `logspline` <double[], any, any, double, any, double, double, logical, double, double> => class<`logspline`>;
 type `oldlogspline` <double[], any, any, any, any, any, any, any, any, logical> => class<`oldlogspline`>;
 type `oldlogspline.to.logspline` <class<`oldlogspline`>, any> => class<`logspline`>;

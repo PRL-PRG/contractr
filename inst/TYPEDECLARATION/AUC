@@ -1,8 +1,6 @@
 type `accuracy` <double[], class<`factor`>, logical> => class<`AUC`, `accuracy`>;
 type `auc` <class<`AUC`, `accuracy`> | class<`AUC`, `roc`> | class<`AUC`, `sensitivity`> | class<`AUC`, `specificity`>, double, double> => double;
 type `.confusionMatrix` <double[], class<`factor`>, logical, character> => list<double[]>;
-type `filter` <character[]> => logical[];
-type `fun` <any, character> => null;
 type `plot.AUC` <class<`AUC`, `accuracy`> | class<`AUC`, `roc`> | class<`AUC`, `sensitivity`> | class<`AUC`, `specificity`>, null, ..., character, logical, double, double> => null;
 type `roc` <double[], class<`factor`>> => class<`AUC`, `roc`>;
 type `sensitivity` <double[], class<`factor`>, logical> => class<`AUC`, `sensitivity`>;

@@ -7,7 +7,6 @@ type `decompose.invcov` <class<`matrix`>> => list<class<`matrix`> | double[]>;
 type `estimate.lambda` <class<`matrix`>, any, logical> => double;
 type `estimate.lambda.var` <class<`matrix`>, any, logical> => double;
 type `fast.svd` <class<`matrix`> | class<`shrinkage`>, any> => list<double[] | class<`matrix`> | double | class<`matrix`>>;
-type `filter` <character[]> => logical[];
 type `invcor.shrink` <class<`matrix`>, any, any, logical> => class<`shrinkage`>;
 type `invcov.shrink` <class<`matrix`>, any, any, any, logical> => class<`shrinkage`>;
 type `is.positive.definite` <class<`matrix`> | class<`shrinkage`>, any, character[]> => logical;

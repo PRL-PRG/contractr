@@ -1,13 +1,8 @@
-type `[[` <class<`condition`, `error`, `simpleError`>> => null;
-type `$` <...> => class<`List`, `environment`> | <any, ...> => class<`List`, `environment`>;
 type `args_env` <..., environment> => environment;
 type `createCallClosure` <any> => class<`function`>;
 type `createListClosure` <any, any> => class<`function`>;
 type `dots` <...> => list<any>;
 type `.evalwith` <character[] | double[] | list<any>> => (null | list<any>);
-type `f` <list<list<character>>, ..., logical> => class<`data.frame`> | <class<`data.frame`> | list<any>, class<`function`>> => (class<`data.frame`> | class<`matrix`> | ^double[] | list<double | list<character>>) | <list<list<list<character | character | list<double> | list<double>>>>, double, ..., logical, logical> => list<list<any>> | <list<list<character | list<double>>>, class<`call`>> => list<list<character | list<double>>>;
-type `filter` <character[]> => logical[];
-type `FUN` <character | double, ...> => list<list<double | character[] | list<double> | character | list<double>>> | <double[] | list<character[] | double[] | list<any>>, class<`call`> | class<`lambda_expression`> | class<`name`>, environment, class<`function`>, null | environment> => any | <character[], character> => logical | <character[] | double | null | list<null | character[]>> => (character[] | double | null | list<any>) | <list<double | list<double>>> => logical | <class<`name`> | class<`call`>> => (character[] | double[]) | <character | null | list<character | class<`function`>>> => (null | list<class<`function`>>) | <character> => (class<`data.frame`> | class<`matrix`> | ^double[] | list<double>) | <class<`name`> | class<`(`> | class<`call`>> => (character[] | double[]);
 type `getnames` <double[] | list<any>, any> => character[];
 type `is.empty` <double[] | list<any>> => logical;
 type `is.error` <class<`try-error`> | double> => logical;
@@ -46,7 +41,7 @@ type `list.iter` <list<list<character | list<double>>>, any> => list<list<charac
 type `list.join` <list<list<character | double>>, list<list<character | double>>, any, any, ..., logical> => list<list<character | double>>;
 type `list.last` <list<list<character | list<double>>>, any> => (null | list<character | list<double>>);
 type `list.map` <list<double[] | list<character | list<double> | list<character | list<double>>>>, any> => list<any>;
-type `list.map.internal` <double[] | list<character[] | double[] | list<any>>, class<`call`> | class<`lambda_expression`> | class<`name`>, environment, class<`function`>, null | environment> => any;
+type `list.map.internal` <double[] | list<character[] | double[] | list<any>>, class<`call`> | class<`lambda_expression`> | class<`name`>, environment, class<`function`>, environment | null> => any;
 type `list.mapv` <list<list<character | list<double>>>, any, any, logical> => (character[] | double[]);
 type `list.match` <list<list<character | list<double>>>, character, ...> => list<list<character | list<double>>>;
 type `list.merge` <...> => list<double | list<double>>;
@@ -71,7 +66,7 @@ type `list.sort` <list<list<character | list<double>>>, ..., null> => list<list<
 type `list.table` <list<list<character | list<double>>>, ..., list<character[]>> => class<`table`>;
 type `list.take` <list<double>, double, logical> => list<double>;
 type `list.takeWhile` <list<list<character | list<double>>>, any> => list<any>;
-type `list.ungroup` <list<list<list<character | character | list<double> | list<double>>>>, double, ..., logical, logical> => list<list<any>>;
+type `list.ungroup` <list<list<list<character | list<double> | list<double>>>>, double, ..., logical, logical> => list<list<double | character | list<double> | list<double>>>;
 type `list.unzip` <list<list<double | double | character[] | list<list<character>>>>, character[], ..., character, null> => list<^double[] | ^double[] | list<double> | double[] | class<`data.frame`> | class<`matrix`>>;
 type `list.update` <list<list<character | list<double>>>, ..., logical> => list<list<character | list<double> | character | integer | list<double> | character | double | list<double>>>;
 type `list.which` <list<list<character | list<double>>>, any> => integer[];

@@ -1,5 +1,3 @@
-type `filter` <character[]> => logical[];
-type `FUN` <integer[], double[], double[]> => double[];
 type `lines.smooth.Pspline` <class<`smooth.Pspline`>, ...> => null;
 type `predict.smooth.Pspline` <class<`smooth.Pspline`>, double[], double, ...> => class<`matrix`>;
 type `print.smooth.Pspline` <class<`smooth.Pspline`>, ...> => class<`smooth.Pspline`>;

@@ -1,4 +1,3 @@
-type `filter` <character[]> => logical[];
 type `plot.rbga` <class<`rbga`>, character, double, ...> => (null | list<integer[]>);
 type `rbga` <double[], double[], null, double, double, double, null, class<`function`>, class<`function`>, logical, logical> => class<`rbga`>;
 type `rbga.bin` <double, null, double, double, double, null, double, null, class<`function`>, logical, logical> => class<`rbga`>;

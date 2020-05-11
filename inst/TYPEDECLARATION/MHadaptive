@@ -1,0 +1,5 @@
+type `BCI` <list<class<`matrix`> | character[] | double>, double[]> => class<`matrix`>;
+type `.is.positive.definite` <class<`matrix`>, any, character[]> => logical;
+type `isPositiveDefinite` <class<`matrix`>> => logical;
+type `mcmc_thin` <list<class<`matrix`> | character[] | double>, double> => list<class<`matrix`> | character[] | double>;
+type `plotMH` <list<class<`matrix`> | character[] | double>, logical> => list<logical>;

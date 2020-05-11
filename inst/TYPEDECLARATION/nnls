@@ -1,6 +1,4 @@
 type `coef.nnls` <class<`nnls`> | class<`nnnpls`>, ...> => double[];
 type `coef.nnnpls` <class<`nnls`> | class<`nnnpls`>, ...> => double[];
-type `filter` <character[]> => logical[];
-type `fun` <character, character> => class<`DLLInfo`>;
 type `nnls` <class<`matrix`>, double[]> => class<`nnls`>;
 type `nnnpls` <class<`matrix`>, double[], double[]> => class<`nnnpls`>;

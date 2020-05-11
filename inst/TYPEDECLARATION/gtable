@@ -1,13 +1,9 @@
 type `%||%` <null, class<`unit`>> => class<`unit`>;
-type `cbind` <..., character, null> => any;
 type `cbind_gtable` <class<`gDesc`, `gTree`, `grob`, `gtable`>, class<`gDesc`, `gTree`, `grob`, `gtable`>, any> => any;
 type `compare_unit` <class<`unit`>, class<`unit`>, class<`function`>> => class<`unit`>;
 type `dim.gtable` <class<`gDesc`, `gTree`, `grob`, `gtable`>> => integer[];
 type `dimnames<-.gtable` <class<`gDesc`, `gTree`, `grob`, `gtable`>, list<double[] | character[] | double[] | null | integer[] | null>> => class<`gDesc`, `gTree`, `grob`, `gtable`>;
 type `dimnames.gtable` <class<`gDesc`, `gTree`, `grob`, `gtable`>, ...> => list<any>;
-type `f` <class<`gDesc`, `gTree`, `grob`, `gtable`>, class<`gDesc`, `gTree`, `grob`, `gtable`>> => any | <class<`gDesc`, `gTree`, `grob`, `gtable`>, class<`gDesc`, `gTree`, `grob`, `gtable`>> => class<`gDesc`, `gTree`, `grob`, `gtable`>;
-type `filter` <character[]> => logical[];
-type `FUN` <class<`circle`, `gDesc`, `grob`> | class<`gDesc`, `grob`, `lines`> | class<`gDesc`, `grob`, `rect`>> => double | <class<`circle`, `gDesc`, `grob`> | class<`gDesc`, `grob`, `lines`> | class<`gDesc`, `grob`, `rect`>> => double | <character | double[], any> => logical;
 type `gtable` <class<`unit`>, class<`unit`>, logical, character, null, null, null> => class<`gDesc`, `gTree`, `grob`, `gtable`>;
 type `[.gtable` <class<`gDesc`, `gTree`, `grob`, `gtable`>, any, any> => class<`gDesc`, `gTree`, `grob`, `gtable`>;
 type `gtable_add_cols` <class<`gDesc`, `gTree`, `grob`, `gtable`>, class<`unit`>, double> => class<`gDesc`, `gTree`, `grob`, `gtable`>;
@@ -32,7 +28,6 @@ type `makeContext.gTableChild` <class<`circle`, `gDesc`, `gTableChild`, `grob`> 
 type `neg_to_pos` <double | integer[], any> => (double | integer[]);
 type `new_data_frame` <list<double[] | character[] | double | character>, double | null> => class<`data.frame`>;
 type `plot.gtable` <class<`gDesc`, `gTree`, `grob`, `gtable`>, ...> => null;
-type `rbind` <..., character, null> => class<`gDesc`, `gTree`, `grob`, `gtable`>;
 type `rbind_gtable` <class<`gDesc`, `gTree`, `grob`, `gtable`>, class<`gDesc`, `gTree`, `grob`, `gtable`>, character> => class<`gDesc`, `gTree`, `grob`, `gtable`>;
 type `t.gtable` <class<`gDesc`, `gTree`, `grob`, `gtable`>> => class<`gDesc`, `gTree`, `grob`, `gtable`>;
 type `vpname` <class<`data.frame`>> => character[];

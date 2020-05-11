@@ -1,14 +1,10 @@
 type `as.Formula` <class<`formula`>, ...> => class<`Formula`, `formula`>;
 type `as.Formula.formula` <class<`formula`>, ..., any> => class<`Formula`, `formula`>;
 type `c_formula` <class<`call`> | class<`name`> | null, class<`call`> | class<`name`> | double, character> => (class<`call`> | class<`formula`>);
-type `extract_parts` <class<`call`> | class<`name`> | double | null, character> => (null | list<any>);
-type `filter` <character[]> => logical[];
 type `Formula` <class<`formula`>> => class<`Formula`, `formula`>;
 type `formula.Formula` <class<`Formula`, `formula`>, double | logical[] | null, double | integer[] | null, logical[], logical, logical, ...> => class<`formula`>;
 type `FUN` <class<`formula`>> => list<null | list<class<`call`>> | null | list<class<`name`>> | list<any>>;
 type `has_dot` <class<`formula`> | class<`Formula`, `formula`>> => logical;
-type `is_lhs_extended` <class<`Formula`, `formula`>> => logical;
-type `is_rhs_extended` <class<`Formula`, `formula`>> => logical;
 type `length.Formula` <class<`Formula`, `formula`>> => integer[];
 type `model.frame.Formula` <class<`Formula`, `formula`>, class<`data.frame`>, ..., null, null, character> => class<`data.frame`>;
 type `model.matrix.Formula` <class<`Formula`, `formula`>, class<`data.frame`>, ..., null | double, double, character> => class<`matrix`>;
@@ -18,5 +14,4 @@ type `paste_formula` <class<`call`> | null | list<any>, class<`call`> | class<`n
 type `simplify_to_formula` <class<`Formula`, `formula`>, double | logical[] | null, double | null> => class<`formula`>;
 type `split_formula` <class<`formula`>> => list<null | list<class<`call`>> | null | list<class<`name`>> | list<any>>;
 type `terms.Formula` <class<`Formula`, `formula`>, ..., double | logical[] | null, double | null, any> => any;
-type `update_components` <class<`call`> | class<`name`>, class<`call`> | class<`name`>> => (class<`call`> | class<`name`>);
 type `update.Formula` <class<`Formula`, `formula`>, class<`formula`>, ...> => class<`Formula`, `formula`>;

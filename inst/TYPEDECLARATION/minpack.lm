@@ -1,16 +1,8 @@
-type `$` < > => class<`formula`> | < > => double[] | < > => class<`matrix`> | < > => double | < > => double[] | <double[]> => logical | < > => double[] | < > => double[] | <logical[]> => integer;
 type `coef.nls.lm` <class<`nls.lm`>, ...> => double[];
 type `deviance.nls.lm` <class<`nls.lm`>, ...> => double;
-type `filter` <character[]> => logical[];
-type `fn` <double[] | list<double>> => double[];
-type `FUN` <character> => integer;
-type `getPars` < > => double[] | < > => double[];
-type `getRHS` < > => double[] | < > => double[] | < > => double[];
-type `getRHS.noVarying` < > => double[];
 type `nls.lm` <double[] | list<double>, null, null, class<`function`>, null | class<`function`>, list<double | integer[] | list<any> | double>, ...> => class<`nls.lm`>;
-type `nlsLM` <class<`formula`>, class<`data.frame`> | class<`data.frame`, `groupedData`, `nfGroupedData`, `nfnGroupedData`> | environment, any, null, character, any, null, null, logical, any, any, any> => any;
+type `nlsLM` <class<`formula`>, class<`data.frame`> | class<`data.frame`, `groupedData`, `nfGroupedData`, `nfnGroupedData`> | environment, any, null, character, any, null, null, logical, any, any, any, logical, ...> => any;
 type `nls.lm.control` <double, double, double, list<any>, double, double, integer[], double, double> => list<double | integer[] | list<any>>;
 type `nlsModel` <class<`formula`>, list<double[]>, double[] | list<double>, double[], null> => class<`nlsModel`>;
-type `setPars` <double[]> => null | <double[]> => null;
 type `summary.nls.lm` <class<`nls.lm`>, ...> => class<`summary.nls.lm`>;
 type `wfct` <any> => any;

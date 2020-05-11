@@ -1,0 +1,6 @@
+type `plot.rmst2` <class<`rmst2`>, character, character, character, character, character, double, double, ...> => null;
+type `print.rmst2` <class<`rmst2`>, double, ...> => class<`rmst2`>;
+type `rmst1` <double[], double[], double, double> => class<`rmst1`>;
+type `rmst2` <double[], double[], double[], double, class<`data.frame`> | null, double> => class<`rmst2`>;
+type `rmst2reg` <double[], double[], class<`matrix`>, double[], double, character, double> => class<`matrix`>;
+type `rmst2.sample.data` < > => class<`data.frame`>;

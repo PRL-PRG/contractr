@@ -1,11 +1,9 @@
-type `(` < > => integer[];
 type `%==%` <double | integer[] | null, double | integer[] | null> => logical;
 type `all_true` <character | logical[]> => logical;
 type `assert` <any, ...> => (null | list<null | class<`function`> | list<null>>);
 type `assert2` <character | null, class<`call`>, environment, logical> => any;
 type `available_dir` <character[]> => any;
 type `deparse_key` <character | class<`call`> | class<`if`> | double> => character;
-type `filter` <character[]> => logical[];
 type `has_error` <any, any> => logical;
 type `has_warning` <character | double | integer[]> => logical;
 type `insert_identical` < > => any;

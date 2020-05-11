@@ -7,7 +7,6 @@ type `conv` <double[]> => double[];
 type `decr` <double[]> => double[];
 type `decr.conc` <double[]> => double[];
 type `decr.conv` <double[]> => double[];
-type `filter` <character[]> => logical[];
 type `fitted.coneproj` <class<`coneproj`>, ...> => class<`matrix`>;
 type `incr` <double[]> => double[];
 type `incr.conc` <double[]> => double[];

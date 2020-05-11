@@ -1,7 +1,4 @@
 type `buildStartupMessage` <..., character, character | null, null, logical, null | character[], null, any> => null;
-type `f` <class<`StartupMessage`, `condition`, `message`, `packageStartupMessage`, `simpleMessage`>> => null;
-type `filter` <character[]> => logical[];
-type `fun` <class<`StartupMessage`, `condition`, `message`, `packageStartupMessage`, `simpleMessage`>, character[]> => null | <character, any> => null | <class<`StartupMessage`, `condition`, `message`, `packageStartupMessage`, `simpleMessage`>, class<`function`>> => null;
 type `infoShow` <character, character, any> => null;
 type `mystartupMessage` <..., null, character, character, any, logical> => null;
 type `NEWS` <character, null> => null;

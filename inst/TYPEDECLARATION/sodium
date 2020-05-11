@@ -7,7 +7,6 @@ type `data_decrypt` <raw[], raw[], raw[]> => raw[];
 type `data_encrypt` <raw[], raw[], raw[]> => raw[];
 type `data_tag` <raw[], raw[]> => raw[];
 type `diffie_hellman` <raw[], raw[]> => raw[];
-type `filter` <character[]> => logical[];
 type `hash` <raw[], null | raw[], double> => raw[];
 type `hex2bin` <character, character> => raw[];
 type `keygen` <raw[]> => raw[];

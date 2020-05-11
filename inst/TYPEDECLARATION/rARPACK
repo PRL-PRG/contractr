@@ -1,4 +1,3 @@
 type `eigs` <class<`dgCMatrix`> | class<`dgRMatrix`> | class<`function`> | class<`matrix`> | class<`dgeMatrix`>, double, character, null, list<any>, ...> => list<complex[] | class<`matrix`> | complex[] | null>;
 type `eigs_sym` <class<`matrix`>, double, character, double | null, list<any>, logical, ...> => list<double[] | class<`matrix`>>;
-type `filter` <character[]> => logical[];
 type `svds` <class<`dgCMatrix`> | class<`matrix`> | class<`dgRMatrix`>, double, double, double, list<any>, ...> => list<double[] | class<`matrix`> | double[] | null | class<`matrix`> | double[] | null>;

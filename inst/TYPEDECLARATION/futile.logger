@@ -1,7 +1,4 @@
-type `[[` <class<`condition`, `simpleWarning`, `warning`>> => character;
-type `appender` <character> => null;
 type `appender.console` < > => class<`function`>;
-type `filter` <character[]> => logical[];
 type `flog.appender` <...> => class<`function`>;
 type `flog.carp` <...> => null;
 type `flog.debug` <character, ..., character, logical> => (character | null);
@@ -13,7 +10,6 @@ type `flog.remove` <...> => null;
 type `flog.threshold` <...> => null;
 type `flog.warn` <character, ..., character, logical> => character;
 type `ftry` <any, any, null> => character;
-type `layout` <integer, character, ...> => character | <integer, double, ...> => character | <integer, character, ...> => character;
 type `layout.format` <character, character> => class<`function`>;
 type `.log_level` <any, ..., integer, character, any> => (character | null);
 type `scat` <character, ..., logical> => null;

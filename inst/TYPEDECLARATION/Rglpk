@@ -1,16 +1,14 @@
 type `as.glp_bounds` <list<any>, ...> => class<`bound_table`, `data.frame`>;
 type `as.glp_bounds.list` <list<any>, integer> => class<`bound_table`, `data.frame`>;
 type `.check_control_parameters` <list<any>> => list<integer>;
-type `filter` <character[]> => logical[];
-type `fun` <any, character> => null | <any, character> => list<any>;
 type `glp_bounds` <list<any>, integer> => class<`bound_table`, `data.frame`>;
 type `glp_bounds_check_sanity` <list<double[]>, integer> => null;
-type `glp_call_interface` <double[], integer, integer[], integer[], double[], integer, double[], integer[], integer, logical, logical[], logical[]> => list<double[] | character>;
+type `glp_call_interface` <double[], integer, integer[], integer[], double[], integer, double[], integer[], integer, logical, logical[], logical[], integer, integer[], double[], double[], integer, integer, integer, integer> => list<double[] | character>;
 type `glp_fix_bound_type` <class<`bound_table`, `data.frame`>> => class<`bound_table`, `data.frame`>;
 type `glp_get_meta_data_from_file` <list<character | integer>, logical> => list<character | integer>;
 type `glp_merge_MP_data` <list<character | integer>, list<double[] | character[]>> => list<any>;
 type `glp_retrieve_MP_from_file` <list<character | integer>, logical, logical> => list<double[] | character[]>;
 type `MILP` <double[], list<class<`simple_triplet_matrix`> | character[] | double[]>, list<list<double[]>>, character[], logical> => class<`MILP`>;
-type `Rglpk_call` <class<`simple_triplet_matrix`> | double[], class<`simple_triplet_matrix`> | class<`matrix`>, character[], double[], null | list<list<double[]>>, character[] | null, logical, logical, integer, integer, integer, character> => list<double[] | null | list<double[]> | double[] | null | list<double[] | null>>;
+type `Rglpk_call` <class<`simple_triplet_matrix`> | double[], class<`simple_triplet_matrix`> | class<`matrix`>, character[], double[], null | list<list<double[]>>, character[] | null, logical, logical, integer, integer, integer, character, integer, logical> => list<double[] | null | list<double[]> | double[] | null | list<double[] | null>>;
 type `Rglpk_read_file` <character, character, logical, logical> => class<`MILP`, `MP_data_from_file`>;
 type `Rglpk_solve_LP` <class<`simple_triplet_matrix`> | double[], class<`simple_triplet_matrix`> | class<`matrix`>, character[], double[], null | list<list<double[]>>, character[] | null, logical, list<any>, ...> => list<double[] | null | list<double[]> | double[] | null | list<double[] | null>>;

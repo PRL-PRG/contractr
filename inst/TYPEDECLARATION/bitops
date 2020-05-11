@@ -5,4 +5,3 @@ type `bitShiftL` <^double[], double[]> => ^double[];
 type `bitShiftR` <^double[], double[]> => ^double[];
 type `bitXor` <^double[], ^double[]> => ^double[];
 type `cksum` <character[]> => double[];
-type `filter` <character[]> => logical[];

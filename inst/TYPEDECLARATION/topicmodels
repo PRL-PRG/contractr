@@ -1,0 +1,12 @@
+type `CTM` <class<`DocumentTermMatrix`, `simple_triplet_matrix`>, double, character, null | list<double | list<double>>, null, ...> => class<`CTM_VEM`>;
+type `dtm2ldaformat` <class<`DocumentTermMatrix`, `simple_triplet_matrix`>, logical> => list<character[] | list<class<`matrix`>>>;
+type `get` <class<`DocumentTermMatrix`, `simple_triplet_matrix`>, any, character, class<`LDA_VEMcontrol`> | list<double>, class<`LDA_VEM`> | null, ...> => (class<`LDA_VEM`> | class<`LDA_Gibbs`>);
+type `get_df` <class<`CTM_VEM`> | class<`LDA_Gibbs`> | class<`LDA_VEM`>, ...> => double | <class<`LDA_Gibbs`>, ...> => integer | <class<`CTM_VEM`>, ...> => double | <class<`LDA_VEM`>, ...> => integer;
+type `init_TopicModelcontrol` <class<`CTM_VEMcontrol`> | class<`LDA_Gibbscontrol`> | class<`LDA_VEMcontrol`>, any, any, any, ...> => list<any>;
+type `LDA` <class<`DocumentTermMatrix`, `simple_triplet_matrix`>, any, character, class<`LDA_VEMcontrol`> | list<double>, class<`LDA_VEM`> | null, ...> => (class<`LDA_VEM`> | class<`LDA_Gibbs`>);
+type `ldaformat2dtm` <list<class<`matrix`>>, character[], logical> => class<`DocumentTermMatrix`, `simple_triplet_matrix`>;
+type `.list2control` <list<any>, character> => (class<`CTM_VEMcontrol`> | class<`LDA_Gibbscontrol`> | class<`LDA_VEMcontrol`> | class<`OPTcontrol`>);
+type `match_terms` <class<`DocumentTermMatrix`, `simple_triplet_matrix`>, class<`LDA_VEM`>> => class<`DocumentTermMatrix`, `simple_triplet_matrix`>;
+type `most_likely` <class<`LDA_VEM`>, character, any, any, ...> => (class<`matrix`> | integer[]);
+type `terms` <class<`LDA_VEM`>, ...> => class<`matrix`>;
+type `topics` <class<`LDA_VEM`>, ...> => integer[] | <class<`LDA_VEM`>, ...> => integer[];

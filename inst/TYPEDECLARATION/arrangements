@@ -1,7 +1,5 @@
-type `$` <double, null | character, null | logical> => (class<`matrix`> | integer[] | null) | <double, null | character, null | logical> => (class<`matrix`> | integer[] | null) | <double, null | character, null | logical> => (class<`matrix`> | integer[] | null) | < > => logical | < > => any | <character> => class<`matrix`> | <double, null | character, null | logical> => (class<`matrix`> | integer[] | null);
 type `combinations` <character[] | double | null, double, null, null, null | double[], logical, null | character, double, null | double, null | double[], null | double, null> => (class<`matrix`> | list<integer[]>);
 type `compositions` <double, double | null, logical, character | null, integer, null, null, null, null> => (class<`matrix`> | list<integer[]>);
-type `filter` <character[]> => logical[];
 type `icombinations` <double, double, null, null, null, logical, null> => class<`Arrangements`, `Combinations`, `R6`, `abstractiter`, `iter`>;
 type `icompositions` <double, double | null, logical, null> => class<`Arrangements`, `Compositions`, `R6`, `abstractiter`, `iter`>;
 type `ipartitions` <double, double | null, logical, logical, null> => class<`Arrangements`, `Partitions`, `R6`, `abstractiter`, `iter`>;
@@ -12,5 +10,4 @@ type `npartitions` <double, null | double, logical, logical> => (class<`bigz`> |
 type `npermutations` <double | character[] | null, double | null, null, null, null | double[], logical, logical> => (class<`bigz`> | integer);
 type `partitions` <double, double | null, logical, logical, character | null, integer, null, null, null, null> => (class<`matrix`> | list<integer[]>);
 type `permutations` <character[] | double | null, double | null, null, null, null | double[], logical, null | character, double, null | double, null | double[], null | double, null> => (class<`matrix`> | list<integer[]>);
-type `.subset2` <double, double | null, logical, null> => logical | <integer, double, null, null, logical, null> => logical | <double, double | null, logical, logical, null> => logical | <integer, double, null, null, logical, null> => logical;
 type `validate_n_value` <double, double, null, null, null, logical> => integer;

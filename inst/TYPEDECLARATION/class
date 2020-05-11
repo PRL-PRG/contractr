@@ -1,6 +1,5 @@
 type `batchSOM` <class<`data.frame`>, class<`somgrid`>, double[], any> => class<`SOM`>;
 type `condense` <class<`matrix`>, class<`factor`>, integer, logical> => integer[];
-type `filter` <character[]> => logical[];
 type `knn` <class<`matrix`>, class<`matrix`>, class<`factor`> | integer[], double, double, logical, logical> => class<`factor`>;
 type `knn1` <class<`matrix`>, class<`data.frame`> | class<`matrix`>, integer[] | class<`factor`>> => class<`factor`>;
 type `knn.cv` <class<`matrix`>, class<`factor`>, double, double, logical, logical> => class<`factor`>;

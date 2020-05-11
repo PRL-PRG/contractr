@@ -5,10 +5,7 @@ type `delTriple` <class<`textmatrix`>, character, character, character> => class
 type `dimcalc_ndocs` <any> => class<`function`> | <double[]> => double;
 type `dimcalc_raw` < > => class<`function`>;
 type `dimcalc_share` <double[]> => double | <double> => class<`function`>;
-type `dims` <double[]> => double | <double[]> => integer;
-type `filter` <character[]> => logical[];
 type `fold_in` <class<`textmatrix`>, class<`LSAspace`>> => class<`textmatrix`>;
-type `FUN` <character, logical, character, double, logical, double, logical, character[] | null, null | character[], null, logical, logical> => class<`data.frame`>;
 type `getSubjectId` <class<`textmatrix`>, character> => integer;
 type `getTriple` <class<`textmatrix`>, character, any> => (character[] | null | list<character[]>);
 type `gw_idf` <class<`matrix`> | class<`textmatrix`>> => double[];
@@ -19,4 +16,4 @@ type `print.textmatrix` <class<`textmatrix`>, double, double, ...> => class<`tex
 type `query` <character, character[], logical, character> => class<`textmatrix`>;
 type `setTriple` <class<`textmatrix`>, character, character, character> => class<`factor`>;
 type `summary.textmatrix` <class<`textmatrix`>, ...> => class<`summary.textmatrix`>;
-type `textmatrix` <character, logical, character, double, logical, double, logical, logical, logical, character[] | null, null | character[], null> => class<`textmatrix`>;
+type `textmatrix` <character, logical, character, double, logical, double, logical, logical, logical, character[] | null, null | character[], null, logical, logical> => class<`textmatrix`>;

@@ -1,4 +1,3 @@
-type `:::` <character | class<`formula`> | list<class<`quoted`>>, any, any> => list<class<`quoted`>>;
 type `%||%` <^character[] | null, any> => (^character[] | integer[]);
 type `acast` <class<`data.frame`>, class<`formula`>, null | class<`function`>, ..., null | character | logical, null | class<`quoted`>, null | double, logical, character> => (class<`array`> | class<`matrix`>);
 type `add_margins` <class<`data.frame`>, list<character[]>, character[] | logical> => class<`data.frame`>;
@@ -7,8 +6,7 @@ type `array_names` <class<`data.frame`>> => character[];
 type `cast` <class<`data.frame`>, list<class<`quoted`>>, null | class<`function`>, ..., null | class<`quoted`>, null | double, logical, character, any> => list<class<`array`> | list<class<`data.frame`>> | class<`matrix`> | list<class<`data.frame`>>>;
 type `colsplit` <character[], character, character[]> => class<`data.frame`>;
 type `dcast` <class<`data.frame`>, class<`formula`>, class<`function`> | null, ..., character[] | logical | null, null | class<`quoted`>, null, logical, character> => class<`data.frame`>;
-type `filter` <character[]> => logical[];
-type `FUN` <class<`data.frame`>> => character[] | <character[] | null> => class<`data.frame`> | <class<`factor`> | integer[] | class<`factor`, `ordered`>> => (class<`factor`> | class<`factor`, `ordered`>) | <integer> => null | <list<any>> => double[] | <integer> => (character[] | null) | <class<`array`> | class<`matrix`> | double | integer[] | null | class<`data.frame`> | class<`data.frame`, `groupedData`, `nfGroupedData`, `nfnGroupedData`> | list<any>, ..., logical, character> => class<`data.frame`> | <integer> => logical | <character[]> => character[] | <character[]> => character[] | <character, character[]> => character[] | <character[] | integer[]> => (class<`factor`> | integer[]);
+type `FUN` <class<`data.frame`>> => character[] | <class<`array`> | class<`matrix`> | double | integer[] | null | class<`data.frame`> | class<`data.frame`, `groupedData`, `nfGroupedData`, `nfnGroupedData`> | list<any>, ..., logical, character> => class<`data.frame`>;
 type `guess_value` <class<`data.frame`>> => character;
 type `is.string` <character> => logical;
 type `margins` <list<character[]>, character[] | logical> => list<null | character[]>;
@@ -21,6 +19,6 @@ type `melt.default` <double | integer[] | null, ..., logical, character> => clas
 type `melt.list` <list<any>, ..., double> => class<`data.frame`>;
 type `melt.matrix` <class<`array`> | class<`matrix`>, character[] | null, ..., logical, logical, character> => class<`data.frame`>;
 type `normalize_melt_arguments` <class<`data.frame`> | class<`data.frame`, `groupedData`, `nfGroupedData`, `nfnGroupedData`>, integer[], logical> => list<null | logical>;
-type `parse_formula` <character | class<`formula`> | list<class<`quoted`>>, any, any> => list<class<`quoted`>>;
+type `parse_formula` <class<`formula`> | list<class<`quoted`>>, any, any> => list<class<`quoted`>>;
 type `recast` <class<`data.frame`>, class<`formula`>, ..., integer[], any> => class<`data.frame`>;
 type `upto` <character, character[]> => character[];

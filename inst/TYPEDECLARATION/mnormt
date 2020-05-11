@@ -1,8 +1,6 @@
 type `biv.nt.prob` <double, double[], double[], double[], class<`matrix`>> => double;
 type `dmnorm` <class<`matrix`> | double[], double[], class<`matrix`>, logical> => double[];
 type `dmt` <class<`matrix`>, double[], class<`matrix`>, double, logical> => double[];
-type `filter` <character[]> => logical[];
-type `fun` <character, character> => null;
 type `pd.solve` <class<`matrix`>, logical, logical> => class<`matrix`>;
 type `pmnorm` <class<`matrix`> | double[], double[], class<`matrix`> | double, ...> => double[];
 type `pmt` <double[], double[], class<`matrix`>, double, ...> => double;

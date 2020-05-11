@@ -1,6 +1,4 @@
 type `.central_intervals` <class<`matrix`>, double> => class<`matrix`>;
-type `filter` <character[]> => logical[];
-type `fun` <...> => null;
 type `posterior_interval` <class<`matrix`>, ...> => class<`matrix`>;
 type `posterior_interval.default` <class<`matrix`>, double, ...> => class<`matrix`>;
 type `.pred_errors` <class<`matrix`>, double[]> => class<`matrix`>;

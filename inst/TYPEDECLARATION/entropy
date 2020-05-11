@@ -15,7 +15,6 @@ type `entropy.empirical` <class<`table`> | double[], character[]> => double;
 type `entropy.MillerMadow` <double[], character[]> => double;
 type `entropy.plugin` <class<`matrix`> | class<`table`> | double[], character[]> => double;
 type `entropy.shrink` <double[], any, character[], logical> => double;
-type `filter` <character[]> => logical[];
 type `freqs.Dirichlet` <class<`matrix`> | double[], double> => (class<`matrix`> | double[]);
 type `freqs.empirical` <class<`matrix`> | class<`table`> | double[]> => (class<`matrix`> | class<`table`> | double[]);
 type `freqs.shrink` <class<`matrix`> | double[], any, logical> => (class<`matrix`> | double[]);

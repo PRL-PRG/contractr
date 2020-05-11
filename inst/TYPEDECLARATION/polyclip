@@ -1,9 +1,6 @@
 type `aspolygonlist` <list<list<double[]>>> => list<list<double[]>>;
 type `ensuredouble` <list<list<double[]>>> => list<list<double[]>>;
-type `ensurexydouble` <list<double[]>> => list<double[]>;
-type `filter` <character[]> => logical[];
-type `fun` <...> => null | <any, any> => null;
-type `FUN` <list<double[]>> => list<double[]> | <list<double[]>> => logical | <list<double[]>> => double[] | <list<double[]>> => double[];
+type `ensurexydouble` <list<integer[] | double>> => list<double[]>;
 type `pointinpolygon` <list<double>, list<integer[]>, any, any, any> => integer;
 type `polyclip` <list<list<integer[]>>, list<list<double[]>>, character[], ..., any, any, any, character[], character[], logical> => list<list<double[]>>;
 type `polylineoffset` <list<list<double[]>>, double, ..., any, any, any, double, double, character, character> => list<list<double[]>>;
@@ -11,6 +8,6 @@ type `polyminkowski` <list<list<double[]>>, list<list<double[]>>, ..., any, any,
 type `polyoffset` <list<list<double[]>>, double, ..., any, any, any, double, double, character> => list<list<double[]>>;
 type `polysimplify` <list<list<double[]>>, ..., any, any, any, character> => list<list<double[]>>;
 type `validpoly` <list<list<double[]>>> => logical;
-type `validxy` <list<double[]>> => logical;
-type `xrange` <list<double[]>> => double[];
-type `yrange` <list<double[]>> => double[];
+type `validxy` <list<double | integer[]>> => logical;
+type `xrange` <list<integer[]>> => integer[];
+type `yrange` <list<integer[]>> => integer[];

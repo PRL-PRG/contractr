@@ -1,8 +1,13 @@
 type `arandi` <integer[], integer[], logical> => double;
+type `binder` <class<`matrix`>, class<`matrix`>> => double[];
 type `cltoSim` <double[]> => class<`matrix`>;
 type `comp.psm` <class<`matrix`>> => class<`matrix`>;
-type `filter` <character[]> => logical[];
-type `FUN` <integer[]> => double | <integer> => integer[] | <integer[]> => double;
+type `laugreen` <class<`matrix`>, null, double> => list<double[] | character>;
 type `maxpear` <class<`matrix`>, null, character[], null> => list<integer[] | double | character>;
+type `medv` <class<`matrix`>, double> => integer[];
+type `minbinder` <class<`matrix`>, class<`matrix`> | null, character[], null, logical, null, double> => list<class<`matrix`> | double[] | integer[] | double | character>;
+type `norm.label` <character[] | double[]> => integer[];
 type `pear` <class<`matrix`>, class<`matrix`>> => double[];
+type `relabel` <class<`matrix`>, logical> => list<class<`matrix`> | double | integer[]>;
 type `Simtocl` <class<`matrix`>> => double[];
+type `vi.dist` <integer[], integer[], logical, double> => double[];

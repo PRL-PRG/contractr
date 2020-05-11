@@ -191,7 +191,6 @@ type `dwald` <double[], double, double, logical> => double[];
 type `dzib` <integer[], double, double, double, logical> => double[];
 type `dzinb` <integer[], double, double, double, logical> => double[];
 type `dzip` <integer[], double, double, logical> => double[];
-type `filter` <character[]> => logical[];
 type `pbbinom` <double[], double, double, double, logical, logical> => double[];
 type `pbetapr` <double[], double, double, double, logical, logical> => double[];
 type `pbhatt` <double[], double, double, double, logical, logical> => double[];

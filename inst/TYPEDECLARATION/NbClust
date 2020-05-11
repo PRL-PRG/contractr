@@ -1,0 +1,1 @@
+type `NbClust` <class<`data.frame`> | class<`matrix`> | null, class<`dist`> | null, null | character, double, double, character, character, double> => list<class<`matrix`> | integer[] | double[]>;

@@ -1,3 +1,2 @@
-type `filter` <character[]> => logical[];
 type `image_type` <character, logical> => character;
 type `read.bitmap` <character, any, logical, ...> => class<`array`>;

@@ -1,8 +1,6 @@
 type `count_tokens` <class<`call`>> => integer[];
-type `filter` <character[]> => logical[];
 type `find_breaks` <integer[], any, any, any, any> => list<any>;
 type `fix_parse_data` <class<`data.frame`>, any> => class<`data.frame`>;
-type `FUN` <character[]> => character | <character | class<`call`> | class<`if`> | class<`name`> | double | null> => character | <integer> => character | <integer> => character | <class<`<-`> | class<`=`> | class<`(`> | class<`{`> | class<`call`> | class<`if`> | class<`name`>> => character | <character[]> => character[];
 type `mask_comments` <character[], any, logical, logical> => character[];
 type `mask_line_break` <character[]> => character[];
 type `overflow_message` <integer[], integer, integer, character> => character;
@@ -17,7 +15,7 @@ type `tidy_dir` <character, logical, ...> => null;
 type `tidy_eval` <character, ..., character, character, environment> => null;
 type `tidy_file` <character[], ...> => null;
 type `tidy_source` <any, logical, logical, logical, logical, double, any, logical, character[] | null, integer, ...> => list<character[]>;
-type `tidy_usage` <character, character[], double, integer, character> => character;
+type `tidy_usage` <character, character[], double, double, character> => character;
 type `trimws` <character[], character> => character[];
 type `unmask_source` <character[]> => character[];
 type `usage` <character | class<`function`>, double, logical, logical, logical, character[]> => character[];

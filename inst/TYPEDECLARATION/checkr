@@ -72,8 +72,6 @@ type `chk_min_int` < > => integer;
 type `chk_tiny_dbl` < > => double;
 type `co_and` <character[], character, class<`call`> | class<`name`>> => character;
 type `err_deparse` <class<`call`> | class<`name`>> => character;
-type `filter` <character[]> => logical[];
-type `FUN` <class<`try-error`>> => character | <character | class<`try-error`> | null> => logical | <class<`call`>> => (character | class<`try-error`> | null);
 type `is_count` <double | integer[] | null> => logical;
 type `is_count_range` <double | integer[] | null> => logical;
 type `is_flag` <double | integer[] | null> => logical;

@@ -1,0 +1,1 @@
+type `fasterize` <class<`data.frame`, `sf`>, class<`RasterLayer`>, character, character, null, null> => class<`RasterLayer`>;

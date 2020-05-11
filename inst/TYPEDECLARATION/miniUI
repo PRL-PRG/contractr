@@ -1,0 +1,9 @@
+type `buildTabset` <list<class<`shiny.tag`>>, character, null, null, null> => list<class<`shiny.tag`>>;
+type `gadgetDependencies` < > => list<class<`html_dependency`>>;
+type `miniButtonBlock` <..., character> => class<`shiny.tag`>;
+type `miniContentPanel` <..., double, logical> => class<`shiny.tag`>;
+type `miniTabPanel` <character, ..., any, class<`shiny.tag`>> => class<`shiny.tag`>;
+type `miniTabstripPanel` <..., null, null, null> => class<`list`, `shiny.tag.list`>;
+type `miniTitleBar` <character, class<`shiny.tag`>, class<`shiny.tag`>> => class<`shiny.tag`>;
+type `miniTitleBarButton` <character, character, logical> => class<`shiny.tag`>;
+type `paddingToPos` <double> => character;

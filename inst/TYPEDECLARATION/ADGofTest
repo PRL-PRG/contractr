@@ -1,4 +1,3 @@
 type `ad.test` <double[], any, ...> => class<`htest`>;
 type `ad.test.pvalue` <double, integer> => double;
 type `ad.test.statistic` <double[]> => double;
-type `filter` <character[]> => logical[];

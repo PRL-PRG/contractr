@@ -1,10 +1,6 @@
 type `as_hms` <character | class<`difftime`> | class<`POSIXct`, `POSIXt`> | double> => class<`difftime`, `hms`>;
 type `as.POSIXct.hms` <class<`difftime`, `hms`>, ...> => class<`POSIXct`, `POSIXt`>;
 type `check_args` <list<double | null | null | integer[] | null>> => null;
-type `f` <double, double> => double;
-type `filter` <character[]> => logical[];
-type `fun` <...> => null;
-type `FUN` <double | integer[]> => logical;
 type `hms` <double | null, double | null, double | null | integer[], null> => class<`difftime`, `hms`>;
 type `map2` <list<null | integer[] | null | double | null>, double[], class<`function`>, ...> => list<double[]>;
 type `map_int` <list<integer[] | double>, class<`function`>, ...> => integer[];

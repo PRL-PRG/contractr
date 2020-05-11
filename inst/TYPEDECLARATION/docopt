@@ -1,20 +1,10 @@
-type `$` <list<class<`Option`>>, list<class<`Option`>>> => list<logical | list<any>> | <character | null, character | null, double, logical | character> => integer | < > => class<`Required`> | <list<class<`Option`>>, list<any>> => list<logical | list<any> | logical | list<class<`Option`>>> | <character, null> => null | < > => character | <list<class<`Option`>>> => list<class<`Option`>> | <list<any>> => list<any> | <list<class<`Option`>>, list<any>> => list<logical | list<any>> | <list<any>, list<any>> => list<logical | list<any> | logical | list<class<`Option`>>> | <list<any>, list<class<`Option`>>> => list<logical | list<any>> | < > => character | <null | list<class<`Option`> | class<`Argument`>>> => list<class<`Option`> | class<`Argument`>> | <list<any>, list<class<`Option`>>> => list<logical | list<any>> | < > => character | < > => character | < > => character | <...> => list<class<`Argument`> | class<`Option`> | class<`Argument`> | class<`Option`>> | <character, class<`function`>, logical> => class<`function`> | < > => character;
 type `Argument` <...> => class<`Argument`>;
-type `as.character` <any, ...> => character | <any, ...> => character;
-type `check` <character | null, character> => logical;
 type `docopt` <character, character, null, logical, null, logical, logical, any> => class<`docopt`, `list`>;
-type `either` < > => class<`Either`>;
 type `Either` <...> => class<`Either`>;
 type `extract` <character, character> => list<character[]>;
 type `extras` <logical, null, list<class<`Option`>>, any> => null;
-type `filter` <character[]> => logical[];
-type `fix_identities` <null | list<class<`Option`> | class<`Argument`>>> => list<class<`Option`> | class<`Argument`>>;
-type `fix_repeating_arguments` < > => class<`Required`>;
-type `flat` <...> => list<class<`Argument`> | class<`Option`> | class<`Argument`> | class<`Option`>>;
 type `formal_usage` <character> => character;
-type `FUN` <any, ...> => character | <any, ...> => character | <class<`Option`>> => logical | <list<logical | list<any> | logical | list<class<`Option`>>>> => logical | <class<`Option`>> => logical | <class<`Option`>> => list<logical | list<any> | logical | list<class<`Option`>>> | <integer> => character[] | <list<logical | list<any>>> => integer | <integer> => character | <class<`Required`>> => list<class<`Argument`> | class<`Option`>> | <integer> => list<character[]> | <list<class<`Argument`> | class<`Option`>>> => class<`Required`> | <character> => class<`Option`> | <class<`Argument`> | class<`OneOrMore`> | class<`Optional`> | class<`Either`> | class<`Option`>> => list<class<`Argument`> | class<`Option`>> | <class<`Option`>> => character | <class<`Option`>> => logical;
 type `matched` <logical, list<any>, list<any>> => list<logical | list<any> | logical | list<class<`Option`>>>;
-type `name` < > => character;
 type `OneOrMore` <...> => class<`OneOrMore`>;
 type `Option` <...> => class<`Option`>;
 type `Optional` <...> => class<`Optional`>;
@@ -30,7 +20,6 @@ type `parse_seq` <class<`Tokens`>, any> => list<class<`OneOrMore`> | class<`Opti
 type `parse_shorts` <class<`Tokens`>, class<`OptionList`>> => list<class<`Option`>>;
 type `printable_usage` <character, any> => character;
 type `Required` <...> => class<`Required`>;
-type `single_match` <list<class<`Option`>>> => integer;
 type `str_c` <character[], ...> => character;
 type `str_extract` <character[], character> => character[];
 type `str_extract_all` <character, character> => list<list<character[]>>;

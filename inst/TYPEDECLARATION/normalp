@@ -1,7 +1,5 @@
 type `dnormp` <double[], double, double, double, logical> => double[];
 type `estimatep` <double[], double, double, character[]> => double;
-type `filter` <character[]> => logical[];
-type `fn` <double[]> => double | <double> => double;
 type `graphnp` <double[], double, double, character> => list<list<double[]>>;
 type `kurtosis` <double[] | null, double, character[]> => double[];
 type `lmp` <class<`formula`>, any, any> => class<`lm`, `lmp`>;

@@ -1,0 +1,17 @@
+type `%||%` <null, integer[]> => integer[];
+type `alias_lookup` < > => character[];
+type `compact` <character | list<any>> => (character | list<any>);
+type `FUN` <character | list<any>> => (character | list<any>);
+type `get_svg_content` <externalptr> => character;
+type `htmlSVG` <class<`histogram`> | null, ...> => class<`character`, `html`>;
+type `ilapply` <list<any>, class<`function`>, ...> => list<any>;
+type `inlineSVG` <class<`histogram`> | null, ..., null | double, null | double> => character;
+type `is_scalar_character` <character> => logical;
+type `plot_dim` <double[] | ^logical[]> => double[];
+type `stringSVG` <null, ...> => class<`svg`>;
+type `svglite` <character, double, double, character, double, logical, list<any>, list<any>> => logical;
+type `svglite_` <character, character, double, double, double, logical, list<list<any>>> => logical;
+type `svgstring` <double, double, character, double, logical, list<any>, list<any>> => class<`function`>;
+type `svgstring_` <environment, character, double, double, double, logical, list<list<any>>> => externalptr;
+type `validate_aliases` <list<any>, list<any>> => list<list<any>>;
+type `xmlSVG` <null, ..., logical, double, double> => class<`xml_document`, `xml_node`>;

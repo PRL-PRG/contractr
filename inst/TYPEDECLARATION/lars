@@ -6,9 +6,6 @@ type `cv.lars` <class<`AsIs`>, double[], double, any, logical, logical, logical,
 type `delcol` <class<`matrix`>, double[], integer> => list<class<`matrix`>>;
 type `downdateR` <class<`matrix`>, integer> => class<`matrix`>;
 type `error.bars` <double[], double[], double[], double, ...> => double[];
-type `filter` <character[]> => logical[];
-type `fun` <any, any> => null;
-type `FUN` <double[]> => double | <integer[]> => double;
 type `lars` <class<`AsIs`>, double[], character[], logical, logical, logical, any, double, any, logical> => class<`lars`>;
 type `nnls.lars` <integer[], double[], class<`matrix`>, double[], class<`matrix`>, any, logical, logical> => list<class<`matrix`> | double[]>;
 type `plotCVLars` <list<double[] | character>, logical> => null;

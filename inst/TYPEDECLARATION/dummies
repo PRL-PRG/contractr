@@ -1,6 +1,4 @@
 type `dummy` <character[] | class<`factor`> | ^integer[], null | class<`data.frame`>, character, logical, any, logical> => class<`matrix`>;
 type `dummy.data.frame` <class<`data.frame`>, null, logical, character[], logical, ...> => class<`data.frame`>;
-type `filter` <character[]> => logical[];
-type `fun` <character, character> => list<null>;
 type `get.dummy` <class<`data.frame`>, character> => class<`data.frame`>;
 type `which.dummy` <class<`data.frame`>, character | null> => integer[];

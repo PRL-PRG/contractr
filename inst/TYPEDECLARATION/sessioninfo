@@ -1,0 +1,13 @@
+type `%||%` <character, null> => character;
+type `dependent_packages` <character, null> => class<`data.frame`>;
+type `dep_types_hard` < > => character[];
+type `find_deps` <character, class<`matrix`>, character[], character[], logical> => character[];
+type `interpret_dependencies` <null> => list<character[]>;
+type `is_na_scalar` <null> => logical;
+type `loaded_packages` < > => class<`data.frame`>;
+type `os_name` < > => character;
+type `package_info` <character | null, logical, null> => class<`data.frame`, `packages_info`>;
+type `pkg_lib_paths` < > => character[];
+type `platform_info` < > => class<`platform_info`>;
+type `session_info` <character | null, logical> => class<`session_info`>;
+type `sort_ci` <character[]> => character[];

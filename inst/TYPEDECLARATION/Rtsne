@@ -1,10 +1,9 @@
-type `.check_tsne_params` <integer, double, double, double, double, logical, class<`matrix`> | null, integer, integer, double, double, double> => list<double | class<`matrix`>>;
+type `.check_tsne_params` <integer, double, double, double, double, logical, class<`matrix`> | null, integer, integer, double, double, double, double> => list<double | class<`matrix`>>;
 type `.clear_unwanted_params` <list<double | class<`matrix`>>> => list<double>;
-type `filter` <character[]> => logical[];
 type `is.wholenumber` <double, double> => logical;
 type `normalize_input` <class<`matrix`>> => class<`matrix`>;
 type `normalize_input_cpp` <class<`matrix`>> => class<`matrix`>;
 type `Rtsne` <class<`data.frame`> | class<`matrix`> | class<`dist`>, ...> => list<class<`matrix`> | double[]>;
 type `Rtsne.data.frame` <class<`data.frame`>, ...> => list<class<`matrix`> | double[]>;
-type `Rtsne.default` <class<`matrix`>, double, double, double, double, logical, logical, logical, double, logical, logical, null | class<`matrix`>> => list<class<`matrix`> | double[]>;
+type `Rtsne.default` <class<`matrix`>, double, double, double, double, logical, logical, logical, double, logical, logical, null | class<`matrix`>, logical, logical, logical, integer, integer, double, double, double> => list<class<`matrix`> | double[]>;
 type `Rtsne.dist` <class<`dist`>, ..., logical> => list<class<`matrix`> | double[]>;

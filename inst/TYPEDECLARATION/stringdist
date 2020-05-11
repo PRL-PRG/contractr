@@ -1,13 +1,10 @@
 type `::` <^character[] | null | list<character>, character[] | null | list<character>, any, logical, double[], double, double, double, any> => any | <double[] | list<any>, double[] | list<any>, character[], double[], double, double, double, double> => any;
-type `[[` <class<`condition`, `simpleWarning`, `warning`>> => character;
 type `ain` <character, character[], ...> => logical;
 type `all_int` <list<any>> => logical;
 type `amatch` <character[] | null, character[] | ^logical[] | null, null | double, logical, character[], logical, double[], double, double, double, double, double> => (^integer[] | null);
 type `do_dist` <character[] | null | list<^integer[]>, ^character[] | null | list<null | integer[] | ^integer[] | null | integer[]>, character, double[], double, double, double, logical, integer> => (^double[] | null);
 type `ensure_int_list` <double[] | list<any>> => list<any>;
-type `filter` <character[]> => logical[];
-type `fun` <any, any> => list<null>;
-type `FUN` <character[] | null | list<^integer[]>, ^character[] | null | list<null | integer[] | ^integer[] | null | integer[]>, character, double[], double, double, double, logical, integer> => (^double[] | null) | <integer[]> => character | <^double[] | null> => list<^integer[] | null> | <..., null, double, logical, logical> => class<`matrix`> | <^character[] | null> => list<integer[] | null | integer | null> | <integer[]> => double[];
+type `FUN` <character[] | null | list<^integer[]>, ^character[] | null | list<null | integer[] | ^integer[] | null | integer[]>, character, double[], double, double, double, logical, integer> => (^double[] | null) | <..., null, double, logical, logical> => class<`matrix`>;
 type `int2char` <list<integer[] | null | integer[]>> => ^character[];
 type `lengths` <character[] | list<^integer[] | null | integer[]>, ...> => integer[];
 type `lengths.character` <character[], character, ...> => integer[];

@@ -1,8 +1,4 @@
-type `cadr` <...> => double;
 type `Compose` <...> => class<`function`>;
 type `Curry` <any, ...> => class<`function`>;
 type `CurryL` <any, ...> => class<`function`> | <...> => class<`call`>;
-type `double` <...> => double;
-type `f` <...> => double[] | <double[], class<`function`>> => double[];
-type `filter` <character[]> => logical[];
 type `multi.argument.Compose` <...> => class<`function`> | <...> => double;

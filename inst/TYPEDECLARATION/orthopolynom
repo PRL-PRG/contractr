@@ -14,7 +14,6 @@ type `chebyshev.u.inner.products` <double> => double[];
 type `chebyshev.u.polynomials` <double, logical> => list<class<`polynomial`>>;
 type `chebyshev.u.recurrences` <double, logical> => class<`data.frame`>;
 type `chebyshev.u.weight` <double[]> => double[];
-type `filter` <character[]> => logical[];
 type `gegenbauer.inner.products` <double, double> => double[];
 type `gegenbauer.polynomials` <double, double, logical> => list<class<`polynomial`>>;
 type `gegenbauer.recurrences` <double, double, logical> => class<`data.frame`>;

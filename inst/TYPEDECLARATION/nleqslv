@@ -1,8 +1,3 @@
-type `catmsg` <character, character, class<`try-error`>> => null;
-type `f` <any> => class<`function`>;
-type `filter` <character[]> => logical[];
-type `makeerrlist` <character, character, null> => list<character | null>;
-type `makereslist` <character, character, list<double[] | character>, null> => list<character | double>;
 type `nleqslv` <class<`function`> | double[], any, null | class<`function`>, ..., character[], character[], character[], logical, list<any>> => any;
 type `print.test.nleqslv` <class<`test.nleqslv`>, double, integer, ...> => class<`test.nleqslv`>;
 type `searchZeros` <class<`matrix`>, class<`function`>, integer, ...> => list<class<`matrix`> | double[]>;

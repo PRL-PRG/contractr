@@ -2,5 +2,3 @@ type `brew` <character, character | class<`connection`, `terminal`>, null, envir
 type `brewCache` <null | environment> => (environment | null);
 type `brewCacheOff` < > => null;
 type `brewCacheOn` < > => null;
-type `filter` <character[]> => logical[];
-type `fun` <any, any> => null;

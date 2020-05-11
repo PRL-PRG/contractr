@@ -1,0 +1,7 @@
+type `binBvn` <double, double[], double[], any> => class<`matrix`>;
+type `chisq` <double[], class<`matrix`> | double[], double, any, any, double, double> => double;
+type `hetcor` <class<`data.frame`> | double[], ..., logical, logical, any, double, logical> => class<`hetcor`>;
+type `hetcor.data.frame` <class<`data.frame`>, logical, logical, character[], double, logical, ...> => class<`hetcor`>;
+type `hetcor.default` <double[], ..., logical, logical, character[], double, logical> => class<`hetcor`>;
+type `polychor` <class<`factor`>, class<`factor`>, logical, any, logical, double> => (class<`polycor`> | double);
+type `polyserial` <double[], class<`factor`>, logical, any, logical, double, double> => (class<`polycor`> | double);

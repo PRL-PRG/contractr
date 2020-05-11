@@ -10,8 +10,6 @@ type `anytime_cpp` <character[] | double[], character, logical, logical, logical
 type `anytime.default` <character[], character, logical, logical, logical, logical> => class<`POSIXct`, `POSIXt`>;
 type `assertDate` <class<`POSIXct`, `POSIXt`> | character[] | class<`Date`>> => class<`Date`>;
 type `assertTime` <character[]> => class<`POSIXct`, `POSIXt`>;
-type `filter` <character[]> => logical[];
-type `fun` <any, any> => logical;
 type `getFormats` < > => character[];
 type `getTZ` < > => character;
 type `iso8601` <class<`Date`> | class<`POSIXct`, `POSIXt`>> => character;

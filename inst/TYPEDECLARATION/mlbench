@@ -1,10 +1,6 @@
 type `as.data.frame.mlbench` <class<`mlbench`, `mlbench.hypercube`> | class<`mlbench`, `mlbench.simplex`> | class<`mlbench`, `mlbench.xor`>, null, logical, ...> => class<`data.frame`>;
 type `bayesclass` <class<`mlbench`, `mlbench.2dnormals`>> => class<`factor`>;
 type `bayesclass.mlbench.2dnormals` <class<`mlbench`, `mlbench.2dnormals`>> => class<`factor`>;
-type `cassinib` <double, double, double> => double[];
-type `circle` <double, double> => double;
-type `filter` <character[]> => logical[];
-type `FUN` <double[]> => double;
 type `hypercube` <double> => class<`matrix`>;
 type `mlbench.1spiral` <double, double, double> => class<`matrix`>;
 type `mlbench.2dnormals` <double, double, double, double> => class<`mlbench`, `mlbench.2dnormals`>;

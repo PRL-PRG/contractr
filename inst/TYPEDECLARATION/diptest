@@ -1,0 +1,7 @@
+type `:::` <..., character> => class<`matrix`>;
+type `aLine` <class<`dip`>, character, character, character, double, ...> => null;
+type `dip` <double[], character | logical, logical, double> => (class<`dip`> | double);
+type `dip.test` <double[], logical, double> => class<`htest`>;
+type `getCM` <integer[], integer[], integer> => list<integer[]>;
+type `plot.dip` <class<`dip`>, logical, character, character, character, character, character, logical, logical, ...> => null;
+type `rdRDS` <..., character> => class<`matrix`>;

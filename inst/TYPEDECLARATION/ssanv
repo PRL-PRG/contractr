@@ -1,0 +1,6 @@
+type `find.calibrated.beta` <double, double, any> => double;
+type `ss.fromdata.neff` <double, double, double, double, double, double, double, null, character[], double, double, double> => class<`power.htest`>;
+type `ss.fromdata.nvar` <double, double, null, double, double, double, double, double, double, character[]> => class<`power.htest`>;
+type `ss.fromdata.pois` <double, double, double, double, double, double, double, null, character[], double, double> => class<`power.htest`>;
+type `ss.nonadh` <double | null, double | null, null | double, double, double, double, double, double, double, double, double, character[], character | null, any> => class<`power.htest`>;
+type `uniroot.integer` <class<`function`>, double[], double, double, double, logical, logical, logical, double, ...> => list<double>;

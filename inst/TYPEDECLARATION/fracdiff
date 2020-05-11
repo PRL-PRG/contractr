@@ -1,11 +1,9 @@
 type `coef.fracdiff` <class<`fracdiff`>, ...> => double[];
 type `confint.fracdiff` <class<`fracdiff`>, any, double, ...> => class<`matrix`>;
-type `diffserie0` <double[], double> => double[];
 type `diffseries` <double[], double> => double[];
 type `.fdcov` <double[], double, any, double, double, class<`matrix`>, double[]> => list<any>;
 type `fdGPH` <double[], double> => list<double>;
 type `fdSperio` <double[], double, double> => list<double>;
-type `filter` <character[]> => logical[];
 type `fracdiff` <double[], double, double, null | ^logical[], null, double | null, double[], any, double, double> => class<`fracdiff`>;
 type `fracdiff.sim` <double, double[] | null, double[] | null, double, class<`function`>, double[], double | null, logical, logical, double[], ..., double> => list<double[] | double[] | null>;
 type `fracdiff.var` <double[], class<`fracdiff`>, double> => class<`fracdiff`>;

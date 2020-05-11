@@ -1,11 +1,8 @@
-type `[[` <class<`assertError`, `condition`, `error`, `simpleError`>> => logical;
 type `%||%` <class<`function`> | null | integer[], any> => (class<`function`> | integer[] | null);
 type `are_equal` <double, double, ...> => logical;
 type `assertError` <character, null> => class<`assertError`, `condition`, `error`, `simpleError`>;
 type `assert_that` <..., environment, null> => any;
 type `check_result` <logical> => logical;
-type `fail` <class<`call`>, environment> => character | <class<`call`>, any> => character | <class<`call`>, environment> => character | <class<`call`>, any> => character | <class<`call`>, any> => character | <class<`call`>, environment> => character | <class<`call`>, any> => character | <class<`call`>, environment> => character | <class<`call`>, any> => character | <class<`call`>, environment> => character | <class<`call`>, any> => character | <class<`call`>, any> => character | <class<`call`>, any> => character;
-type `filter` <character[]> => logical[];
 type `get_message` <logical, class<`call`>, any> => character;
 type `%has_args%` <class<`function`>, character> => logical;
 type `has_args` <class<`function`>, character, logical> => logical;

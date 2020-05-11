@@ -1,4 +1,3 @@
-type `$` <character, ...> => class<`Item`, `R6`> | <character[], ...> => list<class<`Item`, `R6`>> | <null> => character[] | <character, class<`Item`, `R6`> | class<`R6ClassGenerator`>, ..., character[]> => class<`Dictionary`, `R6`>;
 type `as_factor` <class<`factor`>, character[], logical> => class<`factor`>;
 type `as_short_string` <list<any>, integer, character> => character;
 type `check_packages_installed` <character[], logical, character> => any;
@@ -19,10 +18,7 @@ type `distinct_values.logical` <logical, logical, logical> => logical[];
 type `encapsulate` <character, class<`function`>, list<double>, list<any>, character[], double> => list<double | class<`data.frame`, `data.table`>>;
 type `enframe` <integer[], character, character> => class<`data.frame`, `data.table`>;
 type `extract_vars` <class<`formula`>> => list<character[]>;
-type `filter` <character[]> => logical[];
 type `formulate` <character | null, character[], null> => class<`formula`>;
-type `fun` <any, character> => logical;
-type `FUN` <character, ...> => class<`Item`, `R6`> | <character> => logical | <list<double>> => list<double> | <character[]> => character[] | <class<`condition`, `message`, `simpleMessage`>> => list<character> | <integer> => (character[] | double[] | list<character[]>) | <character | double | integer[] | null> => character | <class<`formula`>> => character;
 type `get_constructor_formals` <class<`R6ClassGenerator`>> => character[];
 type `get_seed` < > => integer[];
 type `has_element` <list<double>, double> => logical;
@@ -66,7 +62,6 @@ type `str_collapse` <character[], character, character, double, character> => ch
 type `str_indent` <character, character, double, integer, ...> => character[];
 type `str_trunc` <character, double, character> => character;
 type `str_wrap` <character, double> => character;
-type `.subset2` < > => environment;
 type `topo_sort` <class<`data.frame`, `data.table`>> => class<`data.frame`, `data.table`>;
 type `transpose_list` <class<`data.frame`> | list<list<double>>> => list<list<double | class<`factor`> | double>>;
 type `unnest` <class<`data.frame`, `data.table`>, character, null> => class<`data.frame`, `data.table`>;

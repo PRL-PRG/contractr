@@ -1,10 +1,5 @@
-type `$` <character, character, any, any> => character[];
 type `as_function` <class<`{`>, environment, environment, ...> => class<`function`>;
-type `filter` <character[]> => logical[];
 type `findGlobals` <class<`{`>, environment, ..., null, character[], character, logical, any, logical> => character[];
-type `find_globals_t` <class<`{`>, environment, ..., logical> => character[] | <class<`{`>, environment, ..., logical> => character[];
-type `fun` <any, character> => logical[];
-type `FUN` <environment> => character;
 type `getOption` <character, logical> => logical;
 type `[.Globals` <class<`Globals`, `list`>, logical[]> => class<`Globals`, `list`>;
 type `globalsByName` <character[], environment, any, ...> => class<`Globals`, `list`>;

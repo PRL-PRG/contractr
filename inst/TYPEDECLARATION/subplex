@@ -1,0 +1,1 @@
+type `subplex` <any, double | class<`function`> | character, list<any>, logical, ...> => any;

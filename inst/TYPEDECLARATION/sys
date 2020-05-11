@@ -4,6 +4,5 @@ type `exec_internal` <character, null, null, logical, double> => list<integer | 
 type `exec_status` <integer, logical> => integer;
 type `execute` <character, character[] | null, class<`function`> | logical, class<`function`> | logical, null | character, logical, double> => integer;
 type `exec_wait` <character, character[] | null, class<`connection`, `terminal`> | class<`connection`, `rawConnection`>, class<`connection`, `terminal`> | class<`connection`, `rawConnection`>, null | character, double> => integer;
-type `filter` <character[]> => logical[];
 type `rbin` < > => character;
 type `r_wait` <character[], class<`connection`, `terminal`>, class<`connection`, `terminal`>, null | character> => integer;

@@ -1,5 +1,3 @@
-type `filter` <character[]> => logical[];
-type `FUN` <...> => list<any> | <integer> => class<`rematch_allrecords`> | <integer[]> => logical | <integer> => list<character[] | integer[] | character | integer> | <integer> => list<character | integer> | <integer> => list<character[]> | <integer> => character[] | <integer> => list<character | integer> | <integer> => class<`rematch_records`>;
 type `re_exec` <character[], character, logical, ...> => class<`data.frame`, `tbl`, `tbl_df`>;
 type `re_exec_all` <character[], character, logical, ...> => class<`data.frame`, `tbl`, `tbl_df`>;
 type `re_match` <character[], character, logical, ...> => class<`data.frame`, `tbl`, `tbl_df`>;

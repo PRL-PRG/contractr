@@ -1,0 +1,16 @@
+type `assert_01` <double[]> => null;
+type `assert_all` <double[], double> => null;
+type `assert_args` <class<`function`>, character> => null;
+type `assert_class` <class<`function`>, character> => null;
+type `assert_dir` <character> => null;
+type `assert_exist` <character> => null;
+type `assert_ext` <character, character> => null;
+type `assert_int` <double[]> => null;
+type `assert_lengths` <...> => null;
+type `assert_multiple` <integer[]> => null;
+type `assert_nodots` < > => null;
+type `assert_noexist` <character> => null;
+type `assert_nona` <integer[]> => null;
+type `assert_sorted` <integer[], logical> => null;
+type `assert_type` <integer[], character> => null;
+type `printf` <...> => null;

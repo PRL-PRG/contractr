@@ -1,7 +1,6 @@
 type `blue2green` <double> => character[];
 type `blue2red` <double> => character[];
 type `blue2yellow` <double> => character[];
-type `filter` <character[]> => logical[];
 type `green2red` <double> => character[];
 type `primary.colors` <double, double, logical> => character[];
 type `rgb.tables` <double, double[], double[], double[]> => character[];

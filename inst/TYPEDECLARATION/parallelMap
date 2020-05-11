@@ -1,7 +1,5 @@
 type `assignInFunctionNamespace` <class<`function`>, list<any>, environment> => null;
 type `checkResultsAndStopWithErrorsMessages` <list<integer>> => null;
-type `filter` <character[]> => logical[];
-type `fun` <any, any> => logical;
 type `getExtraPackages` <character> => character[];
 type `getPMDefOptCpus` <any> => null;
 type `getPMDefOption` <character, character | logical | null> => (character | logical | null);

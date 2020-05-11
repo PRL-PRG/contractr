@@ -1,7 +1,4 @@
 type `::` <class<`data.frame`> | double[] | list<^double[] | character[] | double[]>, any, character, double[] | null, null | double[]> => list<^double[]>;
-type `auto.format` <double[]> => character[];
-type `filter` <character[]> => logical[];
 type `.Last.projection` <any> => list<character | double[] | character | null | double[]>;
 type `map.grid` <class<`map`>, double, double, logical, logical, double, double, double, double, ...> => null;
 type `mapproject` <class<`data.frame`> | double[] | list<^double[] | character[] | double[]>, any, character, double[] | null, null | double[]> => list<^double[]>;
-type `pretty.range` <double[], ...> => double[];

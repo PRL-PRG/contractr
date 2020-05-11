@@ -39,14 +39,12 @@ type `file_temp` <character, character, character> => class<`character`, `fs_pat
 type `file_temp_pop` < > => (class<`character`, `fs_path`> | null);
 type `file_temp_push` <character[]> => class<`character`, `fs_path`>;
 type `file_touch` <character, character, class<`POSIXct`, `POSIXt`>> => class<`character`, `fs_path`>;
-type `filter` <character[]> => logical[];
 type `fs_bytes` <class<`fs_bytes`, `numeric`> | character[]> => class<`fs_bytes`, `numeric`>;
 type `[.fs_path` <class<`character`, `fs_path`>, double | integer[]> => class<`character`, `fs_path`>;
 type `==.fs_perms` <class<`fs_perms`, `integer`>, character> => logical;
 type `&.fs_perms` <class<`fs_perms`, `integer`>, character | class<`fs_perms`, `integer`>> => class<`fs_perms`, `integer`>;
 type `fs_perms` <character[] | class<`fs_perms`, `integer`> | double[], ...> => class<`fs_perms`, `integer`>;
-type `fun` <...> => null;
-type `FUN` <character[]> => class<`character`, `fs_path`> | <character[] | class<`character`, `fs_path`>> => character[] | <character> => class<`character`, `fs_path`> | <character[] | list<character[]>> => class<`character`, `fs_path`> | <character[]> => character[];
+type `FUN` <character[] | list<character[]>> => class<`character`, `fs_path`>;
 type `getmode_` <character, double> => integer;
 type `group_ids` < > => class<`data.frame`>;
 type `groups_` < > => class<`data.frame`>;

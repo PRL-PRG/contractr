@@ -1,7 +1,6 @@
 type `.code.to.na` <class<`matrix`>, double> => class<`matrix`>;
 type `da.norm` <list<class<`matrix`> | double[]>, double[], any, double, logical, logical> => double[];
 type `em.norm` <list<class<`matrix`> | double[]>, any, logical, double, double, any> => double[];
-type `filter` <character[]> => logical[];
 type `getparam.norm` <list<class<`matrix`> | double[]>, double[], logical> => list<double[] | class<`matrix`>>;
 type `imp.norm` <list<class<`matrix`> | double[]>, double[], class<`matrix`>> => class<`matrix`>;
 type `loglik.norm` <list<class<`matrix`> | double[]>, double[]> => double;

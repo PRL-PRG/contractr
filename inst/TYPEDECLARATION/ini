@@ -1,5 +1,2 @@
-type `filter` <character[]> => logical[];
-type `index` <character, character> => integer;
 type `read.ini` <character, character> => list<list<character>>;
-type `trim` <character> => character;
 type `write.ini` <list<list<character>>, character, character> => null;

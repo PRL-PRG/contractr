@@ -7,5 +7,3 @@ type `afill<-` <class<`array`> | class<`matrix`>, ..., logical, logical, class<`
 type `afill<-.default` <class<`array`> | class<`matrix`>, ..., logical, logical, class<`matrix`>> => any;
 type `asub` <class<`array`> | class<`matrix`> | integer[], double | integer[] | list<any>, any, logical | null, ...> => (class<`array`> | class<`matrix`> | integer[]);
 type `asub.default` <class<`array`> | class<`matrix`> | integer[], double | integer[] | list<any>, double[], logical | null, ...> => (class<`array`> | class<`matrix`> | integer[]);
-type `filter` <character[]> => logical[];
-type `FUN` <any> => logical | <class<`array`> | class<`data.frame`> | class<`matrix`> | double[]> => integer;

@@ -1,0 +1,2 @@
+type `geom_bar_text` <null, null, character, character, logical, null, logical, class<`unit`>, class<`unit`>, double, character, logical, logical, null, null, null, null, null, null, logical> => class<`Layer`, `LayerInstance`, `gg`, `ggproto`>;
+type `geom_fit_text` <null, null, character, character, logical, null, logical, class<`unit`>, class<`unit`>, double, character, logical, logical, logical, null, null, null, null, null, null> => class<`Layer`, `LayerInstance`, `gg`, `ggproto`>;

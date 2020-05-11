@@ -6,12 +6,10 @@ type `dtw` <class<`crossdist`> | class<`matrix`> | class<`ts`> | double[], null 
 type `dtwPlot` <class<`dtw`>, character, ...> => (null | list<character | double[] | null>);
 type `dtwPlotAlignment` <class<`dtw`>, character, character, character, ...> => null;
 type `dtwPlotDensity` <class<`dtw`>, logical, character, character, ...> => null;
-type `dtwPlotThreeWay` <class<`dtw`>, null, null, character, character, integer[] | null, double, double, double, character, character, character> => list<character | double[] | null>;
+type `dtwPlotThreeWay` <class<`dtw`>, null, null, character, character, integer[] | null, double, double, double, character, character, character, ...> => list<character | double[] | null>;
 type `dtwPlotTwoWay` <class<`dtw`>, null, null, double, character, double, double | integer[] | null, character, double, character, character, ...> => list<character | double[] | null>;
 type `dtwWindow.plot` <class<`function`>, double, double, ...> => null;
 type `.extractpattern` <class<`matrix`> | class<`stepPattern`>, integer> => class<`matrix`>;
-type `filter` <character[]> => logical[];
-type `fun` <class<`matrix`>, class<`matrix`>, double, double, double, ...> => class<`matrix`> | <class<`matrix`>, class<`matrix`>, double, ...> => class<`matrix`> | <any, any> => character | <class<`matrix`>, class<`matrix`>, double, double, ...> => class<`matrix`>;
 type `globalCostMatrix` <class<`matrix`> | class<`crossdist`>, class<`stepPattern`>, class<`function`>, logical, null | class<`matrix`>, ...> => list<class<`matrix`> | class<`stepPattern`>>;
 type `is.dtw` <class<`dtw`>> => logical;
 type `is.stepPattern` <class<`stepPattern`>> => logical;
@@ -29,4 +27,3 @@ type `.RJtypeIV` <character, logical> => class<`matrix`>;
 type `stepPattern` <double[] | class<`matrix`>, null> => class<`stepPattern`>;
 type `warp` <class<`dtw`>, logical> => double[];
 type `warpArea` <class<`dtw`>> => double;
-type `window.function` <class<`matrix`>, class<`matrix`>, double, ...> => class<`matrix`> | <class<`matrix`>, class<`matrix`>, double, double, ...> => class<`matrix`> | <any, any, ...> => logical;

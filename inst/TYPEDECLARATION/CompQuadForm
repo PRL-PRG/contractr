@@ -1,6 +1,4 @@
 type `davies` <double, double[], double[], double[], double, double, double> => list<double[]>;
 type `farebrother` <double, double[], double[], double[], double, double, double> => list<double>;
-type `filter` <character[]> => logical[];
-type `fun` <character, character> => class<`DLLInfo`>;
 type `imhof` <double, double[], double[], double[], double, double, double> => list<double>;
 type `liu` <double, double[], double[], double[]> => double;

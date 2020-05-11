@@ -1,5 +1,3 @@
-type `::` <class<`profile`, `profile.nls`> | class<`data.frame`> | class<`formula`>, ...> => null;
-type `doaxis` <double, logical> => double[];
 type `ellipse` <class<`arima0`> | class<`glm`, `lm`> | class<`lm`> | class<`matrix`> | class<`nls`> | class<`profile`, `profile.glm`> | class<`profile`, `profile.nls`> | double, ...> => class<`matrix`>;
 type `ellipse.arima0` <class<`arima0`>, double[], double, double, ...> => class<`matrix`>;
 type `ellipse.default` <class<`matrix`> | double, any, double[], double, double, any, double, ...> => class<`matrix`>;
@@ -9,14 +7,6 @@ type `ellipse.nls` <class<`nls`>, character[] | integer[], double, double, ...> 
 type `ellipse.profile` <class<`profile`, `profile.glm`> | class<`profile`, `profile.nls`>, integer[] | character[], any, double, double, ...> => class<`matrix`>;
 type `ellipse.profile.glm` <class<`profile`, `profile.glm`>, integer[], double, any, double, any, ...> => class<`matrix`>;
 type `ellipse.profile.nls` <class<`profile`, `profile.nls`>, character[] | integer[], double, double, double, ...> => class<`matrix`>;
-type `filter` <character[]> => logical[];
-type `FUN` <class<`data.frame`>> => double[];
-type `getad` <double, double> => double[];
-type `myapprox` <double[], double[], double[]> => double[];
-type `pairs` <class<`profile`, `profile.nls`> | class<`data.frame`> | class<`formula`>, ...> => null;
-type `pairs.default` <class<`data.frame`>, ...> => null;
-type `pairs.formula` <class<`formula`>, any, ..., any, class<`function`>> => null;
+type `pairs` <class<`data.frame`> | class<`formula`>, ...> => null;
 type `pairs.profile` <class<`profile`, `profile.nls`>, character[], class<`function`>, logical, logical, logical, logical, logical, double, ...> => null;
-type `plotcorr` <class<`matrix`>, logical, character[], logical, character[], logical, character, logical, character, character, double, double> => null;
-type `plotcorrInternal` < > => null;
-type `setup` <^double[], ^double[], ...> => null;
+type `plotcorr` <class<`matrix`>, logical, character[], logical, character[], logical, character, logical, character, character, double, double, any, double[], ...> => null;

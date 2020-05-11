@@ -1,4 +1,3 @@
-type `:::` <class<`simple_triplet_matrix`>, class<`matrix`>> => class<`matrix`>;
 type `abind_simple_sparse_array` <..., integer> => class<`simple_sparse_array`>;
 type `as.array.simple_sparse_array` <class<`simple_sparse_array`>, ...> => (class<`array`> | class<`matrix`>);
 type `as.array.simple_triplet_matrix` <class<`simple_triplet_matrix`>, ...> => class<`matrix`>;
@@ -13,7 +12,6 @@ type `as.simple_triplet_matrix.matrix` <class<`matrix`>> => class<`simple_triple
 type `as.simple_triplet_matrix.simple_sparse_array` <class<`simple_sparse_array`>> => class<`simple_triplet_matrix`>;
 type `as.vector.simple_sparse_array` <class<`simple_sparse_array`>, character> => (double[] | null);
 type `as.vector.simple_triplet_matrix` <class<`simple_triplet_matrix`>, character> => double[];
-type `cbind` <..., integer> => class<`simple_triplet_matrix`>;
 type `colapply_simple_triplet_matrix` <class<`simple_triplet_matrix`>, class<`function`>, ...> => any;
 type `col_means` <class<`matrix`> | class<`simple_triplet_matrix`>, logical, double, ...> => ^double[];
 type `col_means.default` <class<`matrix`>, logical, double, ...> => ^double[];
@@ -34,18 +32,13 @@ type `dim<-.simple_triplet_matrix` <class<`simple_triplet_matrix`>, double[]> =>
 type `dim.simple_triplet_matrix` <class<`simple_triplet_matrix`>> => integer[];
 type `drop_simple_sparse_array` <class<`simple_sparse_array`>> => (class<`simple_sparse_array`> | integer[]);
 type `extend_simple_sparse_array` <class<`simple_sparse_array`>, integer[]> => class<`simple_sparse_array`>;
-type `f` <class<`simple_triplet_matrix`>, class<`simple_triplet_matrix`>> => class<`simple_triplet_matrix`> | <class<`simple_triplet_matrix`>, class<`simple_triplet_matrix`>> => class<`simple_triplet_matrix`>;
-type `filter` <character[]> => logical[];
-type `FUN` <class<`matrix`> | class<`simple_sparse_array`> | class<`simple_triplet_matrix`>> => class<`simple_triplet_matrix`> | <double[]> => (double | logical[] | null) | <class<`matrix`> | double[]> => (^double[] | null | list<logical[]>) | <class<`matrix`> | double[], class<`matrix`> | double[]> => any | <integer[]> => null;
+type `FUN` <class<`matrix`> | class<`simple_sparse_array`> | class<`simple_triplet_matrix`>> => class<`simple_triplet_matrix`>;
 type `is.numeric.simple_triplet_matrix` <class<`simple_triplet_matrix`>> => logical;
 type `is.simple_sparse_array` <class<`simple_sparse_array`>> => logical;
 type `is.simple_triplet_matrix` <class<`matrix`> | class<`simple_sparse_array`> | class<`simple_triplet_matrix`> | ^double[]> => logical;
-type `.make_dimnames` <class<`simple_triplet_matrix`>, class<`matrix`> | class<`simple_triplet_matrix`>> => null;
 type `matprod_simple_triplet_matrix` <class<`matrix`> | class<`simple_triplet_matrix`>, class<`simple_triplet_matrix`> | class<`matrix`>> => class<`matrix`>;
 type `.means_simple_triplet_matrix` <class<`simple_triplet_matrix`>, integer, logical> => ^double[];
 type `Ops.simple_triplet_matrix` <class<`matrix`> | class<`simple_triplet_matrix`>, any> => class<`simple_triplet_matrix`>;
-type `rbind` <..., integer> => class<`simple_triplet_matrix`>;
-type `.reduce` <class<`simple_triplet_matrix`>> => class<`simple_triplet_matrix`>;
 type `reduce_simple_sparse_array` <class<`simple_sparse_array`>, logical, logical> => class<`simple_sparse_array`>;
 type `rollup` <class<`array`> | class<`matrix`> | class<`simple_sparse_array`> | class<`simple_triplet_matrix`>, integer[], any, any, ...> => (class<`array`> | class<`matrix`> | class<`simple_sparse_array`> | class<`simple_triplet_matrix`>);
 type `rollup.array` <class<`array`> | class<`matrix`>, integer[], null | ^double[] | list<double[]>, class<`function`>, ..., logical, character> => (class<`array`> | class<`matrix`>);
@@ -71,7 +64,6 @@ type `simple_triplet_matrix` <double[], double[], ^complex[], double, double, nu
 type `simple_triplet_zero_matrix` <double, double, character> => class<`simple_triplet_matrix`>;
 type `slam_options` <any, any> => (double | list<double>);
 type `split.simple_triplet_matrix` <class<`simple_triplet_matrix`>, ^double[], logical, double, ...> => list<class<`simple_triplet_matrix`>>;
-type `spos` <class<`matrix`>> => double[];
 type `.stm_as_subscript` <class<`matrix`> | class<`simple_triplet_matrix`> | class<`simple_sparse_array`> | ^double[], any, logical, ...> => any;
 type `tcrossapply_simple_triplet_matrix` <class<`matrix`> | class<`simple_triplet_matrix`>, class<`simple_triplet_matrix`>, class<`function`>, ...> => class<`matrix`>;
 type `.tcrossprod_bailout` <class<`simple_triplet_matrix`>, class<`matrix`> | class<`simple_triplet_matrix`> | null, logical> => class<`matrix`>;

@@ -1,0 +1,5 @@
+type `all_equal` <double[] | list<integer[]>, null | double[] | class<`matrix`>> => logical;
+type `extend_char_vec` <character[] | integer[], null | double, double | null> => character[];
+type `group_close` <double[], double> => list<double[]>;
+type `put_in_pos` <character[] | integer[], double[]> => character[];
+type `remove_filename_spaces` <character, character, character> => logical[];

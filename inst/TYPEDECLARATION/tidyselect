@@ -1,5 +1,3 @@
-type `::` <character[], ..., character[], character[], logical> => any;
-type `[[` <class<`condition`, `error`, `rlang_error`, `vctrs_error_subscript`, `vctrs_error_subscript_oob`>> => any;
 type `all_of` <character[]> => character[];
 type `any_of` <character[], ..., character[]> => integer;
 type `are_empty_name` <character[]> => logical[];
@@ -28,11 +26,7 @@ type `eval_slash` <class<`call`>, environment, environment> => integer;
 type `eval_sym` <class<`name`>, environment, any, logical> => integer;
 type `everything` <character[]> => integer[];
 type `expr_kind` <class<`call`> | class<`name`> | integer[]> => character;
-type `.f` <character, character[], ...> => integer[] | <character, character[]> => integer[] | <character, character[], integer[]> => integer[] | <integer> => integer;
-type `filter` <character[]> => logical[];
 type `flat_map_int` <character[], class<`function`>, ...> => integer[];
-type `.fn` <..., any, any, character[]> => logical;
-type `fun` <...> => null;
 type `instrument_base_errors` <any> => any;
 type `is_character` <character[], null> => logical;
 type `is_data_dups` <integer> => logical;
