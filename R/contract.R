@@ -4,6 +4,11 @@ get_contracts <- function() {
 }
 
 #' @export
+clear_contracts <- function() {
+    .Call(C_clear_contracts)
+}
+
+#' @export
 capture_contracts <- function(code, separate = TRUE) {
     stopifnot(is_scalar_logical(separate))
     .Call(C_enable_contracts)
