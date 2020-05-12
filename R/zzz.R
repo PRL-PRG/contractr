@@ -5,12 +5,13 @@
     set_autoinject()
 
     handle_package <- function(package_name, ...) {
-        if (should_autoinject()) {
+        autoinject_packages <- get_autoinject()
+        if (package_name %in% autoinject_packages || any(autoinject_packages == "all")) {
             tryCatch(
                 fun_names <- insert_package_contract(package_name),
                 error = function(e) {
                     expected_message <- sprintf("there is no package called '%s'", package_name)
-                    if(length(grep(expected_message, e$message)) == 1) {
+                    if (length(grep(expected_message, e$message)) == 1) {
                         message(expected_message)
                     }
                     else {

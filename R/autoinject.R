@@ -4,18 +4,18 @@ set_autoinject <- function(autoinject) {
     if (missing(autoinject)) {
         autoinject <- getOption("contractr.autoinject")
         if (is.null(autoinject)) {
-            autoinject <- TRUE
+            autoinject <- "all"
         }
     }
 
-    if (!is_scalar_logical(autoinject)) {
-        stop("autoinject should be TRUE or FALSE; not ", autoinject)
+    if (!is_vector_character(autoinject)) {
+        stop("autoinject should be 'all' or vector of package names, not ", autoinject)
     }
 
     .state$autoinject <- autoinject
 }
 
 #' @export
-should_autoinject <- function() {
+get_autoinject <- function() {
     .state$autoinject
 }
