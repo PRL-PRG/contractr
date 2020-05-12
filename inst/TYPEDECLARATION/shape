@@ -1,7 +1,6 @@
 type `Arrowhead` <double[], double[], double[], double[], any, double, character, character | integer[], double, character[] | integer[], double, double, ...> => null;
 type `Arrows` <double[], double[], double[], double[], double, double[], any, double, character, logical, character, any, double, any, double, double, ...> => null;
 type `colorlegend` <character[], double[], double | null, double | null, null | double[], logical, double[], double[], null | character, double, character, character, double, logical, ...> => list<double[]>;
-type `color.palette` <double, double[]> => character[] | <double> => character[];
 type `cylindersegment` <double, double, double, double, double, double[], double, double, character, double, ...> => null;
 type `drapecol` <class<`matrix`>, character[], character, null> => character[];
 type `emptyplot` <double[], double[], double, logical, character | null, ...> => null;
@@ -22,5 +21,5 @@ type `rotatexy` <class<`matrix`> | double[], double, class<`matrix`> | double[],
 type `roundrect` <double[], double, double, double, double, character[] | integer, character, double, double, ...> => null;
 type `shadepalette` <double, character, character, double[]> => character[];
 type `textflag` <double[], double, double, double, double, character[], character, character, double, double, character, logical, character | null, ...> => null;
-type `val2col` <class<`matrix`> | null, any, character[] | double> => list<character[] | double[] | character | double[] | double[]>;
+type `val2col` <class<`matrix`> | null, any, character[] | double> => (list<character[] | double[]> | list<character | double[]> | list<double[]>);
 type `writelabel` <character, double, double, double, double, ...> => null;

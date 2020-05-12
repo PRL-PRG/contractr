@@ -1,13 +1,12 @@
-type `::` <any, any> => (double | null);
 type `closepb` <class<`timerProgressBar`, `txtProgressBar`> | class<`txtProgressBar`> | null> => null;
 type `dopb` < > => logical;
 type `getTimeAsString` <double | null> => character;
-type `pbapply` <class<`array`> | class<`matrix`>, integer[] | double, class<`function`>, ..., null | class<`SOCKcluster`, `cluster`>> => (class<`array`> | class<`matrix`> | double[] | list<class<`table`> | integer[]>);
+type `pbapply` <class<`array`> | class<`matrix`>, integer[] | double, class<`function`>, ..., null | class<`SOCKcluster`, `cluster`>> => (class<`array`> | class<`matrix`> | double[] | list<class<`table`>> | list<integer[]>);
 type `pblapply` <character[] | double[] | list<double[]>, class<`function`>, ..., any> => list<any>;
-type `pbmapply` <class<`function`>, ..., null | list<double>, logical, logical> => list<double[] | character>;
+type `pbmapply` <class<`function`>, ..., list<double> | null, logical, logical> => (list<double[]> | list<character>);
 type `pboptions` <...> => list<character | double>;
 type `pbreplicate` <double, any, character, null | class<`SOCKcluster`, `cluster`> | integer> => (class<`matrix`> | double[]);
-type `pbsapply` <double[] | character[] | list<double[]>, class<`function`>, ..., character | logical, logical, null | class<`SOCKcluster`, `cluster`> | integer> => (class<`array`> | class<`matrix`> | double[] | list<any>);
+type `pbsapply` <double[] | list<double[]> | character[], class<`function`>, ..., character | logical, logical, null | class<`SOCKcluster`, `cluster`> | integer> => (class<`array`> | class<`matrix`> | double[] | list<any>);
 type `pbtypes` < > => character[];
 type `setpb` <any, any> => (double | null);
 type `splitpb` <double, double, null | double> => list<integer[]>;

@@ -1,5 +1,5 @@
 type `colors_discrete_drwhy` <integer> => character;
-type `explain` <class<`glm`, `lm`> | class<`lm`> | class<`ranger`>, class<`data.frame`> | null, null | double[], class<`function`> | null, null, null, ..., null | character, logical, logical, logical, null | list<character>, null> => class<`explainer`>;
+type `explain` <class<`glm`, `lm`> | class<`lm`> | class<`ranger`>, class<`data.frame`> | null, null | double[], class<`function`> | null, null, null, ..., null | character> => class<`explainer`>;
 type `get_pkg_ver_safe` <character> => character;
 type `is_y_in_data` <class<`data.frame`>, double[]> => logical;
 type `model_diagnostics` <class<`explainer`>, null, ...> => class<`data.frame`, `model_diagnostics`>;

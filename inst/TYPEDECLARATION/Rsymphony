@@ -1,7 +1,0 @@
-type `filter` <character[]> => logical[];
-type `glp_bounds` <list<any>, integer> => class<`bound_table`, `data.frame`>;
-type `glp_bounds_check_sanity` <list<double[]>, integer> => null;
-type `glp_fix_bound_type` <class<`bound_table`, `data.frame`>> => class<`bound_table`, `data.frame`>;
-type `make_csc_matrix` <class<`matrix`>> => list<double[]>;
-type `make_csc_matrix.matrix` <class<`matrix`>> => list<double[]>;
-type `Rsymphony_solve_LP` <double[], class<`matrix`>, character[], double[], null | list<list<double[]>>, character[] | null, logical, double, double, double, double, logical> => list<double[]>;

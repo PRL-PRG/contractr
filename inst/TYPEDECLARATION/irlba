@@ -1,10 +1,10 @@
 type `convtests` <any, double, double, list<double[] | class<`matrix`>>, class<`matrix`>, double, double, double[] | null, double, any, any, any> => list<double>;
 type `cross` <class<`matrix`> | complex[], any> => class<`matrix`>;
-type `irlba` <class<`matrix`> | class<`dgCMatrix`> | class<`dgTMatrix`> | class<`scaled_matrix`> | class<`dgeMatrix`> | class<`lgCMatrix`>, double, double, double, double, logical, double, double[] | null | list<double[] | class<`matrix`>>, logical, logical, null | double[], null | double[], null | double, null, any, any, logical, ...> => list<any>;
+type `irlba` <class<`matrix`> | class<`dgCMatrix`> | class<`dgTMatrix`> | class<`scaled_matrix`> | class<`dgeMatrix`> | class<`lgCMatrix`>, double, double, double, double, logical, double, double[] | null | list<double[] | class<`matrix`>>, logical, logical, null | double[], null | double[], null | double, null, any, any> => list<any>;
 type `norm2` <class<`matrix`> | complex[]> => double;
 type `orthog` <class<`matrix`> | complex[], class<`matrix`> | complex[]> => class<`matrix`>;
 type `partial_eigen` <class<`matrix`>, double, logical, ...> => list<class<`matrix`> | double[]>;
 type `prcomp_irlba` <class<`matrix`>, double, logical, logical, logical, ...> => class<`irlba_prcomp`, `prcomp`>;
-type `ssvd` <class<`matrix`>, double, double[], double, double, logical, logical, double, null, ...> => list<class<`matrix`> | double[] | class<`matrix`> | double>;
+type `ssvd` <class<`matrix`>, double, double[], double, double, logical, logical, double, null, ...> => (list<class<`matrix`> | double[]> | list<class<`matrix`> | double>);
 type `summary.irlba_prcomp` <class<`irlba_prcomp`, `prcomp`>, ...> => class<`summary.prcomp`>;
-type `svdr` <class<`dgeMatrix`> | class<`matrix`> | class<`lgCMatrix`>, double, double, integer, double, double[] | null, null, logical> => list<double[] | class<`matrix`> | double[]>;
+type `svdr` <class<`dgeMatrix`> | class<`matrix`> | class<`lgCMatrix`>, double, double, integer, double, double[] | null, null, logical> => (list<double[] | class<`matrix`>> | list<double[]>);

@@ -48,7 +48,6 @@ type `format.git_reference` <class<`git_reference`>, ...> => character;
 type `format.git_signature` <class<`git_signature`>, ...> => character;
 type `format.git_stash` <class<`git_commit`, `git_stash`>, ...> => character;
 type `format.git_tag` <class<`git_tag`>, ...> => character;
-type `FUN` <class<`git_branch`>> => character | <character, character> => character;
 type `get_refspec` <class<`git_repository`>, character[] | null, any, list<logical>> => any;
 type `get_upstream_name` <class<`git_branch`>> => any;
 type `git_config_files` <character | class<`git_repository`> | double | null> => class<`data.frame`>;

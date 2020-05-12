@@ -1,4 +1,4 @@
-type `DEoptim` <class<`function`>, double[], double[], list<double | double | null | list<any>>, ..., null> => class<`DEoptim`>;
-type `DEoptim.control` <double, double, logical, double | null, double, double, double, logical, null, double, double, double, double, any, any, double, null, null, null, list<any>> => list<double | null | list<any>>;
+type `DEoptim` <class<`function`>, double[], double[], list<double> | list<double | null | list<any>>, ..., null> => class<`DEoptim`>;
+type `DEoptim.control` <double, double, logical, double | null, double, double, double, logical, null, double, double, double, double, any, any, double> => list<double | null | list<any>>;
 type `plot.DEoptim` <class<`DEoptim`>, character[], ...> => null;
 type `summary.DEoptim` <class<`DEoptim`>, ...> => class<`DEoptim`>;

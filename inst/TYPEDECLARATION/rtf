@@ -30,7 +30,6 @@ type `addText` <...> => character;
 type `addText.RTF` <class<`Object`, `RTF`>, ..., logical, logical> => character;
 type `addTrellisObject` <...> => any;
 type `addTrellisObject.RTF` <class<`Object`, `RTF`>, class<`trellis`>, double, double, double, null, ...> => any;
-type `constructor` <character, double, double, double[], double> => class<`Object`, `RTF`>;
 type `.convert` <character[]> => character[];
 type `decreaseIndent` <...> => double;
 type `decreaseIndent.RTF` <class<`Object`, `RTF`>, ...> => double;

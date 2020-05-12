@@ -5,5 +5,5 @@ type `adrop` <class<`array`>, integer[] | double, logical, logical, ...> => any;
 type `adrop.default` <class<`array`>, integer[] | double, logical, logical, ...> => any;
 type `afill<-` <class<`array`> | class<`matrix`>, ..., logical, logical, class<`matrix`>> => any;
 type `afill<-.default` <class<`array`> | class<`matrix`>, ..., logical, logical, class<`matrix`>> => any;
-type `asub` <class<`array`> | class<`matrix`> | integer[], double | integer[] | list<any>, any, logical | null, ...> => (class<`array`> | class<`matrix`> | integer[]);
-type `asub.default` <class<`array`> | class<`matrix`> | integer[], double | integer[] | list<any>, double[], logical | null, ...> => (class<`array`> | class<`matrix`> | integer[]);
+type `asub` <class<`array`> | class<`matrix`> | integer[], double | integer[] | list<double[]> | list<integer[] | double> | list<integer[] | null> | list<null | double> | list<double | character[]> | list<character[]>, any, logical | null, ...> => (class<`array`> | class<`matrix`> | integer[]);
+type `asub.default` <class<`array`> | class<`matrix`> | integer[], double | integer[] | list<double[]> | list<integer[] | double> | list<integer[] | null> | list<null | double> | list<double | character[]> | list<character[]>, double[], logical | null, ...> => (class<`array`> | class<`matrix`> | integer[]);

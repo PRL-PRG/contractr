@@ -1,4 +1,3 @@
-type `:::` <class<`matrix`> | class<`crossdist`>, class<`stepPattern`>, class<`function`>, logical, null | class<`matrix`>, ...> => list<class<`matrix`> | class<`stepPattern`>>;
 type `backtrack` <list<any>> => list<double[]>;
 type `.canonicalizeWindowFunction` <character | class<`function`>> => class<`function`>;
 type `countPaths` <class<`dtw`>, logical> => double;
@@ -20,7 +19,7 @@ type `plot.dtw` <class<`dtw`>, character, ...> => (null | list<character | doubl
 type `plot.stepPattern` <class<`stepPattern`>, ...> => null;
 type `.Pnew` <double, character, logical> => list<double | character>;
 type `print.stepPattern` <class<`stepPattern`>, ...> => null;
-type `.Pstep` <list<double[] | character | double | character>, double, double> => list<double[] | character>;
+type `.Pstep` <list<double[] | character> | list<double | character>, double, double> => list<double[] | character>;
 type `.PtoMx` <list<double[] | character>> => class<`matrix`>;
 type `rabinerJuangStepPattern` <double, character, logical> => class<`stepPattern`>;
 type `.RJtypeIV` <character, logical> => class<`matrix`>;

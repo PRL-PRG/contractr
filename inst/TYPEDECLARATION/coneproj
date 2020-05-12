@@ -14,5 +14,5 @@ type `incr.conv` <double[]> => double[];
 type `makedelta` <class<`matrix`>, double> => class<`matrix`>;
 type `qprog` <class<`matrix`>, class<`matrix`>, class<`matrix`>, double[], null, logical> => class<`coneproj`>;
 type `shapereg` <any, null, null, logical, double> => class<`coneproj`>;
-type `shapereg.fit` <double[], class<`matrix`>, double, class<`matrix`> | null, null, logical, any> => list<double[] | class<`matrix`> | null | double[] | class<`matrix`> | null | double | class<`matrix`>>;
+type `shapereg.fit` <double[], class<`matrix`>, double, class<`matrix`> | null, null, logical, any> => (list<double[] | class<`matrix`>> | list<null | double[] | class<`matrix`>> | list<null | double | class<`matrix`>>);
 type `summary.coneproj` <class<`coneproj`>, ...> => class<`summary.coneproj`>;

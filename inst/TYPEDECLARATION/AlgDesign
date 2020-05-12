@@ -4,5 +4,5 @@ type `gen.factorial` <double[], double, logical, character | integer[], null | c
 type `gen.mixture` <double, double> => class<`data.frame`>;
 type `model.matrix.formula` <class<`formula`>, class<`data.frame`>, ...> => class<`matrix`>;
 type `optBlock` <class<`formula`>, class<`data.frame`> | class<`factor`>, double[], null, class<`data.frame`> | null, logical, double, character, logical> => list<class<`data.frame`> | double[] | list<class<`data.frame`>>>;
-type `optFederov` <class<`formula`>, class<`data.frame`> | class<`matrix`>, any, logical, logical, character, logical, any, logical, double[] | null, double, double, double, double, double, logical> => list<class<`data.frame`> | double[] | double | class<`data.frame`> | integer[]>;
+type `optFederov` <class<`formula`>, class<`data.frame`> | class<`matrix`>, any, logical, logical, character, logical, any, logical, double[] | null, double, double, double, double, double, logical> => (list<class<`data.frame`> | double[]> | list<double | class<`data.frame`> | integer[]>);
 type `optMonteCarlo` <class<`formula`>, class<`data.frame`>, any, logical, character, logical, null, double, null | class<`function`>, logical, double, any, any, double, double, logical> => list<double | class<`data.frame`>>;

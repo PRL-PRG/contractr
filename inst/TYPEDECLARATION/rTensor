@@ -10,7 +10,7 @@ type `.is_zero_tensor` <class<`Tensor`>> => logical;
 type `k_fold` <class<`Tensor`> | class<`matrix`>, double, double[]> => class<`Tensor`>;
 type `khatri_rao` <class<`matrix`>, class<`matrix`>> => class<`matrix`>;
 type `khatri_rao_list` <list<class<`matrix`>>, logical> => class<`matrix`>;
-type `kronecker_list` <list<double[] | class<`matrix`>>> => (class<`array`> | class<`matrix`>);
+type `kronecker_list` <list<double[]> | list<class<`matrix`>>> => (class<`array`> | class<`matrix`>);
 type `k_unfold` <class<`Tensor`>, double> => class<`Tensor`> | <class<`Tensor`>, double> => class<`Tensor`>;
 type `matvec` <class<`Tensor`>> => class<`Tensor`> | <class<`Tensor`>> => class<`Tensor`>;
 type `modeMean` <class<`Tensor`>, double, logical> => class<`Tensor`> | <class<`Tensor`>, double, logical> => class<`Tensor`>;

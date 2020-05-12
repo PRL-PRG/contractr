@@ -1,11 +1,8 @@
 type `checkCredMass` <double> => null;
-type `FUN` <character[] | double[], double, ...> => ^double[];
 type `hdi` <class<`data.frame`> | class<`density`> | class<`function`> | double[], double, ...> => (class<`matrix`> | double[]);
 type `hdi.data.frame` <class<`data.frame`>, double, ...> => class<`matrix`>;
 type `hdi.default` <double[], double, ...> => double[];
 type `hdi.density` <class<`density`>, double, logical, ...> => (class<`matrix`> | double[]);
 type `hdi.function` <class<`function`>, double, any, ...> => double[];
 type `hdiVector` <character[] | double[], double, ...> => ^double[];
-type `ICDF` <double[], class<`function`>, ...> => double[];
 type `inverseCDF` <double[], class<`function`>, ...> => double[];
-type `object` <double[], class<`function`>, ...> => double[];

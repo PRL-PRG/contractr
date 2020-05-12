@@ -1,2 +1,0 @@
-type `auc` <class<`data.frame`>, logical, double, logical> => (class<`data.frame`> | double);
-type `filter` <character[]> => logical[];

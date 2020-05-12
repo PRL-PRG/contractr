@@ -1,9 +1,8 @@
-type `::` <any, null, null, character, any, ...> => any | <any, null, null, character, any, logical, ...> => any;
 type `allocArray` <integer[], double | null, ...> => class<`array`>;
 type `allocMatrix` <integer, integer, double | null, ...> => class<`matrix`>;
 type `allocVector` <double, null | double, ...> => ^double[];
 type `allValue` <^character[] | ^double[], null, character | null | double, logical, ...> => (logical | null);
-type `anyMissing` <class<`AsIs`> | class<`data.frame`> | class<`matrix`> | class<`table`> | ^complex[] | null | raw[] | list<any>, null, ...> => logical;
+type `anyMissing` <class<`AsIs`> | class<`data.frame`> | class<`matrix`> | class<`table`> | ^complex[] | list<null> | null | raw[] | list<^logical[] | complex[] | class<`AsIs`>> | list<^integer[] | complex[] | class<`AsIs`>> | list<^double[] | complex[] | class<`AsIs`>> | list<^complex[] | class<`AsIs`>> | list<complex[] | class<`AsIs`>>, null, ...> => logical;
 type `anyValue` <^character[] | ^double[], null, character | null | double, logical, ...> => (logical | null);
 type `binCounts` <double[] | ^integer[], null, double[], logical, ...> => any;
 type `binMeans` <^double[], ^integer[] | double[], null, double[], logical, logical, logical, ...> => any;
@@ -41,8 +40,6 @@ type `colWeightedSds` <class<`matrix`>, double[], null, null, logical, ...> => ^
 type `colWeightedVars` <class<`matrix`>, double[], null, null, logical, ...> => ^double[];
 type `count` <^character[] | ^double[], null, character | null | double, any, ...> => (integer | null);
 type `diff2` <^double[], null, integer, integer, ...> => (^double[] | null);
-type `fcn` <double[], null, logical, integer, double, ...> => (double | null) | <double[], null, logical, integer, double, ...> => (double | null) | <double[], null, logical, integer, double, double, ...> => (double | null) | <double[], null, logical, integer, double, ...> => (double | null) | <^double[], null | ^double[] | class<`table`>, null, logical, null, ...> => (double | null);
-type `FUN` <double[] | null, null | ^double[], null, logical | null, logical, null | character, ...> => (double | null);
 type `indexByRow` <class<`matrix`> | double[], double[] | null, ...> => any;
 type `iqr` <^double[], null, logical, ...> => (double | null);
 type `iqrDiff` <double[], null, logical, integer, double, ...> => (double | null);

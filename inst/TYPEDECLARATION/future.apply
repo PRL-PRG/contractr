@@ -3,7 +3,7 @@ type `future_by.data.frame` <class<`data.frame`>, class<`factor`>, class<`functi
 type `future_by_internal` <class<`data.frame`>, class<`factor`>, class<`function`>, ..., any, class<`function`>, any, character, character> => any;
 type `future_lapply` <list<class<`data.frame`>>, class<`function`>, ..., logical, null, logical, null, logical, logical, double, null, character> => any;
 type `future_version` < > => class<`numeric_version`, `package_version`>;
-type `future_xapply` <class<`function`>, integer, list<class<`data.frame`>>, list<any>, null, class<`{`>, environment, logical, null, double, null, logical, null, logical, logical, character, class<`function`>, any, any, ...> => any;
+type `future_xapply` <class<`function`>, integer, list<class<`data.frame`>>, list<any>, null, class<`{`>, environment, logical, null, double, null, logical, null, logical> => any;
 type `getGlobalsAndPackagesXApply` <any, list<any>, any, environment, logical, null, logical> => list<class<`FutureGlobals`, `Globals`, `list`> | character | logical>;
 type `getOption` <character, logical | null> => (logical | null);
 type `import_from` <character, any, character> => class<`function`>;

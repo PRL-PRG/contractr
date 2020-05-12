@@ -7,7 +7,7 @@ type `poLCA.posterior` <class<`poLCA`>, class<`matrix`> | double[], class<`matri
 type `poLCA.predcell` <class<`poLCA`>, class<`data.frame`> | class<`matrix`> | double[]> => class<`matrix`>;
 type `poLCA.probHat.C` <class<`matrix`>, class<`matrix`>, list<double[]>> => double[];
 type `poLCA.reorder` <list<class<`matrix`>>, integer[]> => list<class<`matrix`>>;
-type `poLCA.se` <class<`matrix`>, any, list<class<`matrix`>>, class<`matrix`>, class<`matrix`>> => list<double[] | class<`matrix`> | list<class<`matrix`>> | null | list<class<`matrix`>>>;
+type `poLCA.se` <class<`matrix`>, any, list<class<`matrix`>>, class<`matrix`>, class<`matrix`>> => (list<double[] | class<`matrix`> | list<class<`matrix`>>> | list<null | list<class<`matrix`>>>);
 type `poLCA.simdata` <double, null | list<class<`matrix`>>, double, double, null, null, double, class<`matrix`> | null, null | double[], logical, null> => list<any>;
 type `poLCA.table` <class<`formula`>, list<any>, class<`poLCA`>> => class<`matrix`>;
 type `poLCA.unvectorize` <list<double[]>> => list<class<`matrix`>>;

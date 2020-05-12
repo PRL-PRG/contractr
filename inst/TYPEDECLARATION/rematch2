@@ -2,5 +2,5 @@ type `re_exec` <character[], character, logical, ...> => class<`data.frame`, `tb
 type `re_exec_all` <character[], character, logical, ...> => class<`data.frame`, `tbl`, `tbl_df`>;
 type `re_match` <character[], character, logical, ...> => class<`data.frame`, `tbl`, `tbl_df`>;
 type `re_match_all` <character[], character, logical, ...> => class<`data.frame`, `tbl`, `tbl_df`>;
-type `$.rematch_allrecords` <class<`rematch_allrecords`>, character> => list<character[] | integer[]>;
+type `$.rematch_allrecords` <class<`rematch_allrecords`>, character> => (list<character[]> | list<integer[]>);
 type `$.rematch_records` <class<`rematch_records`>, character> => (character[] | integer[]);

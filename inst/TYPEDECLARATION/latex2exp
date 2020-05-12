@@ -1,8 +1,0 @@
-type `[[` <character> => character | <character> => character | <character> => character | <character> => character | <character> => character | <character> => character | <character> => character | <character> => character | <character> => character | <character> => character | <character> => character | <character> => character | <character> => character | <character> => character | <character> => character | <character> => character | <character> => character | <character> => character | <character> => character | <character> => character | <character> => character | <character> => character | <character> => character | <character> => character | <character> => character | <character> => character | <character> => character;
-type `filter` <character[]> => logical[];
-type `_fseq` <character> => character;
-type `FUN` <class<`latextoken`>> => list<any> | <character, character[]> => expression;
-type `post_process` <class<`latextoken`>> => list<any>;
-type `TeX` <character, character[]> => expression;
-type `.token` <character, class<`latextoken`> | null, class<`latextoken`> | null, character, logical> => class<`latextoken`>;
-type `toString.latextoken` <class<`latextoken`>, ...> => character;

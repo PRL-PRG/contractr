@@ -1,6 +1,0 @@
-type `check_recycling` <integer, integer> => (character | null);
-type `filter` <character[]> => logical[];
-type `fun` <any, any> => list<null>;
-type `gower_dist` <class<`data.frame`>, class<`data.frame`>, null, null | integer[], double, null | double[] | ^integer[], logical, any> => any;
-type `gower_topn` <class<`data.frame`>, class<`data.frame`>, null, null, double, double, integer[] | null, logical, any> => any;
-type `gower_work` <class<`data.frame`>, class<`data.frame`>, null, null | integer[], any, double, any, any, any> => any;

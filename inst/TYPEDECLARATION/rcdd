@@ -1,10 +1,9 @@
 type `addHeq` <integer[], character | double, class<`matrix`>> => class<`matrix`>;
 type `addHin` <double[], double, class<`matrix`>> => class<`matrix`>;
-type `allfaces` <class<`matrix`>> => list<list<integer[] | character[] | double[]>>;
+type `allfaces` <class<`matrix`>> => (list<list<integer[] | character[]>> | list<list<double[]>>);
 type `d2q` <double[] | class<`bar`, `baz`, `foo`> | class<`matrix`>> => (character[] | class<`bar`, `baz`, `foo`> | class<`matrix`>);
-type `FUN` <class<`matrix`> | character[] | integer[], class<`matrix`> | character[] | double> => (class<`matrix`> | character[]);
 type `linearity` <class<`matrix`>, character> => integer[];
-type `lpcdd` <class<`matrix`>, character[] | double[], character | double, logical, character[]> => list<character[] | character | double[]>;
+type `lpcdd` <class<`matrix`>, character[] | double[], character | double, logical, character[]> => (list<character[]> | list<character | double[]>);
 type `makeH` <any, any, any, any, null | class<`matrix`>> => class<`matrix`>;
 type `makeV` <any, any, any, null> => class<`matrix`>;
 type `q2d` <class<`matrix`> | character[]> => (class<`matrix`> | double[]);

@@ -1,10 +1,9 @@
-type `::` <class<`function`>> => list<double | double | character>;
 type `clone_and_merge` <class<`function`>, ...> => class<`function`>;
 type `inlist` <...> => class<`function`>;
 type `inrange` <double, double> => class<`function`>;
 type `is_setting` <...> => logical;
 type `options_manager` <..., any> => class<`function`>;
-type `reset` <class<`function`>> => list<double | double | character>;
+type `reset` <class<`function`>> => (list<double> | list<double | character>);
 type `reset_options` < > => list<any>;
 type `reset_par` < > => list<character | double[] | null>;
 type `stop_if_reserved` <...> => logical[];

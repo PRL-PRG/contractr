@@ -6,7 +6,6 @@ type `complex_factorial` <double, logical> => complex;
 type `complex_gamma` <complex, logical> => complex;
 type `complex_ode` <complex[], double[], class<`function`>, complex[], null, class<`function`>, class<`function`>, ...> => class<`deSolve`, `matrix`>;
 type `crit` <...> => complex[];
-type `f` <integer[] | double, double, double, double, double, double> => complex[];
 type `f15.1.1` <complex, complex, complex, complex[], double, double> => complex[];
 type `f15.3.1` <double, double, double, double, complex[]> => complex;
 type `f15.3.10_11_12` <double, double, double, complex, double, double, character> => (complex | null);

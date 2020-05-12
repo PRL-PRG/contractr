@@ -7,7 +7,7 @@ type `dimcalc_raw` < > => class<`function`>;
 type `dimcalc_share` <double[]> => double | <double> => class<`function`>;
 type `fold_in` <class<`textmatrix`>, class<`LSAspace`>> => class<`textmatrix`>;
 type `getSubjectId` <class<`textmatrix`>, character> => integer;
-type `getTriple` <class<`textmatrix`>, character, any> => (character[] | null | list<character[]>);
+type `getTriple` <class<`textmatrix`>, character, any> => (character[] | list<character[]> | null);
 type `gw_idf` <class<`matrix`> | class<`textmatrix`>> => double[];
 type `lsa` <class<`textmatrix`>, class<`function`>> => class<`LSAspace`>;
 type `lw_bintf` <class<`matrix`> | class<`textmatrix`>> => class<`matrix`>;

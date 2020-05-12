@@ -1,2 +1,0 @@
-type `filter` <character[]> => logical[];
-type `lifetab` <^double[], double, double[], double[]> => class<`data.frame`>;

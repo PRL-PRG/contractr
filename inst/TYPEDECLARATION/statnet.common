@@ -29,7 +29,6 @@ type `eval_lhs.formula` <class<`formula`>> => double;
 type `EVL` <...> => double;
 type `filter_rhs.formula` <class<`formula`>, class<`function`>, ...> => class<`formula`>;
 type `forkTimeout` <any, double, any, null> => (logical | null);
-type `FUN` <class<`rle`>> => class<`rle`>;
 type `is.na.rle` <class<`rle`>> => class<`rle`>;
 type `lapply.mcmc.list` <class<`mcmc.list`>, class<`function`>, ...> => class<`mcmc.list`>;
 type `length.rle` <class<`rle`>> => double;

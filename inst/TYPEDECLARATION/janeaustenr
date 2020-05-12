@@ -1,2 +1,0 @@
-type `austen_books` < > => class<`data.frame`, `tbl`, `tbl_df`>;
-type `filter` <character[]> => logical[];

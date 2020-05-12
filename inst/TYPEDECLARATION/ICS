@@ -18,8 +18,6 @@ type `mvnorm.kur.test` <class<`matrix`>, character, double, class<`function`>> =
 type `mvnorm.skew.test` <class<`matrix`>, class<`function`>> => class<`htest`>;
 type `.norm.mu.V` <double[], class<`matrix`>, class<`matrix`>> => double;
 type `plot` <class<`ics`>, any, ...> => null | <class<`ics2`>, any, ...> => null;
-type `S1` <class<`matrix`>, null, class<`function`>> => class<`matrix`> | <class<`matrix`> | class<`data.frame`>, double, character, null, null, null, double, double, class<`function`>> => list<double[] | class<`matrix`>>;
-type `S2` <class<`matrix`> | class<`data.frame`>, double, character, null, null, null, double, double, class<`function`>> => list<double[] | class<`matrix`>>;
 type `screeplot.ics` <class<`ics`>, null, character, character, character, character, integer[], logical, ...> => null;
 type `summary` <class<`ics`>, ...> => class<`ics`> | <class<`ics2`>, ...> => class<`ics2`>;
 type `tM` <class<`matrix`> | class<`data.frame`>, double, character, null, null, null, double, double, class<`function`>> => list<double[] | class<`matrix`>>;

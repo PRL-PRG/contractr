@@ -7,7 +7,6 @@ type `bind_behavr_list` <list<class<`behavr`, `data.frame`, `data.table`>>> => c
 type `bin_var` <double[], double, double | null> => double[];
 type `check_conform` <class<`behavr`, `data.frame`, `data.table`> | class<`data.frame`, `data.table`>, null | class<`data.frame`, `data.table`>> => null;
 type `days` <double> => double;
-type `FUN` <class<`behavr`, `data.frame`, `data.table`>> => class<`data.frame`, `data.table`>;
 type `is.behavr` <class<`behavr`, `data.frame`, `data.table`>> => logical;
 type `meta` <class<`behavr`, `data.frame`, `data.table`>> => class<`data.frame`, `data.table`>;
 type `mins` <double> => double;

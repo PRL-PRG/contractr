@@ -1,9 +1,9 @@
-type `%||%` <null | double | integer[] | list<integer[]>, any> => (class<`matrix`> | double | integer[] | list<double[] | double | character>);
+type `%||%` <null | double | integer[] | list<integer[]>, any> => (class<`matrix`> | double | integer[] | list<double[]> | list<double | character>);
 type `checkRNGversion` <character> => double;
 type `%dorng%` <class<`foreach`> | class<`filteredforeach`, `foreach`> | class<`foreach`, `xforeach`>, any> => any;
 type `doRNGseq` <integer, null | double | class<`matrix`> | integer[] | list<double[]>, ...> => list<integer[]>;
 type `doRNGversion` <any> => character;
-type `getDoBackend` < > => list<class<`function`> | class<`SOCKcluster`, `cluster`> | class<`function`> | list<double | list<class<`function`> | class<`SOCKcluster`, `cluster`>>> | class<`function`> | list<null | double | list<class<`function`> | class<`SOCKcluster`, `cluster`>>>>;
+type `getDoBackend` < > => (list<class<`function`> | class<`SOCKcluster`, `cluster`>> | list<class<`function`> | list<double | list<class<`function`> | class<`SOCKcluster`, `cluster`>>>> | list<class<`function`> | list<null | double | list<class<`function`> | class<`SOCKcluster`, `cluster`>>>>);
 type `ns_get` <character, environment, ...> => (class<`function`> | environment);
 type `registerDoRNG` <double | null, logical> => class<`function`>;
-type `setDoBackend` <list<class<`function`> | list<double | list<class<`function`> | class<`SOCKcluster`, `cluster`>>> | class<`function`> | list<null | double | list<class<`function`> | class<`SOCKcluster`, `cluster`>>> | class<`function`> | class<`SOCKcluster`, `cluster`>>> => list<class<`function`> | class<`SOCKcluster`, `cluster`> | class<`function`> | list<double | list<class<`function`> | class<`SOCKcluster`, `cluster`>>> | class<`function`> | list<null | double | list<class<`function`> | class<`SOCKcluster`, `cluster`>>>>;
+type `setDoBackend` <list<class<`function`> | list<double | list<class<`function`> | class<`SOCKcluster`, `cluster`>>>> | list<class<`function`> | list<null | double | list<class<`function`> | class<`SOCKcluster`, `cluster`>>>> | list<class<`function`> | class<`SOCKcluster`, `cluster`>>> => (list<class<`function`> | class<`SOCKcluster`, `cluster`>> | list<class<`function`> | list<double | list<class<`function`> | class<`SOCKcluster`, `cluster`>>>> | list<class<`function`> | list<null | double | list<class<`function`> | class<`SOCKcluster`, `cluster`>>>>);

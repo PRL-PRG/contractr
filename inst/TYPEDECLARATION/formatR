@@ -1,5 +1,5 @@
 type `count_tokens` <class<`call`>> => integer[];
-type `find_breaks` <integer[], any, any, any, any> => list<any>;
+type `find_breaks` <integer[], any, any, any, any> => (list<integer | null> | list<integer[] | null> | list<integer[]> | list<null>);
 type `fix_parse_data` <class<`data.frame`>, any> => class<`data.frame`>;
 type `mask_comments` <character[], any, logical, logical> => character[];
 type `mask_line_break` <character[]> => character[];

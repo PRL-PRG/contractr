@@ -1,4 +1,3 @@
-type `::` <class<`dist`> | class<`matrix`> | class<`data.frame`> | class<`NN`, `frNN`>, any, double, null, logical, ...> => any | <class<`matrix`> | class<`data.frame`> | class<`data.frame`, `data.table`> | class<`dist`> | class<`NN`, `kNN`>, double, null | class<`data.frame`>, logical, character, any, any, any> => any;
 type `adjacencylist` <class<`NN`, `frNN`> | class<`NN`, `kNN`> | class<`NN`, `kNN`, `sNN`>, ...> => list<integer[]>;
 type `adjacencylist.frNN` <class<`NN`, `frNN`>, ...> => list<integer[]>;
 type `adjacencylist.kNN` <class<`NN`, `kNN`> | class<`NN`, `kNN`, `sNN`>, ...> => list<integer[]>;
@@ -12,7 +11,7 @@ type `buildDendrogram` <class<`hclust`>> => class<`dendrogram`>;
 type `computeStability` <class<`hclust`>, double, logical> => list<list<double[]>>;
 type `dbscan` <class<`dist`> | class<`matrix`> | class<`data.frame`> | class<`NN`, `frNN`>, any, double, null, logical, ...> => any;
 type `dbscan_density_int` <class<`matrix`>, double, integer, integer, integer, double> => integer[];
-type `dbscan_int` <class<`matrix`>, double, integer, double[], integer, integer, integer, integer, double, list<any>> => integer[];
+type `dbscan_int` <class<`matrix`>, double, integer, double[], integer, integer, integer, integer> => integer[];
 type `dendrogram_to_reach` <class<`dendrogram`>> => class<`reachability`>;
 type `distToAdjacency` <double[], integer> => list<integer[]>;
 type `extractClusterLabels` <class<`data.frame`>, integer[], logical> => double[];
@@ -27,7 +26,7 @@ type `frNN_query_int` <class<`matrix`>, class<`matrix`>, double, integer, intege
 type `glosh` <class<`hclust`> | class<`matrix`>, double, ...> => double[];
 type `hclustMergeOrder` <class<`matrix`>, integer[]> => class<`hclust`>;
 type `hdbscan` <class<`data.frame`> | class<`data.frame`, `data.table`> | class<`matrix`>, double, null, logical, logical> => class<`hdbscan`>;
-type `hullplot` <class<`matrix`>, class<`dbscan`, `dbscan_fast`> | class<`kmeans`> | class<`optics`> | integer[], null | character, double, double, double, logical, double, character, ...> => null;
+type `hullplot` <class<`matrix`>, class<`dbscan`, `dbscan_fast`> | class<`kmeans`> | class<`optics`> | integer[], null | character, double, double, double, logical, double> => null;
 type `jpclust` <class<`data.frame`, `data.table`> | class<`NN`, `kNN`>, double, double, ...> => class<`general_clustering`>;
 type `JP_int` <class<`matrix`>, integer> => integer[];
 type `kNN` <class<`matrix`> | class<`data.frame`> | class<`data.frame`, `data.table`> | class<`dist`> | class<`NN`, `kNN`>, double, null | class<`data.frame`>, logical, character, any, any, any> => any;
@@ -53,7 +52,7 @@ type `.predict_frNN` <class<`matrix`>, class<`matrix`>, integer[], double, ...> 
 type `prims` <double[], integer> => class<`matrix`>;
 type `reach_to_dendrogram` <class<`reachability`>, double[]> => class<`dendrogram`>;
 type `simplifiedTree` <list<list<double[]>>> => class<`dendrogram`>;
-type `sNN` <class<`data.frame`> | class<`data.frame`, `data.table`> | class<`NN`, `kNN`, `sNN`>, any, null | double, logical, logical, character, double, character, double> => class<`NN`, `kNN`, `sNN`>;
+type `sNN` <class<`data.frame`> | class<`data.frame`, `data.table`> | class<`NN`, `kNN`, `sNN`>, any, null | double, logical, logical, character, double, character> => class<`NN`, `kNN`, `sNN`>;
 type `sNNclust` <class<`data.frame`, `data.table`>, double, double, double, logical, ...> => class<`general_clustering`>;
 type `SNN_sim_int` <class<`matrix`>, logical> => class<`matrix`>;
 type `sort.frNN` <class<`NN`, `frNN`>, logical, ...> => class<`NN`, `frNN`>;

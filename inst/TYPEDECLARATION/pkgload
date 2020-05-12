@@ -1,10 +1,9 @@
 type `all_named` <pairlist> => logical;
-type `compact` <list<any>> => list<any>;
+type `compact` <list<null> | list<null | class<`for`>> | list<null | class<`if`>> | list<null | class<`<-`>>> => list<any>;
 type `comp_lang` <character | class<`<-`> | class<`{`> | class<`call`> | class<`for`> | class<`if`> | class<`name`> | null | pairlist | class<`(`> | double, class<`call`> | class<`<-`> | class<`for`> | class<`if`>, any> => logical;
 type `dir.exists` <character[]> => logical[];
 type `extract_lang` <class<`{`> | class<`<-`> | class<`if`> | class<`for`> | character | class<`(`> | class<`call`> | class<`name`> | double | null | pairlist, class<`function`>, ...> => (class<`<-`> | class<`for`> | class<`if`> | null);
 type `f` <character | class<`<-`> | class<`{`> | class<`call`> | class<`for`> | class<`if`> | class<`name`> | null | pairlist | class<`(`> | double, class<`call`> | class<`<-`> | class<`for`> | class<`if`>, any> => logical | <character | class<`<-`> | class<`(`> | class<`{`> | class<`call`> | class<`for`> | class<`if`> | class<`name`> | double | null | pairlist, character> => (character | class<`<-`> | class<`(`> | class<`{`> | class<`call`> | class<`for`> | class<`if`> | class<`name`> | double | null | pairlist) | <character | class<`<-`> | class<`{`> | class<`call`> | class<`name`> | integer | null | pairlist> => (character | class<`<-`> | class<`{`> | class<`call`> | class<`name`> | integer | null | pairlist) | <character | class<`<-`> | class<`{`> | class<`call`> | class<`for`> | class<`if`> | class<`name`>> => (character | class<`<-`> | class<`{`> | class<`call`> | class<`for`> | class<`if`> | class<`name`>);
-type `FUN` <class<`{`> | class<`<-`> | class<`if`> | class<`for`> | character | class<`(`> | class<`call`> | class<`name`> | double | null | pairlist, class<`function`>, ...> => (class<`<-`> | class<`for`> | class<`if`> | null) | <character | class<`<-`> | class<`(`> | class<`{`> | class<`call`> | class<`for`> | class<`if`> | class<`name`> | double | null | pairlist, class<`function`>, ...> => (character | class<`<-`> | class<`(`> | class<`{`> | class<`call`> | class<`for`> | class<`if`> | class<`name`> | double | null | pairlist);
 type `has_tests` < > => logical;
 type `inst` <character> => character;
 type `is_installed` <character, double> => logical;

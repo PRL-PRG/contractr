@@ -1,4 +1,0 @@
-type `autplot1` <class<`mcmc.list`>, double, null, logical, any, character[], null, ...> => null;
-type `filter` <character[]> => logical[];
-type `.graypr` <logical, logical, logical, logical, logical, logical, double, double, double, double> => null;
-type `mcmcplotsPalette` <double, character[], null> => character;

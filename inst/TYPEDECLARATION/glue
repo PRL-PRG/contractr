@@ -7,9 +7,9 @@ type `delayed_assign` <character, character | class<`call`> | double, environmen
 type `glue` <..., character, environment, character, character, character | class<`SQL`>, any, logical> => any;
 type `glue_col` <..., environment, character> => class<`character`, `glue`>;
 type `glue_collapse` <character[] | class<`character`, `glue`> | integer[] | list<class<`SQL`>>, character, double, character> => class<`character`, `glue`>;
-type `glue_data` <class<`data.frame`> | null, ..., character, environment, character, character, any, any, logical> => any;
+type `glue_data` <class<`data.frame`> | null, ..., character, environment, character, character, any, any> => any;
 type `glue_sql` <..., class<`SQLiteConnection`>, environment, class<`SQL`>> => class<`SQL`>;
-type `has_names` <list<any>> => logical[];
+type `has_names` <list<character> | list<character | double | class<`call`>> | list<character | class<`call`>> | list<character | double> | list<class<`name`>>> => logical[];
 type `lengths` <list<character[]>> => integer[];
 type `recycle_columns` <list<character[]>> => list<character[]>;
 type `register_s3_method` <character, character, character, null> => null;

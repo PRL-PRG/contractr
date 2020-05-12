@@ -8,7 +8,6 @@ type `colorScene` <class<`Triangles3D`>> => class<`Triangles3D`>;
 type `colorTriangles` <class<`Triangles3D`>> => class<`Triangles3D`>;
 type `distFrechet` <integer[], double[], integer[], double[], double, character> => double;
 type `expandParLongData` <class<`ParLongData`>, integer> => class<`ParLongData`> | <class<`ParLongData`>, class<`Partition`>> => class<`ParLongData`> | <class<`ParLongData`>, double> => class<`ParLongData`> | <class<`ParLongData`>, class<`Partition`> | double> => class<`ParLongData`>;
-type `FUN` <^double[]> => double[];
 type `imputation` <class<`matrix`>, character, character | null, character | null> => class<`matrix`> | <class<`matrix`>, character, character | null, character | null> => class<`matrix`>;
 type `imput_copyMean_bisector` <class<`matrix`>> => class<`matrix`>;
 type `imput_copyMean_global` <class<`matrix`>> => class<`matrix`>;
@@ -64,6 +63,6 @@ type `scale` <class<`matrix`>> => class<`matrix`> | <class<`LongData3d`>, double
 type `sdcNA` <double[]> => double;
 type `sdNA` <^double[]> => double;
 type `t2ve` <class<`Triangles3D`>> => list<class<`matrix`>>;
-type `varNumAndName` <double | character, character[]> => list<double | character | integer | character>;
+type `varNumAndName` <double | character, character[]> => (list<double | character> | list<integer | character>);
 type `wideToLong` <class<`data.frame`>, double[]> => class<`data.frame`>;
 type `windowsCut` <double, logical, logical> => class<`ParWindows`>;

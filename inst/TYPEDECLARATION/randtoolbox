@@ -1,4 +1,3 @@
-type `:::` <character, character> => any;
 type `bit2int` <class<`matrix`> | double[]> => double;
 type `bit2unitreal` <class<`matrix`>> => double;
 type `bits.to.real` <class<`matrix`> | double[]> => double;
@@ -6,10 +5,9 @@ type `coll.test` <class<`function`>, double, double, double, double, logical, ..
 type `coll.test.sparse` <class<`function`>, double, double, double, double, ...> => class<`data.frame`>;
 type `congruRand` <double, double, double, double, double, any> => double[];
 type `freq.test` <double[], integer[], logical> => list<double[]>;
-type `FUN` <class<`matrix`> | double[]> => double | <double> => double[];
 type `gap.test` <double[], double, double, logical> => list<double[]>;
 type `get.description` < > => list<character[] | integer[]>;
-type `getParameters` <character> => list<double[] | class<`matrix`> | double[] | class<`matrix`> | null>;
+type `getParameters` <character> => (list<double[] | class<`matrix`>> | list<double[] | class<`matrix`> | null>);
 type `get.primes` <double> => integer[];
 type `.getrandtoolboxEnv` <character, character> => any;
 type `getWELLState` < > => class<`matrix`>;

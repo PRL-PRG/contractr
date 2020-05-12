@@ -1,7 +1,6 @@
 type `ad.test` <double[], character, ..., logical, any> => class<`htest`>;
 type `braun` <double[], class<`function`>, double> => list<double | character>;
 type `cvm.test` <double[], character, ..., logical, any> => class<`htest`>;
-type `FUN` <double[]> => list<double | character> | <double[]> => list<double | character>;
 type `getCdf` <character, logical> => class<`function`>;
 type `getfunky` <character> => class<`function`>;
 type `pAD` <double, any, logical, any> => double;

@@ -5,7 +5,7 @@ type `distractorAnalysis` <class<`data.frame`>, character[], any, double, any, c
 type `itemAnalysis` <class<`data.frame`>, logical, logical, logical, any, any, any, any, any> => class<`itemAnalysis`>;
 type `polyserial` <double[], double[], logical> => double;
 type `reliability` <class<`data.frame`> | class<`matrix`>, logical, logical, logical> => class<`reliability`>;
-type `score` <class<`data.frame`>, any, logical, null, logical, character, any> => list<double[] | double[] | class<`reliability`> | class<`matrix`> | double[] | class<`matrix`>>;
+type `score` <class<`data.frame`>, any, logical, null, logical, character, any> => (list<double[]> | list<double[] | class<`reliability`> | class<`matrix`>> | list<double[] | class<`matrix`>>);
 type `score.transform` <double[], double, double, logical> => list<double[]>;
 type `spearman.brown` <double, double, character> => list<double>;
 type `subscales` <class<`data.frame`>, class<`matrix`>, character[], logical, logical, character[]> => list<list<double[] | class<`reliability`> | class<`matrix`>>>;

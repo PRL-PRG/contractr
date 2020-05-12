@@ -2,7 +2,7 @@ type `activeSet` <class<`matrix`>, character | class<`function`>, integer[] | nu
 type `aTx` <class<`matrix`>, double[]> => double[];
 type `b2a` <class<`matrix`>, integer> => class<`matrix`>;
 type `checkSol` <any, double[], any, double[], ^double[], ^double[], any> => ^double[];
-type `fSolver` <double[], class<`matrix`> | integer[] | null, list<class<`function`> | class<`function`> | double[] | double[] | class<`function`>>> => list<double[]>;
+type `fSolver` <double[], class<`matrix`> | integer[] | null, list<class<`function`>> | list<class<`function`> | double[]> | list<double[] | class<`function`>>> => list<double[]>;
 type `gpava` <double[] | null, class<`data.frame`> | class<`matrix`> | double[], null, class<`function`>, character, null | double> => class<`gpava`>;
 type `is.active` <double[], double> => integer[];
 type `is.pos` <double, double> => logical;
@@ -10,7 +10,6 @@ type `mkIndi` <class<`matrix`>, integer> => class<`matrix`>;
 type `mkLagrange` <class<`matrix`>, double[]> => ^double[];
 type `mregnn` <class<`matrix`>, double[], class<`matrix`>> => list<double[]>;
 type `mregnnM` <class<`matrix`>, double[]> => list<double[]>;
-type `mySolver` <double[], class<`matrix`> | integer[] | null, list<class<`function`> | class<`function`> | double[] | double[] | class<`function`>>> => list<double[]>;
 type `plot.gpava` <class<`gpava`>, character, character, character, character, ...> => null;
 type `summary.activeset` <class<`activeset`>, ...> => null;
 type `taTx` <class<`matrix`>, ^double[], integer> => ^double[];

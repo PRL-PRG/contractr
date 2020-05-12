@@ -16,8 +16,7 @@ type `ATSP` <class<`dist`> | class<`TSP`, `dist`> | class<`matrix`>, null, null>
 type `cut_tour` <class<`TOUR`, `integer`>, integer | character[], logical> => (integer[] | list<integer[]>);
 type `cut_tour.TOUR` <class<`TOUR`, `integer`>, integer | character[], logical> => (integer[] | list<integer[]>);
 type `ETSP` <class<`data.frame`> | class<`matrix`>, null> => class<`ETSP`, `matrix`>;
-type `FUN` <class<`TOUR`, `integer`> | class<`ATSP`, `ATSP`, `matrix`> | class<`ATSP`, `matrix`> | class<`ETSP`, `matrix`> | class<`TSP`, `dist`>, ...> => (double | null);
-type `.get_parameters` <list<any>, list<any>> => list<any>;
+type `.get_parameters` <list<any>, list<any>> => (list<integer> | list<class<`TOUR`, `integer`> | double> | list<integer[] | double> | list<null | double>);
 type `image.ATSP` <class<`ATSP`, `matrix`>, class<`TOUR`, `integer`>, character[], ...> => null;
 type `image.TSP` <class<`TSP`, `dist`>, any, character[], ...> => null;
 type `insert_dummy` <class<`ATSP`, `matrix`> | class<`ATSP`, `ATSP`, `matrix`> | class<`TSP`, `dist`>, double, double, any, character> => (class<`ATSP`, `matrix`> | class<`TSP`, `dist`>);

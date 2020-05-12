@@ -1,6 +1,6 @@
 type `create.wData.omega` <double[], double[], class<`factor`>, integer[], double, character, character> => class<`data.frame`>;
 type `crprep` <character, ...> => class<`crprep`, `data.frame`>;
-type `crprep.default` <character, character, class<`data.frame`>, character[], character, double, character, any, any, logical, logical, double, double, ...> => class<`crprep`, `data.frame`>;
+type `crprep.default` <character, character, class<`data.frame`>, character[], character, double, character, any> => class<`crprep`, `data.frame`>;
 type `crsample` <class<`data.frame`>, double, null> => list<double>;
 type `Cuminc` <character | double[], character | integer[], any, any, any, any, logical> => class<`Cuminc`, `data.frame`>;
 type `cutLMms` <class<`data.frame`, `msdata`>, double, any> => class<`data.frame`, `msdata`>;
@@ -16,14 +16,14 @@ type `msboot` <class<`function`>, class<`data.frame`, `msdata`>, double, charact
 type `msfit` <class<`coxph`> | class<`coxph`, `coxph.null`>, any, logical, character[], class<`matrix`>> => class<`msfit`>;
 type `msprep` <^character[] | class<`matrix`>, ^character[] | class<`matrix`>, any, class<`matrix`>, any, any, any> => class<`data.frame`, `msdata`>;
 type `msprepEngine` <class<`matrix`> | double[], any, any, any, any, any, any, class<`matrix`> | null> => class<`matrix`>;
-type `mssample` <class<`data.frame`>, class<`matrix`>, list<double | null>, null, character[], character[], any, null, double, null | double> => (class<`data.frame`> | class<`msdata`>);
+type `mssample` <class<`data.frame`>, class<`matrix`>, list<double | null>, null, character[], character[], any, null> => (class<`data.frame`> | class<`msdata`>);
 type `mssample1` <class<`data.frame`>, class<`matrix`>, list<double[]>, null, character, character, any, null> => class<`matrix`>;
 type `my.cbind2` <double, class<`matrix`>> => class<`matrix`>;
 type `my.rbind` <class<`matrix`>, class<`matrix`>> => class<`matrix`>;
 type `NAfix` <^double[], double> => double[];
 type `paths` <class<`matrix`>, double> => class<`matrix`>;
-type `plot.msfit` <class<`msfit`>, character[], any, character, character, any, any, any, any, any, character, ...> => null;
-type `plot.probtrans` <class<`probtrans`>, double, character[], any, any, character, character, any, any, double, any, any, any, any, character, character, character, ...> => null;
+type `plot.msfit` <class<`msfit`>, character[], any, character, character, any, any, any> => null;
+type `plot.probtrans` <class<`probtrans`>, double, character[], any, any, character, character, any> => null;
 type `print.msdata` <class<`data.frame`, `msdata`>, logical, ...> => null;
 type `probtrans` <class<`msfit`>, double, character[], character[], logical, logical> => class<`probtrans`>;
 type `summary.msfit` <class<`msfit`>, logical, logical, ...> => null;

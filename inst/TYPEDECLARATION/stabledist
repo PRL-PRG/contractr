@@ -1,11 +1,9 @@
-type `:::` <double[], double, double, logical> => double[];
 type `cospi2` <double[]> => double[];
 type `C.stable.tail` <double, logical> => double;
 type `dPareto` <double[], double, double, logical> => double[];
 type `dstable` <double[], double, double, double, double, double, logical, double, null, double> => double[];
 type `.e.minus` <double, double> => double;
 type `.e.plus` <double, double> => double;
-type `f` <double[], double, double, double, double, double, logical, double, null, double> => double[];
 type `.FCT1` <double, any, any, any, logical, any, any, any, any> => double;
 type `.fct2` <double, double, logical, double, double, logical> => double;
 type `.FCT2` <double, double, any, any, logical, any> => double;

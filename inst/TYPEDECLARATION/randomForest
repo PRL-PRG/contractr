@@ -21,7 +21,7 @@ type `plot.randomForest` <class<`randomForest`, `randomForest.formula`>, charact
 type `predict.randomForest` <class<`randomForest`> | class<`randomForest`, `randomForest.formula`>, class<`matrix`> | class<`data.frame`>, character, logical, logical, logical, logical, any, ...> => (class<`factor`> | class<`matrix`, `votes`> | double[] | list<class<`factor`> | class<`matrix`>>);
 type `print.randomForest` <class<`randomForest`, `randomForest.formula`>, ...> => null;
 type `randomForest` <any, ...> => (class<`randomForest`> | class<`randomForest`, `randomForest.formula`>);
-type `randomForest.default` <class<`data.frame`> | class<`matrix`>, class<`factor`> | double[] | null, null | class<`data.frame`>, null | class<`factor`>, double, double, logical, null, any, any, double[], double, double | null, logical, logical, double, any, logical, logical, double> => class<`randomForest`>;
+type `randomForest.default` <class<`data.frame`> | class<`matrix`>, class<`factor`> | double[] | null, null | class<`data.frame`>, null | class<`factor`>, double, double, logical, null, any, any, double[], double, double | null, logical, logical, double> => class<`randomForest`>;
 type `randomForest.formula` <class<`formula`>, any, ..., any, class<`function`>> => class<`randomForest`, `randomForest.formula`>;
 type `rfcv` <class<`data.frame`>, class<`factor`>, double, character, double, class<`function`>, logical, ...> => list<double[] | list<class<`factor`>>>;
 type `rfImpute` <class<`formula`>, ...> => class<`data.frame`>;

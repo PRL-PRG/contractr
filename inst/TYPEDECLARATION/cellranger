@@ -28,7 +28,6 @@ type `cell_cols` <^character[] | ^double[]> => class<`cell_limits`, `list`>;
 type `cell_limits` <^double[] | list<integer>, ^double[] | list<integer>, null | character> => class<`cell_limits`, `list`>;
 type `cell_rows` <^double[]> => class<`cell_limits`, `list`>;
 type `dim.cell_limits` <class<`cell_limits`, `list`>> => ^double[];
-type `FUN` <character[] | class<`list`, `ra_ref`>, ...> => class<`cell_addr`> | <class<`list`, `ra_ref`> | class<`cell_addr`>, any, any, null | logical, ...> => (character[] | null);
 type `guess_fo` <character[] | double, character[]> => (character[] | null);
 type `is_A1` <character[] | double> => logical[];
 type `isFALSE` <logical> => logical;

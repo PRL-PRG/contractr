@@ -1,4 +1,3 @@
-type `FUN` <...> => class<`WKNNF`>;
 type `knn` <class<`matrix`>, class<`matrix`>, double, double, character | integer, double> => list<class<`matrix`>>;
 type `WKNND` <...> => any;
 type `WKNNF` <...> => class<`WKNNF`>;

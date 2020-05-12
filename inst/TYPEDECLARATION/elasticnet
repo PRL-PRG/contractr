@@ -1,8 +1,8 @@
-type `cv.enet` <class<`AsIs`>, double[], double, double, double[], character, logical, logical, logical, ...> => list<double[]>;
+type `cv.enet` <class<`AsIs`>, double[], double, double, double[], character, logical, logical> => list<double[]>;
 type `enet` <class<`AsIs`>, double[], double, any, logical, logical, logical, double> => class<`enet`>;
 type `plot.enet` <class<`enet`>, character[], logical, ...> => null;
-type `predict.enet` <class<`enet`>, any, any, character[], character[], logical, ...> => list<double[] | character | class<`matrix`> | character | double[]>;
+type `predict.enet` <class<`enet`>, any, any, character[], character[], logical, ...> => (list<double[] | character | class<`matrix`>> | list<character | double[]>);
 type `rootmatrix` <class<`matrix`>> => class<`matrix`>;
 type `solvebeta` <class<`matrix`>, double[], double[], any, character, double> => double[];
-type `spca` <class<`matrix`>, double, double[], character, character, logical, double, double, logical, double> => class<`spca`>;
+type `spca` <class<`matrix`>, double, double[], character, character, logical, double, double> => class<`spca`>;
 type `updateRR` <class<`AsIs`> | double[], class<`matrix`> | null, any, double, any> => class<`matrix`>;

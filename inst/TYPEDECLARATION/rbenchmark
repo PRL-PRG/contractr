@@ -1,3 +1,0 @@
-type `benchmark` <..., character[], character[], double[], environment, character> => class<`data.frame`>;
-type `filter` <character[]> => logical[];
-type `FUN` <...> => null;

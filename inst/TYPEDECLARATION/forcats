@@ -35,7 +35,6 @@ type `fct_shift` <class<`factor`, `ordered`>, double> => class<`factor`, `ordere
 type `fct_shuffle` <class<`factor`> | class<`factor`, `ordered`>> => (class<`factor`> | class<`factor`, `ordered`>);
 type `fct_unify` <list<class<`factor`>>, character[]> => list<class<`factor`>>;
 type `fct_unique` <class<`factor`>> => class<`factor`>;
-type `FUN` <class<`factor`>, ..., double> => class<`factor`>;
 type `in_smallest` <integer[]> => logical[];
 type `lump_cutoff` <integer[]> => double;
 type `lvls_expand` <class<`factor`>, character[]> => class<`factor`>;

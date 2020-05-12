@@ -4,8 +4,8 @@ type `as.matrix.gchol.bdsmatrix` <class<`gchol.bdsmatrix`>, logical, ...> => cla
 type `backsolve` <class<`gchol`> | class<`gchol.bdsmatrix`> | class<`matrix`>, ...> => class<`matrix`> | <class<`gchol`>, ...> => class<`matrix`> | <class<`gchol.bdsmatrix`>, ...> => class<`matrix`> | <class<`matrix`>, ...> => class<`matrix`>;
 type `bdsBlock` <character[], double[]> => class<`bdsmatrix`>;
 type `bdsI` <integer[], any> => class<`bdsmatrix`>;
-type `bdsmatrix` <double[], double[], any, null | list<null | character[] | character[] | integer[]>> => class<`bdsmatrix`>;
-type `bdsmatrix.reconcile` <class<`function`> | list<any>, character[]> => (class<`bdsmatrix`> | list<class<`bdsmatrix`>>);
+type `bdsmatrix` <double[], double[], any, list<null | character[]> | null | list<character[]> | list<integer[]>> => class<`bdsmatrix`>;
+type `bdsmatrix.reconcile` <class<`function`> | list<class<`matrix`> | class<`function`> | class<`bdsmatrix`>> | list<class<`bdsmatrix`>> | list<class<`bdsmatrix`> | class<`function`>> | list<class<`bdsmatrix`> | class<`matrix`>>, character[]> => (class<`bdsmatrix`> | list<class<`bdsmatrix`>>);
 type `diag` <class<`bdsmatrix`>, any, any, logical> => double[] | <class<`gchol.bdsmatrix`>, any, any, logical> => double[] | <class<`gchol`>, any, any, logical> => double[];
 type `diag<-` <class<`bdsmatrix`>, double[]> => class<`bdsmatrix`>;
 type `gchol` <class<`bdsmatrix`>, double> => class<`gchol.bdsmatrix`> | <class<`matrix`>, double> => class<`gchol`> | <class<`matrix`> | class<`bdsmatrix`>, double> => (class<`gchol`> | class<`gchol.bdsmatrix`>);

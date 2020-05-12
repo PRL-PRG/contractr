@@ -4,7 +4,6 @@ type `copy_labels.data.frame` <class<`data.frame`, `tbl`, `tbl_df`>, class<`data
 type `copy_labels.default` <class<`factor`> | class<`haven_labelled`> | integer[], class<`factor`> | class<`haven_labelled`> | integer[]> => (class<`factor`> | class<`haven_labelled`> | integer[]);
 type `copy_labels_from` <class<`data.frame`, `tbl`, `tbl_df`>, class<`data.frame`, `tbl`, `tbl_df`>> => class<`data.frame`, `tbl`, `tbl_df`>;
 type `foreign_to_labelled` <class<`data.frame`>> => class<`data.frame`, `tbl`, `tbl_df`>;
-type `FUN` <character[] | class<`factor`> | class<`haven_labelled`> | class<`haven_labelled`, `haven_labelled_spss`> | class<`data.frame`> | ^double[] | class<`data.frame`, `tbl`, `tbl_df`>, logical> => (null | character[] | list<any>) | <class<`haven_labelled`> | class<`haven_labelled`, `haven_labelled_spss`> | ^double[] | class<`data.frame`, `tbl`, `tbl_df`> | class<`data.frame`>, any> => (character[] | double[] | null | list<any>) | <class<`haven_labelled`, `haven_labelled_spss`> | character[] | class<`haven_labelled`> | integer[] | class<`data.frame`, `tbl`, `tbl_df`>> => (null | double[] | list<null | double>);
 type `look_for` <class<`data.frame`>, ..., logical, logical, logical> => class<`data.frame`>;
 type `na_range` <class<`haven_labelled`, `haven_labelled_spss`> | class<`haven_labelled`> | integer[]> => (double[] | null);
 type `na_range<-` <class<`haven_labelled`> | class<`haven_labelled`, `haven_labelled_spss`> | integer[], null | double[]> => (class<`haven_labelled`> | class<`haven_labelled`, `haven_labelled_spss`> | integer[]);
@@ -48,11 +47,11 @@ type `val_label<-.data.frame` <class<`data.frame`>, double, character> => class<
 type `val_label<-.haven_labelled` <^double[] | class<`haven_labelled`>, double, character | null> => class<`haven_labelled`>;
 type `val_label.haven_labelled` <class<`haven_labelled`>, double, logical> => (character | null);
 type `val_label<-.numeric` <^double[], double, character> => class<`haven_labelled`>;
-type `val_labels` <class<`haven_labelled`> | class<`haven_labelled`, `haven_labelled_spss`> | ^double[] | class<`data.frame`, `tbl`, `tbl_df`> | class<`data.frame`>, any> => (character[] | double[] | null | list<any>);
-type `val_labels<-` <class<`data.frame`> | class<`factor`> | character[] | class<`haven_labelled`> | ^double[], double[] | null | character[] | list<double[]>> => (class<`data.frame`> | class<`factor`> | class<`haven_labelled`> | ^double[]);
+type `val_labels` <class<`haven_labelled`> | class<`haven_labelled`, `haven_labelled_spss`> | ^double[] | class<`data.frame`, `tbl`, `tbl_df`> | class<`data.frame`>, any> => (character[] | double[] | null | list<character[] | double[]> | list<double[]> | list<double[] | null> | list<null>);
+type `val_labels<-` <class<`data.frame`> | class<`factor`> | character[] | class<`haven_labelled`> | ^double[], double[] | null | list<double[]> | character[]> => (class<`data.frame`> | class<`factor`> | class<`haven_labelled`> | ^double[]);
 type `val_labels<-.character` <character[] | ^double[], character[] | double[] | null> => (class<`haven_labelled`> | integer[]);
 type `val_labels<-.data.frame` <class<`data.frame`>, double[] | null | list<double[]>> => class<`data.frame`>;
-type `val_labels.data.frame` <class<`data.frame`, `tbl`, `tbl_df`> | class<`data.frame`>, logical> => list<any>;
+type `val_labels.data.frame` <class<`data.frame`, `tbl`, `tbl_df`> | class<`data.frame`>, logical> => (list<character[] | double[]> | list<double[]> | list<double[] | null> | list<null>);
 type `val_labels<-.default` <class<`factor`>, double[]> => class<`factor`>;
 type `val_labels.default` <^double[], any> => null;
 type `val_labels<-.haven_labelled` <class<`haven_labelled`>, double[] | null> => (class<`haven_labelled`> | ^double[]);
@@ -60,9 +59,9 @@ type `val_labels.haven_labelled` <class<`haven_labelled`> | class<`haven_labelle
 type `val_labels<-.numeric` <character[] | ^double[], character[] | double[] | null> => (class<`haven_labelled`> | integer[]);
 type `val_labels_to_na` <class<`haven_labelled`>> => ^double[];
 type `val_labels_to_na.haven_labelled` <class<`haven_labelled`>> => ^double[];
-type `var_label` <character[] | class<`factor`> | class<`haven_labelled`> | class<`haven_labelled`, `haven_labelled_spss`> | class<`data.frame`> | ^double[] | class<`data.frame`, `tbl`, `tbl_df`>, logical> => (null | character[] | list<any>);
+type `var_label` <character[] | class<`factor`> | class<`haven_labelled`> | class<`haven_labelled`, `haven_labelled_spss`> | class<`data.frame`> | ^double[] | class<`data.frame`, `tbl`, `tbl_df`>, logical> => (null | character[] | list<character> | list<character | null> | list<null | character> | list<null>);
 type `var_label<-` <^character[] | class<`data.frame`> | class<`factor`> | class<`factor`, `ordered`> | class<`haven_labelled`> | class<`haven_labelled`, `haven_labelled_spss`> | double[], null | character[] | list<character>> => (^character[] | class<`data.frame`> | class<`factor`> | class<`factor`, `ordered`> | class<`haven_labelled`> | class<`haven_labelled`, `haven_labelled_spss`> | double[]);
 type `var_label<-.data.frame` <class<`data.frame`>, character[] | list<character>> => class<`data.frame`>;
-type `var_label.data.frame` <class<`data.frame`> | class<`data.frame`, `tbl`, `tbl_df`>, logical> => (character[] | list<any>);
+type `var_label.data.frame` <class<`data.frame`> | class<`data.frame`, `tbl`, `tbl_df`>, logical> => (character[] | list<character> | list<character | null> | list<null | character> | list<null>);
 type `var_label<-.default` <^character[] | class<`factor`> | class<`factor`, `ordered`> | class<`haven_labelled`> | class<`haven_labelled`, `haven_labelled_spss`> | double[], null | character> => (^character[] | class<`factor`> | class<`factor`, `ordered`> | class<`haven_labelled`> | class<`haven_labelled`, `haven_labelled_spss`> | double[]);
 type `var_label.default` <character[] | class<`factor`> | class<`haven_labelled`> | class<`haven_labelled`, `haven_labelled_spss`> | ^double[], logical> => (character | null);

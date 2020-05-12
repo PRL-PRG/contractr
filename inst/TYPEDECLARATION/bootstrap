@@ -1,8 +1,8 @@
 type `abcnon` <class<`matrix`> | double[], class<`function`>, double, double[]> => list<any>;
 type `bcanon` <double[], double, class<`function`>, ..., double[]> => list<class<`matrix`> | double[] | class<`call`>>;
 type `bootpred` <double[], double[], double, class<`function`>, class<`function`>, class<`function`>, ...> => list<double | class<`call`>>;
-type `bootstrap` <double[], double, class<`function`>, ..., class<`function`> | null> => list<double[] | class<`call`> | double[] | null | class<`call`>>;
-type `boott` <double[], class<`function`>, ..., class<`function`>, double, double, logical, double, double, double, double[]> => list<class<`matrix`> | double[] | class<`call`> | class<`matrix`> | null | class<`call`>>;
+type `bootstrap` <double[], double, class<`function`>, ..., class<`function`> | null> => (list<double[] | class<`call`>> | list<double[] | null | class<`call`>>);
+type `boott` <double[], class<`function`>, ..., class<`function`>, double, double, logical, double, double, double, double[]> => (list<class<`matrix`> | double[] | class<`call`>> | list<class<`matrix`> | null | class<`call`>>);
 type `crossval` <double[], double[], class<`function`>, class<`function`>, ..., double> => list<double[] | class<`call`> | list<integer[]>>;
 type `ctsub` <double[], double[], double[]> => double[];
 type `jackknife` <double[], class<`function`>, ...> => list<double[] | class<`call`>>;

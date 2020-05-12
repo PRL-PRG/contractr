@@ -53,7 +53,7 @@ type `Mobius.capacity` <double[], double, double> => class<`Mobius.capacity`>;
 type `Mobius.card.set.func` <double[]> => class<`Mobius.card.set.func`>;
 type `Mobius.game` <double[], double, double> => class<`Mobius.game`>;
 type `Mobius.set.func` <double[], double, double> => class<`Mobius.set.func`>;
-type `Mobius.set.func.internal` <double[], double, double> => list<double[] | integer[] | double>;
+type `Mobius.set.func.internal` <double[], double, double> => (list<double[]> | list<integer[] | double>);
 type `normalize` <class<`card.capacity`>, ...> => class<`card.capacity`> | <class<`Mobius.capacity`>, ...> => class<`Mobius.capacity`> | <class<`capacity`> | class<`card.capacity`> | class<`Mobius.capacity`>, ...> => (class<`capacity`> | class<`card.capacity`> | class<`Mobius.capacity`>) | <class<`capacity`>, ...> => class<`capacity`>;
 type `orness` <class<`capacity`> | class<`card.capacity`> | class<`Mobius.capacity`>, ...> => double | <class<`card.capacity`>, ...> => double | <class<`capacity`>, ...> => double | <class<`Mobius.capacity`>, ...> => double;
 type `rnd` <class<`card.capacity`>, double> => class<`card.capacity`> | <class<`set.func`>, double> => class<`set.func`> | <class<`Mobius.capacity`>, double> => class<`Mobius.capacity`> | <class<`capacity`> | class<`card.capacity`> | class<`Mobius.capacity`> | class<`set.func`>, double> => (class<`capacity`> | class<`card.capacity`> | class<`Mobius.capacity`> | class<`set.func`>) | <class<`capacity`>, double> => class<`capacity`>;

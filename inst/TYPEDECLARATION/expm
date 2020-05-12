@@ -1,5 +1,3 @@
-type `::` <class<`matrix`> | class<`dgCMatrix`> | class<`dgeMatrix`>, logical> => any | <class<`dgCMatrix`> | class<`matrix`>, character[], double, logical, any, logical, any> => any;
-type `:::` <class<`matrix`> | class<`dgeMatrix`>, double> => any;
 type `%^%` <class<`matrix`>, double> => class<`matrix`>;
 type `balance` <class<`dgeMatrix`> | class<`matrix`>, character[]> => any;
 type `dgebal` <class<`dgeMatrix`> | class<`matrix`>, character[]> => any;

@@ -1,4 +1,3 @@
-type `:::` < > => character;
 type `addFormats` <character[]> => null;
 type `anydate` <class<`POSIXct`, `POSIXt`> | character[] | class<`Date`> | class<`factor`> | class<`factor`, `ordered`> | double[], any, logical, any, logical> => class<`Date`>;
 type `anydate.Date` <class<`Date`>, any, logical, any, logical> => class<`Date`>;

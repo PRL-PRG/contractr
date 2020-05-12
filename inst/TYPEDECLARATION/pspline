@@ -1,5 +1,0 @@
-type `lines.smooth.Pspline` <class<`smooth.Pspline`>, ...> => null;
-type `predict.smooth.Pspline` <class<`smooth.Pspline`>, double[], double, ...> => class<`matrix`>;
-type `print.smooth.Pspline` <class<`smooth.Pspline`>, ...> => class<`smooth.Pspline`>;
-type `smooth.Pspline` <double[], double[], double[], double, double, double, double> => class<`smooth.Pspline`>;
-type `sm.spline` <double[], double[], any, logical, ...> => class<`smooth.Pspline`>;

@@ -5,9 +5,9 @@ type `accumulate.iforeach` <class<`iforeach`, `iter`>, class<`data.frame`> | cla
 type `accumulate.ixforeach` <class<`iter`, `ixforeach`>, class<`data.frame`> | double, double, ...> => null;
 type `callCombine` <class<`iforeach`, `iter`>, any> => null;
 type `complete` <class<`iforeach`, `iter`>> => logical;
-type `%do%` <class<`foreach`> | class<`foreach`, `xforeach`> | class<`filteredforeach`, `foreach`>, any> => (class<`matrix`> | class<`randomForest`> | double[] | null | list<double>);
+type `%do%` <class<`foreach`> | class<`foreach`, `xforeach`> | class<`filteredforeach`, `foreach`>, any> => (class<`matrix`> | class<`randomForest`> | double[] | list<double> | null);
 type `%dopar%` <class<`foreach`> | class<`foreach`, `xforeach`>, any> => (class<`data.frame`> | class<`matrix`> | class<`randomForest`> | integer[] | list<double>);
-type `foreach` <..., any, any, null, logical, logical, double, character[], character | null, null, null, logical> => class<`foreach`>;
+type `foreach` <..., any, any, null, logical, logical, double, character[], character | null> => class<`foreach`>;
 type `getDoPar` < > => list<class<`function`> | null>;
 type `getDoParName` < > => null;
 type `getDoParRegistered` < > => logical;
@@ -26,9 +26,9 @@ type `getErrorValue` <class<`ifilteredforeach`, `iter`> | class<`iforeach`, `ite
 type `getErrorValue.ifilteredforeach` <class<`ifilteredforeach`, `iter`>, ...> => null;
 type `getErrorValue.iforeach` <class<`iforeach`, `iter`> | class<`iter`, `ixforeach`>, ...> => null;
 type `getErrorValue.ixforeach` <class<`iforeach`, `iter`> | class<`iter`, `ixforeach`>, ...> => null;
-type `getResult` <class<`iforeach`, `iter`> | class<`iter`, `ixforeach`> | class<`ifilteredforeach`, `iter`>, ...> => (class<`data.frame`> | class<`matrix`> | class<`randomForest`> | double[] | null | list<double>);
+type `getResult` <class<`iforeach`, `iter`> | class<`iter`, `ixforeach`> | class<`ifilteredforeach`, `iter`>, ...> => (class<`data.frame`> | class<`matrix`> | class<`randomForest`> | double[] | list<double> | null);
 type `getResult.ifilteredforeach` <class<`ifilteredforeach`, `iter`> | class<`iter`, `ixforeach`>, ...> => (double[] | null | class<`data.frame`> | class<`matrix`>);
-type `getResult.iforeach` <class<`iforeach`, `iter`>, ...> => (class<`data.frame`> | class<`matrix`> | class<`randomForest`> | double[] | null | list<double>);
+type `getResult.iforeach` <class<`iforeach`, `iter`>, ...> => (class<`data.frame`> | class<`matrix`> | class<`randomForest`> | double[] | list<double> | null);
 type `getResult.ixforeach` <class<`ifilteredforeach`, `iter`> | class<`iter`, `ixforeach`>, ...> => (double[] | null | class<`data.frame`> | class<`matrix`>);
 type `iter.filteredforeach` <class<`filteredforeach`, `foreach`>, ...> => class<`ifilteredforeach`, `iter`>;
 type `iter.foreach` <class<`foreach`>, ..., list<any>> => class<`iforeach`, `iter`>;

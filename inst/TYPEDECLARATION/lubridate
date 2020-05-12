@@ -60,7 +60,6 @@ type `floor_multi_unit` <double, double> => double;
 type `floor_multi_unit1` <double, double> => double;
 type `force_tz` <class<`Date`> | class<`POSIXct`, `POSIXt`>, character, logical> => (class<`Date`> | class<`POSIXct`, `POSIXt`>);
 type `force_tzs` <class<`POSIXct`, `POSIXt`>, character[], character, logical> => class<`POSIXct`, `POSIXt`>;
-type `FUN` <character | class<`Interval`> | class<`Period`>, any, ...> => class<`Period`> | <character, character[], logical> => (character[] | null) | <character[] | double> => character[] | <class<`Interval`> | class<`Duration`> | class<`Period`> | double[]> => logical;
 type `.get_locale_regs` <character> => list<character[] | list<character[]>>;
 type `.get_train_set` <character[]> => character[];
 type `guess_formats` <character[], character[], character, logical, logical> => (character[] | null);
@@ -137,7 +136,7 @@ type `.parse_xxx` <..., character, any, null | character, character, double> => 
 type `.parse_xxx_hms` <..., character[], double, any, character, character> => class<`POSIXct`, `POSIXt`>;
 type `period` <character | double[] | null, character[], ...> => class<`Period`>;
 type `.period_from_num` <double[], character[]> => class<`Period`>;
-type `.period_from_units` <list<class<`difftime`> | double[]>> => class<`Period`>;
+type `.period_from_units` <list<class<`difftime`>> | list<double[]>> => class<`Period`>;
 type `period_to_seconds` <class<`Period`>> => double;
 type `pm` <class<`Date`>> => logical;
 type `pretty_dates` <class<`Date`>, double, ...> => class<`POSIXct`, `POSIXt`>;

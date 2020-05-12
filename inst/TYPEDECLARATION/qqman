@@ -1,4 +1,0 @@
-type `filter` <character[]> => logical[];
-type `fun` <...> => null;
-type `manhattan` <class<`data.frame`>, character, character, character, character, character[], null | character[], double, double, null | character[], logical, null | double> => list<logical>;
-type `qq` <double[], ...> => null;

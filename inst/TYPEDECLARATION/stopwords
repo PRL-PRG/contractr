@@ -1,6 +1,0 @@
-type `createError` <any, character, any> => class<`function`>;
-type `filter` <character[]> => logical[];
-type `fun` <...> => list<null>;
-type `get_stopwords_data` <character> => list<character[]>;
-type `stopwords` <character, character> => character[];
-type `stopwords_options` < > => list<character[] | null>;

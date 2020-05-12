@@ -1,6 +1,6 @@
 type `%==%` <double | integer[] | null, double | integer[] | null> => logical;
 type `all_true` <character | logical[]> => logical;
-type `assert` <any, ...> => (null | list<null | class<`function`> | list<null>>);
+type `assert` <any, ...> => (list<null | class<`function`> | list<null>> | null);
 type `assert2` <character | null, class<`call`>, environment, logical> => any;
 type `available_dir` <character[]> => any;
 type `deparse_key` <character | class<`call`> | class<`if`> | double> => character;

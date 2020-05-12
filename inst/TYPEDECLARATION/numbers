@@ -16,7 +16,6 @@ type `egyptian_methods` <double, double> => null;
 type `eulersPhi` <double> => double;
 type `extGCD` <double, double> => double[];
 type `fibonacci` <double, logical> => double[];
-type `FUN` <double> => double | <double> => double;
 type `GCD` <double, double> => double;
 type `hermiteNF` <class<`matrix`>> => list<class<`matrix`>>;
 type `iNthroot` <double, double> => double;

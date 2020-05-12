@@ -29,6 +29,6 @@ type `resolve` <class<`data.frame`> | class<`promise`> | double> => null;
 type `%...T>%` <class<`promise`>, any> => class<`promise`>;
 type `%...T!%` <class<`promise`>, any> => class<`promise`>;
 type `then` <class<`ClusterFuture`, `Future`, `MultiprocessFuture`, `MultisessionFuture`, `environment`> | class<`promise`>, class<`function`> | class<`formula`>, null | class<`formula`> | class<`function`>> => class<`promise`>;
-type `tryCatch` <class<`function`> | class<`promise`> | null | list<class<`function`> | class<`promise`>>, ..., any> => (class<`function`> | class<`promise`> | null | list<class<`function`> | class<`promise`>>);
+type `tryCatch` <class<`function`> | class<`promise`> | list<class<`function`>> | list<class<`promise`>> | null, ..., any> => (class<`function`> | class<`promise`> | list<class<`function`>> | list<class<`promise`>> | null);
 type `without_promise_domain` <class<`promise`>> => class<`promise`>;
 type `with_promise_domain` <null, class<`promise`>, logical> => class<`promise`>;

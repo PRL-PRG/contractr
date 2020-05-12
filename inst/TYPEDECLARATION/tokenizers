@@ -17,8 +17,8 @@ type `tokenize_ngrams` <character[] | list<character>, logical, double, any, any
 type `tokenize_ngrams.default` <character[] | list<character>, logical, double, double, character[], character, logical> => list<character[]>;
 type `tokenize_paragraphs` <character, character, logical> => list<character[]>;
 type `tokenize_paragraphs.default` <character, character, logical> => list<character[]>;
-type `tokenize_ptb` <character[] | list<character>, logical, logical> => list<character[]>;
-type `tokenize_ptb.default` <character[] | list<character>, logical, logical> => list<character[]>;
+type `tokenize_ptb` <list<character> | character[], logical, logical> => list<character[]>;
+type `tokenize_ptb.default` <list<character> | character[], logical, logical> => list<character[]>;
 type `tokenize_sentences` <character, logical, logical, logical> => list<character[]>;
 type `tokenize_sentences.default` <character, logical, logical, logical> => list<character[]>;
 type `tokenize_skip_ngrams` <character, logical, double, double, double, any, logical> => list<character[]>;

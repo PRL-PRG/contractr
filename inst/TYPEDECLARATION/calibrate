@@ -1,4 +1,4 @@
-type `calibrate` <class<`matrix`> | double[], class<`matrix`> | double[], double[], class<`matrix`>, any, double, logical, logical, logical, logical, character, logical, null, double, class<`matrix`>, character, double, logical, double, any> => list<null | class<`matrix`> | double[]>;
+type `calibrate` <class<`matrix`> | double[], class<`matrix`> | double[], double[], class<`matrix`>, any, double, logical, logical, logical, logical, character, logical, null, double, class<`matrix`>, character> => list<null | class<`matrix`> | double[]>;
 type `canocor` <class<`matrix`>, class<`matrix`>> => list<class<`matrix`>>;
 type `circle` <double, double[]> => null;
 type `dlines` <class<`matrix`>, class<`matrix`>, character> => null;

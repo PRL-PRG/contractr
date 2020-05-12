@@ -1,3 +1,3 @@
 type `is.R6` <class<`R6`> | class<`R6ClassGenerator`>> => logical;
 type `is.R6Class` <class<`R6`> | class<`R6ClassGenerator`>> => logical;
-type `R6Class` <character | null, list<any>, null | list<any>, null | list<class<`function`>>, any, logical, logical, logical, logical, logical, environment, any> => class<`R6ClassGenerator`>;
+type `R6Class` <character | null, list<any>, list<double> | list<class<`function`>> | list<class<`function`> | list<any>> | null | list<double | class<`function`>>, null | list<class<`function`>>, any, logical, logical, logical> => class<`R6ClassGenerator`>;

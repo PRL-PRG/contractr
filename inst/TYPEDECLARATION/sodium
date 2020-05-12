@@ -1,4 +1,3 @@
-type `::` <double> => raw[];
 type `auth_decrypt` <raw[], raw[], raw[], raw[]> => raw[];
 type `auth_encrypt` <raw[], raw[], raw[], raw[]> => raw[];
 type `bin2hex` <raw[]> => character;

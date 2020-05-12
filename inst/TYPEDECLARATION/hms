@@ -1,11 +1,11 @@
 type `as_hms` <character | class<`difftime`> | class<`POSIXct`, `POSIXt`> | double> => class<`difftime`, `hms`>;
 type `as.POSIXct.hms` <class<`difftime`, `hms`>, ...> => class<`POSIXct`, `POSIXt`>;
-type `check_args` <list<double | null | null | integer[] | null>> => null;
+type `check_args` <list<double | null> | list<null | integer[]> | list<null>> => null;
 type `hms` <double | null, double | null, double | null | integer[], null> => class<`difftime`, `hms`>;
-type `map2` <list<null | integer[] | null | double | null>, double[], class<`function`>, ...> => list<double[]>;
-type `map_int` <list<integer[] | double>, class<`function`>, ...> => integer[];
-type `map_lgl` <list<any>, class<`function`>, ...> => logical[];
-type `map_mold` <list<any>, class<`function`>, integer, ...> => integer[];
+type `map2` <list<null | integer[]> | list<null> | list<double | null>, double[], class<`function`>, ...> => list<double[]>;
+type `map_int` <list<integer[]> | list<double>, class<`function`>, ...> => integer[];
+type `map_lgl` <list<integer[]> | list<double | null> | list<null | integer[]> | list<null> | list<double>, class<`function`>, ...> => logical[];
+type `map_mold` <list<integer[]> | list<double> | list<double | null> | list<null | integer[]> | list<null>, class<`function`>, integer, ...> => integer[];
 type `new_hms` <double[]> => any;
 type `parse_hm` <character> => class<`difftime`, `hms`>;
 type `parse_hms` <character> => class<`difftime`, `hms`>;

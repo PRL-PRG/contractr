@@ -1,4 +1,3 @@
-type `:::` <..., character> => class<`matrix`>;
 type `aLine` <class<`dip`>, character, character, character, double, ...> => null;
 type `dip` <double[], character | logical, logical, double> => (class<`dip`> | double);
 type `dip.test` <double[], logical, double> => class<`htest`>;

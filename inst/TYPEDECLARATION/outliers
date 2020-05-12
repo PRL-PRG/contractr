@@ -1,7 +1,6 @@
 type `chisq.out.test` <double[], double, logical> => class<`htest`>;
 type `cochran.test` <class<`formula`> | double[], class<`data.frame`> | double[], logical> => class<`htest`>;
 type `dixon.test` <double[], double, logical, logical> => class<`htest`>;
-type `FUN` <double[] | class<`matrix`>, logical, any, logical> => (double[] | class<`matrix`>) | <double[] | class<`matrix`>, logical, logical> => (class<`matrix`> | double[]);
 type `grubbs.test` <double[], double, logical, logical> => class<`htest`>;
 type `outlier` <double[] | class<`matrix`>, logical, logical> => (class<`matrix`> | double[]);
 type `pcochran` <double, double, double> => double;

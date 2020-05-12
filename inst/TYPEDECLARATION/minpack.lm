@@ -1,6 +1,6 @@
 type `coef.nls.lm` <class<`nls.lm`>, ...> => double[];
 type `deviance.nls.lm` <class<`nls.lm`>, ...> => double;
-type `nls.lm` <double[] | list<double>, null, null, class<`function`>, null | class<`function`>, list<double | integer[] | list<any> | double>, ...> => class<`nls.lm`>;
+type `nls.lm` <double[] | list<double>, null, null, class<`function`>, null | class<`function`>, list<double | integer[] | list<any>> | list<double>, ...> => class<`nls.lm`>;
 type `nlsLM` <class<`formula`>, class<`data.frame`> | class<`data.frame`, `groupedData`, `nfGroupedData`, `nfnGroupedData`> | environment, any, null, character, any, null, null, logical, any, any, any, logical, ...> => any;
 type `nls.lm.control` <double, double, double, list<any>, double, double, integer[], double, double> => list<double | integer[] | list<any>>;
 type `nlsModel` <class<`formula`>, list<double[]>, double[] | list<double>, double[], null> => class<`nlsModel`>;

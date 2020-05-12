@@ -7,11 +7,10 @@ type `bootstrap` <class<`data.frame`>, double, character> => class<`data.frame`,
 type `crossv_kfold` <class<`data.frame`>, double, character> => class<`data.frame`, `tbl`, `tbl_df`>;
 type `crossv_mc` <class<`data.frame`>, double, double, character> => class<`data.frame`, `tbl`, `tbl_df`>;
 type `data_grid` <class<`data.frame`>, ..., class<`lm`> | null> => class<`data.frame`, `tbl`, `tbl_df`>;
-type `.f` <class<`data.frame`>, class<`lm`>, character, null> => class<`data.frame`> | <class<`data.frame`, `tbl`, `tbl_df`>, class<`lm`>, character> => class<`data.frame`, `tbl`, `tbl_df`> | <class<`data.frame`>, integer[]> => class<`resample`> | <class<`call`> | double | class<`(`> | class<`name`> | class<`formula`>> => character[];
 type `find_binding_env` <character, environment> => null;
 type `find_symbols` <class<`call`> | double | class<`(`> | class<`name`> | class<`formula`>> => character[];
 type `find_symbols_call` <class<`call`> | class<`formula`> | class<`(`>> => character[];
-type `fit_with` <class<`data.frame`>, class<`function`>, list<class<`formula`>>, ...> => list<class<`glm`, `lm`> | class<`lm`>>;
+type `fit_with` <class<`data.frame`>, class<`function`>, list<class<`formula`>>, ...> => (list<class<`glm`, `lm`>> | list<class<`lm`>>);
 type `formulas` <class<`formula`>, ...> => list<class<`formula`>>;
 type `gather_predictions` <class<`data.frame`>, ..., character, character, null> => class<`data.frame`>;
 type `gather_residuals` <class<`data.frame`, `tbl`, `tbl_df`>, ..., character, character> => class<`data.frame`, `tbl`, `tbl_df`>;

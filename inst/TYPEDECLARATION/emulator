@@ -4,10 +4,7 @@ type `cond.sample` <double, class<`matrix`>, class<`matrix`>, double[], any, cla
 type `corr` <double[], double[], double[] | null, null | class<`matrix`>, character, null> => double;
 type `corr.matrix` <class<`matrix`> | class<`data.frame`>, class<`matrix`> | null | class<`data.frame`>, double, class<`function`>, ...> => class<`matrix`>;
 type `cprod` <class<`matrix`> | double[], class<`matrix`> | double[]> => class<`matrix`>;
-type `distance.function` <double[], double[], double[] | null, null | class<`matrix`>, character, null> => double;
 type `estimator` <class<`matrix`>, class<`matrix`>, double[], double[], null, class<`function`>> => double[];
-type `FUN` <double[]> => double[];
-type `func` <double[]> => double[];
 type `ht` <class<`matrix`> | class<`data.frame`>> => class<`matrix`>;
 type `interpolant` <double[], double[], class<`matrix`>, class<`matrix`>, null, logical, double[], null, class<`function`>, logical, class<`function`>, ...> => (double | list<double[] | class<`matrix`>>);
 type `interpolant.quick` <class<`matrix`>, double[], class<`matrix`> | class<`data.frame`>, class<`matrix`>, double[], null, class<`function`>, logical, class<`function`>, ...> => (double[] | list<double[]>);

@@ -5,7 +5,7 @@ type `.fdcov` <double[], double, any, double, double, class<`matrix`>, double[]>
 type `fdGPH` <double[], double> => list<double>;
 type `fdSperio` <double[], double, double> => list<double>;
 type `fracdiff` <double[], double, double, null | ^logical[], null, double | null, double[], any, double, double> => class<`fracdiff`>;
-type `fracdiff.sim` <double, double[] | null, double[] | null, double, class<`function`>, double[], double | null, logical, logical, double[], ..., double> => list<double[] | double[] | null>;
+type `fracdiff.sim` <double, double[] | null, double[] | null, double, class<`function`>, double[], double | null, logical, logical, double[], ..., double> => (list<double[]> | list<double[] | null>);
 type `fracdiff.var` <double[], class<`fracdiff`>, double> => class<`fracdiff`>;
 type `logLik.fracdiff` <class<`fracdiff`>, ...> => class<`logLik`>;
 type `summary.fracdiff` <class<`fracdiff`>, logical, ...> => class<`summary.fracdiff`>;

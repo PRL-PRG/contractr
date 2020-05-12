@@ -1,7 +1,7 @@
 type `adjacency.landkreis` <character> => class<`spam`>;
 type `all.equal` <class<`matrix`>, class<`spam`>, ...> => logical | <class<`spam`>, class<`spam`>, ...> => (character[] | logical) | <class<`spam`>, class<`matrix`>, ...> => logical;
 type `all.equal.spam` <class<`spam`>, class<`spam`>, any, null, logical, ...> => (character[] | logical);
-type `apply.spam` <class<`spam`>, double[] | null, class<`function`>, ...> => (class<`matrix`> | class<`spam`> | double[] | list<class<`table`> | double[]>);
+type `apply.spam` <class<`spam`>, double[] | null, class<`function`>, ...> => (class<`matrix`> | class<`spam`> | double[] | list<class<`table`>> | list<double[]>);
 type `as.matrix` <class<`spam`>, ...> => class<`matrix`>;
 type `as.matrix.spam` <class<`spam`>, ...> => class<`matrix`>;
 type `assign.spam` <class<`spam`>, class<`matrix`> | double | integer[], null | double | integer[], double[] | class<`matrix`>> => class<`spam`>;
@@ -40,7 +40,7 @@ type `forwardsolve` <class<`spam.chol.NgPeyton`>, class<`matrix`> | double[], ..
 type `germany.plot` <double[], integer[] | null, double[], logical, null, double, double, logical, ...> => null;
 type `getEigenval` <double[], integer, integer, integer, logical> => list<^double[]>;
 type `grid_trace2` <double[], double[], null, null, null, character, character, character, double[], null, logical, class<`unit`>, class<`unit`>, class<`unit`>, class<`unit`>, logical> => class<`gDesc`, `gTree`, `grob`>;
-type `grid_zoom` <class<`gDesc`, `grob`, `points`> | class<`gDesc`, `gTree`, `grob`>, class<`viewport`>, character, any, any, double[], double[], double[], logical, double, character, logical, character, class<`gpar`>, null | class<`gpar`>, class<`axis`, `gDesc`, `gTree`, `grob`, `xaxis`> | null, null> => class<`gDesc`, `gTree`, `grob`>;
+type `grid_zoom` <class<`gDesc`, `grob`, `points`> | class<`gDesc`, `gTree`, `grob`>, class<`viewport`>, character, any, any, double[], double[], double[], logical, double, character, logical, character, class<`gpar`>, null | class<`gpar`>, class<`axis`, `gDesc`, `gTree`, `grob`, `xaxis`> | null> => class<`gDesc`, `gTree`, `grob`>;
 type `head` <class<`spam`>, ...> => class<`matrix`>;
 type `image` <class<`spam`>, ...> => null;
 type `image.spam` <class<`spam`>, double[], any, any, any, any, any, logical, character, character, any, any, any, logical, any, ...> => null;
@@ -50,7 +50,6 @@ type `isSymmetric` <class<`spam`>, ...> => logical;
 type `isSymmetric.spam` <class<`spam`>, double, ...> => logical;
 type `kronecker` <class<`spam`>, class<`spam`>, character, logical, ...> => class<`spam`> | <class<`spam`>, class<`matrix`>, character, logical, ...> => class<`spam`>;
 type `kronecker.spam` <class<`matrix`>, class<`matrix`>, character, logical, ...> => class<`spam`>;
-type `.local` <class<`spam`>, class<`spam`>, any, null, logical, ...> => (character[] | logical) | <class<`spam`>, character | integer[], character, list<any>, double, null, ...> => class<`spam.chol.NgPeyton`> | <class<`spam`>, any, any> => double[] | <class<`spam`>, double, ...> => logical;
 type `lower.tri` <class<`spam`>, logical> => class<`spam`>;
 type `matrix_add_spammatrix` <class<`spam`>, class<`matrix`>> => class<`matrix`>;
 type `matrix_sub_matrixspam` <class<`matrix`>, class<`spam`>> => class<`matrix`>;
@@ -92,7 +91,7 @@ type `summary` <class<`spam.chol.NgPeyton`>, ...> => class<`summary.spam.chol.Ng
 type `t` <class<`spam`>> => class<`spam`>;
 type `tail` <class<`spam`>, ...> => class<`matrix`>;
 type `toeplitz.spam` <double[], double[] | null, double> => class<`spam`>;
-type `triplet` <class<`spam`>, logical> => list<double[] | class<`matrix`> | double[]>;
+type `triplet` <class<`spam`>, logical> => (list<double[]> | list<class<`matrix`> | double[]>);
 type `t.spam` <class<`spam`>> => class<`spam`>;
 type `update.spam.chol.NgPeyton` <class<`spam.chol.NgPeyton`>, class<`spam`>, ...> => (class<`spam.chol.NgPeyton`> | null);
 type `upper.tri` <class<`spam`>, logical> => class<`spam`>;

@@ -10,7 +10,6 @@ type `.bsPhi` <double, double, double, double, double, double, double, double> =
 type `CBND` <double, double, double> => double;
 type `CND` <double> => double;
 type `CRRBinomialTreeOption` <character, double, double, double, double, double, double, double, null, null> => class<`fOPTION`>;
-type `f` <double[], logical, logical, double, double[]> => double;
 type `.fHN` <double[], double, list<double>, double, double, double, double> => complex[];
 type `GBSCharacteristics` <character, double, double, double, double, double, double> => list<double>;
 type `.GBSDelta` <character, double, double, double, double, double, double> => double;

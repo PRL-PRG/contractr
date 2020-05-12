@@ -1,9 +1,0 @@
-type `bestCriterion` <double[], character> => integer;
-type `buildCriteriaList` <character[], logical> => character[];
-type `clust_canonify` <integer[]> => integer[];
-type `concordance` <integer[], integer[]> => class<`matrix`>;
-type `extCriteria` <integer[], integer[], character[]> => list<double>;
-type `filter` <character[]> => logical[];
-type `fun` <character, character> => class<`DLLInfo`>;
-type `getCriteriaNames` <logical> => character[];
-type `intCriteria` <class<`matrix`>, integer[], character[]> => list<double>;

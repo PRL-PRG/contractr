@@ -1,6 +1,5 @@
 type `frobenius.norm` <class<`matrix`>> => double;
-type `FUN` <class<`data.frame`> | class<`matrix`> | double[]> => double[] | <double, double[]> => double;
-type `MaRaTe.internal` <class<`matrix`>, class<`matrix`> | null, character> => list<double | class<`matrix`> | double>;
+type `MaRaTe.internal` <class<`matrix`>, class<`matrix`> | null, character> => (list<double | class<`matrix`>> | list<double>);
 type `MaRaTe.internal.csample` <class<`matrix`>, class<`factor`>, character, ...> => list<double | class<`matrix`>>;
 type `mat.sqrt` <class<`matrix`>> => class<`matrix`>;
 type `mycolMeans` <class<`data.frame`> | class<`matrix`> | double[]> => double[];
@@ -13,5 +12,5 @@ type `rank.ctest.formula` <class<`formula`>, any, ...> => class<`htest`>;
 type `rank.ctest.ics` <class<`ics`>, class<`factor`> | null, double[], any, ...> => class<`htest`>;
 type `sumsignout` <class<`matrix`>> => class<`matrix`>;
 type `T.vdw.loc` <double, double[]> => double;
-type `tyler.shape` <class<`matrix`>, double | null, null, double, double, double, logical, logical, class<`function`>> => class<`matrix`>;
+type `tyler.shape` <class<`matrix`>, double | null, null, double, double, double, logical, logical> => class<`matrix`>;
 type `vdw.loc` <double[], double, double, class<`function`>> => double;

@@ -1,7 +1,6 @@
 type `%||%` <null, integer[]> => integer[];
 type `alias_lookup` < > => character[];
-type `compact` <character | list<any>> => (character | list<any>);
-type `FUN` <character | list<any>> => (character | list<any>);
+type `compact` <list<any> | character> => (list<any> | character);
 type `get_svg_content` <externalptr> => character;
 type `htmlSVG` <class<`histogram`> | null, ...> => class<`character`, `html`>;
 type `ilapply` <list<any>, class<`function`>, ...> => list<any>;

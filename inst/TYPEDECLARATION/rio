@@ -4,7 +4,7 @@ type `characterize.default` <double[], ...> => ^character[];
 type `compress_out` <character, class<`character`, `rio_csv`>, character> => character;
 type `convert` <character, character, list<any>, list<any>> => character;
 type `export` <character[] | class<`data.frame`> | list<class<`data.frame`>>, any, any, ...> => character;
-type `.export` <class<`character`, `rio_dump`> | class<`character`, `rio_dta`> | class<`character`, `rio_sav`> | class<`character`, `rio_xlsx`> | class<`character`, `rio_csv`> | class<`character`, `rio_json`> | class<`character`, `rio_rdata`> | class<`character`, `rio_rds`> | class<`character`, `rio_tsv`>, class<`data.frame`> | character[] | list<class<`data.frame`>>, ...> => (character | class<`data.frame`> | class<`Workbook`> | null);
+type `.export` <class<`character`, `rio_dump`> | class<`character`, `rio_dta`> | class<`character`, `rio_sav`> | class<`character`, `rio_xlsx`> | class<`character`, `rio_csv`> | class<`character`, `rio_json`> | class<`character`, `rio_rdata`> | class<`character`, `rio_rds`> | class<`character`, `rio_tsv`>, class<`data.frame`> | list<class<`data.frame`>> | character[], ...> => (character | class<`data.frame`> | class<`Workbook`> | null);
 type `export_delim` <class<`character`, `rio_csv`> | class<`character`, `rio_tsv`>, class<`data.frame`>, logical, character, logical, logical, ...> => null;
 type `.export.rio_csv` <class<`character`, `rio_csv`>, class<`data.frame`>, character, character, ...> => null;
 type `.export.rio_dta` <class<`character`, `rio_dta`>, class<`data.frame`>, ...> => class<`data.frame`>;
@@ -18,8 +18,7 @@ type `.export.rio_xlsx` <class<`character`, `rio_xlsx`>, list<class<`data.frame`
 type `factorize` <class<`data.frame`> | double[], ...> => (class<`data.frame`> | class<`factor`>);
 type `factorize.data.frame` <class<`data.frame`>, ...> => class<`data.frame`>;
 type `factorize.default` <double[], ...> => class<`factor`>;
-type `find_compress` <character> => list<character | character | null>;
-type `FUN` <class<`data.frame`> | double[], ...> => (^character[] | class<`data.frame`>) | <class<`data.frame`> | double[], ...> => (class<`data.frame`> | class<`factor`>);
+type `find_compress` <character> => (list<character> | list<character | null>);
 type `gather_attrs` <class<`data.frame`>> => class<`data.frame`>;
 type `get_ext` <character> => character;
 type `get_type` <character> => character;

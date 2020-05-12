@@ -1,7 +1,0 @@
-type `ash1` <list<double[]>, double, double[]> => list<double[]>;
-type `ash2` <list<class<`matrix`> | integer>, double[], double[]> => list<class<`matrix`> | double[]>;
-type `bin1` <double[], double[], double> => list<double[]>;
-type `bin2` <class<`matrix`>, class<`matrix`>, double[]> => list<class<`matrix`> | integer>;
-type `center` <double[], integer> => list<double[]>;
-type `filter` <character[]> => logical[];
-type `nicerange` <double[], double> => double[];

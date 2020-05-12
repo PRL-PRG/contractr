@@ -1,11 +1,11 @@
 type `as.function.formula` <class<`formula`>, ...> => class<`function`>;
 type `$.fn` <class<`fn`>, character> => class<`function`>;
-type `gsubfn` <any, any, character[], any, logical, logical, null | character, environment, ...> => character[];
+type `gsubfn` <any, any, character[], any, logical, logical, null | character, environment> => character[];
 type `match.funfn` <character | class<`formula`> | class<`function`> | class<`result`> | class<`protoMethod`>, logical> => (class<`function`> | class<`protoMethod`>);
-type `ostrapply` <character[], character, class<`environment`, `proto`> | class<`function`>, logical, ..., any, class<`formula`> | logical, logical, class<`function`>> => (class<`matrix`> | list<character[]>);
+type `ostrapply` <character[], character, class<`environment`, `proto`> | class<`function`>, logical, ..., any, class<`formula`> | logical, logical> => (class<`matrix`> | list<character[]>);
 type `read.pattern` <any, character, logical, character, character, character, ...> => class<`data.frame`>;
 type `[<-.result` <class<`result`>, ..., class<`eigen`> | class<`lm`> | class<`matrix`> | class<`qr`> | list<double>> => class<`result`>;
-type `strapply` <character[], character, class<`function`> | class<`result`> | class<`environment`, `proto`>, any, ..., any, logical, logical, any, class<`function`> | logical | class<`formula`>, any, class<`function`> | class<`result`>> => (character[] | class<`matrix`> | list<character[] | list<character[]>>);
+type `strapply` <character[], character, class<`function`> | class<`result`> | class<`environment`, `proto`>, any, ..., any, logical, logical> => (character[] | class<`matrix`> | list<character[]> | list<list<character[]>>);
 type `strapply1` <character, character, null, logical> => class<`matrix`>;
 type `strapplyc` <character[], character, null, logical, logical, any, any> => list<character[]>;
 type `tclList2R` <character, class<`function`>> => list<character[]>;

@@ -3,7 +3,7 @@ type `disp` <double[], class<`matrix`>, double[], class<`scores`>> => class<`mat
 type `drop.test` <class<`rfit`>, class<`rfit`> | null> => class<`drop.test`>;
 type `getScores` <class<`scores`>, double[]> => double[] | <class<`scores`>, double[]> => double[];
 type `getScoresDeriv` <class<`scores`>, double[]> => double[] | <class<`scores`>, double[]> => double[];
-type `jaeckel` <class<`matrix`>, double[], double[], class<`scores`>, null, ...> => list<double[] | null | double | integer[] | null>;
+type `jaeckel` <class<`matrix`>, double[], double[], class<`scores`>, null, ...> => (list<double[] | null> | list<double | integer[] | null>);
 type `khmat` <class<`data.frame`>, class<`data.frame`>> => class<`matrix`>;
 type `kwayr` <integer[], class<`data.frame`>> => list<class<`matrix`> | class<`rfit`>>;
 type `oneway.rfit` <integer[], class<`factor`>, any, character> => class<`oneway.rfit`>;

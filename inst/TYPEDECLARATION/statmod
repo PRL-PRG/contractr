@@ -9,7 +9,6 @@ type `elda` <double[], double[], double[], double[], logical, double, logical> =
 type `eldaOneGroup` <double[], double[], double[], logical, double, double, double, logical> => list<double[]>;
 type `fitNBP` <class<`matrix`>, double[], double[], double, double, logical> => list<class<`matrix`> | double>;
 type `forward` <double[], class<`matrix`>, null, logical, integer> => double[];
-type `fun` <class<`matrix`>, class<`matrix`>> => double;
 type `gauss.quad` <double, character, double, double> => list<double[]>;
 type `gauss.quad.prob` <double, character, double, double, double, double, double, double> => list<double[]>;
 type `glmgam.fit` <class<`matrix`> | double[], double[] | class<`matrix`>, null | double[], double, double, logical> => list<double[]>;

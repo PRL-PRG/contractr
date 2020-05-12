@@ -17,10 +17,10 @@ type `tidy.DocumentTermMatrix` <class<`DocumentTermMatrix`, `simple_triplet_matr
 type `tidy.LDA` <class<`LDA_VEM`>, character[], logical, ...> => class<`data.frame`, `tbl`, `tbl_df`>;
 type `tidy.simple_triplet_matrix` <class<`DocumentTermMatrix`, `simple_triplet_matrix`> | class<`simple_triplet_matrix`>, character[] | null, character[] | null, ...> => class<`data.frame`, `tbl`, `tbl_df`>;
 type `tidy_topicmodels` <class<`LDA_VEM`>, character[], logical, ...> => class<`data.frame`, `tbl`, `tbl_df`>;
-type `tidy_triplet` <any, class<`data.frame`, `sparseSummary`> | list<double[]>, character[] | null, character[] | null> => class<`data.frame`, `tbl`, `tbl_df`>;
-type `unnest_characters` <class<`data.frame`, `tbl`, `tbl_df`>, any, any, logical, character[], logical, logical, null, ...> => class<`data.frame`, `tbl`, `tbl_df`>;
-type `unnest_character_shingles` <class<`data.frame`, `tbl`, `tbl_df`>, any, any, double, double, logical, character[], logical, logical, null, ...> => class<`data.frame`, `tbl`, `tbl_df`>;
+type `tidy_triplet` <any, list<double[]> | class<`data.frame`, `sparseSummary`>, character[] | null, character[] | null> => class<`data.frame`, `tbl`, `tbl_df`>;
+type `unnest_characters` <class<`data.frame`, `tbl`, `tbl_df`>, any, any, logical, character[], logical, logical, null> => class<`data.frame`, `tbl`, `tbl_df`>;
+type `unnest_character_shingles` <class<`data.frame`, `tbl`, `tbl_df`>, any, any, double, double, logical, character[], logical> => class<`data.frame`, `tbl`, `tbl_df`>;
 type `unnest_ptb` <class<`data.frame`, `tbl`, `tbl_df`>, any, any, character[], logical, logical, null, ...> => class<`data.frame`, `tbl`, `tbl_df`>;
-type `unnest_tokens` <class<`data.frame`, `grouped_df`, `tbl`, `tbl_df`> | class<`data.frame`, `tbl`, `tbl_df`>, any, any, character | class<`function`>, any, logical, logical, null | logical, ...> => (class<`data.frame`, `grouped_df`, `tbl`, `tbl_df`> | class<`data.frame`, `tbl`, `tbl_df`>);
-type `unnest_tokens.data.frame` <class<`data.frame`, `grouped_df`, `tbl`, `tbl_df`> | class<`data.frame`, `tbl`, `tbl_df`>, any, any, character | class<`function`>, character[], logical, logical, null | logical, ...> => (class<`data.frame`, `grouped_df`, `tbl`, `tbl_df`> | class<`data.frame`, `tbl`, `tbl_df`>);
-type `unnest_tweets` <class<`data.frame`, `tbl`, `tbl_df`>, any, any, logical, logical, character[], logical, logical, null, ...> => class<`data.frame`, `tbl`, `tbl_df`>;
+type `unnest_tokens` <class<`data.frame`, `grouped_df`, `tbl`, `tbl_df`> | class<`data.frame`, `tbl`, `tbl_df`>, any, any, character | class<`function`>, any, logical, logical, null | logical> => (class<`data.frame`, `grouped_df`, `tbl`, `tbl_df`> | class<`data.frame`, `tbl`, `tbl_df`>);
+type `unnest_tokens.data.frame` <class<`data.frame`, `grouped_df`, `tbl`, `tbl_df`> | class<`data.frame`, `tbl`, `tbl_df`>, any, any, character | class<`function`>, character[], logical, logical, null | logical> => (class<`data.frame`, `grouped_df`, `tbl`, `tbl_df`> | class<`data.frame`, `tbl`, `tbl_df`>);
+type `unnest_tweets` <class<`data.frame`, `tbl`, `tbl_df`>, any, any, logical, logical, character[], logical, logical> => class<`data.frame`, `tbl`, `tbl_df`>;

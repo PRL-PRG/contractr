@@ -1,7 +1,6 @@
-type `:::` <character[], character[]> => any;
 type `adjusted` <character[], ...> => class<`function`>;
 type `adjusted_calpha` <...> => class<`function`>;
-type `allsubsets` <integer[]> => list<integer[] | null>;
+type `allsubsets` <integer[]> => (list<integer[]> | list<null>);
 type `as.char` <class<`name`>> => character;
 type `.bdiag` <...> => class<`matrix`>;
 type `bread.mmm` <class<`mmm`>, ...> => class<`matrix`>;
@@ -24,7 +23,7 @@ type `extr` <class<`glht`, `summary.glht`> | class<`confint.glht`, `glht`>> => l
 type `factor_contrasts` <class<`aovlist`, `listof`> | class<`aov`, `lm`> | class<`coxph`> | class<`glm`, `lm`> | class<`lm`> | class<`polr`> | class<`survreg`> | class<`lme`> | class<`coxme`> | class<`lmerMod`> | class<`colr`, `mlt`, `mlt_fit`, `mlt_setup`, `tram`>> => any;
 type `Ftest` < > => class<`function`>;
 type `get_letters` <integer, character[], any> => character[];
-type `glht` <class<`aov`, `lm`> | class<`colr`, `mlt`, `mlt_fit`, `mlt_setup`, `tram`> | class<`coxme`> | class<`coxph`> | class<`glmerMod`> | class<`glm`, `lm`> | class<`lm`> | class<`lme`> | class<`lmerMod`> | class<`lmrob`> | class<`mmm`> | class<`nls`> | class<`parm`> | class<`polr`> | class<`survreg`> | class<`aovlist`, `listof`> | list<double[] | class<`matrix`>>, any, ...> => any;
+type `glht` <class<`aov`, `lm`> | class<`colr`, `mlt`, `mlt_fit`, `mlt_setup`, `tram`> | class<`coxme`> | class<`coxph`> | class<`glmerMod`> | class<`glm`, `lm`> | class<`lm`> | class<`lme`> | class<`lmerMod`> | class<`lmrob`> | class<`mmm`> | class<`nls`> | class<`parm`> | class<`polr`> | class<`survreg`> | list<double[] | class<`matrix`>> | class<`aovlist`, `listof`>, any, ...> => any;
 type `glht.character` <class<`aov`, `lm`> | class<`glm`, `lm`> | class<`lm`> | class<`parm`> | list<double[] | class<`matrix`>>, character[], ...> => class<`glht`>;
 type `glht.matrix` <class<`mmm`> | class<`aov`, `lm`> | class<`colr`, `mlt`, `mlt_fit`, `mlt_setup`, `tram`> | class<`coxme`> | class<`coxph`> | class<`glmerMod`> | class<`glm`, `lm`> | class<`lm`> | class<`lme`> | class<`lmerMod`> | class<`lmrob`> | class<`nls`> | class<`parm`> | class<`polr`> | class<`survreg`> | list<double[] | class<`matrix`>>, class<`matrix`>, character[], double[], ...> => class<`glht`>;
 type `glht.mcp` <class<`aov`, `lm`> | class<`colr`, `mlt`, `mlt_fit`, `mlt_setup`, `tram`> | class<`coxme`> | class<`coxph`> | class<`glm`, `lm`> | class<`lm`> | class<`lme`> | class<`lmerMod`> | class<`polr`> | class<`survreg`> | class<`aovlist`, `listof`>, class<`mcp`>, ...> => any;

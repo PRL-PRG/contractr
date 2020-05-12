@@ -14,7 +14,7 @@ type `getStructureType` <class<`SDMXStructureType`>> => character | <class<`SDMX
 type `isRegistryInterfaceEnvelope` <class<`XMLAbstractDocument`, `XMLInternalDocument`>, logical> => logical;
 type `isSoapRequestEnvelope` <class<`XMLAbstractDocument`, `XMLInternalDocument`>, any> => logical;
 type `namespaces.SDMX` <class<`XMLAbstractDocument`, `XMLInternalDocument`>> => class<`data.frame`>;
-type `readSDMX` <character | null, logical, logical, null, null | character, null, null, null | character, null, null, null | character, null | list<character | null>, character, null | double, null | double, logical, logical, logical> => any;
+type `readSDMX` <character | null, logical, logical, null, null | character, null, null, null | character> => any;
 type `saveSDMX` <class<`SDMXCodelists`> | class<`SDMXMessageGroup`>, character> => null;
 type `SDMX` <class<`XMLAbstractDocument`, `XMLInternalDocument`>, class<`data.frame`>> => class<`SDMX`>;
 type `SDMXCodelists` <class<`XMLAbstractDocument`, `XMLInternalDocument`>, class<`data.frame`>> => class<`SDMXCodelists`>;
@@ -25,7 +25,7 @@ type `SDMXGenericData` <class<`XMLAbstractDocument`, `XMLInternalDocument`>, cla
 type `SDMXHeader` <class<`XMLAbstractDocument`, `XMLInternalDocument`>, class<`data.frame`>> => class<`SDMXHeader`>;
 type `SDMXMessageGroup` <class<`XMLAbstractDocument`, `XMLInternalDocument`>, class<`data.frame`>> => class<`SDMXMessageGroup`>;
 type `SDMXRequestBuilder` <character, character, null, list<class<`function`>>, list<class<`function`>>, logical, list<any>> => class<`SDMXRequestBuilder`>;
-type `SDMXRequestParams` <character, character, null, character, character | null, character, character | null, character | null, character, null | character, null | double, null | double, any> => class<`SDMXRequestParams`>;
+type `SDMXRequestParams` <character, character, null, character, character | null, character, character | null, character | null> => class<`SDMXRequestParams`>;
 type `SDMXREST20RequestBuilder` <character, character, null, logical, list<any>, logical, logical> => class<`SDMXREST20RequestBuilder`>;
 type `SDMXREST21RequestBuilder` <character, character, character | null, logical, list<any>, logical, logical> => class<`SDMXREST21RequestBuilder`>;
 type `SDMXSchema` <any, class<`data.frame`>> => class<`SDMXSchema`>;

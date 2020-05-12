@@ -1,4 +1,3 @@
-type `::` <class<`array`> | class<`matrix`> | double[], any> => (class<`size_t`> | integer) | <double, double> => double | <class<`matrix`>, any> => class<`size_t`>;
 type `as.size_t` <integer[]> => class<`size_t`>;
 type `ceil` <double[]> => double[];
 type `cell` <...> => class<`matrix`>;
@@ -24,7 +23,7 @@ type `jet.colors` <double> => character[];
 type `linspace` <double, double, double> => double[];
 type `logspace` <double, double, double> => double[];
 type `magic` <double> => class<`matrix`>;
-type `meshgrid` <integer[], any, any, double> => list<class<`array`> | class<`matrix`>>;
+type `meshgrid` <integer[], any, any, double> => (list<class<`array`>> | list<class<`matrix`>>);
 type `mkconstarray` <character, double, class<`matrix`>> => (class<`array`> | class<`matrix`>);
 type `mod` <double, double> => double;
 type `multiline.plot.colors` < > => character[];

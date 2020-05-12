@@ -1,4 +1,0 @@
-type `area` <double[], double[]> => double;
-type `filter` <character[]> => logical[];
-type `survivalROC` <integer[], integer[], double[], null, double, null, character, null, double | null, character> => list<double[]>;
-type `survivalROC.C` <integer[], integer[], double[], double, double> => list<double[]>;

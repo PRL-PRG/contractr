@@ -1,5 +1,5 @@
 type `addAutoFilter` <class<`jobjRef`>, character> => class<`jobjRef`>;
-type `addDataFrame` <class<`data.frame`>, class<`jobjRef`>, logical, logical, double, double, list<class<`CellStyle`>>, class<`CellStyle`> | null, null | class<`CellStyle`>, logical, character, logical> => class<`CellBlock`>;
+type `addDataFrame` <class<`data.frame`>, class<`jobjRef`>, logical, logical, double, double, list<class<`CellStyle`>>, class<`CellStyle`> | null, null | class<`CellStyle`>> => class<`CellBlock`>;
 type `addHyperlink` <class<`jobjRef`>, character, character[], null> => null;
 type `addMergedRegion` <class<`jobjRef`>, double, double, double, double> => integer;
 type `addPicture` <character, class<`jobjRef`>, double, double, double> => class<`jobjRef`>;
@@ -26,7 +26,6 @@ type `createWorkbook` <character> => class<`jobjRef`>;
 type `DataFormat` <character> => class<`DataFormat`>;
 type `Fill` <character, character, character> => class<`Fill`>;
 type `Font` <class<`jobjRef`>, character | null, null | double, null | character, logical, logical, logical, double | null, null> => class<`Font`>;
-type `FUN` <character> => class<`jobjRef`>;
 type `getCellComment` <class<`jobjRef`>> => class<`jobjRef`>;
 type `getCells` <list<class<`jobjRef`>>, null, logical> => list<class<`jobjRef`>>;
 type `getRanges` <class<`jobjRef`>> => list<class<`jobjRef`>>;
@@ -39,7 +38,7 @@ type `is.DataFormat` <class<`Alignment`> | class<`Border`> | class<`DataFormat`>
 type `is.Fill` <class<`Fill`> | class<`Font`>> => logical;
 type `is.Font` <class<`Font`>> => logical;
 type `loadWorkbook` <character, null> => class<`jobjRef`>;
-type `printSetup` <class<`jobjRef`>, null, null, double, null, null, null, logical, null, null, null> => class<`jobjRef`>;
+type `printSetup` <class<`jobjRef`>, null, null, double, null, null, null, logical, null> => class<`jobjRef`>;
 type `.Rcolor2XLcolor` <character[], logical> => list<class<`jobjRef`>>;
 type `removeRow` <class<`jobjRef`>, list<class<`jobjRef`>>> => null;
 type `saveWorkbook` <class<`jobjRef`>, character, null> => null;

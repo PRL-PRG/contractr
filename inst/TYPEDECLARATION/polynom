@@ -9,8 +9,6 @@ type `c.polylist` <..., logical> => class<`polylist`>;
 type `.degree` <class<`polynomial`>> => double;
 type `deriv.polylist` <class<`polylist`>, ...> => class<`polylist`>;
 type `deriv.polynomial` <class<`polynomial`>, ...> => class<`polynomial`>;
-type `f` <any, class<`polynomial`>> => class<`polynomial`>;
-type `FUN` <double[] | class<`polynomial`>> => class<`polynomial`> | <class<`polynomial`>, double[], ...> => double[] | <class<`polynomial`> | class<`polylist`>, ...> => (class<`polynomial`> | class<`polylist`>);
 type `GCD` <...> => class<`polynomial`>;
 type `.GCD2` <any, class<`polynomial`>> => class<`polynomial`>;
 type `GCD.polylist` <...> => class<`polynomial`>;

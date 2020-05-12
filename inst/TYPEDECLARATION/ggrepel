@@ -1,8 +1,8 @@
 type `%||%` <character | null, any> => (character | null);
 type `centroid` <double[], double, double> => double[];
 type `euclid` <double[], double[]> => double;
-type `geom_label_repel` <null, null, character, character, logical, ..., double, double, double, double, double, null, null, double, null, double, class<`arrow`> | null, double, double, double> => class<`Layer`, `LayerInstance`, `gg`, `ggproto`>;
-type `geom_text_repel` <null, class<`data.frame`> | null, character, character, logical, ..., double, double | null, null, character | null, double, null, double, null, double, double, double[], double[], ^logical[], ^logical[]> => class<`Layer`, `LayerInstance`, `gg`, `ggproto`>;
+type `geom_label_repel` <null, null, character, character, logical, ..., double, double, double, double, double, null, null, double, null, double> => class<`Layer`, `LayerInstance`, `gg`, `ggproto`>;
+type `geom_text_repel` <null, class<`data.frame`> | null, character, character, logical, ..., double, double | null, null, character | null, double, null, double, null, double, double> => class<`Layer`, `LayerInstance`, `gg`, `ggproto`>;
 type `ggname` <character, class<`gDesc`, `gTree`, `grob`, `textrepeltree`>> => class<`gDesc`, `gTree`, `grob`, `textrepeltree`>;
 type `intersect_line_rectangle` <double[], double[], double[]> => double[];
 type `makeContent.textrepelgrob` <class<`gDesc`, `gTree`, `grob`, `textrepelgrob`>> => class<`gDesc`, `gTree`, `grob`, `textrepelgrob`>;
@@ -10,5 +10,5 @@ type `makeContent.textrepeltree` <class<`gDesc`, `gTree`, `grob`, `textrepeltree
 type `not_empty` <character[]> => logical[];
 type `repel_boxes` <class<`matrix`>, double, double, class<`matrix`>, double[], double[], double[], double[], double, double, character> => class<`data.frame`>;
 type `select_line_connection` <double[], double[]> => double[];
-type `textRepelGrob` <character, class<`unit`>, class<`unit`>, class<`unit`>, class<`unit`>, double, character, character, class<`unit`>, class<`unit`>, null, class<`gpar`>, class<`gpar`>, null, null, class<`unit`>, double, double> => class<`gDesc`, `gTree`, `grob`, `textrepelgrob`>;
+type `textRepelGrob` <character, class<`unit`>, class<`unit`>, class<`unit`>, class<`unit`>, double, character, character, class<`unit`>, class<`unit`>, null, class<`gpar`>, class<`gpar`>, null, null, class<`unit`>> => class<`gDesc`, `gTree`, `grob`, `textrepelgrob`>;
 type `to_unit` <class<`unit`> | double | null> => (class<`unit`> | null);

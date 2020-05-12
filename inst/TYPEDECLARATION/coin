@@ -1,6 +1,3 @@
-type `:::` <double, double, double, character, any> => double[];
-type `[[` <double[] | ^integer[], character[]> => ^double[];
-type `@` < > => double[] | <logical> => (class<`matrix`> | double[]) | <logical> => double[];
 type `ansari_test` <class<`formula`> | class<`IndependenceProblem`>, ...> => any;
 type `ansari_test.formula` <class<`formula`>, class<`data.frame`> | list<any>, null, null, ...> => any;
 type `ansari_test.IndependenceProblem` <class<`IndependenceProblem`>, any, logical, double, ...> => any;
@@ -34,7 +31,6 @@ type `%EQ%` <class<`matrix`> | ^double[], double> => (class<`matrix`> | ^logical
 type `exact` <character[], null | double> => class<`function`>;
 type `ExactNullDistribution` <class<`ScalarIndependenceTestStatistic`>, ...> => any | <class<`QuadTypeIndependenceTestStatistic`> | class<`ScalarIndependenceTestStatistic`>, ...> => any | <class<`QuadTypeIndependenceTestStatistic`>, ...> => class<`ExactNullDistribution`>;
 type `expectation` <class<`ScalarIndependenceTest`>, ...> => double | <class<`ScalarIndependenceTestConfint`>, ...> => double | <class<`MaxTypeIndependenceTestStatistic`>, ...> => double[] | <class<`QuadTypeIndependenceTest`>, ...> => double[] | <class<`IndependenceLinearStatistic`>, ...> => double[] | <class<`QuadTypeIndependenceTestStatistic`>, ...> => double[] | <class<`IndependenceLinearStatistic`> | class<`ScalarIndependenceTestStatistic`> | class<`MaxTypeIndependenceTestStatistic`> | class<`QuadTypeIndependenceTest`> | class<`QuadTypeIndependenceTestStatistic`> | class<`ScalarIndependenceTestConfint`> | class<`MaxTypeIndependenceTest`> | class<`ScalarIndependenceTest`>, ...> => double[] | <class<`MaxTypeIndependenceTest`>, ...> => double[] | <class<`ScalarIndependenceTestStatistic`>, ...> => double;
-type `factor_trafo` <class<`factor`>> => class<`matrix`>;
 type `fisyat_test` <class<`formula`> | class<`IndependenceProblem`>, ...> => any;
 type `fisyat_test.formula` <class<`formula`>, class<`data.frame`>, null, null, ...> => any;
 type `fisyat_test.IndependenceProblem` <class<`IndependenceProblem`>, character[], character[], ...> => any;
@@ -43,7 +39,7 @@ type `fligner_test.formula` <class<`formula`>, class<`data.frame`> | list<any>, 
 type `fligner_test.IndependenceProblem` <class<`IndependenceProblem`>, any, logical, double, ...> => any;
 type `fligner_trafo` <^integer[] | class<`array`> | double[], character[]> => ^double[];
 type `fmaxstat_trafo` <class<`factor`>, double, double> => class<`matrix`>;
-type `formula2data` <class<`formula`>, class<`data.frame`> | list<any>, null | double[], class<`formula`> | null, ...> => list<any>;
+type `formula2data` <class<`formula`>, class<`data.frame`> | list<any>, null | double[], class<`formula`> | null, ...> => (list<class<`data.frame`> | class<`factor`> | double[]> | list<class<`data.frame`> | class<`factor`> | null> | list<class<`data.frame`> | double[] | null> | list<class<`data.frame`> | null | double[]> | list<class<`data.frame`> | null | integer[]> | list<class<`data.frame`> | null>);
 type `friedman_test` <class<`formula`> | class<`SymmetryProblem`>, ...> => any;
 type `friedman_test.formula` <class<`formula`>, class<`data.frame`> | list<any>, null, ...> => any;
 type `friedman_test.SymmetryProblem` <class<`SymmetryProblem`>, ...> => any;
@@ -52,11 +48,11 @@ type `ft` <character, character, class<`formula`>, class<`data.frame`> | list<an
 type `f_trafo` <class<`factor`>> => class<`matrix`>;
 type `%GE%` <class<`matrix`> | class<`matrix`, `pvalue`> | double[], double[] | class<`matrix`, `pvalue`>> => (class<`matrix`> | logical[]);
 type `%GT%` <class<`array`> | double[], double> => (class<`array`> | logical[]);
-type `has_distribution` <list<character[] | class<`function`> | null | character | class<`function`> | null | class<`function`> | character[] | null>> => logical;
+type `has_distribution` <list<character[] | class<`function`> | null> | list<character | class<`function`> | null> | list<class<`function`> | character[] | null>> => logical;
 type `id_trafo` <^integer[]> => ^integer[];
 type `independence_test` <class<`formula`> | class<`IndependenceProblem`> | class<`table`>, ...> => any;
 type `independence_test.formula` <class<`formula`>, class<`data.frame`> | list<any>, null | double[], class<`formula`> | null, ...> => any;
-type `independence_test.IndependenceProblem` <class<`IndependenceProblem`>, character[], character[] | class<`function`>, character[], class<`function`>, any, null | list<double[]>, null | class<`function`>, ...> => any;
+type `independence_test.IndependenceProblem` <class<`IndependenceProblem`>, character[], character[] | class<`function`>, character[], class<`function`>, any, null | list<double[]>, null | class<`function`>> => any;
 type `independence_test.table` <class<`table`>, ...> => (class<`MaxTypeIndependenceTest`> | class<`QuadTypeIndependenceTest`> | class<`ScalarIndependenceTest`>);
 type `is_2sample` <class<`IndependenceProblem`> | class<`IndependenceTestProblem`> | class<`MaxTypeIndependenceTestStatistic`> | class<`QuadTypeIndependenceTestStatistic`> | class<`ScalarIndependenceTestStatistic`> | class<`SymmetryProblem`>> => logical;
 type `is_censored_x` <class<`IndependenceTestProblem`> | class<`MaxTypeIndependenceTestStatistic`> | class<`QuadTypeIndependenceTestStatistic`> | class<`ScalarIndependenceTestStatistic`>> => logical;
@@ -132,14 +128,12 @@ type `normal_test` <class<`formula`> | class<`IndependenceProblem`>, ...> => any
 type `normal_test.formula` <class<`formula`>, class<`data.frame`> | list<any>, null, null, ...> => any;
 type `normal_test.IndependenceProblem` <class<`IndependenceProblem`>, any, logical, double, ...> => any;
 type `normal_trafo` <double[] | ^integer[], character[]> => ^double[];
-type `numeric_trafo` <double[] | ^integer[], character[]> => ^double[] | <^integer[] | double[], character[]> => ^double[] | <double[] | ^integer[], character[], double[]> => (class<`matrix`> | ^double[]) | <^integer[] | class<`array`> | double[], character[]> => ^double[] | <double[] | ^integer[] | class<`array`> | class<`data.frame`>, character[]> => ^double[];
 type `ofmaxstat_trafo` <double[] | ^integer[] | class<`factor`, `ordered`>, double, double> => class<`matrix`>;
 type `of_trafo` <class<`factor`> | class<`factor`, `ordered`>, null | double[] | list<double[]>> => class<`matrix`>;
 type `oneway_test` <class<`formula`> | class<`IndependenceProblem`>, ...> => any;
 type `oneway_test.formula` <class<`formula`>, class<`data.frame`> | list<any>, null, null, ...> => any;
 type `oneway_test.IndependenceProblem` <class<`IndependenceProblem`>, ...> => any;
 type `ordered_scores` <double, double[]> => class<`matrix`>;
-type `ordered_trafo` <class<`factor`> | class<`factor`, `ordered`>, null | double[] | list<double[]>> => class<`matrix`>;
 type `pmvn` <double, double, double[], class<`matrix`>, logical, ...> => double;
 type `pperm` <class<`QuadTypeIndependenceTest`>, class<`matrix`> | integer[] | double, ...> => (class<`matrix`> | double[]) | <class<`ApproxNullDistribution`>, class<`matrix`> | double[], ...> => (class<`matrix`> | double[]) | <class<`MaxTypeIndependenceTest`>, class<`matrix`> | integer[] | double, ...> => (class<`matrix`> | double[]) | <class<`AsymptNullDistribution`>, class<`matrix`> | integer[] | double, ...> => (class<`matrix`> | double[]) | <class<`ExactNullDistribution`>, class<`matrix`> | double[], ...> => (class<`matrix`> | double[]) | <class<`ScalarIndependenceTest`>, class<`matrix`> | double[], ...> => (class<`matrix`> | double[]) | <class<`ApproxNullDistribution`> | class<`AsymptNullDistribution`> | class<`ExactNullDistribution`> | class<`MaxTypeIndependenceTest`> | class<`QuadTypeIndependenceTest`> | class<`ScalarIndependenceTest`>, class<`matrix`> | double[], ...> => (class<`matrix`> | double[]);
 type `pvalue` <class<`ScalarIndependenceTestConfint`>, ...> => class<`numeric`, `pvalue`> | <class<`ExactNullDistribution`>, ...> => class<`numeric`, `pvalue`> | <class<`MaxTypeIndependenceTest`> | class<`AsymptNullDistribution`> | class<`ExactNullDistribution`> | class<`QuadTypeIndependenceTest`> | class<`ScalarIndependenceTest`> | class<`ScalarIndependenceTestConfint`> | class<`ApproxNullDistribution`>, ...> => (class<`matrix`, `pvalue`> | class<`numeric`, `pvalue`>) | <class<`AsymptNullDistribution`>, ...> => class<`numeric`, `pvalue`> | <class<`MaxTypeIndependenceTest`>, ...> => (class<`matrix`, `pvalue`> | class<`numeric`, `pvalue`>) | <class<`ApproxNullDistribution`>, ...> => class<`numeric`, `pvalue`> | <class<`ScalarIndependenceTest`>, ...> => class<`numeric`, `pvalue`> | <class<`MaxTypeIndependenceTest`>, ...> => (class<`matrix`, `pvalue`> | class<`numeric`, `pvalue`>) | <class<`ApproxNullDistribution`>, ...> => class<`numeric`, `pvalue`> | <class<`QuadTypeIndependenceTest`>, ...> => class<`numeric`, `pvalue`>;
@@ -158,7 +152,7 @@ type `savage_test` <class<`formula`> | class<`IndependenceProblem`>, ...> => any
 type `savage_test.formula` <class<`formula`>, class<`data.frame`> | list<any>, null, null, ...> => any;
 type `savage_test.IndependenceProblem` <class<`IndependenceProblem`>, any, logical, double, ...> => any;
 type `savage_trafo` <^integer[] | double[], character[]> => ^double[];
-type `setAttributes` <double[], null | list<integer[] | integer[] | list<character | null> | character>> => (class<`matrix`> | double[]);
+type `setAttributes` <double[], list<integer[]> | list<integer[] | list<character | null>> | null | list<character>> => (class<`matrix`> | double[]);
 type `setColnames` <class<`matrix`>, character[]> => class<`matrix`>;
 type `setDimnames` <class<`matrix`>, list<integer[] | character[]>> => class<`matrix`>;
 type `setRownames` <class<`matrix`>, integer[]> => class<`matrix`>;
@@ -174,13 +168,12 @@ type `spearman_test.IndependenceProblem` <class<`IndependenceProblem`>, characte
 type `SR_shift_1sample` <class<`QuadTypeIndependenceTestStatistic`> | class<`ScalarIndependenceTestStatistic`>, any> => any;
 type `SR_shift_2sample` <class<`QuadTypeIndependenceTestStatistic`> | class<`ScalarIndependenceTestStatistic`>, double> => class<`ExactNullDistribution`>;
 type `statistic` <class<`IndependenceLinearStatistic`> | class<`MaxTypeIndependenceTest`> | class<`MaxTypeIndependenceTestStatistic`> | class<`QuadTypeIndependenceTest`> | class<`QuadTypeIndependenceTestStatistic`> | class<`ScalarIndependenceTest`> | class<`ScalarIndependenceTestConfint`> | class<`ScalarIndependenceTestStatistic`>, ...> => (class<`matrix`> | double) | <class<`QuadTypeIndependenceTestStatistic`>, ...> => (class<`matrix`> | double) | <class<`QuadTypeIndependenceTest`>, ...> => (class<`matrix`> | double) | <class<`ScalarIndependenceTestConfint`>, ...> => class<`matrix`> | <class<`QuadTypeIndependenceTestStatistic`>, ...> => (class<`matrix`> | double) | <class<`MaxTypeIndependenceTest`>, ...> => (class<`matrix`> | double) | <class<`ScalarIndependenceTestStatistic`>, ...> => (class<`matrix`> | double) | <class<`MaxTypeIndependenceTestStatistic`>, ...> => (class<`matrix`> | double) | <class<`ScalarIndependenceTest`>, ...> => (class<`matrix`> | double) | <class<`ScalarIndependenceTestStatistic`>, ...> => (class<`matrix`> | double) | <class<`MaxTypeIndependenceTestStatistic`>, ...> => (class<`matrix`> | double) | <class<`IndependenceLinearStatistic`>, ...> => class<`matrix`>;
-type `statnames` <class<`IndependenceLinearStatistic`> | class<`IndependenceTestProblem`> | class<`MaxTypeIndependenceTestStatistic`> | class<`QuadTypeIndependenceTestStatistic`> | class<`ScalarIndependenceTestStatistic`>> => list<character[] | list<character[]> | character | list<character>>;
+type `statnames` <class<`IndependenceLinearStatistic`> | class<`IndependenceTestProblem`> | class<`MaxTypeIndependenceTestStatistic`> | class<`QuadTypeIndependenceTestStatistic`> | class<`ScalarIndependenceTestStatistic`>> => (list<character[] | list<character[]>> | list<character | list<character>>);
 type `str2lang` <character> => class<`<-`>;
 type `support` < > => double[] | <logical> => (class<`matrix`> | double[]) | <logical> => double[] | <class<`ScalarIndependenceTest`>, ...> => (double[] | null) | <class<`ApproxNullDistribution`>, ...> => (class<`matrix`> | double[]) | <class<`ApproxNullDistribution`> | class<`ExactNullDistribution`> | class<`MaxTypeIndependenceTest`> | class<`QuadTypeIndependenceTest`> | class<`ScalarIndependenceTest`> | class<`AsymptNullDistribution`>, ...> => (class<`matrix`> | double[] | null) | <class<`QuadTypeIndependenceTest`>, ...> => (double[] | null) | <class<`ExactNullDistribution`>, ...> => double[] | <class<`AsymptNullDistribution`>, ...> => null | <class<`MaxTypeIndependenceTest`>, ...> => double[];
-type `surv_trafo` <class<`Surv`>, character[], any, ...> => any;
 type `symmetry_test` <class<`formula`> | class<`SymmetryProblem`> | class<`table`>, ...> => any;
 type `symmetry_test.formula` <class<`formula`>, class<`data.frame`> | list<any>, null, null, ...> => any;
-type `symmetry_test.SymmetryProblem` <class<`SymmetryProblem`>, character[], character[] | class<`function`>, character[], class<`function`>, class<`function`>, null | list<integer[]>, null | class<`function`>, logical, ...> => any;
+type `symmetry_test.SymmetryProblem` <class<`SymmetryProblem`>, character[], character[] | class<`function`>, character[], class<`function`>, class<`function`>, null | list<integer[]>, null | class<`function`>> => any;
 type `symmetry_test.table` <class<`table`>, ...> => (class<`MaxTypeIndependenceTest`> | class<`QuadTypeIndependenceTest`> | class<`ScalarIndependenceTest`>);
 type `table2IndependenceProblem` <class<`table`>> => class<`IndependenceProblem`>;
 type `table2SymmetryProblem` <class<`table`>> => class<`SymmetryProblem`>;
@@ -197,6 +190,4 @@ type `wilcoxsign_test.SymmetryProblem` <class<`SymmetryProblem`>, character[], .
 type `wilcox_test` <class<`formula`> | class<`IndependenceProblem`>, ...> => any;
 type `wilcox_test.formula` <class<`formula`>, class<`data.frame`> | list<any>, logical[] | null, null, ...> => any;
 type `wilcox_test.IndependenceProblem` <class<`IndependenceProblem`>, logical, double, ...> => any;
-type `xtrafo` <class<`data.frame`>, any, any, any, any, null | list<class<`function`>>, class<`factor`> | null> => any;
-type `ytrafo` <double[] | ^integer[] | class<`array`> | class<`data.frame`>, character[]> => ^double[] | <class<`data.frame`>, any, any, any, any, null | list<class<`function`>>, class<`factor`> | null> => any;
 type `zheng_trafo` <class<`factor`> | class<`factor`, `ordered`>, double> => class<`matrix`>;

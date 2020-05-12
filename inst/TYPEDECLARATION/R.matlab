@@ -1,10 +1,8 @@
 type `as.character.Matlab` <class<`Matlab`, `Object`>, ...> => character;
 type `close.Matlab` <class<`Matlab`, `Object`>, ...> => null;
-type `constructor` <character, double, logical> => class<`Matlab`, `Object`>;
 type `evaluate` <...> => any;
 type `evaluate.Matlab` <class<`Matlab`, `Object`>, ..., character, logical> => any;
 type `finalize.Matlab` <class<`Matlab`, `Object`>, ...> => null;
-type `fun` <any, character> => null | <any, character> => any;
 type `getOption.Matlab` <class<`Matlab`, `Object`>, ...> => (double | null);
 type `getVariable` <...> => any;
 type `getVariable.Matlab` <class<`Matlab`, `Object`>, character, any, ...> => any;

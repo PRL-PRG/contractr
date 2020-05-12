@@ -11,5 +11,5 @@ type `push_warning` <class<`condition`, `lifecycle_warning_deprecated`, `warning
 type `signal_validate_arg` <class<`call`>, any> => (character | null);
 type `signal_validate_fn` <class<`call`>> => character;
 type `signal_validate_pkg` <environment> => character;
-type `signal_validate_what` <character, character, any> => list<character | class<`call`> | null | class<`call`>>;
+type `signal_validate_what` <character, character, any> => (list<character | class<`call`>> | list<null | class<`call`>>);
 type `silver` <character> => character;

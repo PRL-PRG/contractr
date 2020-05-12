@@ -9,7 +9,6 @@ type `cajolst` <class<`data.frame`>, logical, double, double> => class<`ca.jo`>;
 type `cajools` <class<`ca.jo`>, null> => class<`lm`, `mlm`>;
 type `cajorls` <class<`ca.jo`>, double, null> => list<class<`lm`, `mlm`> | class<`matrix`>>;
 type `ca.po` <class<`matrix`>, character[], character[], character, null> => class<`ca.po`>;
-type `FUN` <character[], character> => list<character[]>;
 type `lttest` <class<`ca.jo`>, double> => class<`matrix`>;
 type `plot` <class<`ur.za`>, any, ...> => list<list<double[]>> | <class<`ur.sp`>, any, ...> => class<`acf`> | <class<`ur.pp`>, any, ...> => class<`acf`> | <class<`ur.ers`>, any, ...> => class<`acf`> | <class<`ur.kpss`>, any, ...> => class<`acf`> | <class<`ca.jo`>, any, ...> => null;
 type `plotres` <class<`ca.jo`>> => null;

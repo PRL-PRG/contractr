@@ -1,4 +1,3 @@
-type `@` <class<`formula`>, class<`data.frame`> | list<any>, null | integer[], class<`standardGeneric`> | null, null | environment, environment, list<any>, logical, logical, null | list<class<`function`>>, ...> => class<`ModelEnvFormula`>;
 type `checkData` <class<`data.frame`>, class<`data.frame`>> => null;
 type `clone` <class<`ModelEnvFormula`>, ...> => class<`ModelEnvFormula`> | <class<`ModelEnv`>, ...> => class<`ModelEnv`> | <class<`ModelEnv`> | class<`ModelEnvFormula`>, ...> => (class<`ModelEnv`> | class<`ModelEnvFormula`>);
 type `complete.cases.ModelEnv` <class<`ModelEnv`> | class<`ModelEnvFormula`>> => logical[];
@@ -10,7 +9,6 @@ type `has` <class<`ModelEnv`>, character> => logical | <class<`ModelEnv`>, chara
 type `MEapply` <class<`ModelEnv`>, class<`function`>, logical, ...> => class<`ModelEnv`> | <class<`ModelEnv`> | class<`ModelEnvFormula`>, class<`function`> | null | list<class<`function`>>, logical, ...> => (class<`ModelEnv`> | class<`ModelEnvFormula`>) | <class<`ModelEnvFormula`>, class<`function`> | null | list<class<`function`>>, logical, ...> => class<`ModelEnvFormula`>;
 type `ModelEnvFormula` <class<`formula`>, class<`data.frame`> | list<any>, null | integer[], class<`standardGeneric`> | null, null | environment, environment, list<any>, logical, logical, null | list<class<`function`>>, ...> => class<`ModelEnvFormula`>;
 type `ModelEnvMatrix` <class<`data.frame`>, class<`data.frame`>, integer[] | null, class<`standardGeneric`> | null, list<any>, ...> => class<`ModelEnv`>;
-type `na.action` <class<`ModelEnvFormula`>, ...> => class<`ModelEnvFormula`>;
 type `na.omit` <class<`ModelEnvFormula`>, ...> => class<`ModelEnvFormula`>;
 type `ParseFormula` <class<`formula`>, class<`data.frame`> | list<any>> => class<`FormulaParts`>;
 type `Predict` <class<`linearModel`, `lm`> | class<`lm`>, ...> => double[];
