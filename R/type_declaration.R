@@ -19,7 +19,7 @@ import_type_declarations <- function(package_name) {
             filepath <- file.path(filepath, package_name)
         }
     }
-    if (filepath == "" || dir.exists(filepath)) {
+    if (filepath == "" || dir.exists(filepath) || !file.exists(filepath)) {
         msg <- sprintf("No type declarations found for package %s", package_name)
         message(msg)
         character(0)
