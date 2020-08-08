@@ -12,9 +12,11 @@ import_type_declarations <- function(package_name) {
     filepath <- system.file("TYPEDECLARATION", package = package_name)
     if (filepath == "" || dir.exists(filepath)) {
         filepath <- Sys.getenv("CONTRACTR_TYPEDECLARATION")
-        if (is.null(filepath) || !dir.exists(filepath)) {
+        if (filepath == "" || !dir.exists(filepath)) {
             filepath <- system.file(file.path("TYPEDECLARATION", package_name),
                                     package = "contractr")
+        } else {
+            filepath <- file.path(filepath, package_name)
         }
     }
     if (filepath == "" || dir.exists(filepath)) {
