@@ -11,8 +11,11 @@ import_type_declarations <- function(package_name) {
     stopifnot(is_scalar_character(package_name))
     filepath <- system.file("TYPEDECLARATION", package = package_name)
     if (filepath == "" || dir.exists(filepath)) {
-        filepath <- system.file(file.path("TYPEDECLARATION", package_name),
-                                package = "contractr")
+        filepath <- Sys.getenv("CONTRACTR_TYPEDECLARATION")
+        if (is.null(filepath) || !dir.exists(filepath)) {
+            filepath <- system.file(file.path("TYPEDECLARATION", package_name),
+                                    package = "contractr")
+        }
     }
     if (filepath == "" || dir.exists(filepath)) {
         msg <- sprintf("No type declarations found for package %s", package_name)
