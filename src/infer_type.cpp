@@ -53,78 +53,25 @@ std::string join(const std::vector<std::string>& strings,
 }
 
 const std::string union_types(const std::vector<std::string>& types) {
-    std::vector<std::string> strings(types);
-
-    int null_index = -1;
-
-    for (int i = 0; i < strings.size(); ++i) {
-        if (strings[i] == "null") {
-            null_index = i;
-            break;
-        }
-    }
-
-    std::string prefix = "";
-
-    if (null_index != -1) {
-        if (strings.size() == 1) {
-            prefix = "null";
-        } else {
-            prefix = "? ";
-        }
-        strings.erase(strings.begin() + null_index);
-    }
-
-    return prefix + join(strings, " | ");
+    return join(types, " | ");
 }
 
 std::string infer_list_type(SEXP value) {
-    SEXP names = getAttrib(value, R_NamesSymbol);
+    std::set<std::string> element_types;
 
-    if (names != R_NilValue) {
-        auto get_name = [names](int index) -> std::string {
-            const std::string na_name("^");
-            SEXP name = STRING_ELT(names, index);
-            if (name == NA_STRING) {
-                return na_name;
-            } else {
-                return std::string("`") + CHAR(name) + "`";
-            }
-        };
-
-        std::vector<std::string> element_types;
-
-        for (int index = 0; index < LENGTH(value); ++index) {
-            std::string name = get_name(index);
-            std::string type = infer_type(VECTOR_ELT(value, index));
-            element_types.push_back(name + ": " + type);
-        }
-
-        return "struct<" + join(element_types, ", ") + ">";
+    for (int index = 0; index < LENGTH(value); ++index) {
+        element_types.insert(infer_type(VECTOR_ELT(value, index)));
     }
 
-    else if (LENGTH(value) <= 5) {
-        std::vector<std::string> element_types;
-
-        for (int index = 0; index < LENGTH(value); ++index) {
-            element_types.push_back(infer_type(VECTOR_ELT(value, index)));
-        }
-
-        return "tuple<" + join(element_types, ", ") + ">";
+    /* empty lists are of type list<any>  */
+    if (element_types.size() == 0) {
+        element_types.insert("any");
     }
 
-    else {
-        std::set<std::string> element_types;
-
-        for (int index = 0; index < LENGTH(value); ++index) {
-            element_types.insert(infer_type(VECTOR_ELT(value, index)));
-        }
-
-        return "list<" +
-               union_types(std::vector<std::string>(element_types.begin(),
-                                                    element_types.end())) +
-               ">";
-    }
+    return "list<" +
+           union_types(std::vector<std::string>(element_types.begin(),
+                                                element_types.end())) +
+           ">";
 }
 
 std::string infer_type(const std::string& parameter_name, SEXP value) {
