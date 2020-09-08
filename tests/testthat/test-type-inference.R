@@ -11,7 +11,7 @@ test_that("type inference for ... works", {
 
 test_that("type inference for missing values works", {
 
-    expect_identical(infer_type(), "???")
+    expect_identical(infer_type(), "any")
 
 })
 
@@ -28,42 +28,28 @@ test_that("type inference for list values works", {
     expect_identical(infer_type(list(NULL, NULL, NULL, NULL, NULL, NULL)), "list<null>")
 
     expect_identical(infer_type(list(1, 2, "3", NULL, list(1, 2), list(TRUE, FALSE))),
-                 "list<? character | double | tuple<double, double> | tuple<logical, logical>>")
+                 "list<character | double | list<double> | list<logical> | null>")
 
 
-    expect_identical(infer_type(create_tuple(0)), "tuple<>")
+    expect_identical(infer_type(create_list()), "list<any>")
+
+    expect_identical(infer_type(create_list(1)), "list<double>")
+
+    expect_identical(infer_type(create_list(1L)), "list<integer>")
+
+    expect_identical(infer_type(create_list(1, NA_real_)), "list<^double | double>")
 
     expect_identical(infer_type(list(1, "3", NULL, list(1, 2), list(1, "2", TRUE, list(1, 2), max))),
-                     str_c("tuple<",
-                           "double, ",
-                           "character, ",
-                           "null, ",
-                           "tuple<double, double>, ",
-                           "tuple<double, character, logical, tuple<double, double>, any => any>>"))
+                     "list<character | double | list<any => any | character | double | list<double> | logical> | list<double> | null>")
 
-    expect_identical(infer_type(create_struct(0)), "struct<>")
-
-    expect_identical(infer_type(create_struct(1)), "struct<`name`: double>")
-
-    expect_identical(infer_type(create_struct(1, NA)), "struct<^: double>")
 
     object <- list(name1 = 1, "3", name3 = NULL, list(1, 2), `another name` = list(1, "2", TRUE, list(1, 2), max))
     expect_identical(infer_type(object),
-                     str_c("struct<",
-                           "`name1`: double, ",
-                           "``: character, ",
-                           "`name3`: null, ",
-                           "``: tuple<double, double>, ",
-                           "`another name`: tuple<double, character, logical, tuple<double, double>, any => any>>"))
+                     "list<character | double | list<any => any | character | double | list<double> | logical> | list<double> | null>")
 
     names(object) <- NA
     expect_identical(infer_type(object),
-                     str_c("struct<",
-                           "^: double, ",
-                           "^: character, ",
-                           "^: null, ",
-                           "^: tuple<double, double>, ",
-                           "^: tuple<double, character, logical, tuple<double, double>, any => any>>"))
+                     "list<character | double | list<any => any | character | double | list<double> | logical> | list<double> | null>")
 
 })
 
@@ -181,14 +167,14 @@ test_that("type inference for expression values works", {
 
 test_that("type inference for language values works", {
 
-    expect_identical(infer_type(quote(1 + 2)), "language")
+    expect_identical(infer_type(quote(1 + 2)), "class<call>")
 
 })
 
 
 test_that("type inference for symbol values works", {
 
-    expect_identical(infer_type(as.symbol("sym")), "symbol")
+    expect_identical(infer_type(as.symbol("sym")), "class<name>")
 
 })
 
@@ -202,13 +188,6 @@ test_that("type inference for pairlist values works", {
 
 test_that("type inference for S4 values works", {
 
-    expect_identical(infer_type(create_s4()), "s4")
-
-})
-
-
-test_that("type inference for weakref values works", {
-
-    expect_identical(infer_type(create_weakref()), "weakref")
+    expect_identical(infer_type(create_s4()), "class<Person>")
 
 })

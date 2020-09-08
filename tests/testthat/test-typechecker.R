@@ -23,22 +23,10 @@ test_that("contract for `double` is enforced correctly", {
       expect_ret_contract_violation("double", "integer[]")
 
     typecheck(fun) %>%
-      apply_arguments(2L) %>%
-      expect_contract_violations(2) %>%
-      expect_arg_contract_violation(1, "double", "integer") %>%
-      expect_ret_contract_violation("double", "integer")
-
-    typecheck(fun) %>%
       apply_arguments(c(2L, 3L)) %>%
       expect_contract_violations(2) %>%
       expect_arg_contract_violation(1, "double", "integer[]") %>%
       expect_ret_contract_violation("double", "integer[]")
-
-    typecheck(fun) %>%
-      apply_arguments(NA_integer_) %>%
-      expect_contract_violations(2) %>%
-      expect_arg_contract_violation(1, "double", "^integer") %>%
-      expect_ret_contract_violation("double", "^integer")
 
     typecheck(fun) %>%
       apply_arguments(c(32L, NA_integer_)) %>%
@@ -125,22 +113,10 @@ test_that("contract for `double` is enforced correctly", {
       expect_ret_contract_violation("double", "logical[]")
 
     typecheck(fun) %>%
-      apply_arguments(TRUE) %>%
-      expect_contract_violations(2) %>%
-      expect_arg_contract_violation(1, "double", "logical") %>%
-      expect_ret_contract_violation("double", "logical")
-
-    typecheck(fun) %>%
       apply_arguments(c(TRUE, FALSE)) %>%
       expect_contract_violations(2) %>%
       expect_arg_contract_violation(1, "double", "logical[]") %>%
       expect_ret_contract_violation("double", "logical[]")
-
-    typecheck(fun) %>%
-      apply_arguments(na_logical_) %>%
-      expect_contract_violations(2) %>%
-      expect_arg_contract_violation(1, "double", "^logical") %>%
-      expect_ret_contract_violation("double", "^logical")
 
     typecheck(fun) %>%
       apply_arguments(c(TRUE, na_logical_)) %>%

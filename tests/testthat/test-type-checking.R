@@ -28,41 +28,22 @@ test_that("type checking for list values works", {
     expect_true(check_type(list(NULL, NULL, NULL, NULL, NULL, NULL), "list<null>"))
 
     expect_true(check_type(list(1, 2, "3", NULL, list(1, 2), list(TRUE, FALSE)),
-                           "list<? character | double | tuple<double, double> | tuple<logical, logical>>"))
+                           "list<null | character | double | tuple<double, double> | tuple<logical, logical>>"))
 
-    expect_true(check_type(create_tuple(0), "tuple<>"))
+    expect_true(check_type(create_list(), "list<any>"))
 
     expect_true(check_type(list(1, "3", NULL, list(1, 2), list(1, "2", TRUE, list(1, 2), max)),
-                     str_c("tuple<",
-                           "double, ",
-                           "character, ",
-                           "null, ",
-                           "tuple<double, double>, ",
-                           "tuple<double, character, logical, tuple<double, double>, any => any>>")))
+                           "list<any>"))
 
-    expect_true(check_type(create_struct(0), "struct<>"))
+    expect_true(check_type(create_list(0), "list<double>"))
 
-    expect_true(check_type(create_struct(1), "struct<`name`: double>"))
-
-    expect_true(check_type(create_struct(1, NA), "struct<^: double>"))
+    expect_true(check_type(create_list(1, NA), "list<^double | double>"))
 
     object <- list(name1 = 1, "3", name3 = NULL, list(1, 2), `another name` = list(1, "2", TRUE, list(1, 2), max))
-    expect_true(check_type(object,
-                             str_c("struct<",
-                                   "`name1`: double, ",
-                                   "``: character, ",
-                                   "`name3`: null, ",
-                                   "``: tuple<double, double>, ",
-                                   "`another name`: tuple<double, character, logical, tuple<double, double>, any => any>>")))
+    expect_true(check_type(object, "list<any>"))
 
     names(object) <- NA
-    expect_true(check_type(object,
-                             str_c("struct<",
-                                   "^: double, ",
-                                   "^: character, ",
-                                   "^: null, ",
-                                   "^: tuple<double, double>, ",
-                                   "^: tuple<double, character, logical, tuple<double, double>, any => any>>")))
+    expect_true(check_type(object, "list<any>"))
 
 })
 
@@ -202,12 +183,5 @@ test_that("type checking for pairlist values works", {
 test_that("type checking for S4 values works", {
 
     expect_true(check_type(create_s4(), "s4"))
-
-})
-
-
-test_that("type checking for weakref values works", {
-
-    expect_true(check_type(create_weakref(), "weakref"))
 
 })

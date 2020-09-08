@@ -29,15 +29,13 @@ test_that("type inference for list values works", {
 
     expect_type_compatibility(list(1, 2, "3", NULL, list(1, 2), list(TRUE, FALSE)))
 
-    expect_type_compatibility(create_tuple(0))
+    expect_type_compatibility(create_list(0))
 
     expect_type_compatibility(list(1, "3", NULL, list(1, 2), list(1, "2", TRUE, list(1, 2), max)))
 
-    expect_type_compatibility(create_struct(0))
+    expect_type_compatibility(create_list(0))
 
-    expect_type_compatibility(create_struct(1))
-
-    expect_type_compatibility(create_struct(1, NA))
+    expect_type_compatibility(create_list(1, NA))
 
     object <- list(name1 = 1, "3", name3 = NULL, list(1, 2), `another name` = list(1, "2", TRUE, list(1, 2), max))
     expect_type_compatibility(object)
@@ -183,13 +181,6 @@ test_that("type inference for pairlist values works", {
 test_that("type inference for S4 values works", {
 
     expect_type_compatibility(create_s4())
-
-})
-
-
-test_that("type inference for weakref values works", {
-
-    expect_type_compatibility(create_weakref())
 
 })
 
