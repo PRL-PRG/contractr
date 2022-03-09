@@ -6,7 +6,7 @@ all: install
 build: clean
 	$(R_EXECUTABLE) CMD build .
 
-install: clean
+install:
 	$(R_EXECUTABLE) CMD INSTALL --with-keep.source .
 
 clean:
