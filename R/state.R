@@ -4,7 +4,8 @@
 
 .state <- new.env(parent=emptyenv())
 .state$call_id <- -1L
-.state$autoinject <- TRUE
+.state$autoinject <- getOption("contractr.autoinject", FALSE)
+.state$autoinject_blacklist <- c("tools:callr", "tools:rstudio", "org:r-libs")
 
 get_next_call_id <- function() {
     .state$call_id <- .state$call_id + 1

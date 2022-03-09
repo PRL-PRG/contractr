@@ -1,12 +1,14 @@
-
 .onLoad <- function(libname, pkgname) {
 
     set_severity()
-    set_autoinject()
 
     handle_package <- function(package_name, ...) {
+        if (package_name %in% get_autoinject_blacklist()) {
+            return();
+        }
+
         autoinject_packages <- get_autoinject()
-        if (package_name %in% autoinject_packages || any(autoinject_packages == "all")) {
+        if (package_name %in% autoinject_packages || autoinject_packages == TRUE) {
             tryCatch(
                 fun_names <- insert_package_contract(package_name),
                 error = function(e) {
@@ -25,7 +27,7 @@
         }
     }
 
-    remove_packages <- c(".GlobalEnv", "Autoloads", "tools:callr", "tools:rstudio")
+    remove_packages <- c(".GlobalEnv", "Autoloads", get_autoinject_blacklist())
     loaded_packages <- setdiff(remove_package_prefix(search()), remove_packages)
     installed_packages <- installed.packages()[, 1]
     remaining_packages <- setdiff(installed_packages, loaded_packages)
