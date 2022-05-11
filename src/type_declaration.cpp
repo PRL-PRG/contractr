@@ -429,3 +429,72 @@ const std::string& type_to_string(const tastr::ast::Node& node) {
         return iter2->second;
     }
 }
+
+static void type_finalizer(SEXP type)
+{
+    if (NULL == R_ExternalPtrAddr(type)) {
+        return;
+    }
+    auto node = (tastr::ast::Node*) R_ExternalPtrAddr(type);
+    delete node;
+    R_ClearExternalPtr(type);
+}
+
+static SEXP node2extptr(tastr::ast::Node* node) {
+    SEXP type = PROTECT(R_MakeExternalPtr(node, R_NilValue, R_NilValue));
+    Rf_setAttrib(type, R_ClassSymbol, Rf_mkString("tastr"));
+    R_RegisterCFinalizerEx(type, type_finalizer, TRUE);
+    UNPROTECT(1);
+    return type;
+}
+
+SEXP r_parse_type(SEXP str) {
+    std::string s = CHAR(STRING_ELT(str, 0));
+    auto res = tastr::parser::parse_string(s);
+    if (!res) {
+        Rf_error("Unable to parse `%s`: %s", s.c_str(), res.get_error_message().c_str());
+        return R_NilValue;
+    }
+    
+    if (res.get_top_level_node()->size() != 1) {
+        Rf_error("Parsed %d types, expected 1", res.get_top_level_node()->size());
+        return R_NilValue;
+    }
+
+    tastr::ast::TypeNode* type = res.get_top_level_node()->at(0).get_type().clone().release();
+
+    return node2extptr(type);
+}
+
+SEXP r_is_function_type(SEXP type) {
+    auto node = (tastr::ast::Node*) R_ExternalPtrAddr(type);
+    return Rf_ScalarLogical(node->is_function_type_node());
+}
+
+SEXP r_get_parameter_type(SEXP type, SEXP param) {
+    auto node = (tastr::ast::Node*) R_ExternalPtrAddr(type);
+
+    if (!node->is_function_type_node()) {
+        Rf_error("Not a function type");
+        return R_NilValue;
+    }
+
+    auto idx = INTEGER(param)[0];
+    auto fun_node = (tastr::ast::FunctionTypeNode*) node;
+
+    tastr::ast::Node* param_node;
+
+    if (idx == 0) {
+        param_node = get_function_return_type(fun_node).clone().release();
+    } else {
+        param_node = get_function_parameter_type(fun_node, idx - 1).clone().release();
+    }
+
+    return node2extptr(param_node);
+}
+
+SEXP type_to_sexp_string(SEXP type) {
+    auto node = (tastr::ast::Node*) R_ExternalPtrAddr(type);
+    auto str = type_to_string(*node);
+    return Rf_mkString(str.c_str());
+}

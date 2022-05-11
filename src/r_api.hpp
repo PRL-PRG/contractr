@@ -28,6 +28,10 @@ SEXP r_check_type(SEXP value_sym, SEXP parameter_name, SEXP type, SEXP rho);
 
 /*  type inference */
 SEXP r_infer_type(SEXP value_sym, SEXP parameter_name, SEXP rho);
+SEXP r_parse_type(SEXP type);
+SEXP r_is_function_type(SEXP type);
+SEXP type_to_sexp_string(SEXP type);
+SEXP r_get_parameter_type(SEXP type, SEXP param);
 
 /*  type declaration cache */
 SEXP r_is_type_well_formed(SEXP r_type);

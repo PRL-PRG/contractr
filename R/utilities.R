@@ -10,6 +10,10 @@ is_scalar_logical <- function(vector) {
     is.logical(vector) && (length(vector) == 1)
 }
 
+is_scalar_integer <- function(vector) {
+    is.integer(vector) && (length(vector) == 1)
+}
+
 is_environment <- function(env) {
     is.environment(env)
 }
