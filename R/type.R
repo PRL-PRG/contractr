@@ -22,7 +22,7 @@ check_type <- function(value, type, parameter_name = UNDEFINED_STRING_VALUE) {
 parse_type <- function(type) {
     stopifnot(is_scalar_character(type))
     type <- sub("^\\(", "<", type)
-    type <- sub(") ->", "> =>", type, fixed=TRUE)
+    type <- sub(") =>", "> =>", type, fixed=TRUE)
     type <- paste0("type t ", type, ";")
 
     .Call(C_parse_type, type)
@@ -49,7 +49,7 @@ format.tastr <- function(x, ...) {
     type <- .Call(C_type_to_sexp_string, x)
     type <- sub("^\\s+", "", type)
     type <- sub("^<", "(", type)
-    type <- sub("> =>", ") ->", type, fixed=TRUE)
+    type <- sub("> =>", ") =>", type, fixed=TRUE)
     type
 }
 
