@@ -36,6 +36,20 @@ is_function_type <- function(type) {
 }
 
 #' @export
+is_class_type <- function(type) {
+    stopifnot(inherits(type, "tastr"))
+
+    .Call(C_is_class_type, type)
+}
+
+#' @export
+get_classes <- function(type) {
+    stopifnot(inherits(type, "tastr"))
+
+    .Call(C_get_classes, type)
+}
+
+#' @export
 get_parameter_type <- function(type, param) {
     stopifnot(inherits(type, "tastr"))
     stopifnot(is_scalar_integer(param))
