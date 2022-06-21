@@ -29,6 +29,37 @@ parse_type <- function(type) {
 }
 
 #' @export
+is_subtype <- function(type1, type2) {
+    stopifnot(inherits(type1, "tastr"))
+    stopifnot(inherits(type2, "tastr"))
+
+    .Call(C_is_subtype, type1, type2)
+}
+
+#' @export 
+minimize_signature <- function(sig) {
+    stopifnot(inherits(sig, "tastr"))
+
+    .Call(C_minimize_signature, sig)
+}
+
+#' @export 
+sig_distance <- function(sig1, sig2) {
+    stopifnot(inherits(sig1, "tastr"))
+    stopifnot(inherits(sig2, "tastr"))
+
+    .Call(C_eq_distance, sig1, sig2)
+}
+
+#' @export
+combine_sigs <- function(sig1, sig2) {
+    stopifnot(inherits(sig1, "tastr"))
+    stopifnot(inherits(sig2, "tastr"))
+
+    .Call(C_combine_sigs, sig1, sig2)
+}
+
+#' @export
 is_function_type <- function(type) {
     stopifnot(inherits(type, "tastr"))
 

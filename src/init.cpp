@@ -34,10 +34,13 @@ static const R_CallMethodDef callMethods[] = {
     {"is_function_type", (DL_FUNC) &r_is_function_type, 1},
     {"get_parameter_type", (DL_FUNC) &r_get_parameter_type, 2},
     {"type_to_sexp_string", (DL_FUNC) &type_to_sexp_string, 1},
-
+    {"minimize_signature", (DL_FUNC) &r_minimize_signature, 1},
+    {"eq_distance", (DL_FUNC) &r_eq_distance, 2},
+    {"combine_sigs", (DL_FUNC) &r_combine_sigs, 2},
 
     /*  type inference */
     {"check_type", (DL_FUNC) &r_check_type, 4},
+    {"is_subtype", (DL_FUNC) &r_is_subtype, 2},
 
     /*  type declaration cache */
     {"is_type_well_formed", (DL_FUNC) &r_is_type_well_formed, 1},

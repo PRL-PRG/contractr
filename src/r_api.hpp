@@ -25,6 +25,10 @@ SEXP r_get_severity();
 
 /*  type checking */
 SEXP r_check_type(SEXP value_sym, SEXP parameter_name, SEXP type, SEXP rho);
+SEXP r_is_subtype(SEXP type1, SEXP type2);
+SEXP r_minimize_signature(SEXP sig);
+SEXP r_eq_distance(SEXP sig1, SEXP sig2);
+SEXP r_combine_sigs(SEXP sig1, SEXP sig2);
 
 /*  type inference */
 SEXP r_infer_type(SEXP value_sym, SEXP parameter_name, SEXP rho);
