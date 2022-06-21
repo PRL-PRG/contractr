@@ -1300,7 +1300,10 @@ SEXP r_combine_sigs(SEXP sig1, SEXP sig2) {
     return node2extptr(new tastr::ast::FunctionTypeNode(
         // op,
         node1->get_operator().clone(),
-        parameter->clone(),
+        (new tastr::ast::GroupTypeNode(
+            (new tastr::ast::OperatorNode("("))->clone(),
+            (new tastr::ast::OperatorNode(")"))->clone(),
+            ((tastr::ast::TypeNodePtr) parameter)->clone()))->clone(),
         return_type->clone()
     ));
 }
