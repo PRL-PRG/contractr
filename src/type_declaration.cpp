@@ -1,7 +1,6 @@
 #include "type_declaration.hpp"
 #include "r_api.hpp"
 #include "utilities.hpp"
-#include "union_visitor.hpp"
 
 #undef length
 #include <limits>
