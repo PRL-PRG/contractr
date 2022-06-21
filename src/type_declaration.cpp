@@ -1,7 +1,6 @@
 #include "type_declaration.hpp"
 #include "r_api.hpp"
 #include "utilities.hpp"
-#include "union_visitor.hpp"
 
 #undef length
 #include <limits>
@@ -847,7 +846,6 @@ SEXP r_is_subtype_inner(const tastr::ast::Node* node1, const tastr::ast::Node* n
             break;
         }
     default:
-        // std::cout << ":-O \n";
         break;
     }
 
@@ -1226,19 +1224,15 @@ SEXP r_combine_sigs(SEXP sig1, SEXP sig2) {
     // They are the same size.
     // Deal with parameters.
     for (int i = 0; i < node1__params->get_parameter_count(); ++i) {
-        std::cout << "Looping over " << i << "\n";
         // Combine the two, and minimize.
         // Make two lists, put them together, minimize them.
         // If length(combined) == length(minimized), then this was a waste.
         // Otherwise, we did good. 
         std::vector<const tastr::ast::TypeNode*> all_types = collect_and_combine_two_types((tastr::ast::TypeNodePtr) &node1__params->at(i), (tastr::ast::TypeNodePtr) &node2__params->at(i));
 
-        std::cout << "all_types.size(): " << all_types.size() << "\n"; 
         // Minimize combined list.
         auto deduped_all_types = remove_duplicate_nodes(all_types);
-        std::cout << "deduped_all_types.size(): " << deduped_all_types.size() << "\n"; 
         auto minimized_all_types = minimize_list_of_types_with_subtyping(deduped_all_types);
-        std::cout << "minimized_all_types.size(): " << minimized_all_types.size() << "\n"; 
 
         // Note: What about 
         if (minimized_all_types.size() == all_types.size()) {
@@ -1249,7 +1243,6 @@ SEXP r_combine_sigs(SEXP sig1, SEXP sig2) {
         }
     }
 
-    std::cout << "Here 4.\n";
     // Deal with return.
     std::vector<const tastr::ast::TypeNode*> all_returns = collect_and_combine_two_types((tastr::ast::TypeNodePtr) &node1->get_return_type(), (tastr::ast::TypeNodePtr) &node2->get_return_type());
     auto minimized_return_types = minimize_list_of_types_with_subtyping(remove_duplicate_nodes(all_returns));
@@ -1261,7 +1254,6 @@ SEXP r_combine_sigs(SEXP sig1, SEXP sig2) {
 
     // If we've made it here, the new signature is good to go.
     
-    std::cout << "Here 5.\n";
     tastr::ast::NodePtr parameter;
     if (node1__params->get_parameter_count() == 0) {
         // TODO Nothing to do? Make sure this works.
@@ -1278,19 +1270,14 @@ SEXP r_combine_sigs(SEXP sig1, SEXP sig2) {
         // }
     } else {
         // Need a (big) CommaSeparatorNode.
-        std::cout << "Here 6.\n";
         auto fst = create_node_from_list(param_type_lists[0])->clone();
-        std::cout << "Here 6.5.\n";
-        std::cout << "param_type_lists[1].size(): " << param_type_lists[1].size() << "\n";
         auto snd = create_node_from_list(param_type_lists[1])->clone();
-        std::cout << "Here 6.99\n";
         auto theCommaSeparatorNode = new tastr::ast::CommaSeparatorNode(
             (new tastr::ast::SeparatorNode(","))->clone(),
             create_node_from_list(param_type_lists[0])->clone(), 
             create_node_from_list(param_type_lists[1])->clone()
         );
 
-        std::cout << "Here 7.\n";
         // If there are more elements, add them.
         for (int i = 2; i < param_type_lists.size(); ++i) {
             theCommaSeparatorNode = new tastr::ast::CommaSeparatorNode(
@@ -1300,7 +1287,6 @@ SEXP r_combine_sigs(SEXP sig1, SEXP sig2) {
             );
         } 
 
-        std::cout << "Here 8.\n";
         parameter = theCommaSeparatorNode;
     }
 
@@ -1310,7 +1296,6 @@ SEXP r_combine_sigs(SEXP sig1, SEXP sig2) {
     } else {
         return_type = (tastr::ast::TypeNodePtr) new_union_from_list_of_elements(minimized_return_types);
     }
-    std::cout << "Here 9.\n";
 
     return node2extptr(new tastr::ast::FunctionTypeNode(
         // op,
