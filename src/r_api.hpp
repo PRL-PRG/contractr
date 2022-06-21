@@ -34,8 +34,10 @@ SEXP r_combine_sigs(SEXP sig1, SEXP sig2);
 SEXP r_infer_type(SEXP value_sym, SEXP parameter_name, SEXP rho);
 SEXP r_parse_type(SEXP type);
 SEXP r_is_function_type(SEXP type);
+SEXP r_is_class_type(SEXP type);
 SEXP type_to_sexp_string(SEXP type);
 SEXP r_get_parameter_type(SEXP type, SEXP param);
+SEXP r_get_classes(SEXP type);
 
 /*  type declaration cache */
 SEXP r_is_type_well_formed(SEXP r_type);

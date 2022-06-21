@@ -32,6 +32,8 @@ static const R_CallMethodDef callMethods[] = {
     {"infer_type", (DL_FUNC) &r_infer_type, 3},
     {"parse_type", (DL_FUNC) &r_parse_type, 1},
     {"is_function_type", (DL_FUNC) &r_is_function_type, 1},
+    {"is_class_type", (DL_FUNC) &r_is_class_type, 1},
+    {"get_classes", (DL_FUNC) &r_get_classes, 1},
     {"get_parameter_type", (DL_FUNC) &r_get_parameter_type, 2},
     {"type_to_sexp_string", (DL_FUNC) &type_to_sexp_string, 1},
     {"minimize_signature", (DL_FUNC) &r_minimize_signature, 1},

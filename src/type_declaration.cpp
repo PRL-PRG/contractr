@@ -1325,6 +1325,32 @@ SEXP r_is_function_type(SEXP type) {
     return Rf_ScalarLogical(node->is_function_type_node());
 }
 
+SEXP r_is_class_type(SEXP type) {
+    auto node = (tastr::ast::Node*) R_ExternalPtrAddr(type);
+    return Rf_ScalarLogical(node->is_class_type_node());
+}
+
+SEXP r_get_classes(SEXP type) {
+    auto node = (tastr::ast::Node*) R_ExternalPtrAddr(type);
+    SEXP ret;
+    if (!node->is_class_type_node()) {
+        ret = PROTECT(Rf_allocVector(STRSXP, 0));
+    } else {
+        auto class_node = (tastr::ast::ClassTypeNode*) node;
+        auto params = class_node->get_parameters();
+        ret = PROTECT(Rf_allocVector(STRSXP, params.get_parameter_count()));
+
+        for (int i = 0; i < params.get_parameter_count(); i++) {
+            auto param_node = tastr::ast::as<tastr::ast::IdentifierNode>(params.at(i));
+            auto name = param_node.get_name();                
+            SET_STRING_ELT(ret, i, Rf_mkChar(name.c_str()));
+        }
+    }
+
+    UNPROTECT(1);
+    return ret;
+}
+
 SEXP r_get_parameter_type(SEXP type, SEXP param) {
     auto node = (tastr::ast::Node*) R_ExternalPtrAddr(type);
 

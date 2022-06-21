@@ -22,7 +22,7 @@ check_type <- function(value, type, parameter_name = UNDEFINED_STRING_VALUE) {
 parse_type <- function(type) {
     stopifnot(is_scalar_character(type))
     type <- sub("^\\(", "<", type)
-    type <- sub(") ->", "> =>", type, fixed=TRUE)
+    type <- sub(") =>", "> =>", type, fixed=TRUE)
     type <- paste0("type t ", type, ";")
 
     .Call(C_parse_type, type)
@@ -67,6 +67,20 @@ is_function_type <- function(type) {
 }
 
 #' @export
+is_class_type <- function(type) {
+    stopifnot(inherits(type, "tastr"))
+
+    .Call(C_is_class_type, type)
+}
+
+#' @export
+get_classes <- function(type) {
+    stopifnot(inherits(type, "tastr"))
+
+    .Call(C_get_classes, type)
+}
+
+#' @export
 get_parameter_type <- function(type, param) {
     stopifnot(inherits(type, "tastr"))
     stopifnot(is_scalar_integer(param))
@@ -80,7 +94,7 @@ format.tastr <- function(x, ...) {
     type <- .Call(C_type_to_sexp_string, x)
     type <- sub("^\\s+", "", type)
     type <- sub("^<", "(", type)
-    type <- sub("> =>", ") ->", type, fixed=TRUE)
+    type <- sub("> =>", ") =>", type, fixed=TRUE)
     type
 }
 
