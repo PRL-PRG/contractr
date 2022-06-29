@@ -986,17 +986,14 @@ std::vector<const tastr::ast::TypeNode*> collect_union_elements(const tastr::ast
     return unionElts;
 }
 
-// Function that takes two sigs, and returns how many parameters they differ in.
-SEXP r_eq_distance(SEXP sig1, SEXP sig2) {
-    auto node1 = (tastr::ast::FunctionTypeNode*) R_ExternalPtrAddr(sig1);
-    auto node2 = (tastr::ast::FunctionTypeNode*) R_ExternalPtrAddr(sig2);
+int eq_distance(tastr::ast::FunctionTypeNode* node1, tastr::ast::FunctionTypeNode* node2) {
 
     auto node1__params = (tastr::ast::ParameterNodePtr) &node1->get_parameter();
     auto node2__params = (tastr::ast::ParameterNodePtr) &node2->get_parameter();
-
+    
     // Are they the same size?
     if (node1__params->get_parameter_count() != node2__params->get_parameter_count()) {
-        return ScalarInteger(-1);
+        return -1;
     }
 
     // They are the same size.
@@ -1011,7 +1008,15 @@ SEXP r_eq_distance(SEXP sig1, SEXP sig2) {
         numEqual++;
     }
 
-    return ScalarInteger(node1__params->get_parameter_count() + 1 - numEqual);
+    return node1__params->get_parameter_count() + 1 - numEqual;
+}
+
+// Function that takes two sigs, and returns how many parameters they differ in.
+SEXP r_eq_distance(SEXP sig1, SEXP sig2) {
+    auto node1 = (tastr::ast::FunctionTypeNode*) R_ExternalPtrAddr(sig1);
+    auto node2 = (tastr::ast::FunctionTypeNode*) R_ExternalPtrAddr(sig2);
+
+    return ScalarInteger(eq_distance(node1, node2));
 }
 
 tastr::ast::UnionTypeNodePtr new_union_from_list_of_elements(std::vector<const tastr::ast::TypeNode*> elts) {
@@ -1075,6 +1080,13 @@ const tastr::ast::Node* minimize_union_type_with_subtyping(const tastr::ast::Nod
 SEXP r_is_subtype(SEXP type1, SEXP type2) {
     auto node1 = (tastr::ast::Node*) R_ExternalPtrAddr(type1);
     auto node2 = (tastr::ast::Node*) R_ExternalPtrAddr(type2);
+
+    // For debugging are_nodes_equal.
+    // if (are_nodes_equal(node1, node2)) {
+    //     return R_TrueValue;
+    // } else {
+    //     return R_FalseValue;
+    // }
 
     return r_is_subtype_inner(node1, node2);
 }
@@ -1204,19 +1216,13 @@ tastr::ast::Node* create_node_from_list(std::vector<const tastr::ast::TypeNode*>
     }
 }
 
-// Function that tries to combine two sigs.
-// Returns false if the new union(s) can't be simplified.
-// If the return + all params managed to get simplified, returns the combined signature.
-SEXP r_combine_sigs(SEXP sig1, SEXP sig2) {
-    auto node1 = (tastr::ast::FunctionTypeNode*) R_ExternalPtrAddr(sig1);
-    auto node2 = (tastr::ast::FunctionTypeNode*) R_ExternalPtrAddr(sig2);
-
+tastr::ast::FunctionTypeNode* combine_sigs(tastr::ast::FunctionTypeNode* node1, tastr::ast::FunctionTypeNode* node2) {
     auto node1__params = (tastr::ast::ParameterNodePtr) &node1->get_parameter();
     auto node2__params = (tastr::ast::ParameterNodePtr) &node2->get_parameter();
 
     // Are they the same size?
     if (node1__params->get_parameter_count() != node2__params->get_parameter_count()) {
-        return R_FalseValue;
+        return nullptr;
     }
 
     std::vector<std::vector<const tastr::ast::TypeNode*>> param_type_lists;
@@ -1237,7 +1243,7 @@ SEXP r_combine_sigs(SEXP sig1, SEXP sig2) {
         // Note: What about 
         if (minimized_all_types.size() == all_types.size()) {
             // We didn't make progress, bail.
-            return R_FalseValue;
+            return nullptr;
         } else {
             param_type_lists.push_back(minimized_all_types);
         }
@@ -1249,7 +1255,7 @@ SEXP r_combine_sigs(SEXP sig1, SEXP sig2) {
 
     if (minimized_return_types.size() == all_returns.size()) {
         // We didn't make progress, bail.
-        return R_FalseValue;
+        return nullptr;
     }
 
     // If we've made it here, the new signature is good to go.
@@ -1297,17 +1303,102 @@ SEXP r_combine_sigs(SEXP sig1, SEXP sig2) {
         return_type = (tastr::ast::TypeNodePtr) new_union_from_list_of_elements(minimized_return_types);
     }
 
-    return node2extptr(new tastr::ast::FunctionTypeNode(
-        // op,
+    return new tastr::ast::FunctionTypeNode(
         node1->get_operator().clone(),
-        (new tastr::ast::GroupTypeNode(
+        (new tastr::ast::ParameterNode(
             (new tastr::ast::OperatorNode("("))->clone(),
             (new tastr::ast::OperatorNode(")"))->clone(),
             ((tastr::ast::TypeNodePtr) parameter)->clone()))->clone(),
         return_type->clone()
-    ));
+    );
 }
 
+// Function that tries to combine two sigs.
+// Returns false if the new union(s) can't be simplified.
+// If the return + all params managed to get simplified, returns the combined signature.
+SEXP r_combine_sigs(SEXP sig1, SEXP sig2) {
+    auto node1 = (tastr::ast::FunctionTypeNode*) R_ExternalPtrAddr(sig1);
+    auto node2 = (tastr::ast::FunctionTypeNode*) R_ExternalPtrAddr(sig2);
+
+    auto combinedSigs = combine_sigs(node1, node2);
+
+    if (combinedSigs == nullptr) {
+        return R_FalseValue;
+    } else {
+        return node2extptr(combinedSigs);
+    }
+}
+
+std::vector<tastr::ast::FunctionTypeNode*> run_minimize_over_vector(std::vector<tastr::ast::FunctionTypeNode*> vec_of_sigs) {
+    std::vector<tastr::ast::FunctionTypeNode*> new_sigs;
+    std::vector<bool> replaced = std::vector<bool>(vec_of_sigs.size(), false);
+
+    for (int i = 0; i < vec_of_sigs.size(); ++i) {
+        for (int j = 0; j < vec_of_sigs.size(); ++j) {
+            if (i == j)
+                continue;
+
+            if (replaced[i] && replaced[j])
+                continue;
+
+            if (eq_distance(vec_of_sigs[i], vec_of_sigs[j]) == 1) {
+                auto new_sig = combine_sigs(vec_of_sigs[i], vec_of_sigs[j]);
+                if (new_sig != nullptr) {
+                    // The combined signature is smaller.
+                    // Let's only put it in if it's not already in there.
+                    bool really_new_sig = true;
+                    for (int k = 0; k < new_sigs.size(); ++k) {
+                        if (are_nodes_equal(new_sig, new_sigs[k])) {
+                            really_new_sig = false;
+                            break;
+                        }
+                    }
+                    
+                    if (really_new_sig)
+                        new_sigs.push_back(new_sig);
+                    
+                    replaced[i] = true;
+                    replaced[j] = true;
+                }
+            }
+        }
+    }
+
+
+    for (int i = 0; i < replaced.size(); ++i) {
+        if (!replaced[i]) {
+            new_sigs.push_back(vec_of_sigs[i]);
+        }
+    }
+
+    return new_sigs;
+}
+
+SEXP minimize_list_of_sigs(SEXP list_of_signatures) {
+    int last_length_los = -1;
+
+    // Make list_of_signatures into something C can understand.
+    std::vector<tastr::ast::FunctionTypeNode*> sigs(Rf_length(list_of_signatures));
+
+    for (int i = 0; i < Rf_length(list_of_signatures); ++i) {
+        sigs[i] = (tastr::ast::FunctionTypeNode*) R_ExternalPtrAddr(VECTOR_ELT(list_of_signatures, i));
+    }
+
+    while(sigs.size() != last_length_los) {
+        last_length_los = sigs.size();
+        sigs = run_minimize_over_vector(sigs);
+    }
+
+    SEXP ret_me = PROTECT(allocVector(VECSXP, sigs.size()));
+
+    for (int i = 0; i < sigs.size(); ++i) {
+        SET_VECTOR_ELT(ret_me, i, node2extptr(sigs[i]));
+    }
+
+    UNPROTECT(1);
+    return ret_me;
+}
+  
 SEXP r_is_function_type(SEXP type) {
     auto node = (tastr::ast::Node*) R_ExternalPtrAddr(type);
     return Rf_ScalarLogical(node->is_function_type_node());

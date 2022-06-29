@@ -39,6 +39,7 @@ static const R_CallMethodDef callMethods[] = {
     {"minimize_signature", (DL_FUNC) &r_minimize_signature, 1},
     {"eq_distance", (DL_FUNC) &r_eq_distance, 2},
     {"combine_sigs", (DL_FUNC) &r_combine_sigs, 2},
+    {"minimize_list_of_sigs", (DL_FUNC) &minimize_list_of_sigs, 1},
 
     /*  type inference */
     {"check_type", (DL_FUNC) &r_check_type, 4},

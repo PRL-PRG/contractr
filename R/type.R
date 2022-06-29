@@ -74,6 +74,12 @@ is_class_type <- function(type) {
 }
 
 #' @export
+minimize_list_of_sigs <- function(list_of_sigs) {
+    # TODO: asserts?
+    .Call(C_minimize_list_of_sigs, list_of_sigs)    
+}
+
+#' @export
 get_classes <- function(type) {
     stopifnot(inherits(type, "tastr"))
 
