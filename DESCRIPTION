@@ -21,3 +21,5 @@ Depends:
     roxygen2
 Remotes: PRL-PRG/injectr
 SystemRequirements: C++11
+Remotes:
+    PRL-PRG/injectr
