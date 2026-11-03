@@ -1,17 +1,14 @@
 #ifndef CONTRACTR_CONTRACT_HPP
 #define CONTRACTR_CONTRACT_HPP
 
-#include <tastr/ast/ast.hpp>
 #include <string>
 #include <Rinternals.h>
 
 #include "utilities.hpp"
-#include "check_type.hpp"
-#include "infer_type.hpp"
-#include "type_declaration.hpp"
 #include "r_api.hpp"
 #undef length
 
+/* A row of the contract table. It records a verdict on a monitored call. */
 class Contract {
   public:
     Contract()
@@ -19,15 +16,11 @@ class Contract {
         , call_trace_(UNDEFINED_STRING_VALUE)
         , package_name_(UNDEFINED_STRING_VALUE)
         , function_name_(UNDEFINED_STRING_VALUE)
-        , actual_parameter_count_(-1)
-        , expected_parameter_count_(-1)
         , parameter_position_(-1)
         , parameter_name_(UNDEFINED_STRING_VALUE)
         , actual_type_(UNDEFINED_STRING_VALUE)
         , expected_type_(UNDEFINED_STRING_VALUE)
-        , function_type_(nullptr)
-        , assertion_status_(false)
-        , asserted_(false) {
+        , origin_(NA_INTEGER) {
     }
 
     int get_call_id() const {
@@ -62,22 +55,6 @@ class Contract {
         function_name_ = function_name;
     }
 
-    int get_actual_parameter_count() const {
-        return actual_parameter_count_;
-    }
-
-    void set_actual_parameter_count(int actual_parameter_count) {
-        actual_parameter_count_ = actual_parameter_count;
-    }
-
-    int get_expected_parameter_count() const {
-        return expected_parameter_count_;
-    }
-
-    void set_expected_parameter_count(int expected_parameter_count) {
-        expected_parameter_count_ = expected_parameter_count;
-    }
-
     int get_parameter_position() const {
         return parameter_position_;
     }
@@ -102,56 +79,33 @@ class Contract {
         return expected_type_;
     }
 
-    const tastr::ast::FunctionTypeNode* get_function_type() {
-        return function_type_;
+    /* Sets the type of the value, the declared type and the verdict on them.
+     * `verdict` is `ok`, `violation` or `unknown`. `origin` is the call id of
+     * the root violation that this violation follows from. It is `NA` for a
+     * root violation and for a row that is not a violation. `blame` is
+     * `caller` or `callee`. It is empty if the row gives no blame. */
+    void set_verdict(const std::string& actual_type,
+                     const std::string& expected_type,
+                     const std::string& verdict,
+                     int origin,
+                     const std::string& blame) {
+        actual_type_ = actual_type;
+        expected_type_ = expected_type;
+        verdict_ = verdict;
+        origin_ = origin;
+        blame_ = blame;
     }
 
-    void set_function_type(const tastr::ast::FunctionTypeNode* function_type) {
-        function_type_ = function_type;
+    const std::string& get_verdict() const {
+        return verdict_;
     }
 
-    bool get_assertion_status() const {
-        return assertion_status_;
+    int get_origin() const {
+        return origin_;
     }
 
-    bool is_asserted() const {
-        return asserted_;
-    }
-
-    void assert(SEXP value, bool is_missing) {
-        if (is_asserted()) {
-            Rf_errorcall(R_NilValue, "contract is being reasserted");
-            return;
-        }
-
-        asserted_ = true;
-
-        SEXP actual_value = is_missing ? R_MissingArg : value;
-
-        /* return type contract  */
-        if (get_parameter_position() == -1) {
-            const tastr::ast::Node& node =
-                get_function_return_type(get_function_type());
-
-            assertion_status_ = check_type(actual_value, node);
-            expected_type_ = type_to_string(node);
-            actual_type_ = infer_type(actual_value);
-        }
-        /* parameter outside limits  */
-        else if (get_parameter_position() >= get_expected_parameter_count()) {
-            assertion_status_ = false;
-            actual_type_ = infer_type(get_parameter_name(), actual_value);
-        }
-        /* parameter is within limits  */
-        else {
-            const tastr::ast::Node& node = get_function_parameter_type(
-                get_function_type(), get_parameter_position());
-
-            assertion_status_ =
-                check_type(get_parameter_name(), actual_value, node);
-            expected_type_ = type_to_string(node);
-            actual_type_ = infer_type(get_parameter_name(), actual_value);
-        }
+    const std::string& get_blame() const {
+        return blame_;
     }
 
   private:
@@ -159,32 +113,18 @@ class Contract {
     std::string call_trace_;
     std::string package_name_;
     std::string function_name_;
-    int actual_parameter_count_;
-    int expected_parameter_count_;
     int parameter_position_;
     std::string parameter_name_;
     std::string actual_type_;
     std::string expected_type_;
-    const tastr::ast::FunctionTypeNode* function_type_;
-    bool assertion_status_;
-    bool asserted_;
+    std::string verdict_;
+    int origin_;
+    std::string blame_;
 };
 
 void initialize_contracts();
 
 void accumulate_contract(Contract* contract);
-
-void destroy_r_contract(SEXP r_contract);
-
-SEXP create_r_contract(Contract* contract);
-
-Contract* extract_from_r_contract(SEXP r_contract);
-
-SEXP r_assert_contract(SEXP r_contract, SEXP value, SEXP is_value_missing);
-
-Contract* create_argument_contract(Contract* result_contract,
-                                   SEXP r_parameter_name,
-                                   int parameter_position);
 
 bool contracts_are_enabled();
 

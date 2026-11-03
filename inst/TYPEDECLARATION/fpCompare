@@ -1,6 +1,0 @@
-type `%<<%` <double[], integer[]> => logical[];
-type `%<=%` <double[], integer[]> => logical[];
-type `%==%` <double[], integer[] | double> => logical[];
-type `%>=%` <double[], integer[]> => logical[];
-type `%>>%` <double[], integer[]> => logical[];
-type `%!=%` <double[], integer[]> => logical[];

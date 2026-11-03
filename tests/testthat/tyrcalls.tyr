@@ -1,0 +1,53 @@
+# tyrcalls: declarations written by hand, in the format of `tyr --typedecl`.
+#| tyrcalls::s1 : (x: vec) -> LGL
+#| tyrcalls::s1 : (x: vec1) -> LGL1
+#| tyrcalls::s1_lazy : (x: vec) -> LGL
+#| tyrcalls::s1_lazy : (x: vec1) -> LGL1
+#| tyrcalls::m_yx : (x: LGL, y: INT) -> LGL
+#| tyrcalls::m_yx : (x: INT, y: LGL) -> LGL1
+#| tyrcalls::m_xy : (x: LGL, y: INT) -> LGL
+#| tyrcalls::m_xy : (x: INT, y: LGL) -> LGL1
+#| tyrcalls::m_x : (x: LGL, y: INT) -> LGL
+#| tyrcalls::m_x : (x: INT, y: LGL) -> LGL1
+#| tyrcalls::m_none : (x: LGL, y: INT) -> LGL
+#| tyrcalls::m_none : (x: INT, y: LGL) -> LGL1
+#| tyrcalls::o_force : (x: INT) -> INT
+#| tyrcalls::o_force : (x: INT, y: LGL) -> LGL
+#| tyrcalls::o_lazy : (x: INT) -> INT
+#| tyrcalls::o_lazy : (x: INT, y: LGL) -> LGL
+#| tyrcalls::u_ab : (a: CHR, b: INT) -> any
+#| tyrcalls::u_ab : (a: INT, b: CHR) -> any
+#| tyrcalls::d_all : (x: LGL, ...: CHR) -> LGL
+#| tyrcalls::d_all : (x: INT, ...: DBL) -> INT
+#| tyrcalls::d_lazy : (x: LGL, ...: CHR) -> LGL
+#| tyrcalls::d_lazy : (x: INT, ...: DBL) -> INT
+#| tyrcalls::d_post : (x: INT, ...: DBL, z: LGL1?) -> any
+#| tyrcalls::tag : (x: 'a) -> 'a
+#| tyrcalls::p_aa : (x: 'a, y: 'a) -> 'a
+#| tyrcalls::p_ab : (x: 'a, y: 'b) -> 'b
+#| tyrcalls::p_ab_lazy : (x: 'a, y: 'b) -> 'b
+#| tyrcalls::p_bound : (x: 'a & dbl, y: 'a) -> any
+#| tyrcalls::r_req : (x: INT, y: INT) -> any
+#| tyrcalls::r_rec : (n: dbl, x: INT) -> INT
+#| tyrcalls::r_def : (x: INT, y: LGL?) -> any
+#| tyrcalls::r_unused : (x: INT1, y: INT) -> INT
+#| tyrcalls::r_pm : (text: CHR, n: INT) -> any
+#| tyrcalls::r_err : (x: INT) -> INT
+#| tyrcalls::r_missing : (x: INT, y: any?) -> LGL1
+#| tyrcalls::r_missing_fwd : (x: INT, y: any?) -> LGL1
+#| tyrcalls::c_f : (x: INT1) -> any
+#| tyrcalls::c_g : (x: INT1) -> any
+#| tyrcalls::c_h : (x: INT1) -> any
+#| tyrcalls::c3_f : (x: INT) -> any
+#| tyrcalls::c3_g : (x: ^INT1) -> any
+#| tyrcalls::c3_h : (x: ^INT1) -> any
+#| tyrcalls::c4_f : (x: INT1) -> any
+#| tyrcalls::c4_g : (x: INT1) -> any
+#| tyrcalls::c5_f : (x: INT1) -> any
+#| tyrcalls::c5_g : (x: INT1) -> any
+#| tyrcalls::ret_x : (x: INT) -> INT
+#| tyrcalls::mk : (x: INT) -> any
+#| tyrcalls::lazy1 : (x: INT1) -> any
+#| tyrcalls::r_def_fwd : (x: INT, y: LGL?) -> LGL1
+#| tyrcalls::c_def : (t: INT1?) -> any
+#| tyrcalls::c_def_bad : (t: CHR1?) -> any

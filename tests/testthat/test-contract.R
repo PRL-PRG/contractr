@@ -1,7 +1,4 @@
 test_that("get_contracts / clear_contracts start empty", {
-    old <- get_severity(); on.exit(set_severity(old), add = TRUE)
-    set_severity("silence")
-
     clear_contracts()
     ct <- get_contracts()
     expect_s3_class(ct, "data.frame")
@@ -9,34 +6,30 @@ test_that("get_contracts / clear_contracts start empty", {
 })
 
 test_that("capture_contracts returns the value and the captured contracts", {
-    old <- get_severity(); on.exit(set_severity(old), add = TRUE)
-    set_severity("silence")
+    tyr_skip_unless_rstt()
+    ns <- testpackage_fixture()
     clear_contracts()
 
-    f <- function(x) if (missing(x)) 3L else x
-    insert_contract(f, "<double> => double", pkg_name = ".GlobalEnv")
-
-    # an integer argument violates <double>: one arg + one return contract
-    cap <- capture_contracts(f(2L))
+    # The capture contains the domain verdict and the return verdict.
+    cap <- capture_contracts(ns$foo2(2L))
 
     expect_named(cap, c("result", "contracts"))
     expect_equal(cap$result, 2L)
     expect_s3_class(cap$contracts, "data.frame")
-    expect_equal(nrow(cap$contracts), 2)
+    expect_equal(cap$contracts$parameter_position, c(-2L, -1L))
+    expect_equal(cap$contracts$verdict, c("ok", "ok"))
 
-    # separate = TRUE (default) does not leak into the global set
+    # With `separate = TRUE` (the default), the rows do not go into the global
+    # table.
     expect_equal(nrow(get_contracts()), 0)
 })
 
 test_that("capture_contracts(separate = FALSE) accumulates into the global set", {
-    old <- get_severity(); on.exit(set_severity(old), add = TRUE)
-    set_severity("silence")
+    tyr_skip_unless_rstt()
+    ns <- testpackage_fixture()
     clear_contracts()
 
-    f <- function(x) if (missing(x)) 3L else x
-    insert_contract(f, "<double> => double", pkg_name = ".GlobalEnv")
-
-    capture_contracts(f(2L), separate = FALSE)
+    capture_contracts(ns$foo2(2L), separate = FALSE)
     expect_equal(nrow(get_contracts()), 2)
 
     clear_contracts()
@@ -49,13 +42,9 @@ test_that("capture_contracts validates the separate flag", {
 })
 
 test_that("ignore_contracts evaluates code without recording contracts", {
-    old <- get_severity(); on.exit(set_severity(old), add = TRUE)
-    set_severity("silence")
+    ns <- testpackage_fixture()
     clear_contracts()
 
-    f <- function(x) if (missing(x)) 3L else x
-    insert_contract(f, "<double> => double", pkg_name = ".GlobalEnv")
-
-    expect_equal(ignore_contracts(f(5L)), 5L)
+    expect_equal(ignore_contracts(ns$foo2(5L)), 5L)
     expect_equal(nrow(get_contracts()), 0)
 })

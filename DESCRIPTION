@@ -18,27 +18,29 @@ Authors@R: c(
            family = "Donat-Bouillud",
            role = "ctb",
            email = "pierre.donat.bouillud@gmail.com"))
-Description: Attaches run-time type contracts to R functions. A function is
-    annotated with a type declaration written in the 'tastr' type language;
-    contractr injects assertions that check the arguments and the return value
-    against the declared type on every call, signalling a warning or an error
-    (depending on the configured severity) when a value does not conform.
+Description: Monitors the calls of an R package at run time. It uses the
+    set-theoretic types that 'tyr' infers for the functions of the package.
+    At the exit of each call, contractr sends queries to the 'rstt' type
+    engine. The queries examine if
+    the call is in the domain of the function and if the result agrees with its
+    type. For a violation, contractr gives a warning or an error, as the
+    severity specifies.
 License: Apache License (>= 2)
 Encoding: UTF-8
 Suggests:
+    processx,
     testthat (>= 2.1.0),
-    rlang,
     devtools,
+    pkgload,
+    roxygen2,
     withr,
     mutator
 RoxygenNote: 7.1.2
 Imports:
+    cli,
     injectr,
-    roxygen2,
     utils
-Depends:
-    roxygen2
 Remotes:
     PRL-PRG/injectr,
     PRL-PRG/mutator
-SystemRequirements: GNU make, flex, bison, C++17
+SystemRequirements: C++17

@@ -1,2 +1,0 @@
-type `testPerl` <character, logical> => logical;
-type `WriteXLS` <character[] | class<`data.frame`> | list<class<`data.frame`>>, character, null, character, logical, character[], logical, logical, logical, logical, logical, character, double, double, any> => logical;

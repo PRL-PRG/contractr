@@ -1,8 +1,0 @@
-type `blue2green` <double> => character[];
-type `blue2red` <double> => character[];
-type `blue2yellow` <double> => character[];
-type `green2red` <double> => character[];
-type `primary.colors` <double, double, logical> => character[];
-type `rgb.tables` <double, double[], double[], double[]> => character[];
-type `table.ramp` <double, double, double, double, double> => double[];
-type `ygobb` <double> => character[];

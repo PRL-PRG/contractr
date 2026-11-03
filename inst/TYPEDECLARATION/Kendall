@@ -1,5 +1,0 @@
-type `Kendall` <double[], double[] | class<`ts`>> => class<`Kendall`>;
-type `MannKendall` <class<`ts`> | double[]> => class<`Kendall`>;
-type `print.Kendall` <class<`Kendall`>, ...> => null;
-type `SeasonalMannKendall` <class<`ts`>> => class<`Kendall`>;
-type `summary.Kendall` <class<`Kendall`>, ...> => null;

@@ -1,4 +1,0 @@
-type `bobyqa` <double[], class<`function`>, double[], double[], list<any>, ...> => class<`bobyqa`, `minqa`>;
-type `commonArgs` <double[], class<`function`>, list<any>, environment> => environment;
-type `newuoa` <double[], class<`function`>, list<any>, ...> => class<`minqa`, `newuoa`>;
-type `uobyqa` <double[], class<`function`>, list<any>, ...> => class<`minqa`, `uobyqa`>;

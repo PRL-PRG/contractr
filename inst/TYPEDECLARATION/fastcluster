@@ -1,2 +1,0 @@
-type `hclust` <class<`dist`>, character, class<`table`> | null> => class<`hclust`>;
-type `hclust.vector` <class<`data.frame`> | class<`matrix`>, character, null | class<`table`>, character, null> => class<`hclust`>;

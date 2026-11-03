@@ -1,2 +1,0 @@
-type `as.matrix.pdist` <class<`pdist`>, ...> => class<`matrix`>;
-type `pdist` <class<`matrix`>, null, integer[], integer[]> => class<`pdist`>;

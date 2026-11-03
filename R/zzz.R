@@ -1,44 +1,20 @@
 .onLoad <- function(libname, pkgname) {
-
     set_severity()
+    set_autoinject()
 
-    handle_package <- function(package_name, ...) {
-        if (package_name %in% get_autoinject_blacklist()) {
-            return();
-        }
-
-        autoinject_packages <- get_autoinject()
-        if (package_name %in% autoinject_packages || autoinject_packages == TRUE) {
-            tryCatch(
-                fun_names <- insert_package_contract(package_name),
-                error = function(e) {
-                    expected_message <- sprintf("there is no package called '%s'", package_name)
-                    if (length(grep(expected_message, e$message)) == 1) {
-                        message(expected_message)
-                    }
-                    else {
-                        stop(e)
-                    }
-                }
-            )
-            if (length(fun_names) != 0) {
-                message("Added contract to ", length(fun_names), " ", package_name, " function(s)")
-            }
-        }
+    ## Monitor the packages that R loaded before contractr. Then add a hook that
+    ## monitors each other installed package when R loads it.
+    for (package in loadedNamespaces()) {
+        autoinject(package)
     }
-
-    remove_packages <- c(".GlobalEnv", "Autoloads", get_autoinject_blacklist())
-    loaded_packages <- setdiff(remove_package_prefix(search()), remove_packages)
-    installed_packages <- utils::installed.packages()[, 1]
-    remaining_packages <- setdiff(installed_packages, loaded_packages)
-
-    for (package in loaded_packages) {
-        handle_package(package)
+    installed <- basename(list.dirs(.libPaths(), recursive = FALSE))
+    for (package in setdiff(installed, loadedNamespaces())) {
+        setHook(packageEvent(package, "onLoad"), autoinject)
     }
+}
 
-    for (package in remaining_packages) {
-        setHook(packageEvent(package, "attach"), handle_package)
-    }
+.onUnload <- function(libpath) {
+    rstt_stop()
 }
 
 .onDetach <- function(libpath) {

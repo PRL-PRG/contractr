@@ -1,3 +1,0 @@
-type `.Last.projection` <any> => (list<character | double[]> | list<character | null | double[]>);
-type `map.grid` <class<`map`>, double, double, logical, logical, double, double, double, double, ...> => null;
-type `mapproject` <list<^double[] | character[]> | class<`data.frame`> | double[] | list<double[]>, any, character, double[] | null, null | double[]> => list<^double[]>;

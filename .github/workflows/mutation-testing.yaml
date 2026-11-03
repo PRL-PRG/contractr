@@ -1,5 +1,5 @@
-# Runs mutator mutation testing via the reusable workflow from PRL-PRG/mutator.
-# See the "Continuous integration" section of the mutator README for all inputs.
+# Runs the mutation tests of mutator with the reusable workflow of PRL-PRG/mutator.
+# The section "Continuous integration" of the mutator README gives all inputs.
 on:
   push:
     branches: [main, master]
@@ -10,18 +10,12 @@ name: mutation-testing
 
 jobs:
   mutation-testing:
-    # Tracking main until a tagged mutator release includes the `submodules`
-    # input (needed for contractr's tastr submodule); pin to that tag once cut.
     uses: PRL-PRG/mutator/.github/workflows/mutation-testing.yaml@main
-    # contents: write lets the reusable workflow publish the badge JSON to gh-pages.
+    # `contents: write` lets the reusable workflow write the badge JSON to gh-pages.
     permissions:
       contents: write
     with:
       target-margin: "0.10"
-      # contractr vendors tastr as a git submodule; the reusable workflow must
-      # check it out or the build fails (requires mutator >= the release that
-      # added the `submodules` input).
-      submodules: recursive
-      # Publishes mutation-results/mutation-score.json to the gh-pages branch
-      # (skipped on pull_request) for the shields.io badge in README.md.
+      # Writes `mutation-results/mutation-score.json` to the gh-pages branch for
+      # a shields.io badge. A pull_request run does not do this step.
       deploy-badge: true

@@ -1,4 +1,0 @@
-type `davies` <double, double[], double[], double[], double, double, double> => list<double[]>;
-type `farebrother` <double, double[], double[], double[], double, double, double> => list<double>;
-type `imhof` <double, double[], double[], double[], double, double, double> => list<double>;
-type `liu` <double, double[], double[], double[]> => double;

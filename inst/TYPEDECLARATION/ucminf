@@ -1,1 +1,0 @@
-type `ucminf` <double[], class<`function`>, class<`function`>, ..., list<double>, double> => list<double[] | character>;

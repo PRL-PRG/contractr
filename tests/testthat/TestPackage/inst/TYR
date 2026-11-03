@@ -1,0 +1,4 @@
+# TestPackage: declarations written by hand, in the format of `tyr --typedecl`.
+#| TestPackage::foo1 : () -> dbl
+#| TestPackage::foo2 : (x: dbl) -> dbl
+#| TestPackage::foo3 : (x: dbl, y: dbl) -> dbl

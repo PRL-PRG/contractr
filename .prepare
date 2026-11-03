@@ -1,7 +1,0 @@
-#!/bin/sh
-# r-universe pre-build hook: executed before `R CMD build`.
-# Checks out the tastr submodule and builds its static library so that the
-# generated source package can be compiled.
-# See https://docs.r-universe.dev/publish/troubleshoot-build.html
-set -e
-./tools/build-tastr.sh

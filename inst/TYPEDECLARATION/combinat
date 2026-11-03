@@ -1,8 +1,0 @@
-type `combn` <character[] | double[], double, null | class<`function`>, logical, ...> => (class<`matrix`> | integer[]);
-type `dmnom` <double[], double, double[]> => double;
-type `logfact` <double[]> => double[];
-type `nCm` <double, double, double> => double;
-type `nsimplex` <double, double> => double;
-type `permn` <double, class<`function`> | null, ...> => list<integer[]>;
-type `rmultinomial` <double[], class<`matrix`>, integer> => class<`matrix`>;
-type `xsimplex` <double, double, class<`function`>, logical, ...> => double[];

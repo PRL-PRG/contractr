@@ -1,5 +1,0 @@
-#!/bin/sh
-# Configure step run by `R CMD INSTALL`. Builds the vendored tastr static
-# library (per platform) before the package's C++ sources are compiled.
-set -e
-"$(dirname "$0")/tools/build-tastr.sh"

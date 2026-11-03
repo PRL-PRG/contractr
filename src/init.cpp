@@ -2,21 +2,25 @@
 
 #include "utilities.hpp"
 #include "Contract.hpp"
+#include "tyr.hpp"
 #include "r_api.hpp"
 #include <R.h>
 #include <R_ext/Rdynload.h>
 #include <Rinternals.h>
-#include <stdlib.h> // for NULL
+#include <stdlib.h> // Declares `NULL`.
 
 extern "C" {
 
 static const R_CallMethodDef callMethods[] = {
-    /* contract insertion  */
-    {"insert_function_contract", (DL_FUNC) &r_insert_function_contract, 3},
-    {"create_result_contract", (DL_FUNC) &r_create_result_contract, 5},
+    /* Full-call checks of tyr types */
+    {"tyr_infer_type", (DL_FUNC) &r_tyr_infer_type, 1},
+    {"tyr_args", (DL_FUNC) &r_tyr_args, 2},
+    {"tyr_peek", (DL_FUNC) &r_tyr_peek, 1},
+    {"tyr_forced_type", (DL_FUNC) &r_tyr_forced_type, 1},
+    {"tyr_contracts_enabled", (DL_FUNC) &r_tyr_contracts_enabled, 0},
+    {"tyr_record", (DL_FUNC) &r_tyr_record, 11},
 
-    /*  contract assertion */
-    {"assert_contract", (DL_FUNC) &r_assert_contract, 3},
+    /* The contract table */
     {"capture_contracts", (DL_FUNC) &r_capture_contracts, 3},
     {"get_contracts", (DL_FUNC) &r_get_contracts, 0},
     {"clear_contracts", (DL_FUNC) &r_clear_contracts, 0},
@@ -24,43 +28,9 @@ static const R_CallMethodDef callMethods[] = {
     {"disable_contracts", (DL_FUNC) &r_disable_contracts, 0},
     {"reinstate_contract_status", (DL_FUNC) &r_reinstate_contract_status, 0},
 
-    /* severity */
+    /* Severity */
     {"set_severity", (DL_FUNC) &r_set_severity, 1},
     {"get_severity", (DL_FUNC) &r_get_severity, 0},
-
-    /* type checking */
-    {"infer_type", (DL_FUNC) &r_infer_type, 3},
-    {"parse_type", (DL_FUNC) &r_parse_type, 1},
-    {"is_function_type", (DL_FUNC) &r_is_function_type, 1},
-    {"is_class_type", (DL_FUNC) &r_is_class_type, 1},
-    {"get_classes", (DL_FUNC) &r_get_classes, 1},
-    {"get_parameter_type", (DL_FUNC) &r_get_parameter_type, 2},
-    {"type_to_sexp_string", (DL_FUNC) &type_to_sexp_string, 1},
-    {"minimize_signature", (DL_FUNC) &r_minimize_signature, 1},
-    {"eq_distance", (DL_FUNC) &r_eq_distance, 2},
-    {"combine_sigs", (DL_FUNC) &r_combine_sigs, 2},
-    {"minimize_list_of_sigs", (DL_FUNC) &minimize_list_of_sigs, 1},
-
-    /*  type inference */
-    {"check_type", (DL_FUNC) &r_check_type, 4},
-    {"is_subtype", (DL_FUNC) &r_is_subtype, 2},
-
-    /*  type declaration cache */
-    {"is_type_well_formed", (DL_FUNC) &r_is_type_well_formed, 1},
-    {"import_type_declarations", (DL_FUNC) &r_import_type_declarations, 2},
-    {"get_type_index", (DL_FUNC) &r_get_type_index, 2},
-    {"get_typed_package_names", (DL_FUNC) &r_get_typed_package_names, 0},
-    {"get_typed_function_names", (DL_FUNC) &r_get_typed_function_names, 1},
-    {"is_package_typed", (DL_FUNC) &r_is_package_typed, 1},
-    {"is_function_typed", (DL_FUNC) &r_is_function_typed, 2},
-    {"set_type_declaration", (DL_FUNC) &r_set_type_declaration, 3},
-    {"show_function_type_declaration",
-     (DL_FUNC) &r_show_function_type_declaration,
-     3},
-    {"show_package_type_declarations",
-     (DL_FUNC) &r_show_package_type_declarations,
-     2},
-    {"show_type_declarations", (DL_FUNC) &r_show_type_declarations, 1},
     {NULL, NULL, 0}};
 
 void R_init_contractr(DllInfo* dll) {

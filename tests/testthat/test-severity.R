@@ -13,7 +13,7 @@ test_that("set_severity rejects unknown levels", {
     on.exit(set_severity(old), add = TRUE)
 
     expect_error(set_severity("bogus"), "severity should be")
-    # an invalid level must not change the current severity
+    # An invalid level must not change the current severity.
     set_severity("error")
     expect_error(set_severity("loud"))
     expect_identical(get_severity(), "error")

@@ -1,7 +1,0 @@
-type `assert_id` <character> => character;
-type `assert_param` <class<`Param`, `ParamDbl`, `R6`> | class<`Param`, `ParamFct`, `R6`>, character, logical, logical> => (class<`Param`, `ParamDbl`, `R6`> | class<`Param`, `ParamFct`, `R6`>);
-type `assert_param_set` <class<`ParamSet`, `R6`>, character, logical, logical, logical> => class<`ParamSet`, `R6`>;
-type `generate_design_grid` <class<`ParamSet`, `R6`>, double, null> => class<`Design`, `R6`>;
-type `generate_design_lhs` <class<`ParamSet`, `R6`>, double, null> => class<`Design`, `R6`>;
-type `generate_design_random` <class<`ParamSet`, `R6`>, double> => class<`Design`, `R6`>;
-type `is_nodefault` <class<`NoDefault`, `R6`> | double> => logical;

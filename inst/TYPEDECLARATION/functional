@@ -1,4 +1,0 @@
-type `Compose` <...> => class<`function`>;
-type `Curry` <any, ...> => class<`function`>;
-type `CurryL` <any, ...> => class<`function`> | <...> => class<`call`>;
-type `multi.argument.Compose` <...> => class<`function`> | <...> => double;

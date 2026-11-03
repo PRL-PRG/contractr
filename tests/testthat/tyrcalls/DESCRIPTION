@@ -1,0 +1,8 @@
+Package: tyrcalls
+Title: Fixtures for the Checks of Full Calls in contractr
+Version: 0.0.1
+Description: Functions that force their arguments in a fixed order. The
+    tests of contractr monitor their calls with the types in
+    '../tyrcalls.tyr'.
+License: Apache License (>= 2)
+Encoding: UTF-8

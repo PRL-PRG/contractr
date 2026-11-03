@@ -1,2 +1,0 @@
-type `getsize` <double> => double;
-type `hoard` < > => class<`HoardClient`, `R6`>;

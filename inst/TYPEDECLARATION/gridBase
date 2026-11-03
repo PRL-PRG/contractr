@@ -1,8 +1,0 @@
-type `badFIG` <list<double>, double[], double[], double[]> => logical;
-type `badOMI` <list<double>, double[], double[]> => logical;
-type `baseViewports` < > => list<class<`viewport`>>;
-type `currentViewportLoc` < > => list<double>;
-type `gridFIG` < > => double[];
-type `gridOMI` < > => double[];
-type `gridPAR` < > => list<character | double>;
-type `gridPLT` < > => double[];

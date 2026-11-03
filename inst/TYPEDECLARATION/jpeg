@@ -1,2 +1,0 @@
-type `readJPEG` <character | raw[], logical> => (class<`array`> | class<`matrix`> | class<`nativeRaster`>);
-type `writeJPEG` <class<`array`> | class<`matrix`> | class<`nativeRaster`>, character | raw[], double, character, any> => (null | raw[]);

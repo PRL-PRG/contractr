@@ -1,2 +1,0 @@
-type `addSpinner` <class<`shiny.tag`>, character, character> => class<`list`, `shiny.tag.list`>;
-type `get_style` <class<`shiny.tag`>> => list<character>;

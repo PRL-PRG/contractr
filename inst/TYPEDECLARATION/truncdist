@@ -1,7 +1,0 @@
-type `dtrunc` <double[], character, double, double, ...> => double[];
-type `extrunc` <character, double, double, ...> => double;
-type `ptrunc` <double[], character, double, double, ...> => double[];
-type `qqtrunc` <double[], character, double, double, character, character, character, ...> => double;
-type `qtrunc` <double[], character, double, double, ...> => double[];
-type `rtrunc` <double, character, double, double, ...> => double[];
-type `vartrunc` <character, double, double, ...> => double;

@@ -1,5 +1,0 @@
-type `check_testfun` <class<`function`>> => list<class<`function`>>;
-type `has_file` <character, null, integer> => class<`root_criterion`>;
-type `make_find_root_file` <class<`root_criterion`>> => class<`function`>;
-type `root_criterion` <class<`function`>, character, null> => class<`root_criterion`>;
-type `thisfile_source` < > => character;

@@ -1,7 +1,0 @@
-[submodule "tastr"]
-	path = tastr
-	url = https://github.com/PRL-PRG/tastr
-	# The build drops a vendored FlexLexer.h and build/ artifacts into the
-	# submodule tree; ignore working-tree changes so the superproject only
-	# tracks the pinned commit.
-	ignore = dirty

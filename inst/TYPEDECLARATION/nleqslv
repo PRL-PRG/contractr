@@ -1,4 +1,0 @@
-type `nleqslv` <class<`function`> | double[], any, null | class<`function`>, ..., character[], character[], character[], logical, list<any>> => any;
-type `print.test.nleqslv` <class<`test.nleqslv`>, double, integer, ...> => class<`test.nleqslv`>;
-type `searchZeros` <class<`matrix`>, class<`function`>, integer, ...> => list<class<`matrix`> | double[]>;
-type `testnslv` <double[], class<`function`>, null, ..., character[], character[], integer, null> => class<`test.nleqslv`>;

@@ -1,1 +1,0 @@
-type `countrycode` <character[], character, character, logical, null, null, null, logical> => (character | integer[]);

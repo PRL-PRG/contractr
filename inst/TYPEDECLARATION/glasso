@@ -1,2 +1,0 @@
-type `glasso` <class<`matrix`>, double, null, class<`matrix`> | null, double, double, logical, logical, character[], any, any, logical> => list<class<`matrix`> | null | double>;
-type `glassopath` <class<`matrix`>, null, double, double, logical, logical, null, null, double> => list<class<`array`> | double[]>;

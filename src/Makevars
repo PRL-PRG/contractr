@@ -1,15 +1,4 @@
-# contractr links against tastr (https://github.com/PRL-PRG/tastr), which is
-# vendored as a git submodule at the package root and built into a static
-# library by the top-level `configure` script (and the r-universe `.prepare`
-# hook) before these sources are compiled.
-
-TASTR_DIRPATH = $(realpath ../tastr)
-TASTR_INCLUDE_PATH = $(TASTR_DIRPATH)/build/include
-TASTR_LIBRARY_PATH = $(TASTR_DIRPATH)/build/lib
-
 # -DR_NO_REMAP avoids R's `length` macro clobbering libc++ headers on macOS.
-PKG_CPPFLAGS = -DR_NO_REMAP -I$(TASTR_INCLUDE_PATH) -I$(TASTR_INCLUDE_PATH)/tastr
-PKG_LIBS = $(TASTR_LIBRARY_PATH)/libtastr.a
+PKG_CPPFLAGS = -DR_NO_REMAP
 
-# tastr requires at least C++14; C++17 is the R 4.x default and a safe superset.
 CXX_STD = CXX17

@@ -1,1 +1,0 @@
-type `wes_palette` <character, any, character[]> => class<`palette`>;

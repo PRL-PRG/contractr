@@ -3,19 +3,4 @@
 ^Makefile$
 ^\.clang-format$
 ^\.lintr$
-# r-universe pre-build hook: run from the git repo, not needed in the tarball.
-^\.prepare$
-^\.covrignore$
-# tastr submodule: keep only what is needed to build the static library.
-^tastr/tests$
-^tastr/docs$
-^tastr/\.git.*$
-^tastr/\.clang-format$
-^tastr/\.travis\.yml$
-^tastr/compile_commands\.json$
-# Never ship tastr's build artifacts: the static library is platform-specific
-# and must be rebuilt per-platform at install time by configure. Shipping it
-# would break installs on a different OS/arch than the one that built the tarball.
-^tastr/build$
-^tastr/\.(parser|lexer|header)\.sentinel$
 ^\.github$

@@ -1,2 +1,0 @@
-type `dgig` <double[] | null, double | null, double | null, double | null, logical> => (double[] | null);
-type `rgig` <double, double, double, double> => any;

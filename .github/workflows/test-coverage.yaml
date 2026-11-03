@@ -1,5 +1,5 @@
-# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
-# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+# This workflow comes from the examples in https://github.com/r-lib/actions/tree/v2/examples
+# For help with build failures, see https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
     branches: [main, master]
@@ -16,9 +16,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          # tastr is a git submodule; required to build the package.
-          submodules: recursive
 
       - uses: r-lib/actions/setup-r@v2
         with:
@@ -30,9 +27,9 @@ jobs:
           needs: coverage
 
       - name: Test coverage
-        # CODECOV_TOKEN (a repo secret) authenticates the upload; anonymous
-        # uploads are rate-limited by Codecov and get dropped, leaving the badge
-        # empty. Add the token under Settings > Secrets > Actions.
+        # The upload uses the repository secret `CODECOV_TOKEN`. Codecov limits
+        # the rate of anonymous uploads and can discard them. Add the token in
+        # Settings > Secrets > Actions.
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: covr::codecov(quiet = FALSE)

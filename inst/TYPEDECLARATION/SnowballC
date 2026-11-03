@@ -1,2 +1,0 @@
-type `getStemLanguages` < > => character[];
-type `wordStem` <character[] | null, character> => (character[] | null);
