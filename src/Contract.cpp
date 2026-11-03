@@ -72,7 +72,9 @@ SEXP r_assert_contract(SEXP r_contract, SEXP value, SEXP is_value_missing) {
 
     contract->assert(value, Rf_asLogical(is_value_missing));
 
-    raise_contract_failure(contract);
+    if (!contract->is_tyr()) {
+        raise_contract_failure(contract);
+    }
 
     accumulate_contract(contract);
 
@@ -115,6 +117,41 @@ SEXP r_create_result_contract(SEXP r_call_id,
     contract->set_function_type(function_type);
     contract->set_expected_parameter_count(
         get_function_parameter_count(function_type));
+
+    return create_r_contract(contract);
+}
+
+SEXP r_create_tyr_result_contract(SEXP r_call_id,
+                                  SEXP r_call_trace,
+                                  SEXP r_package_name,
+                                  SEXP r_function_name,
+                                  SEXP r_type_index) {
+    int call_id = Rf_asInteger(r_call_id);
+    /* the deparsed call, as a character vector of lines */
+    std::string call_trace;
+    if (TYPEOF(r_call_trace) == STRSXP) {
+        for (int i = 0; i < LENGTH(r_call_trace); ++i) {
+            if (i != 0)
+                call_trace += " ";
+            call_trace += CHAR(STRING_ELT(r_call_trace, i));
+        }
+        if (call_trace.size() > 300)
+            call_trace = call_trace.substr(0, 297) + "...";
+    }
+    std::string package_name = CHAR(Rf_asChar(r_package_name));
+    std::string function_name = CHAR(Rf_asChar(r_function_name));
+    int package_index = INTEGER(r_type_index)[0];
+    int function_index = INTEGER(r_type_index)[1];
+
+    Contract* contract = new Contract();
+    contract->set_call_id(call_id);
+    contract->set_call_trace(call_trace);
+    contract->set_package_name(package_name);
+    contract->set_function_name(function_name);
+    contract->set_parameter_position(-1);
+    contract->set_tyr(package_index, function_index);
+    contract->set_expected_parameter_count(
+        tyr_parameter_count(package_index, function_index));
 
     return create_r_contract(contract);
 }

@@ -2,6 +2,7 @@
 
 #include "utilities.hpp"
 #include "Contract.hpp"
+#include "tyr.hpp"
 #include "r_api.hpp"
 #include <R.h>
 #include <R_ext/Rdynload.h>
@@ -14,6 +15,17 @@ static const R_CallMethodDef callMethods[] = {
     /* contract insertion  */
     {"insert_function_contract", (DL_FUNC) &r_insert_function_contract, 3},
     {"create_result_contract", (DL_FUNC) &r_create_result_contract, 5},
+    {"create_tyr_result_contract",
+     (DL_FUNC) &r_create_tyr_result_contract,
+     5},
+
+    /* set-theoretic ("tyr") types */
+    {"tyr_declare", (DL_FUNC) &r_tyr_declare, 7},
+    {"tyr_get_index", (DL_FUNC) &r_tyr_get_index, 2},
+    {"tyr_function_names", (DL_FUNC) &r_tyr_function_names, 1},
+    {"tyr_package_names", (DL_FUNC) &r_tyr_package_names, 0},
+    {"tyr_clear", (DL_FUNC) &r_tyr_clear, 0},
+    {"tyr_infer_type", (DL_FUNC) &r_tyr_infer_type, 2},
 
     /*  contract assertion */
     {"assert_contract", (DL_FUNC) &r_assert_contract, 3},

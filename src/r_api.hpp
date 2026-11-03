@@ -9,6 +9,7 @@ extern "C" {
 /* contract insertion  */
 SEXP r_insert_function_contract(SEXP, SEXP, SEXP);
 SEXP r_create_result_contract(SEXP, SEXP, SEXP, SEXP, SEXP);
+SEXP r_create_tyr_result_contract(SEXP, SEXP, SEXP, SEXP, SEXP);
 
 /*  contract assertion */
 SEXP r_assert_contract(SEXP, SEXP, SEXP);

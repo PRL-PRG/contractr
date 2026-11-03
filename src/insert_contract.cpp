@@ -31,6 +31,15 @@ void insert_argument_contract(Contract* contract,
         call_value = contractr_PREXPR(value);
         value_missing = R_FalseValue;
         evaluate_call = false;
+    } else if (TYPEOF(value) == PROMSXP &&
+               contract->is_tyr() && contractr_PRENV(value) == rho) {
+        /* argument not supplied by the caller: R has bound the formal to a
+         * promise for its default, evaluated in the callee's own frame. The
+         * value that promise produces says nothing about the call, so record
+         * the argument as absent instead. */
+        call_value = R_NilValue;
+        value_missing = R_TrueValue;
+        evaluate_call = true;
     } else if (TYPEOF(value) == PROMSXP) {
         /* promise */
         call_value = contractr_PREXPR(value);

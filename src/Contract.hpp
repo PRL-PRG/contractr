@@ -9,6 +9,7 @@
 #include "check_type.hpp"
 #include "infer_type.hpp"
 #include "type_declaration.hpp"
+#include "tyr.hpp"
 #include "r_api.hpp"
 #undef length
 
@@ -26,8 +27,24 @@ class Contract {
         , actual_type_(UNDEFINED_STRING_VALUE)
         , expected_type_(UNDEFINED_STRING_VALUE)
         , function_type_(nullptr)
+        , tyr_(false)
+        , tyr_package_index_(-1)
+        , tyr_function_index_(-1)
         , assertion_status_(false)
         , asserted_(false) {
+    }
+
+    /* A tyr contract records the declared and the observed type as strings
+     * and does not decide conformance: that is a subtyping question, answered
+     * offline by the rstt engine. */
+    bool is_tyr() const {
+        return tyr_;
+    }
+
+    void set_tyr(int package_index, int function_index) {
+        tyr_ = true;
+        tyr_package_index_ = package_index;
+        tyr_function_index_ = function_index;
     }
 
     int get_call_id() const {
@@ -128,6 +145,19 @@ class Contract {
 
         SEXP actual_value = is_missing ? R_MissingArg : value;
 
+        if (is_tyr()) {
+            actual_type_ = tyr_infer_type(actual_value);
+            const std::string& expected =
+                get_parameter_position() == -1
+                    ? tyr_return_type(tyr_package_index_, tyr_function_index_)
+                    : tyr_parameter_type(tyr_package_index_,
+                                         tyr_function_index_,
+                                         get_parameter_position());
+            expected_type_ = expected.empty() ? UNDEFINED_STRING_VALUE : expected;
+            assertion_status_ = true;
+            return;
+        }
+
         /* return type contract  */
         if (get_parameter_position() == -1) {
             const tastr::ast::Node& node =
@@ -166,6 +196,9 @@ class Contract {
     std::string actual_type_;
     std::string expected_type_;
     const tastr::ast::FunctionTypeNode* function_type_;
+    bool tyr_;
+    int tyr_package_index_;
+    int tyr_function_index_;
     bool assertion_status_;
     bool asserted_;
 };
